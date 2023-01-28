@@ -1,11 +1,22 @@
 @import "../node_modules/bulma/bulma.sass"
 
+html, body
+  margin: 0
+  height: 100%
+
+body
+  background-image: url("@/assets/shutterstock_237955894.jpg")
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
+
 .clickable
   cursor: pointer
 
 .dice
-  background-image: url("@/assets/d20.svg")
-  background-position: center
-  background-repeat: no-repeat
-  background-size: contain
-  filter: brightness(0) invert(1)
+  @include from(768px)
+    background-image: url("@/assets/d20.svg")
+    background-position: center
+    background-repeat: no-repeat
+    background-size: contain
+    filter: brightness(0) invert(1)

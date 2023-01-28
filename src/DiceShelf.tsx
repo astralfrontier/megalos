@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react'
 
 import './App.sass'
 
@@ -11,7 +10,7 @@ interface DiceShelfProps {
 function DiceShelf(props: DiceShelfProps) {
     return (
       <div className='box block has-text-white has-background-info'>
-        <div className='columns is-centered is-vcentered'>
+        <div className='columns is-centered is-vcentered is-mobile is-multiline'>
           {props.rolls.map((roll, index) => (
             <div className='column' key={index}>
               <div className='has-text-centered clickable dice' onClick={() => props.onClick(index)}>
