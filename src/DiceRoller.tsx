@@ -81,8 +81,8 @@ function DiceRoller(props: DiceRollerProps) {
     }
 
     return (
-        <div>
-            <DiceShelf face="d20" rolls={rolls} onClick={(index: number) => {
+        <>
+            <DiceShelf rolls={rolls} onClick={(index: number) => {
                 const newRolls = [...rolls]
                 newRolls.splice(index, 1, rollDie(1,20))
                 setRolls(newRolls)
@@ -117,7 +117,7 @@ function DiceRoller(props: DiceRollerProps) {
                 <p className='is-size-3'>{summary}</p>
                 <p>Click on a single die to reroll it.</p>
             </div>
-        </div>
+        </>
     )
 }
 
