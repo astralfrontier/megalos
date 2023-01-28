@@ -9,6 +9,9 @@ function App() {
       <DiceRoller />
       <div className='box block'>
         <div className='columns'>
+          <div className='column is-narrow'>
+            <img src="/shutterstock_1036949959.jpg" width="227" height="250" />
+          </div>
           <div className='column'>
             <div className='content'>
               <p>MEGALOS rules: <a href="https://mataramg.itch.io/megalos" target="_blank">https://mataramg.itch.io/megalos</a></p>
@@ -25,7 +28,7 @@ function App() {
             </div>
           </div>
           <div className='column is-narrow'>
-            <img src="/src/assets/shutterstock_1158872473.jpg" width="250" height="250" />
+            <img src="/shutterstock_1158872473.jpg" width="250" height="250" />
           </div>
         </div>
       </div>
