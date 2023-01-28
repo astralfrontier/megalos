@@ -24,9 +24,9 @@ function FormInput(props: FormInputProps) {
       <label className="label" id={props.label}>{props.label}</label>
       <div className="control">
         <div className="select is-rounded">
-          <select onChange={onChange(props.setter)}>
+          <select onChange={onChange(props.setter)} value={props.getter}>
             {toRange(props.min, props.max).map(value => (
-              <option selected={value === props.getter}>{value}</option>
+              <option key={value}>{value}</option>
             ))}
           </select>
         </div>
