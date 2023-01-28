@@ -6,7 +6,6 @@ import DiceRoller from './DiceRoller'
 function App() {
   return (
     <div className='container'>
-      <h1 className='title'>MEGALOS</h1>
       <DiceRoller />
       <footer className='footer'>
         Dice font is "gems": <a href="https://herror.itch.io/gems" target="_blank">https://herror.itch.io/gems</a>
