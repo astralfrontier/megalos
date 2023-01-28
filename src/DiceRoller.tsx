@@ -7,8 +7,6 @@ import FormInput from './FormInput';
 interface DiceRollerProps {
 }
 
-const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
-
 function rollDie(min: number, max: number): number {
     return Math.floor(Math.random() * max) + min;
 }
@@ -31,7 +29,7 @@ function DiceRoller(props: DiceRollerProps) {
 
     function rollAndShow() {
         setRerolls(0)
-        setRolls(rollDice(diceCount || 2))
+        setRolls(rollDice(diceCount > 0 ? diceCount : 2))
     }
 
     // Summarize the results
@@ -89,19 +87,19 @@ function DiceRoller(props: DiceRollerProps) {
                 setRerolls(rerolls + 1)
             }} />
             <div className='box block'>
-                <div className='columns is-vcentered'>
+                <div className='columns'>
                     <div className='column'>
-                        <FormInput label={'Dice'} inputType={'number'} getter={diceCount} setter={(value) => setDiceCount(clamp(value, 0, 8))}>
+                        <FormInput label={'Dice'} min={0} max={8} getter={diceCount} setter={setDiceCount}>
                             Your skill rating, or the dice rating of your weapon, plus Advantage, minus Disadvantage
                         </FormInput>
                     </div>
                     <div className='column'>
-                        <FormInput label={'Difficulty'} inputType={'number'} getter={difficulty} setter={(value) => setDifficulty(clamp(value, 1, 99))}>
+                        <FormInput label={'Difficulty'} min={1} max={21} getter={difficulty} setter={setDifficulty}>
                             The default value is 15 for checks, or the opponent's Dodge or Ward for attacks
                         </FormInput>
                     </div>
                     <div className='column'>
-                        <FormInput label={'Resistance'} inputType={'number'} getter={resistance} setter={(value) => setResistance(clamp(value, 1, 99))}>
+                        <FormInput label={'Resistance'} min={1} max={8} getter={resistance} setter={setResistance}>
                             The default value is 1, +1 each for magickal effects, Stressed Out, unfavorable conditions, and GM ruling
                         </FormInput>
                     </div>

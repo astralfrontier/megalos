@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import './App.sass'
 import DiceRoller from './DiceRoller'
+
+import './App.sass'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <div className='box block'>
         <div className='columns'>
           <div className='column is-narrow'>
-            <img src="/shutterstock_1036949959.jpg" width="227" height="250" />
+            <img src="/shutterstock_1036949959_s.jpg" width="227" height="250" alt="A collection of swords" />
           </div>
           <div className='column'>
             <div className='content'>
@@ -28,7 +29,7 @@ function App() {
             </div>
           </div>
           <div className='column is-narrow'>
-            <img src="/shutterstock_1158872473.jpg" width="250" height="250" />
+            <img src="/shutterstock_1158872473_s.jpg" width="250" height="250" alt="A collection of jewels" />
           </div>
         </div>
       </div>
