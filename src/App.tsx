@@ -1,43 +1,43 @@
-import React, { useState } from 'react'
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import DiceRoller from './DiceRoller'
-import DiceWrapper, { DiceContext } from './DiceWrapper';
+import AppFooter from "./AppFooter";
+import DiceRoller from "./DiceRoller";
+import DiceWrapper from "./DiceWrapper";
 
-import './App.sass'
+import "./App.sass";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <WrappedDiceRoller />,
+    errorElement: <ErrorPage />
+  },
+]);
+
+function WrappedDiceRoller(_props) {
   return (
-    <div className='container'>
-      <DiceWrapper>
-        <DiceRoller />
-      </DiceWrapper>
-      <div className='box block'>
-        <div className='columns'>
-          <div className='column is-narrow'>
-            <img src="/shutterstock_1036949959_s.jpg" width="227" height="250" alt="A collection of swords" />
-          </div>
-          <div className='column'>
-            <div className='content'>
-              <p>MEGALOS rules: <a href="https://mataramg.itch.io/megalos" target="_blank">https://mataramg.itch.io/megalos</a></p>
-              <p>Source code: <a href="https://github.com/astralfrontier/megalos" target="_blank">https://github.com/astralfrontier/megalos</a></p>
+    <DiceWrapper>
+      <DiceRoller />
+    </DiceWrapper>
+  );
+}
 
-              <p>
-                This tool was independently developed and is not affiliated with the author of MEGALOS.
-                This tool is available under an MIT license.
-              </p>
-
-              <p>
-                Images are licensed from Shutterstock and are not covered by the MIT license.
-              </p>
-            </div>
-          </div>
-          <div className='column is-narrow'>
-            <img src="/shutterstock_1158872473_s.jpg" width="250" height="250" alt="A collection of jewels" />
-          </div>
-        </div>
-      </div>
+function ErrorPage(_props) {
+  return (
+    <div className="box block has-background-danger">
+      <h1 className="title">Not Found</h1>
     </div>
   )
 }
 
-export default App
+function App() {
+  return (
+    <div className="container">
+      <RouterProvider router={router} />
+      <AppFooter />
+    </div>
+  );
+}
+
+export default App;
