@@ -1,42 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import DiceSettingsShelf from './DiceSettingsShelf';
 import DiceShelf from './DiceShelf';
 import { DiceContext } from './DiceWrapper';
-import FormInput from './FormInput';
+import PresetShelf from './PresetShelf';
 
 interface DiceRollerProps {
-}
-
-interface Preset {
-    label: string;
-    diceCount: number;
-    difficulty: number;
-    resistance: number;
+    children?: React.ReactNode;
 }
 
 function rollDie(min: number, max: number): number {
     return Math.floor(Math.random() * max) + min;
 }
 
-function rollDice(diceCount: number): number[] {
-    const results: number[] = []
-    for (let i = 0; i < diceCount; i++) {
-        results.push(rollDie(1, 20))
-    }
-    return results
-}
-
-function DiceRoller(props: DiceRollerProps) {
-    const { diceCount, setDiceCount, rolls, setRolls, difficulty, setDifficulty, resistance, setResistance } = useContext(DiceContext)
+function DiceRoller(_props: DiceRollerProps) {
+    const { diceCount, rolls, setRolls, difficulty, resistance } = useContext(DiceContext)
 
     const [rerolls, setRerolls] = useState<number>(0)
     const [summary, setSummary] = useState<string>("")
-    const [presets, setPresets] = useState<Preset[]>([])
-
-    function rollAndShow() {
-        setRerolls(0)
-        setRolls(rollDice(diceCount > 0 ? diceCount : 2))
-    }
 
     // Summarize the results
     useEffect(() => {
@@ -69,102 +50,34 @@ function DiceRoller(props: DiceRollerProps) {
             const hitType = strongHits.length > 0 ? "STRONG HIT" : "HIT"
             const msg = [
                 hitType,
-                `: Needed ${resistance} hit(s) to succeed, got ${totalHits} hit(s)`
+                ` (${hits.join(' ')})`
             ]
             if ((totalHits - resistance) > 0) {
-                msg.push(`, with ${totalHits - resistance} excess hit(s)`)
+                msg.push(`, ${totalHits - resistance} excess`)
             }
             setSummary(msg.join(''))
         }
     }, [rolls, difficulty, resistance])
 
-    function resetRolls() {
-        setDifficulty(15)
-        setResistance(1)
-        setRerolls(0)
-    }
-
-    function savePreset() {
-        const presetName = prompt("Enter a name for this preset", "New Preset")
-        if (presetName != null) {
-            const newPresets = [...presets]
-            newPresets.push({
-                label: presetName,
-                diceCount: diceCount,
-                difficulty: difficulty,
-                resistance: resistance
-            })
-            setPresets(newPresets)
-        }
-    }
-
-    function usePreset(index: number) {
-        const preset = presets[index]
-        setDiceCount(preset.diceCount)
-        setDifficulty(preset.difficulty)
-        setResistance(preset.resistance)
-    }
-
-    function deletePreset(index: number) {
-        const newPresets = [...presets]
-        newPresets.splice(index, 1)
-        setPresets(newPresets)
-    }
-
     return (
         <>
-            <DiceShelf rolls={rolls} onClick={(index: number) => {
-                const newRolls = [...rolls]
-                newRolls.splice(index, 1, rollDie(1,20))
-                setRolls(newRolls)
-                setRerolls(rerolls + 1)
-            }} />
+            <div className='box block has-text-white has-background-info'>
+                <DiceShelf rolls={rolls} onClick={(index: number) => {
+                    const newRolls = [...rolls]
+                    newRolls.splice(index, 1, rollDie(1,20))
+                    setRolls(newRolls)
+                    setRerolls(rerolls + 1)
+                }} />
+            </div>
              <div className='box block'>
                 <p className='is-size-3'>{summary}</p>
                 <p>Click on a single die to reroll it.</p>
             </div>
             <div className='box block'>
-                <div className='columns'>
-                <div className='column has-text-centered'>
-                        <button className='button is-primary mx-2' onClick={() => rollAndShow()}>Roll</button>
-                        <button className='button is-warning mx-2' onClick={() => resetRolls()}>Reset</button>
-                        <br />
-                        Rerolls Used: {rerolls}
-                        <br />
-                        <button className='button is-info' onClick={() => savePreset()}>Save</button>
-                    </div>
-                    <div className='column'>
-                        <FormInput label={'Dice'} min={0} max={8} getter={diceCount} setter={setDiceCount}>
-                            Your skill rating, or the dice rating of your weapon, plus Advantage, minus Disadvantage
-                        </FormInput>
-                    </div>
-                    <div className='column'>
-                        <FormInput label={'Difficulty'} min={1} max={21} getter={difficulty} setter={setDifficulty}>
-                            The default value is 15 for checks, or the opponent's Dodge or Ward for attacks
-                        </FormInput>
-                    </div>
-                    <div className='column'>
-                        <FormInput label={'Resistance'} min={1} max={8} getter={resistance} setter={setResistance}>
-                            The default value is 1, +1 each for magickal effects, Stressed Out, unfavorable conditions, and GM ruling
-                        </FormInput>
-                    </div>
-                </div>
+                <DiceSettingsShelf rerolls={rerolls} setRerolls={setRerolls} />
             </div>
             <div className='box block'>
-                {presets.map((preset, index) => (
-                    <div className='columns is-multiline is-vcentered'>
-                        <div className='column is-narrow'>
-                            <button className='button is-primary' onClick={() => usePreset(index)}>Use</button>
-                        </div>
-                        <div className='column is-narrow'>
-                            <button className='button is-warning' onClick={() => deletePreset(index)}>Delete</button>
-                        </div>
-                        <div className='column'>
-                            {preset.label} ({preset.difficulty}/{preset.resistance}, {preset.diceCount} dice)
-                        </div>
-                    </div>
-                ))}
-                {presets.length ? <></> : <p className='subtitle'>No presets (click "Save" to create one)</p>}
+                <PresetShelf />
             </div>
         </>
     )
