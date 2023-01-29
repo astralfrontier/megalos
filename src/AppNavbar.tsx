@@ -33,10 +33,10 @@ function AppNavbar() {
       </div>
       <div className={isActive ? "navbar-menu is-active" : "navbar-menu"} id="appNavbarItems">
         <div className="navbar-start">
-          <NavLink className={activeNavbarItem} to={DICE_PATH}>
+          <NavLink className={activeNavbarItem} to={DICE_PATH} onClick={() => setIsActive(false)}>
             Dice
           </NavLink>
-          <NavLink className={activeNavbarItem} to={LOADOUTS_PATH}>
+          <NavLink className={activeNavbarItem} to={LOADOUTS_PATH} onClick={() => setIsActive(false)}>
             Loadouts
           </NavLink>
         </div>
