@@ -1,8 +1,7 @@
-// import localforage from 'localforage';
-import React, { useEffect } from 'react';
-import { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 
 import DiceShelf from './DiceShelf';
+import { DiceContext } from './DiceWrapper';
 import FormInput from './FormInput';
 
 interface DiceRollerProps {
@@ -28,10 +27,8 @@ function rollDice(diceCount: number): number[] {
 }
 
 function DiceRoller(props: DiceRollerProps) {
-    const [diceCount, setDiceCount] = useState<number>(1)
-    const [rolls, setRolls] = useState<number[]>(rollDice(diceCount))
-    const [difficulty, setDifficulty] = useState<number>(15)
-    const [resistance, setResistance] = useState<number>(1)
+    const { diceCount, setDiceCount, rolls, setRolls, difficulty, setDifficulty, resistance, setResistance } = useContext(DiceContext)
+
     const [rerolls, setRerolls] = useState<number>(0)
     const [summary, setSummary] = useState<string>("")
     const [presets, setPresets] = useState<Preset[]>([])
@@ -40,18 +37,6 @@ function DiceRoller(props: DiceRollerProps) {
         setRerolls(0)
         setRolls(rollDice(diceCount > 0 ? diceCount : 2))
     }
-
-    // useEffect(() => {
-    //     try {
-    //         localforage.ready().then(() => {
-    //             localforage.getItem("presets").then(value => {
-    //                 setPresets(value as Preset[] || [])
-    //             })
-    //         })    
-    //     } catch (err) {
-    //         alert("Error fetching presets")
-    //     }
-    // }, [])
 
     // Summarize the results
     useEffect(() => {

@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 
 import DiceRoller from './DiceRoller'
+import DiceWrapper, { DiceContext } from './DiceWrapper';
 
 import './App.sass'
 
 function App() {
   return (
     <div className='container'>
-      <DiceRoller />
+      <DiceWrapper>
+        <DiceRoller />
+      </DiceWrapper>
       <div className='box block'>
         <div className='columns'>
           <div className='column is-narrow'>
