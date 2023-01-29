@@ -6,15 +6,6 @@ interface FormInputProps {
   children?: React.ReactNode;
 }
 
-function onChange(setter: any) {
-  return (event) => setter(parseInt(event.target.value));
-}
-
-// Why, Javascript, why
-function toRange(min: number, max: number): number[] {
-  return [...Array(max + 1).keys()].slice(min);
-}
-
 function GenericInput(props: FormInputProps) {
   return (
     <div className="field">
