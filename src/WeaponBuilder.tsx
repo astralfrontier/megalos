@@ -3,218 +3,173 @@ import React, { useState } from "react";
 import GenericInput from "./GenericInput";
 import { plusOrMinus, rollDie } from './utilities';
 
-const outfitValues = {
-  Light: {
-    defenseBonus: 0,
-    inventoryPoints: 8,
-    restrictions: "Light outfits can be worn by Support & Striker callings",
-    A: {
-      defenseBonus: 2,
-      armorHP: 15,
-      soakBonus: 1
+const weaponValues = {
+  size: [
+    {
+      label: "Light",
+      damageBonus: 3,
+      weaponDice: 3
     },
-    B: {
-      defenseBonus: 1,
-      armorHP: 10,
-      soakBonus: 0
+    {
+      label: "Heavy",
+      damageBonus: 6,
+      weaponDice: 2
+    }
+  ],
+  range: [
+    {
+      label: "Melee",
+      damageBonus: 1,
+      range: 0
     },
-    C: {
-      defenseBonus: 0,
-      armorHP: 5,
-      soakBonus: -1
+    {
+      label: "Ranged",
+      damageBonus: 0,
+      range: 3
+    }
+  ],
+  weaponType: [
+    {
+      label: "Accurate",
+      help: "Gain Advantage on the attack roll with Basic Attacks like Strike & Flurry of Strikes actions"
     },
-  },
-  Medium: {
-    defenseBonus: 1,
-    inventoryPoints: 5,
-    restrictions: "Medium outfits can be worn by Striker & Tank callings",
-    A: {
-      defenseBonus: 3,
-      armorHP: 15,
-      soakBonus: 2
+    {
+      label: "Deadly",
+      help: "+1 damage bonus (or +2 for Heavy Weapons)"
     },
-    B: {
-      defenseBonus: 2,
-      armorHP: 10,
-      soakBonus: 1
+    {
+      label: "Focus",
+      help: "Gain +1 bonus to Ward Defense"
     },
-    C: {
-      defenseBonus: 1,
-      armorHP: 5,
-      soakBonus: 0
+    {
+      label: "Magickal",
+      help: "Basic Attacks with this weapon are rolled against the target's Ward Defense instead of their Dodge Defense"
     },
-  },
-  Heavy: {
-    defenseBonus: 2,
-    inventoryPoints: 4,
-    restrictions: "Heavy outfits can be worn by Tank callings",
-    A: {
-      defenseBonus: 2,
-      armorHP: 20,
-      soakBonus: 2
+    {
+      label: "Reach",
+      help: "Weapon gains +1 Range"
     },
-    B: {
-      defenseBonus: 1,
-      armorHP: 15,
-      soakBonus: 1
-    },
-    C: {
-      defenseBonus: 0,
-      armorHP: 7,
-      soakBonus: 0
-    },
-  },
+    {
+      label: "Shield",
+      help: "Gain +1 bonus to Dodge Defense"
+    }
+  ]
 }
 
 const modValues = [
   {
-    name: "Attuned",
-    value: "Witches only. +2 on Aether Charge rolls."
+    name: "Astral",
+    value: "Basic Attacks inflict Astral damage instead of Physical"
   },
   {
-    name: "Bodyguard",
-    value: "+1 Physical & Toxic Soak."
+    name: "Balanced",
+    value: "Add +2 to the attack result of one rolled Weapon Die"
   },
   {
-    name: "Cargo",
-    value: "+2 maximum Inventory Points (or +3 for Light Outfits)."
+    name: "Bloodthirsty",
+    value: "Melee only. Increase Surge range by +1. By default this makes Surges generate on rolls of 19-20"
   },
   {
-    name: "Deflective",
-    value: "+1 bonus to Dodge Defense."
+    name: "Crushing",
+    value: "Spend 1 Surge: 1 target of the attack rolls their Soak with Disadvantage"
   },
   {
-    name: "Flexible",
-    value: "Gain Advantage on Move tests."
+    name: "Execution",
+    value: "Increase Core Damage by +2 vs Injured targets"
   },
   {
-    name: "Fluxing",
-    value: "◇: +/- 1 to a single Aether Current die's value, once per round on my turn."
+    name: "Parrying",
+    value: "Increase Soak against Physical damage by +1"
   },
   {
-    name: "Hexagrammatic",
-    value: "+1 bonus to Ward Defense"
+    name: "Seeking",
+    value: "Ranged only. Weapon ignores cover, add +1 to the result of all rolled Weapon Dice"
   },
   {
-    name: "Reinforced",
-    value: "+4 bonus Armor HP (or +5 for Heavy Outfits)."
+    name: "Shredding",
+    value: "Spend 1 Surge: Inflict WOUNDED (5) on one target"
   },
   {
-    name: "Silent",
-    value: "Gain Advantage on Sneak tests."
+    name: "Umbral",
+    value: "Basic Attacks inflict Umbral damage instead of Physical"
   },
   {
-    name: "Spellthreaded",
-    value: "+1 Astral & Umbral Soak."
+    name: "Venomous",
+    value: "Spend 1 Surge: Inflict SICK (5) on one target"
   },
 ]
 
 function WeaponBuilder() {
-  const [outfitForm, setOutfitForm] = useState<string>("Light")
-  const [defenseBonus, setDefenseBonus] = useState<string>("A")
-  const [armorHP, setArmorHP] = useState<string>("B")
-  const [soakBonus, setSoakBonus] = useState<string>("C")
+  const [size, setSize] = useState<number>(0)
+  const [range, setRange] = useState<number>(0)
+  const [weaponType, setWeaponType] = useState<number>(0)
   const [mod, setMod] = useState<number>(0)
-  const [outfitName, setOutfitName] = useState<string>("My New Outfit")
-  const [outfitDesc, setOutfitDesc] = useState<string>("My outfit's description")
+  const [weaponName, setWeaponName] = useState<string>("My New Weapon")
+  const [weaponDesc, setWeaponDesc] = useState<string>("My weapon's description")
 
-  function renameOutfit() {
-    const value = prompt("Enter a new name for the outfit", outfitName);
+  function renameWeapon() {
+    const value = prompt("Enter a new name for the outfit", weaponName);
     if (value) {
-      setOutfitName(value)
+      setWeaponName(value)
     }
   }
 
-  function describeOutfit() {
-    const value = prompt("Enter a description for the outfit", outfitDesc);
+  function describeWeapon() {
+    const value = prompt("Enter a description for the outfit", weaponDesc);
     if (value) {
-      setOutfitDesc(value)
+      setWeaponDesc(value)
     }
   }
-
 
   function randomizeSettings() {
-    const priorities = [
-      "ABC",
-      "ACB",
-      "BAC",
-      "BCA",
-      "CAB",
-      "CBA"
-    ]
-    const newPriorities = priorities[rollDie(0, 5)]
-    setDefenseBonus(newPriorities[0])
-    setArmorHP(newPriorities[1])
-    setSoakBonus(newPriorities[2])
-    setMod(rollDie(0, modValues.length - 1))
+    setSize(rollDie(1, weaponValues.size.length) - 1)
+    setRange(rollDie(1, weaponValues.range.length) - 1)
+    setWeaponType(rollDie(1, weaponValues.weaponType.length) - 1)
+    setMod(rollDie(1, modValues.length) - 1)
   }
 
-  let finalDefenseBonus = outfitValues[outfitForm].defenseBonus + outfitValues[outfitForm][defenseBonus].defenseBonus
-  let defenseBonusAnnotation = ""
-  let finalArmorHP = outfitValues[outfitForm][armorHP].armorHP
-  let finalSoakBonus = outfitValues[outfitForm][soakBonus].soakBonus
-  let soakAnnotation = ""
-  let finalInventoryPoints = outfitValues[outfitForm].inventoryPoints
+  let sizeLabel = weaponValues.size[size].label
+  let finalWeaponDice = weaponValues.size[size].weaponDice
+  let finalDamageBonus = weaponValues.size[size].damageBonus + weaponValues.range[range].damageBonus
+  let finalRange = weaponValues.range[range].range
 
-  switch (modValues[mod].name) {
-    case "Bodyguard":
-      soakAnnotation = ` (${plusOrMinus(finalSoakBonus + 1)} vs. Physical and Toxic)`
+  switch (weaponValues.weaponType[weaponType].label) {
+    case "Deadly":
+      finalDamageBonus = finalDamageBonus + (sizeLabel == "Heavy" ? 2 : 1)
       break;
-    case "Cargo":
-      finalInventoryPoints = finalInventoryPoints + (outfitForm == "Light" ? 3 : 2)
-      break;
-    case "Deflective":
-      defenseBonusAnnotation = ` (${plusOrMinus(finalDefenseBonus + 1)} to Dodge)`
-      break;
-    case "Hexagrammatic":
-      defenseBonusAnnotation = ` (${plusOrMinus(finalDefenseBonus + 1)} to Ward)`
-      break;
-    case "Reinforced":
-      finalArmorHP = finalArmorHP + (outfitForm == "Heavy" ? 5 : 4)
-      break;
-    case "Spellthreaded":
-      soakAnnotation = ` (${plusOrMinus(finalSoakBonus + 1)} vs. Astral and Umbral)`
-      break;
+    case "Reach":
+      finalRange = finalRange + 1
   }
 
   return (
     <>
       <div className="box block">
-        <h1 className="title">Outfit Builder</h1>
+        <h1 className="title">Weapon Builder</h1>
         <div className="columns">
           <div className="column">
-            <GenericInput label="Outfit Form" help={outfitValues[outfitForm].restrictions}>
-              <select onChange={(event) => setOutfitForm(event.target.value)} value={outfitForm}>
-                <option>Light</option>
-                <option>Medium</option>
-                <option>Heavy</option>
+            <GenericInput label="Size" help={"The size of the weapon"}>
+              <select onChange={(event) => setSize(parseInt(event.target.value))} value={size}>
+                {weaponValues.size.map((value, index) => (
+                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, {value.weaponDice} Weapon Dice)</option>
+                ))}
               </select>
             </GenericInput>
           </div>
           <div className="column">
-            <GenericInput label="Defense Bonus" help={"Increase your Calling’s base Dodge & Ward by this amount"}>
-              <select onChange={(event) => setDefenseBonus(event.target.value)} value={defenseBonus}>
-                <option value="A">A ({plusOrMinus(outfitValues[outfitForm].A.defenseBonus)})</option>
-                <option value="B">B ({plusOrMinus(outfitValues[outfitForm].B.defenseBonus)})</option>
-                <option value="C">C ({plusOrMinus(outfitValues[outfitForm].C.defenseBonus)})</option>
+            <GenericInput label="Range" help={"The range of the weapon"}>
+              <select onChange={(event) => setRange(parseInt(event.target.value))} value={range}>
+                {weaponValues.range.map((value, index) => (
+                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, Range {value.range}</option>
+                ))}
               </select>
             </GenericInput>
           </div>
           <div className="column">
-            <GenericInput label="Armor HP" help={"A number of points that function like normal HP, are lost before normal HP, and are restored to full at the end of each combat encounter"}>
-              <select onChange={(event) => setArmorHP(event.target.value)} value={armorHP}>
-                <option value="A">A ({(outfitValues[outfitForm].A.armorHP)})</option>
-                <option value="B">B ({(outfitValues[outfitForm].B.armorHP)})</option>
-                <option value="C">C ({(outfitValues[outfitForm].C.armorHP)})</option>
-              </select>
-            </GenericInput>
-          </div>
-          <div className="column">
-            <GenericInput label="Soak Bonus" help={"Increase the result of all Soak rolls by this amount"}>
-              <select onChange={(event) => setSoakBonus(event.target.value)} value={soakBonus}>
-                <option value="A">A ({plusOrMinus(outfitValues[outfitForm].A.soakBonus)})</option>
-                <option value="B">B ({plusOrMinus(outfitValues[outfitForm].B.soakBonus)})</option>
-                <option value="C">C ({plusOrMinus(outfitValues[outfitForm].C.soakBonus)})</option>
+            <GenericInput label="Weapon Type" help={weaponValues.weaponType[weaponType].help}>
+              <select onChange={(event) => setWeaponType(parseInt(event.target.value))} value={weaponType}>
+                {weaponValues.weaponType.map((value, index) => (
+                  <option key={value.label} value={index}>{value.label}</option>
+                ))}
               </select>
             </GenericInput>
           </div>
@@ -239,35 +194,31 @@ function WeaponBuilder() {
       </div>
       <div className="box block">
         <p><em>Click on the name or description to edit them.</em></p>
-        {(defenseBonus == armorHP || armorHP == soakBonus || defenseBonus == soakBonus) ? <>
-          <p className="has-background-danger">
-            <span className="is-size-3">Please make sure priorities are correctly set</span>  
-          </p>
-        </> : <></>}
-        <p className="has-background-primary clickable" onClick={() => renameOutfit()}>
-          <span className="is-size-3">{outfitName}</span>
+        <p className="has-background-primary clickable" onClick={() => renameWeapon()}>
+          <span className="is-size-3">{weaponName}</span>
         </p>
-        <p className="has-background-grey-lighter clickable" onClick={() => describeOutfit()}>{outfitDesc}</p>
+        <p className="has-background-grey-lighter clickable" onClick={() => describeWeapon()}>{weaponDesc}</p>
         <p>
-          {outfitForm} Outfit ◯ {modValues[mod].name}
+          <em>
+            {weaponValues.size[size].label} Weapon ✧&nbsp;
+            {weaponValues.range[range].label},&nbsp;
+            {weaponValues.weaponType[weaponType].label},&nbsp;
+            {modValues[mod].name}
+          </em>
         </p>
         <p>
-          <strong>Defense Bonus:</strong> {plusOrMinus(finalDefenseBonus)}{defenseBonusAnnotation},&nbsp;
-          <strong>Armor HP:</strong> {finalArmorHP},&nbsp;
-          <strong>Soak Bonus:</strong> {plusOrMinus(finalSoakBonus)}{soakAnnotation},&nbsp;
-          <strong>Inventory Points:</strong> {finalInventoryPoints}
+          <strong>Weapon Dice:</strong> {plusOrMinus(finalWeaponDice)},&nbsp;
+          <strong>Damage Bonus:</strong> {plusOrMinus(finalDamageBonus)},&nbsp;
+          <strong>Range:</strong> {finalRange}
         </p>
-        <p className="has-background-grey-lighter">
+        <div className="has-background-grey-lighter">
           <div>
-            {outfitForm === "Heavy" ? <>
-              <strong>Heavy:</strong>&nbsp;
-              Disadvantage on Move & Sneak tests.
-            </> : <></>}
+            <strong>{weaponValues.weaponType[weaponType].label}: </strong>{weaponValues.weaponType[weaponType].help}
           </div>
           <div>
             <strong>{modValues[mod].name}: </strong>{modValues[mod].value}
           </div>
-        </p>
+        </div>
       </div>
     </>
   );
