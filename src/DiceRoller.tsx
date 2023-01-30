@@ -9,7 +9,7 @@ interface DiceRollerProps {
     children?: React.ReactNode;
 }
 
-import rollDie from './dice';
+import {rollDie} from './utilities';
 
 function DiceRoller(_props: DiceRollerProps) {
     const { diceCount, rolls, setRolls, difficulty, resistance } = useContext(DiceContext)
