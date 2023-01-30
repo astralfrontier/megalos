@@ -113,7 +113,7 @@ function plusOrMinus(value: number): string {
   return (value > 0) ? `+${value}` : `${value}`
 }
 
-function LoadoutBuilder() {
+function OutfitBuilder() {
   const [outfitForm, setOutfitForm] = useState<string>("Light")
   const [defenseBonus, setDefenseBonus] = useState<string>("A")
   const [armorHP, setArmorHP] = useState<string>("B")
@@ -277,4 +277,4 @@ function LoadoutBuilder() {
   );
 }
 
-export default LoadoutBuilder;
+export default OutfitBuilder;

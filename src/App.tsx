@@ -2,10 +2,10 @@ import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import AppFooter from "./AppFooter";
-import AppNavbar, { DICE_PATH, LOADOUTS_PATH } from "./AppNavbar";
+import AppNavbar, { DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from "./AppNavbar";
 import DiceRoller from "./DiceRoller";
 import DiceWrapper from "./DiceWrapper";
-import LoadoutBuilder from "./LoadoutBuilder";
+import OutfitBuilder from "./OutfitBuilder";
 
 import "./App.sass";
 
@@ -25,7 +25,7 @@ function App() {
         <DiceWrapper>
           <Routes>
             <Route path={DICE_PATH} element={<DiceRoller />} />
-            <Route path={LOADOUTS_PATH} element={<LoadoutBuilder />} />
+            <Route path={OUTFITS_PATH} element={<OutfitBuilder />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </DiceWrapper>
