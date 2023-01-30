@@ -9,9 +9,7 @@ interface DiceRollerProps {
     children?: React.ReactNode;
 }
 
-function rollDie(min: number, max: number): number {
-    return Math.floor(Math.random() * max) + min;
-}
+import rollDie from './dice';
 
 function DiceRoller(_props: DiceRollerProps) {
     const { diceCount, rolls, setRolls, difficulty, resistance } = useContext(DiceContext)
