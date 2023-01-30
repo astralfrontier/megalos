@@ -146,11 +146,11 @@ function OutfitBuilder() {
       "CAB",
       "CBA"
     ]
-    const newPriorities = priorities[rollDie(0, 5)]
+    const newPriorities = priorities[rollDie(1, 6) - 1]
     setDefenseBonus(newPriorities[0])
     setArmorHP(newPriorities[1])
     setSoakBonus(newPriorities[2])
-    setMod(rollDie(0, modValues.length - 1))
+    setMod(rollDie(1, modValues.length) - 1)
   }
 
   let finalDefenseBonus = outfitValues[outfitForm].defenseBonus + outfitValues[outfitForm][defenseBonus].defenseBonus
@@ -253,7 +253,7 @@ function OutfitBuilder() {
         </p>
         <p className="has-background-grey-lighter clickable" onClick={() => describeOutfit()}>{outfitDesc}</p>
         <p>
-          {outfitForm} Outfit ◯ {modValues[mod].name}
+          <em>{outfitForm} Outfit ◯ {modValues[mod].name}</em>
         </p>
         <p>
           <strong>Defense Bonus:</strong> {plusOrMinus(finalDefenseBonus)}{defenseBonusAnnotation},&nbsp;
@@ -261,7 +261,7 @@ function OutfitBuilder() {
           <strong>Soak Bonus:</strong> {plusOrMinus(finalSoakBonus)}{soakAnnotation},&nbsp;
           <strong>Inventory Points:</strong> {finalInventoryPoints}
         </p>
-        <p className="has-background-grey-lighter">
+        <div className="has-background-grey-lighter">
           <div>
             {outfitForm === "Heavy" ? <>
               <strong>Heavy:</strong>&nbsp;
@@ -271,7 +271,7 @@ function OutfitBuilder() {
           <div>
             <strong>{modValues[mod].name}: </strong>{modValues[mod].value}
           </div>
-        </p>
+        </div>
       </div>
     </>
   );
