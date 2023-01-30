@@ -159,7 +159,7 @@ function WeaponBuilder() {
             <GenericInput label="Range" help={"The range of the weapon"}>
               <select onChange={(event) => setRange(parseInt(event.target.value))} value={range}>
                 {weaponValues.range.map((value, index) => (
-                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, Range {value.range}</option>
+                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, Range {value.range})</option>
                 ))}
               </select>
             </GenericInput>
@@ -199,15 +199,15 @@ function WeaponBuilder() {
         </p>
         <p className="has-background-grey-lighter clickable" onClick={() => describeWeapon()}>{weaponDesc}</p>
         <p>
+          <em>{weaponValues.size[size].label} Weapon</em> ✧&nbsp;
           <em>
-            {weaponValues.size[size].label} Weapon ✧&nbsp;
             {weaponValues.range[range].label},&nbsp;
             {weaponValues.weaponType[weaponType].label},&nbsp;
             {modValues[mod].name}
           </em>
         </p>
         <p>
-          <strong>Weapon Dice:</strong> {plusOrMinus(finalWeaponDice)},&nbsp;
+          <strong>Weapon Dice:</strong> {finalWeaponDice},&nbsp;
           <strong>Damage Bonus:</strong> {plusOrMinus(finalDamageBonus)},&nbsp;
           <strong>Range:</strong> {finalRange}
         </p>

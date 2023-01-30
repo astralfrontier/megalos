@@ -253,7 +253,7 @@ function OutfitBuilder() {
         </p>
         <p className="has-background-grey-lighter clickable" onClick={() => describeOutfit()}>{outfitDesc}</p>
         <p>
-          <em>{outfitForm} Outfit ◯ {modValues[mod].name}</em>
+          <em>{outfitForm} Outfit</em> ◯ <em>{modValues[mod].name}</em>
         </p>
         <p>
           <strong>Defense Bonus:</strong> {plusOrMinus(finalDefenseBonus)}{defenseBonusAnnotation},&nbsp;
