@@ -40,6 +40,9 @@ function AppNavbar() {
           <NavLink className={activeNavbarItem} to={OUTFITS_PATH} onClick={() => setIsActive(false)}>
             Outfits
           </NavLink>
+          <NavLink className={activeNavbarItem} to={WEAPONS_PATH} onClick={() => setIsActive(false)}>
+            Weapons
+          </NavLink>
         </div>
       </div>
     </nav>

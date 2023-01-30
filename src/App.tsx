@@ -6,6 +6,7 @@ import AppNavbar, { DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from "./AppNavbar";
 import DiceRoller from "./DiceRoller";
 import DiceWrapper from "./DiceWrapper";
 import OutfitBuilder from "./OutfitBuilder";
+import WeaponBuilder from "./WeaponBuilder";
 
 import "./App.sass";
 
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path={DICE_PATH} element={<DiceRoller />} />
             <Route path={OUTFITS_PATH} element={<OutfitBuilder />} />
+            <Route path={WEAPONS_PATH} element={<WeaponBuilder />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </DiceWrapper>
