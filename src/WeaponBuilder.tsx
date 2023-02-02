@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
+import { DiceContext, Preset } from './DiceWrapper';
 import GenericInput from "./GenericInput";
 import { plusOrMinus, rollDie } from './utilities';
 
@@ -100,6 +101,8 @@ const modValues = [
 ]
 
 function WeaponBuilder() {
+  const { presets, setPresets } = useContext(DiceContext)
+
   const [size, setSize] = useState<number>(0)
   const [range, setRange] = useState<number>(0)
   const [weaponType, setWeaponType] = useState<number>(0)
@@ -139,6 +142,18 @@ function WeaponBuilder() {
       break;
     case "Reach":
       finalRange = finalRange + 1
+  }
+
+  function addAsPreset() {
+    const description = `${weaponName}: ${weaponValues.size[size].label}, ${weaponValues.range[range].label}, ${weaponValues.weaponType[weaponType].label}, ${modValues[mod].name}, Range ${finalRange}, ${plusOrMinus(finalDamageBonus)} damage`
+    const preset: Preset = {
+      label: description,
+      diceCount: finalWeaponDice,
+      difficulty: 15,
+      resistance: 1
+    }
+    setPresets([...presets, preset])
+    alert("Preset added to Dice roller")
   }
 
   return (
@@ -218,6 +233,9 @@ function WeaponBuilder() {
           <div>
             <strong>{modValues[mod].name}: </strong>{modValues[mod].value}
           </div>
+        </div>
+        <div className="mt-2">
+          <button className="button is-primary" onClick={() => addAsPreset()}>Add Preset</button>
         </div>
       </div>
     </>
