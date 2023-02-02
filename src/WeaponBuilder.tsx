@@ -150,7 +150,7 @@ function WeaponBuilder() {
             <GenericInput label="Size" help={"The size of the weapon"}>
               <select onChange={(event) => setSize(parseInt(event.target.value))} value={size}>
                 {weaponValues.size.map((value, index) => (
-                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, {value.weaponDice} Weapon Dice)</option>
+                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} dmg, {value.weaponDice} Dice)</option>
                 ))}
               </select>
             </GenericInput>
@@ -159,7 +159,7 @@ function WeaponBuilder() {
             <GenericInput label="Range" help={"The range of the weapon"}>
               <select onChange={(event) => setRange(parseInt(event.target.value))} value={range}>
                 {weaponValues.range.map((value, index) => (
-                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} damage bonus, Range {value.range})</option>
+                  <option key={value.label} value={index}>{value.label} ({plusOrMinus(value.damageBonus)} dmg, Range {value.range})</option>
                 ))}
               </select>
             </GenericInput>
