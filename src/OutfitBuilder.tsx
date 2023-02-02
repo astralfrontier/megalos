@@ -136,6 +136,14 @@ function OutfitBuilder() {
     }
   }
 
+  function prioritize(getter, setter, value, firstGetter, firstSetter, secondGetter, secondSetter) {
+    if (value == firstGetter) {
+      firstSetter(getter)
+    } else if (value == secondGetter) {
+      secondSetter(getter)
+    }
+    setter(value)
+  }
 
   function randomizeSettings() {
     const priorities = [
@@ -197,7 +205,7 @@ function OutfitBuilder() {
           </div>
           <div className="column">
             <GenericInput label="Defense Bonus" help={"Increase your Calling’s base Dodge & Ward by this amount"}>
-              <select onChange={(event) => setDefenseBonus(event.target.value)} value={defenseBonus}>
+              <select onChange={(event) => prioritize(defenseBonus, setDefenseBonus, event.target.value, armorHP, setArmorHP, soakBonus, setSoakBonus)} value={defenseBonus}>
                 <option value="A">A ({plusOrMinus(outfitValues[outfitForm].A.defenseBonus)})</option>
                 <option value="B">B ({plusOrMinus(outfitValues[outfitForm].B.defenseBonus)})</option>
                 <option value="C">C ({plusOrMinus(outfitValues[outfitForm].C.defenseBonus)})</option>
@@ -206,7 +214,7 @@ function OutfitBuilder() {
           </div>
           <div className="column">
             <GenericInput label="Armor HP" help={"A number of points that function like normal HP, are lost before normal HP, and are restored to full at the end of each combat encounter"}>
-              <select onChange={(event) => setArmorHP(event.target.value)} value={armorHP}>
+              <select onChange={(event) => prioritize(armorHP, setArmorHP, event.target.value, defenseBonus, setDefenseBonus, soakBonus, setSoakBonus)} value={armorHP}>
                 <option value="A">A ({(outfitValues[outfitForm].A.armorHP)})</option>
                 <option value="B">B ({(outfitValues[outfitForm].B.armorHP)})</option>
                 <option value="C">C ({(outfitValues[outfitForm].C.armorHP)})</option>
@@ -215,7 +223,7 @@ function OutfitBuilder() {
           </div>
           <div className="column">
             <GenericInput label="Soak Bonus" help={"Increase the result of all Soak rolls by this amount"}>
-              <select onChange={(event) => setSoakBonus(event.target.value)} value={soakBonus}>
+              <select onChange={(event) => prioritize(soakBonus, setSoakBonus, event.target.value, defenseBonus, setDefenseBonus, armorHP, setArmorHP)} value={soakBonus}>
                 <option value="A">A ({plusOrMinus(outfitValues[outfitForm].A.soakBonus)})</option>
                 <option value="B">B ({plusOrMinus(outfitValues[outfitForm].B.soakBonus)})</option>
                 <option value="C">C ({plusOrMinus(outfitValues[outfitForm].C.soakBonus)})</option>
@@ -243,11 +251,6 @@ function OutfitBuilder() {
       </div>
       <div className="box block">
         <p><em>Click on the name or description to edit them.</em></p>
-        {(defenseBonus == armorHP || armorHP == soakBonus || defenseBonus == soakBonus) ? <>
-          <p className="has-background-danger">
-            <span className="is-size-3">Please make sure priorities are correctly set</span>  
-          </p>
-        </> : <></>}
         <p className="has-background-primary clickable" onClick={() => renameOutfit()}>
           <span className="is-size-3">{outfitName}</span>
         </p>
