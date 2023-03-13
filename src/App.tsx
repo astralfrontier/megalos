@@ -8,8 +8,10 @@ import OutfitBuilder from './OutfitBuilder'
 import WeaponBuilder from './WeaponBuilder'
 
 import './App.sass'
+import CharacterBuilder from './characters/CharacterBuilder'
 
 export const DICE_PATH = '/'
+export const CHARACTER_PATH = '/character'
 export const OUTFITS_PATH = '/outfits'
 export const WEAPONS_PATH = '/weapons'
 
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
     element: (
       <DefaultLayout>
         <DiceRoller />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: CHARACTER_PATH,
+    element: (
+      <DefaultLayout>
+        <CharacterBuilder />
       </DefaultLayout>
     ),
   },

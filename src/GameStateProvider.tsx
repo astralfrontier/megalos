@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { MegalosCharacter, newCharacter } from './characters/data'
 
 export interface Preset {
   label: string
@@ -37,14 +38,25 @@ export const DiceContext = createContext<DiceState>({
   setPresets: () => {},
 })
 
+interface CharacterState {
+  character: MegalosCharacter;
+  setCharacter: React.Dispatch<React.SetStateAction<MegalosCharacter>>;
+}
+
+export const CharacterContext = createContext<CharacterState>({
+  character: newCharacter(),
+  setCharacter: () => {}
+})
+
 function GameStateProvider(props: GameStateProviderProps) {
   const [diceCount, setDiceCount] = useState<number>(1)
   const [rolls, setRolls] = useState<number[]>([1])
   const [difficulty, setDifficulty] = useState<number>(15)
   const [resistance, setResistance] = useState<number>(1)
   const [presets, setPresets] = useState<Preset[]>([])
+  const [character, setCharacter] = useState<MegalosCharacter>(newCharacter)
 
-  const value = {
+  const diceContextProviderValue = {
     diceCount,
     setDiceCount,
     rolls,
@@ -57,8 +69,17 @@ function GameStateProvider(props: GameStateProviderProps) {
     setPresets,
   }
 
+  const characterContextProviderValue = {
+    character,
+    setCharacter
+  }
+
   return (
-    <DiceContext.Provider value={value}>{props.children}</DiceContext.Provider>
+    <DiceContext.Provider value={diceContextProviderValue}>
+      <CharacterContext.Provider value={characterContextProviderValue}>
+        {props.children}
+      </CharacterContext.Provider>
+    </DiceContext.Provider>
   )
 }
 
