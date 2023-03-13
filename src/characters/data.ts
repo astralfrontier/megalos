@@ -1,3 +1,5 @@
+import { append, difference, intersection, map, pluck, prop, reject, sortBy } from "ramda"
+
 export type MegalosClassName = "" | "Throne" | "Invoker" | "Witch"
 
 export type MegalosCallingName = "" |
@@ -31,9 +33,17 @@ export interface MegalosCalling {
   name: MegalosCallingName
 }
 
+// TODO: description
+export interface MegalosSkill {
+  name: MegalosSkillName
+}
+
+// Effective rank is what's shown on the sheet
+// It includes homeland skill picks
 export interface RankedSkill {
   skill: MegalosSkillName
   rank: number
+  effectiveRank: number
 }
 
 export interface MegalosCharacter {
@@ -284,11 +294,48 @@ export const classes: MegalosClass[] = [
   },
 ]
 
+/**
+ * Given a list of ranked skills,
+ * return a list sorted by name,
+ * with effective ranks computed
+ * @param skills 
+ */
+export function recalculateSkills(character: MegalosCharacter, newHomelandSkills: MegalosSkillName[]): RankedSkill[] {
+  // Which skills does the character have as homeland skills,
+  // but has not assigned any ranks to? We'll need to append these to the end
+  const homelandSkillsWithoutRanks = difference(newHomelandSkills, pluck("skill", character.skills))
+
+  let newSkills: RankedSkill[] = map(
+    rankedSkill => ({
+      skill: rankedSkill.skill,
+      rank: rankedSkill.rank,
+      effectiveRank: rankedSkill.rank + (newHomelandSkills.includes(rankedSkill.skill) ? 1 : 0)
+    }),
+    character.skills
+  )
+
+  for (let newSkill of homelandSkillsWithoutRanks) {
+    newSkills = append({
+      skill: newSkill,
+      rank: 1,
+      effectiveRank: 2
+    }, newSkills)
+  }
+
+  // Hide any resulting skills with a rank of 1, as that's the default
+  newSkills = reject(
+    (skill: RankedSkill) => skill.effectiveRank < 2,
+    newSkills
+  )
+
+  return sortBy(prop("skill"), newSkills)
+}
+
 export function newCharacter(): MegalosCharacter {
   return {
     name: 'New Character',
     pronouns: 'they/them',
-    homeland: '',
+    homeland: homelands[0].name,
     homelandSkills: [],
     class: '',
     calling: '',

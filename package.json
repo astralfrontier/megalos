@@ -14,11 +14,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
     "bulma": "^0.9.4",
+    "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
+    "@types/ramda": "^0.28.23",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
