@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+import { DiceContext } from '../GameStateProvider'
 import DiceInput from './DiceInput'
-import { DiceContext } from './DiceWrapper'
 
 interface DiceSettingsShelfProps {
   rerolls: number

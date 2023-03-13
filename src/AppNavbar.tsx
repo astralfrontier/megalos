@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const DICE_PATH = '/'
-export const OUTFITS_PATH = '/outfits'
-export const WEAPONS_PATH = '/weapons'
+import { DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from './App'
 
 const activeNavbarItem = ({ isActive }) =>
   isActive ? 'navbar-item has-background-white' : 'navbar-item'

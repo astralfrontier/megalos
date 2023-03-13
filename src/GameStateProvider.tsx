@@ -20,7 +20,7 @@ export interface DiceState {
   setPresets: React.Dispatch<React.SetStateAction<Preset[]>>
 }
 
-interface DiceWrapperProps {
+interface GameStateProviderProps {
   children?: React.ReactNode
 }
 
@@ -37,7 +37,7 @@ export const DiceContext = createContext<DiceState>({
   setPresets: () => {},
 })
 
-function DiceWrapper(props: DiceWrapperProps) {
+function GameStateProvider(props: GameStateProviderProps) {
   const [diceCount, setDiceCount] = useState<number>(1)
   const [rolls, setRolls] = useState<number[]>([1])
   const [difficulty, setDifficulty] = useState<number>(15)
@@ -62,4 +62,4 @@ function DiceWrapper(props: DiceWrapperProps) {
   )
 }
 
-export default DiceWrapper
+export default GameStateProvider

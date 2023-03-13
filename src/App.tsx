@@ -1,15 +1,17 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import AppFooter from './AppFooter'
-import AppNavbar, { DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from './AppNavbar'
+import DefaultLayout from './DefaultLayout'
 import DiceRoller from './dice/DiceRoller'
-import DiceWrapper from './dice/DiceWrapper'
+import GameStateProvider from './GameStateProvider'
 import OutfitBuilder from './OutfitBuilder'
 import WeaponBuilder from './WeaponBuilder'
 
 import './App.sass'
-import DefaultLayout from './DefaultLayout'
+
+export const DICE_PATH = '/'
+export const OUTFITS_PATH = '/outfits'
+export const WEAPONS_PATH = '/weapons'
 
 const router = createBrowserRouter([
   {
@@ -52,8 +54,8 @@ function ErrorPage(_props) {
 
 export default function App() {
   return (
-    <DiceWrapper>
+    <GameStateProvider>
       <RouterProvider router={router} />
-    </DiceWrapper>
+    </GameStateProvider>
   )
 }

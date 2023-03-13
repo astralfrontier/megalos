@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { DiceContext } from './DiceWrapper'
+import { DiceContext } from '../GameStateProvider'
 
 interface PresetShelfProps {}
 

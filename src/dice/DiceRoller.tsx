@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+import { DiceContext } from '../GameStateProvider'
 import DiceSettingsShelf from './DiceSettingsShelf'
 import DiceShelf from './DiceShelf'
-import { DiceContext } from './DiceWrapper'
 import PresetShelf from './PresetShelf'
 
 interface DiceRollerProps {

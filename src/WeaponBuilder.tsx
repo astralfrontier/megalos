@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import { DiceContext, Preset } from './dice/DiceWrapper'
+import { DiceContext, Preset } from './GameStateProvider'
 import GenericInput from './GenericInput'
 import { plusOrMinus, rollDie } from './utilities'
 
