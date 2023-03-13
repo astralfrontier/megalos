@@ -130,7 +130,7 @@ function SkillsChooser() {
               )}
             </ul>
           </div>
-          {sanityCheck(allocatedRanks >= 6, "You cannot spend more than 6 points on skills")}
+          {sanityCheck(allocatedRanks > 6, "You cannot spend more than 6 points on skills")}
           {sanityCheck(maxRanks > 3, "You cannot have a skill ranked higher than 3")}
         </div>
         <div className="column">
