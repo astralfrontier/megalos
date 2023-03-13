@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run --e2e",
     "prettier": "prettier --write ."
   },
   "dependencies": {

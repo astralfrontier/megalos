@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import AppFooter from './AppFooter'
 import AppNavbar, { DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from './AppNavbar'
@@ -9,6 +9,38 @@ import OutfitBuilder from './OutfitBuilder'
 import WeaponBuilder from './WeaponBuilder'
 
 import './App.sass'
+import DefaultLayout from './DefaultLayout'
+
+const router = createBrowserRouter([
+  {
+    path: DICE_PATH,
+    element: (
+      <DefaultLayout>
+        <DiceRoller />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: OUTFITS_PATH,
+    element: (
+      <DefaultLayout>
+        <OutfitBuilder />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: WEAPONS_PATH,
+    element: (
+      <DefaultLayout>
+        <WeaponBuilder />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
+  },
+])
 
 function ErrorPage(_props) {
   return (
@@ -18,23 +50,10 @@ function ErrorPage(_props) {
   )
 }
 
-function App() {
+export default function App() {
   return (
-    <Router>
-      <AppNavbar />
-      <div className="container">
-        <DiceWrapper>
-          <Routes>
-            <Route path={DICE_PATH} element={<DiceRoller />} />
-            <Route path={OUTFITS_PATH} element={<OutfitBuilder />} />
-            <Route path={WEAPONS_PATH} element={<WeaponBuilder />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        </DiceWrapper>
-        <AppFooter />
-      </div>
-    </Router>
+    <DiceWrapper>
+      <RouterProvider router={router} />
+    </DiceWrapper>
   )
 }
-
-export default App
