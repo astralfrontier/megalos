@@ -1,5 +1,6 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+describe('Dice Roller', () => {
+  it('rolls dice', () => {
+    cy.visit('/')
+    cy.get("#dice-roll").click()
   })
 })

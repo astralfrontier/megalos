@@ -64,12 +64,14 @@ function DiceSettingsShelf(props: DiceSettingsShelfProps) {
       <div className="columns">
         <div className="column has-text-centered">
           <button
+            id="dice-roll"
             className="button is-primary mx-2"
             onClick={() => rollAndShow()}
           >
             Roll
           </button>
           <button
+            id="dice-reset"
             className="button is-warning mx-2"
             onClick={() => resetRolls()}
           >
@@ -78,7 +80,7 @@ function DiceSettingsShelf(props: DiceSettingsShelfProps) {
           <br />
           Rerolls Used: {rerolls}
           <br />
-          <button className="button is-info" onClick={() => savePreset()}>
+          <button id="dice-save" className="button is-info" onClick={() => savePreset()}>
             Save
           </button>
         </div>
