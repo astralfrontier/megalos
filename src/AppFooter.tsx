@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 function AppFooter() {
   return (
@@ -15,13 +15,13 @@ function AppFooter() {
         <div className="column">
           <div className="content">
             <p>
-              MEGALOS rules:{" "}
+              MEGALOS rules:{' '}
               <a href="https://mataramg.itch.io/megalos" target="_blank">
                 https://mataramg.itch.io/megalos
               </a>
             </p>
             <p>
-              Source code:{" "}
+              Source code:{' '}
               <a
                 href="https://github.com/astralfrontier/megalos"
                 target="_blank"
@@ -52,7 +52,7 @@ function AppFooter() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default AppFooter;
+export default AppFooter

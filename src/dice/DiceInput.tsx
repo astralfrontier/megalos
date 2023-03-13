@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react'
 
-import GenericInput from "./GenericInput";
+import GenericInput from '../GenericInput'
 
 interface DiceInputProps {
-  label: string;
-  min: number;
-  max: number;
-  getter: any;
-  setter: any;
-  help: string;
-  children?: any;
+  label: string
+  min: number
+  max: number
+  getter: any
+  setter: any
+  help: string
+  children?: any
 }
 
 function onChange(setter: any) {
-  return (event) => setter(parseInt(event.target.value));
+  return (event) => setter(parseInt(event.target.value))
 }
 
 // Why, Javascript, why
 function toRange(min: number, max: number): number[] {
-  return [...Array(max + 1).keys()].slice(min);
+  return [...Array(max + 1).keys()].slice(min)
 }
 
 function DiceInput(props: DiceInputProps) {
@@ -30,7 +30,7 @@ function DiceInput(props: DiceInputProps) {
         ))}
       </select>
     </GenericInput>
-  );
+  )
 }
 
-export default DiceInput;
+export default DiceInput

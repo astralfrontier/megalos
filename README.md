@@ -1,5 +1,4 @@
-MEGALOS
-=======
+# MEGALOS
 
 A set of tools for the MEGALOS RPG, found at https://mataramg.itch.io/megalos
 

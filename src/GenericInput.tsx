@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
 interface FormInputProps {
-  label: string;
-  help: string;
-  children?: React.ReactNode;
+  label: string
+  help: string
+  children?: React.ReactNode
 }
 
 function GenericInput(props: FormInputProps) {
@@ -17,7 +17,7 @@ function GenericInput(props: FormInputProps) {
       </div>
       <p className="help">{props.help}</p>
     </div>
-  );
+  )
 }
 
-export default GenericInput;
+export default GenericInput

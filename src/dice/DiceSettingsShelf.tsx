@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 
-import DiceInput from "./DiceInput";
-import { DiceContext } from "./DiceWrapper";
+import DiceInput from './DiceInput'
+import { DiceContext } from './DiceWrapper'
 
 interface DiceSettingsShelfProps {
-  rerolls: number;
-  setRerolls: React.Dispatch<React.SetStateAction<number>>;
+  rerolls: number
+  setRerolls: React.Dispatch<React.SetStateAction<number>>
 }
 
 function rollDie(min: number, max: number): number {
-  return Math.floor(Math.random() * max) + min;
+  return Math.floor(Math.random() * max) + min
 }
 
 function rollDice(diceCount: number): number[] {
-  const results: number[] = [];
+  const results: number[] = []
   for (let i = 0; i < diceCount; i++) {
-    results.push(rollDie(1, 20));
+    results.push(rollDie(1, 20))
   }
-  return results;
+  return results
 }
 
 function DiceSettingsShelf(props: DiceSettingsShelfProps) {
@@ -31,31 +31,31 @@ function DiceSettingsShelf(props: DiceSettingsShelfProps) {
     setResistance,
     presets,
     setPresets,
-  } = useContext(DiceContext);
-  const { rerolls, setRerolls } = props;
+  } = useContext(DiceContext)
+  const { rerolls, setRerolls } = props
 
   function rollAndShow() {
-    setRerolls(0);
-    setRolls(rollDice(diceCount > 0 ? diceCount : 2));
+    setRerolls(0)
+    setRolls(rollDice(diceCount > 0 ? diceCount : 2))
   }
 
   function resetRolls() {
-    setDifficulty(15);
-    setResistance(1);
-    setRerolls(0);
+    setDifficulty(15)
+    setResistance(1)
+    setRerolls(0)
   }
 
   function savePreset() {
-    const presetName = prompt("Enter a name for this preset", "New Preset");
+    const presetName = prompt('Enter a name for this preset', 'New Preset')
     if (presetName != null) {
-      const newPresets = [...presets];
+      const newPresets = [...presets]
       newPresets.push({
         label: presetName,
         diceCount: diceCount,
         difficulty: difficulty,
         resistance: resistance,
-      });
-      setPresets(newPresets);
+      })
+      setPresets(newPresets)
     }
   }
 
@@ -80,25 +80,29 @@ function DiceSettingsShelf(props: DiceSettingsShelfProps) {
           <br />
           Rerolls Used: {rerolls}
           <br />
-          <button id="dice-save" className="button is-info" onClick={() => savePreset()}>
+          <button
+            id="dice-save"
+            className="button is-info"
+            onClick={() => savePreset()}
+          >
             Save
           </button>
         </div>
         <div className="column">
           <DiceInput
-            label={"Dice"}
+            label={'Dice'}
             min={0}
             max={8}
             getter={diceCount}
             setter={setDiceCount}
             help={
-              "Your skill rating, or the dice rating of your weapon, plus Advantage, minus Disadvantage"
+              'Your skill rating, or the dice rating of your weapon, plus Advantage, minus Disadvantage'
             }
           />
         </div>
         <div className="column">
           <DiceInput
-            label={"Difficulty"}
+            label={'Difficulty'}
             min={1}
             max={21}
             getter={difficulty}
@@ -110,19 +114,19 @@ function DiceSettingsShelf(props: DiceSettingsShelfProps) {
         </div>
         <div className="column">
           <DiceInput
-            label={"Resistance"}
+            label={'Resistance'}
             min={1}
             max={8}
             getter={resistance}
             setter={setResistance}
             help={
-              "The default value is 1, +1 each for magickal effects, Stressed Out, unfavorable conditions, and GM ruling"
+              'The default value is 1, +1 each for magickal effects, Stressed Out, unfavorable conditions, and GM ruling'
             }
           />
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default DiceSettingsShelf;
+export default DiceSettingsShelf

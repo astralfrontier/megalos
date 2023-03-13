@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-export const DICE_PATH = "/";
-export const OUTFITS_PATH = "/outfits";
-export const WEAPONS_PATH = "/weapons";
+export const DICE_PATH = '/'
+export const OUTFITS_PATH = '/outfits'
+export const WEAPONS_PATH = '/weapons'
 
 const activeNavbarItem = ({ isActive }) =>
-  isActive ? "navbar-item has-background-white" : "navbar-item";
+  isActive ? 'navbar-item has-background-white' : 'navbar-item'
 
 function AppNavbar() {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(false)
 
   return (
     <nav
@@ -21,7 +21,7 @@ function AppNavbar() {
         <a className="navbar-item">MEGALOS</a>
         <a
           role="button"
-          className={isActive ? "navbar-burger is-active" : "navbar-burger"}
+          className={isActive ? 'navbar-burger is-active' : 'navbar-burger'}
           aria-label="menu"
           aria-expanded="false"
           data-target="appNavbarItems"
@@ -32,21 +32,36 @@ function AppNavbar() {
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div className={isActive ? "navbar-menu is-active" : "navbar-menu"} id="appNavbarItems">
+      <div
+        className={isActive ? 'navbar-menu is-active' : 'navbar-menu'}
+        id="appNavbarItems"
+      >
         <div className="navbar-start">
-          <NavLink className={activeNavbarItem} to={DICE_PATH} onClick={() => setIsActive(false)}>
+          <NavLink
+            className={activeNavbarItem}
+            to={DICE_PATH}
+            onClick={() => setIsActive(false)}
+          >
             Dice
           </NavLink>
-          <NavLink className={activeNavbarItem} to={OUTFITS_PATH} onClick={() => setIsActive(false)}>
+          <NavLink
+            className={activeNavbarItem}
+            to={OUTFITS_PATH}
+            onClick={() => setIsActive(false)}
+          >
             Outfits
           </NavLink>
-          <NavLink className={activeNavbarItem} to={WEAPONS_PATH} onClick={() => setIsActive(false)}>
+          <NavLink
+            className={activeNavbarItem}
+            to={WEAPONS_PATH}
+            onClick={() => setIsActive(false)}
+          >
             Weapons
           </NavLink>
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default AppNavbar;
+export default AppNavbar
