@@ -4,7 +4,7 @@ function AppFooter() {
   return (
     <div className="box block">
       <div className="columns">
-        <div className="column is-narrow">
+        <div className="column is-narrow is-hidden-mobile">
           <img
             src="/shutterstock_1036949959_s.jpg"
             width="227"
@@ -42,7 +42,7 @@ function AppFooter() {
             </p>
           </div>
         </div>
-        <div className="column is-narrow">
+        <div className="column is-narrow is-hidden-mobile">
           <img
             src="/shutterstock_1158872473_s.jpg"
             width="250"
