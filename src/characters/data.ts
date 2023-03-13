@@ -15,6 +15,13 @@ export type MegalosSkillName = "" |
 
 export type MegalosTrait = string
 
+export interface MegalosTraits {
+  background: MegalosTrait
+  mental: MegalosTrait
+  physical: MegalosTrait
+  special: MegalosTrait
+}
+
 export interface Homeland {
   name: string
   description: string[]
@@ -54,7 +61,7 @@ export interface MegalosCharacter {
   class: MegalosClassName
   calling: MegalosCallingName
   skills: RankedSkill[]
-  traits: MegalosTrait[]
+  traits: MegalosTraits
 }
 
 export const homelands: Homeland[] = [
@@ -340,6 +347,11 @@ export function newCharacter(): MegalosCharacter {
     class: '',
     calling: '',
     skills: [],
-    traits: [],
+    traits: {
+      background: "",
+      mental: "",
+      physical: "",
+      special: ""
+    }
   }
 }

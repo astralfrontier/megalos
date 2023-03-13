@@ -40,12 +40,6 @@ function TableRow(props: TableRowProps) {
 function SkillsPane() {
   const { character } = useContext(CharacterContext)
 
-  const skills = character.skills
-  for (let skill of character.homelandSkills) {
-    for (let rank of skills) {
-    }
-  }
-
   return (
     <>
       <article className="message">
