@@ -1,37 +1,37 @@
 import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
-import HomelandChooser from './HomelandChooser'
-import TraitsChooser from './TraitsChooser'
-import SkillsChooser from './SkillsChooser'
-import ClassCallingChooser from './ClassCallingChooser'
-import PowersTalentsChooser from './PowersTalentsChooser'
 import BondChooser from './BondChooser'
+import ClassCallingChooser from './ClassCallingChooser'
+import HomelandChooser from './HomelandChooser'
+import PowersTalentsChooser from './PowersTalentsChooser'
+import SkillsChooser from './SkillsChooser'
+import TraitsChooser from './TraitsChooser'
 
 const activeSteps = [
   {
-    name: "Homeland",
-    element: <HomelandChooser />
+    name: 'Homeland',
+    element: <HomelandChooser />,
   },
   {
-    name: "Traits",
-    element: <TraitsChooser />
+    name: 'Traits',
+    element: <TraitsChooser />,
   },
   {
-    name: "Skills",
-    element: <SkillsChooser />
+    name: 'Skills',
+    element: <SkillsChooser />,
   },
   {
-    name: "Class and Calling",
-    element: <ClassCallingChooser />
+    name: 'Class and Calling',
+    element: <ClassCallingChooser />,
   },
   {
-    name: "Powers and Talents",
-    element: <PowersTalentsChooser />
+    name: 'Powers and Talents',
+    element: <PowersTalentsChooser />,
   },
   {
-    name: "Bonds",
-    element: <BondChooser />
+    name: 'Bonds',
+    element: <BondChooser />,
   },
 ]
 
@@ -42,25 +42,22 @@ function CharacterBuilder() {
   return (
     <>
       <div className="box block">
-        <nav
-          className="breadcrumb has-arrow-separator"
-          aria-label="breadcrumbs"
-        >
+        <div className='tabs'>
           <ul>
-            {activeSteps.map(
-              (step, i) => (
-                <li className={activeStep == i ? "is-active" : ""}><a onClick={() => setActiveStep(i)}>{step.name}</a></li>
-              )
-            )}
+            {activeSteps.map((step, i) => (
+              <li className={activeStep == i ? 'is-active' : ''}>
+                <a onClick={() => setActiveStep(i)}>
+                  {step.name}
+                </a>
+              </li>
+            ))}
           </ul>
-        </nav>
-        {activeSteps.map(
-          (step, i) => (
-            <div className={activeStep == i ? "" : "is-hidden"}>
-              {step.element}
-            </div>
-          )
-        )}
+        </div>
+        {activeSteps.map((step, i) => (
+          <div className={activeStep == i ? '' : 'is-hidden'}>
+            {step.element}
+          </div>
+        ))}
       </div>
     </>
   )

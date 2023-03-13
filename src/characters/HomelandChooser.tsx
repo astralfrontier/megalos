@@ -32,7 +32,7 @@ function HomelandChooser() {
     setCharacter({
       ...character,
       homelandSkills: newHomelandSkills,
-      skills: recalculateSkills(character, newHomelandSkills)
+      skills: recalculateSkills(character, character.skills, newHomelandSkills)
     })
   }
 

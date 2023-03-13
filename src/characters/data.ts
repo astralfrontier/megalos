@@ -1,17 +1,37 @@
-import { append, difference, intersection, map, pluck, prop, reject, sortBy } from "ramda"
+import { append, difference, intersection, map, pluck, prop, reject, sortBy } from 'ramda'
 
-export type MegalosClassName = "" | "Throne" | "Invoker" | "Witch"
+export type MegalosClassName = '' | 'Throne' | 'Invoker' | 'Witch'
 
-export type MegalosCallingName = "" |
-  "Arklight" | "Champion" | "Shadowblade" |
-  "Astromancer" | "Chanter" | "Raconteur" |
-  "Draloi" | "Psythe" | "Rune Magus"
+export type MegalosCallingName =
+  | ''
+  | 'Arklight'
+  | 'Champion'
+  | 'Shadowblade'
+  | 'Astromancer'
+  | 'Chanter'
+  | 'Raconteur'
+  | 'Draloi'
+  | 'Psythe'
+  | 'Rune Magus'
 
-export type MegalosSkillName = "" |
-  "Attune" | "Bargain" | "Create" | "Drive" | "Finesse" |
-  "Force" | "Hunt" | "Inspect" | "Learn" | "Move" |
-  "Perform" | "Restore" | "Sneak" | "Survive" | "Talk" |
-  "Watch"
+export type MegalosSkillName =
+  | ''
+  | 'Attune'
+  | 'Bargain'
+  | 'Create'
+  | 'Drive'
+  | 'Finesse'
+  | 'Force'
+  | 'Hunt'
+  | 'Inspect'
+  | 'Learn'
+  | 'Move'
+  | 'Perform'
+  | 'Restore'
+  | 'Sneak'
+  | 'Survive'
+  | 'Talk'
+  | 'Watch'
 
 export type MegalosTrait = string
 
@@ -40,9 +60,10 @@ export interface MegalosCalling {
   name: MegalosCallingName
 }
 
-// TODO: description
 export interface MegalosSkill {
   name: MegalosSkillName
+  description: string
+  uses: string[]
 }
 
 // Effective rank is what's shown on the sheet
@@ -285,19 +306,226 @@ export const homelands: Homeland[] = [
 export const classes: MegalosClass[] = [
   {
     name: 'Invoker',
-    callings: ["Astromancer", "Chanter", "Raconteur"]
+    callings: ['Astromancer', 'Chanter', 'Raconteur'],
   },
   {
     name: 'Throne',
-    callings: [
-      "Arklight", "Champion", "Shadowblade"
-    ]
+    callings: ['Arklight', 'Champion', 'Shadowblade'],
   },
   {
     name: 'Witch',
-    callings: [
-      "Draloi", "Psythe", "Rune Magus"
-    ]
+    callings: ['Draloi', 'Psythe', 'Rune Magus'],
+  },
+]
+
+export const skills: MegalosSkill[] = [
+  {
+    name: 'Attune',
+    description: `Learning about the local aether, identifying magick and spellcraft, and controlling magickal devices.`,
+    uses: [
+      "Attune to the magickal energies of a complex enchanted object to learn what it's for and how to use it.",
+      "Discern how recently magick was used in an area and what that magick's overall aspect was.",
+      "Bring yourself in sync with a teleportation device, circle, or crystal, so that you can recall yourself to it later, a bit like learning someone's phone number or address. You may only be attuned to one such thing at a time.",
+      'Get an impression of the aetheric “vibe check” of a creature, place, or thing.',
+    ],
+  },
+  {
+    name: 'Bargain',
+    description: `Make and alter deals, convince others
+      to behave in a way they'd rather not in
+      exchange for something that you do or
+      give them. In order to bargain effectively,
+      you must have something to offer to or withhold from the other party.
+      How much leverage you have (or they
+      believe you have) directly affects the
+      overall effectiveness of a successful
+      Bargain test.`,
+    uses: [
+      "Get a more favorable price on items you're buying or selling.",
+      'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
+      'Renegotiate a deal for better terms once the balance of power has shifted between the relevant parties.',
+    ],
+  },
+  {
+    name: 'Create',
+    description: `Make and alter deals, convince others
+      to behave in a way they'd rather not in
+      exchange for something that you do or
+      give them. In order to bargain effectively,
+      you must have something to offer to or withhold from the other party.
+      How much leverage you have (or they
+      believe you have) directly affects the
+      overall effectiveness of a successful
+      Bargain test.`,
+    uses: [
+      "Get a more favorable price on items you're buying or selling.",
+      'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
+      'Renegotiate a deal for better terms once the balance of power has shifted between the relevant parties.',
+    ],
+  },
+  {
+    name: 'Drive',
+    description: `Riding, piloting, or steering any sort of
+    vehicle. Some vehicles may require
+    more than one operator, but there's
+    usually just one actual driver.`,
+    uses: [
+      'Steer a humble mek-walker or airboat.',
+      'Pilot a powerful war-walker or airship.',
+      'Win a race through straightforward skill and white-knuckle grit.',
+      'Recognize something out of place or exceptional about a particular vehicle.',
+    ],
+  },
+  {
+    name: 'Finesse',
+    description: `Using carefully applied pressures and
+      leverage to interact with your environment.
+      This is used whenever you carefully and precisely interact with creatures and objects.`,
+    uses: [
+      'Pick locks & disable complex devices.',
+      'Agilely reverse a grapple.',
+      'Carefully dismantle traps.',
+    ],
+  },
+  {
+    name: 'Force',
+    description: `Using brute force to interact with your
+    environment. This is used whenever
+    you push, lift, drag, bend, or break
+    something.`,
+    uses: [
+      'Lift or move heavy stuff.',
+      'Bash, crash, and break things.',
+      'Hold onto something & not let go.',
+    ],
+  },
+  {
+    name: 'Hunt',
+    description: `Finding people and animals, tracking
+    movement based on clues left behind
+    in the environment, and killing critters
+    for food and other supplies.`,
+    uses: [
+      'Track down prey by its leavings & trail.',
+      "Recognize when a creature is wounded or has other things going on with it based on what it's left in its wake.",
+      'Provide food for the group when roughing it out in the wilderness.',
+    ],
+  },
+  {
+    name: 'Inspect',
+    description: `Deducing details about an object, person, or place that you are currently
+    holding, observing, or within. Inspect is
+    based on your own internal knowledge
+    and logical processes`,
+    uses: [
+      'Discern when something which should be there is missing.',
+      "Discern when something which shouldn't be there is present.",
+      'Discover details and intuit the history of an object, person, or location based on its current state.',
+      'Discover forensic information.',
+    ],
+  },
+  {
+    name: 'Learn',
+    description: `Searching for knowledge through gossip, by poring over texts, and generally
+      finding out what you don't already
+      know by means of libraries, crowds, interviews, etc.`,
+    uses: [
+      "Learn things you didn't know before.",
+      "Search a large trove of information, whether it's digging through a library or canvassing a group of people.",
+    ],
+  },
+  {
+    name: 'Move',
+    description: `Moving yourself quickly or skillfully
+    through space. This includes things like
+    running, jumping, climbing, and swimming. It also covers acrobatic pursuits
+    as well.`,
+    uses: [
+      'Win a foot race through speed & agility.',
+      'Swim against a powerful current.',
+      'Maintain your balance across a narrow, slippery, or otherwise treacherous span.',
+      'Tumble, leap, climb, and otherwise parkour through an environment.',
+    ],
+  },
+  {
+    name: 'Perform',
+    description: `Engaging in a physical, visual and/or
+    auditory performance art. This covers
+    everything from singing and acting to
+    playing instruments and dancing. This
+    skill is also used to assume a false identity - not to be confused with acts of
+    one-off deception (which would be Talk
+    instead).`,
+    uses: [
+      'Perform a song, oratory, dance, or other performance art routine.',
+      "Judge the relative skill of another performer's artistry.",
+      'Impersonate someone by taking on a wholly false persona.',
+      'Entertain (Rest Activity): Use your skills to help others relax & regain resources.',
+    ],
+  },
+  {
+    name: 'Restore',
+    description: `To heal bodies and minds, and to mend
+    fraying relationships. Use Restore to fix
+    what's broken or breaking in people
+    the way you would use Create to fix
+    what's broken or breaking in objects.`,
+    uses: [
+      'Diagnose afflictions like poisons, curses, and diseases.',
+      'Treat emotional wounds and trauma with therapeutic techniques and counseling over a long period of time.',
+      'Act as a mediator between two or more groups with significant disputes and badly frayed relations.',
+      'First Aid (Rest Activity): Care for a wounded patient to restore some HP. You spend 1 Recovery; Injured targets regain HP equal to their Recovery Base (p. 43) while non-Injured ones regain HP equal to (RB * 2).',
+    ],
+  },
+  {
+    name: 'Sneak',
+    description: `Hiding, moving silently, stealing things
+    without being caught, and engaging in
+    all manner of general skulduggery.`,
+    uses: [
+      'Remain unseen while moving or hiding.',
+      'Hide in plain sight, seeming to just “blend in” with a crowd.',
+      'Steal something while being observed but without anyone noticing.',
+      'Perform acts of sleight of hand like close-up magic, palming objects, etc.',
+    ],
+  },
+  {
+    name: 'Survive',
+    description: `The combined knowledge and behavior or skills required to survive in an inhospitable environment or without the
+    normal support structures of civilization.`,
+    uses: [
+      'Recognize different plants & animals, as well as their properties as relates to humanity (i.e. “is this edible?”, “is this animal generally aggressive?”, etc.).',
+      'Build camps & structures to protect against the local elements.',
+      'Determine direction, distance traveled, approximate location based on maps & landmarks, etc.',
+      'Scavenge (Rest Activity): Source medicinal or practical resources from your immediate environment.',
+    ],
+  },
+  {
+    name: 'Talk',
+    description: `Expressing yourself clearly. Use Talk to
+    convince, cajole, bully, or deceive others
+    into acting in a way they'd otherwise
+    not based only on your words`,
+    uses: [
+      'Explain and express yourself adequately, especially to people predisposed to distrust or misunderstand you.',
+      'Convince others who are convincible that your point of view is the correct one.',
+      'Conceal truths & information behind deceptions & omissions without your evasiveness being readily apparent.',
+      'Intimidate or pressure people with words & threats alone.',
+    ],
+  },
+  {
+    name: 'Watch',
+    description: `To remain vigilant and react to changes
+    in your environment. The Watch skill is
+    often used reactively, but you can
+    proactively keep careful vigil as well.`,
+    uses: [
+      'Notice when someone is sneaking up on you or your group.',
+      "Detect changes in your environment which signal something that's about to happen.",
+      "Remain vigilant for long periods of time such that you're able to react in a timely manner when something happens.",
+      "Watch someone for signs of evasiveness or deception while they're talking.",
+      'Stand Watch (Rest Activity): You stay alert enough to know if your group is going to get ambushed during a rest.',
+    ],
   },
 ]
 
@@ -305,37 +533,46 @@ export const classes: MegalosClass[] = [
  * Given a list of ranked skills,
  * return a list sorted by name,
  * with effective ranks computed
- * @param skills 
+ * @param skills
  */
-export function recalculateSkills(character: MegalosCharacter, newHomelandSkills: MegalosSkillName[]): RankedSkill[] {
+export function recalculateSkills(
+  character: MegalosCharacter,
+  newSkills: RankedSkill[],
+  newHomelandSkills: MegalosSkillName[]
+): RankedSkill[] {
   // Which skills does the character have as homeland skills,
   // but has not assigned any ranks to? We'll need to append these to the end
-  const homelandSkillsWithoutRanks = difference(newHomelandSkills, pluck("skill", character.skills))
-
-  let newSkills: RankedSkill[] = map(
-    rankedSkill => ({
-      skill: rankedSkill.skill,
-      rank: rankedSkill.rank,
-      effectiveRank: rankedSkill.rank + (newHomelandSkills.includes(rankedSkill.skill) ? 1 : 0)
-    }),
-    character.skills
+  const homelandSkillsWithoutRanks = difference(
+    newHomelandSkills,
+    pluck('skill', newSkills)
   )
 
-  for (let newSkill of homelandSkillsWithoutRanks) {
-    newSkills = append({
-      skill: newSkill,
-      rank: 1,
-      effectiveRank: 2
-    }, newSkills)
-  }
-
-  // Hide any resulting skills with a rank of 1, as that's the default
-  newSkills = reject(
-    (skill: RankedSkill) => skill.effectiveRank < 2,
+  let updatedSkills: RankedSkill[] = map(
+    (rankedSkill) => ({
+      skill: rankedSkill.skill,
+      rank: rankedSkill.rank,
+      effectiveRank:
+        rankedSkill.rank +
+        (newHomelandSkills.includes(rankedSkill.skill) ? 1 : 0),
+    }),
     newSkills
   )
 
-  return sortBy(prop("skill"), newSkills)
+  for (let newSkill of homelandSkillsWithoutRanks) {
+    updatedSkills = append(
+      {
+        skill: newSkill,
+        rank: 1,
+        effectiveRank: 2,
+      },
+      updatedSkills
+    )
+  }
+
+  // Hide any resulting skills with a rank of 1, as that's the default
+  updatedSkills = reject((skill: RankedSkill) => skill.effectiveRank < 2, updatedSkills)
+
+  return sortBy(prop('skill'), updatedSkills)
 }
 
 export function newCharacter(): MegalosCharacter {
@@ -348,10 +585,10 @@ export function newCharacter(): MegalosCharacter {
     calling: '',
     skills: [],
     traits: {
-      background: "",
-      mental: "",
-      physical: "",
-      special: ""
-    }
+      background: '',
+      mental: '',
+      physical: '',
+      special: '',
+    },
   }
 }
