@@ -1,4 +1,4 @@
-import { append, difference, intersection, map, pluck, prop, reject, sortBy } from 'ramda'
+import { append, ascend, difference, filter, indexOf, intersection, map, pluck, prop, propEq, reject, sortBy, sortWith } from 'ramda'
 
 export type MegalosClassName = '' | 'Throne' | 'Invoker' | 'Witch'
 
@@ -32,6 +32,10 @@ export type MegalosSkillName =
   | 'Survive'
   | 'Talk'
   | 'Watch'
+  | 'Cautious (Cutscene)'
+  | 'Clever (Cutscene)'
+  | 'Forceful (Cutscene)'
+  | 'Quick (Cutscene)'
 
 export type MegalosTrait = string
 
@@ -60,9 +64,18 @@ export interface MegalosCalling {
   name: MegalosCallingName
 }
 
+export enum MegalosSkillType {
+  // Regular skills
+  ACTIVE,
+
+  // Cutscene approaches
+  CUTSCENE
+}
+
 export interface MegalosSkill {
   name: MegalosSkillName
-  description: string
+  type: MegalosSkillType
+  description: string[]
   uses: string[]
 }
 
@@ -321,7 +334,8 @@ export const classes: MegalosClass[] = [
 export const skills: MegalosSkill[] = [
   {
     name: 'Attune',
-    description: `Learning about the local aether, identifying magick and spellcraft, and controlling magickal devices.`,
+    type: MegalosSkillType.ACTIVE,
+    description: [`Learning about the local aether, identifying magick and spellcraft, and controlling magickal devices.`],
     uses: [
       "Attune to the magickal energies of a complex enchanted object to learn what it's for and how to use it.",
       "Discern how recently magick was used in an area and what that magick's overall aspect was.",
@@ -331,7 +345,8 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Bargain',
-    description: `Make and alter deals, convince others
+    type: MegalosSkillType.ACTIVE,
+    description: [`Make and alter deals, convince others
       to behave in a way they'd rather not in
       exchange for something that you do or
       give them. In order to bargain effectively,
@@ -339,7 +354,7 @@ export const skills: MegalosSkill[] = [
       How much leverage you have (or they
       believe you have) directly affects the
       overall effectiveness of a successful
-      Bargain test.`,
+      Bargain test.`],
     uses: [
       "Get a more favorable price on items you're buying or selling.",
       'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
@@ -348,7 +363,8 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Create',
-    description: `Make and alter deals, convince others
+    type: MegalosSkillType.ACTIVE,
+    description: [`Make and alter deals, convince others
       to behave in a way they'd rather not in
       exchange for something that you do or
       give them. In order to bargain effectively,
@@ -356,7 +372,7 @@ export const skills: MegalosSkill[] = [
       How much leverage you have (or they
       believe you have) directly affects the
       overall effectiveness of a successful
-      Bargain test.`,
+      Bargain test.`],
     uses: [
       "Get a more favorable price on items you're buying or selling.",
       'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
@@ -365,10 +381,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Drive',
-    description: `Riding, piloting, or steering any sort of
+    type: MegalosSkillType.ACTIVE,
+    description: [`Riding, piloting, or steering any sort of
     vehicle. Some vehicles may require
     more than one operator, but there's
-    usually just one actual driver.`,
+    usually just one actual driver.`],
     uses: [
       'Steer a humble mek-walker or airboat.',
       'Pilot a powerful war-walker or airship.',
@@ -378,9 +395,10 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Finesse',
-    description: `Using carefully applied pressures and
+    type: MegalosSkillType.ACTIVE,
+    description: [`Using carefully applied pressures and
       leverage to interact with your environment.
-      This is used whenever you carefully and precisely interact with creatures and objects.`,
+      This is used whenever you carefully and precisely interact with creatures and objects.`],
     uses: [
       'Pick locks & disable complex devices.',
       'Agilely reverse a grapple.',
@@ -389,10 +407,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Force',
-    description: `Using brute force to interact with your
+    type: MegalosSkillType.ACTIVE,
+    description: [`Using brute force to interact with your
     environment. This is used whenever
     you push, lift, drag, bend, or break
-    something.`,
+    something.`],
     uses: [
       'Lift or move heavy stuff.',
       'Bash, crash, and break things.',
@@ -401,10 +420,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Hunt',
-    description: `Finding people and animals, tracking
+    type: MegalosSkillType.ACTIVE,
+    description: [`Finding people and animals, tracking
     movement based on clues left behind
     in the environment, and killing critters
-    for food and other supplies.`,
+    for food and other supplies.`],
     uses: [
       'Track down prey by its leavings & trail.',
       "Recognize when a creature is wounded or has other things going on with it based on what it's left in its wake.",
@@ -413,10 +433,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Inspect',
-    description: `Deducing details about an object, person, or place that you are currently
+    type: MegalosSkillType.ACTIVE,
+    description: [`Deducing details about an object, person, or place that you are currently
     holding, observing, or within. Inspect is
     based on your own internal knowledge
-    and logical processes`,
+    and logical processes`],
     uses: [
       'Discern when something which should be there is missing.',
       "Discern when something which shouldn't be there is present.",
@@ -426,9 +447,10 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Learn',
-    description: `Searching for knowledge through gossip, by poring over texts, and generally
+    type: MegalosSkillType.ACTIVE,
+    description: [`Searching for knowledge through gossip, by poring over texts, and generally
       finding out what you don't already
-      know by means of libraries, crowds, interviews, etc.`,
+      know by means of libraries, crowds, interviews, etc.`],
     uses: [
       "Learn things you didn't know before.",
       "Search a large trove of information, whether it's digging through a library or canvassing a group of people.",
@@ -436,10 +458,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Move',
-    description: `Moving yourself quickly or skillfully
+    type: MegalosSkillType.ACTIVE,
+    description: [`Moving yourself quickly or skillfully
     through space. This includes things like
     running, jumping, climbing, and swimming. It also covers acrobatic pursuits
-    as well.`,
+    as well.`],
     uses: [
       'Win a foot race through speed & agility.',
       'Swim against a powerful current.',
@@ -449,13 +472,14 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Perform',
-    description: `Engaging in a physical, visual and/or
+    type: MegalosSkillType.ACTIVE,
+    description: [`Engaging in a physical, visual and/or
     auditory performance art. This covers
     everything from singing and acting to
     playing instruments and dancing. This
     skill is also used to assume a false identity - not to be confused with acts of
     one-off deception (which would be Talk
-    instead).`,
+    instead).`],
     uses: [
       'Perform a song, oratory, dance, or other performance art routine.',
       "Judge the relative skill of another performer's artistry.",
@@ -465,11 +489,12 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Restore',
-    description: `To heal bodies and minds, and to mend
+    type: MegalosSkillType.ACTIVE,
+    description: [`To heal bodies and minds, and to mend
     fraying relationships. Use Restore to fix
     what's broken or breaking in people
     the way you would use Create to fix
-    what's broken or breaking in objects.`,
+    what's broken or breaking in objects.`],
     uses: [
       'Diagnose afflictions like poisons, curses, and diseases.',
       'Treat emotional wounds and trauma with therapeutic techniques and counseling over a long period of time.',
@@ -479,9 +504,10 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Sneak',
-    description: `Hiding, moving silently, stealing things
+    type: MegalosSkillType.ACTIVE,
+    description: [`Hiding, moving silently, stealing things
     without being caught, and engaging in
-    all manner of general skulduggery.`,
+    all manner of general skulduggery.`],
     uses: [
       'Remain unseen while moving or hiding.',
       'Hide in plain sight, seeming to just “blend in” with a crowd.',
@@ -491,8 +517,9 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Survive',
-    description: `The combined knowledge and behavior or skills required to survive in an inhospitable environment or without the
-    normal support structures of civilization.`,
+    type: MegalosSkillType.ACTIVE,
+    description: [`The combined knowledge and behavior or skills required to survive in an inhospitable environment or without the
+    normal support structures of civilization.`],
     uses: [
       'Recognize different plants & animals, as well as their properties as relates to humanity (i.e. “is this edible?”, “is this animal generally aggressive?”, etc.).',
       'Build camps & structures to protect against the local elements.',
@@ -502,10 +529,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Talk',
-    description: `Expressing yourself clearly. Use Talk to
+    type: MegalosSkillType.ACTIVE,
+    description: [`Expressing yourself clearly. Use Talk to
     convince, cajole, bully, or deceive others
     into acting in a way they'd otherwise
-    not based only on your words`,
+    not based only on your words`],
     uses: [
       'Explain and express yourself adequately, especially to people predisposed to distrust or misunderstand you.',
       'Convince others who are convincible that your point of view is the correct one.',
@@ -515,10 +543,11 @@ export const skills: MegalosSkill[] = [
   },
   {
     name: 'Watch',
-    description: `To remain vigilant and react to changes
+    type: MegalosSkillType.ACTIVE,
+    description: [`To remain vigilant and react to changes
     in your environment. The Watch skill is
     often used reactively, but you can
-    proactively keep careful vigil as well.`,
+    proactively keep careful vigil as well.`],
     uses: [
       'Notice when someone is sneaking up on you or your group.',
       "Detect changes in your environment which signal something that's about to happen.",
@@ -527,7 +556,82 @@ export const skills: MegalosSkill[] = [
       'Stand Watch (Rest Activity): You stay alert enough to know if your group is going to get ambushed during a rest.',
     ],
   },
+  {
+    name: 'Cautious (Cutscene)',
+    type: MegalosSkillType.CUTSCENE,
+    description: [`Characters that favor the Cautious
+    approach tend to be protective, defensive,
+    and ungiven to rash action. Often these
+    are Arklights, Chanters, Draloi, or Shad-
+    owblades. A Cautious approach favors
+    waiting for an ideal opportunity or else
+    not taking what seems like an unnec-
+    essary risk.`,
+    `An example of a Cautious approach's
+    outcome would be settling for less
+    information than you might otherwise
+    get by continuing to spy on an enemy
+    for longer, in order to get out while the
+    getting's good.`],
+    uses: []
+  },
+  {
+    name: 'Clever (Cutscene)',
+    type: MegalosSkillType.CUTSCENE,
+    description: [`Characters that favor the Clever approach tend to be studious, insightful,
+    and meditative. Often these are Raconteurs, Arklights, Draloi, Rune Magi, or
+    Psythes. A Clever approach favors planning things out ahead of time, and
+    working smarter, not harder.`,
+    `An example of a Clever approach's outcome would be facing down a mekari
+    construct with a specially-tuned device
+    designed to nullify the thing's strongest weapons or weaken its protective
+    shields`],
+    uses: []
+  },
+  {
+    name: 'Forceful (Cutscene)',
+    type: MegalosSkillType.CUTSCENE,
+    description: [`Characters that favor the Forceful approach tend to be brash, powerful, and
+    assertive. Often these are Champions,
+    Raconteurs, Astromancers, and Rune
+    Magi. A Forceful approach favors powering through the opposition and never
+    listening to naysayers & defeatists.`,
+    `An example of a Forceful approach's
+    outcome would be audaciously forcing
+    your way in to speak with a monarch
+    whose courts' byzantine laws demanded you linger in a bureaucratic
+    purgatory for ages before your case
+    could be pled.`],
+    uses: []
+  },
+  {
+    name: 'Quick (Cutscene)',
+    type: MegalosSkillType.CUTSCENE,
+    description: [`Characters that favor the Quick approach tend to be lithe, agile, and
+    quick-witted. Often Shadowblades, Astromancers, Champions, or Psythes. A
+    Quick approach favors getting "in &
+    out" unscathed, preferring subtlety &
+    speed to precision, innovation, or raw
+    power.`,
+    `An example of a Quick approach's outcome would be making it through a
+    gauntlet of enemy artillery unharmed
+    to deliver an important message to a
+    camp cut off from the front lines.`],
+    uses: []
+  }
 ]
+
+export const ACTIVE_SKILLS = pluck("name", filter(propEq("type", MegalosSkillType.ACTIVE), skills) as MegalosSkill[])
+export const CUTSCENE_SKILLS = pluck("name", filter(propEq("type", MegalosSkillType.CUTSCENE), skills) as MegalosSkill[])
+
+// Cache the names of skills for quick sorting
+const skillNames = pluck("name", skills)
+
+// Sort skills by appearance in the skills list, thus putting cutscenes at the end
+const skillSortCriteria = (skill: RankedSkill) => indexOf(skill.skill, skillNames)
+// const skillSortCriteria = (skill: RankedSkill) => prop("skill")
+
+const skillSorter = sortBy(skillSortCriteria)
 
 /**
  * Given a list of ranked skills,
@@ -572,7 +676,7 @@ export function recalculateSkills(
   // Hide any resulting skills with a rank of 1, as that's the default
   updatedSkills = reject((skill: RankedSkill) => skill.effectiveRank < 2, updatedSkills)
 
-  return sortBy(prop('skill'), updatedSkills)
+  return skillSorter(updatedSkills)
 }
 
 export function newCharacter(): MegalosCharacter {

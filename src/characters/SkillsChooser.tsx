@@ -1,22 +1,23 @@
-import { append, find, findIndex, map, max, propEq, reduce } from 'ramda'
+import { append, filter, find, findIndex, map, max, propEq, reduce } from 'ramda'
 import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
-import { MegalosSkillName, recalculateSkills, skills } from './data'
+import { ACTIVE_SKILLS, CUTSCENE_SKILLS, MegalosSkillName, RankedSkill, recalculateSkills, skills } from './data'
 import SkillsPane from './SkillsPane'
 
 function sanityCheck(condition: boolean, message: string) {
-  return (
-    condition ?
-    <div className="notification is-danger">
-      {message}
-    </div>
-    : <></>
+  return condition ? (
+    <div className="notification is-danger">{message}</div>
+  ) : (
+    <></>
   )
 }
 
-// TODO: cutscene skills
+function skillPointsTotal(skills: RankedSkill[]) {
+  return reduce((sum, skill) => sum + skill.rank - 1, 0, skills)
+}
+
 function SkillsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
   const [currentSkill, setCurrentSkill] = useState<MegalosSkillName>(
@@ -31,11 +32,11 @@ function SkillsChooser() {
   //const effectiveRank = character.skills[currentRankedSkill]?.effectiveRank || 1
   const currentSkillDetails = find(propEq('name', currentSkill), skills)
 
-  const allocatedRanks = reduce(
-    (sum, rankedSkill) => sum + rankedSkill.rank - 1,
-    0,
-    character.skills
-  )
+  const rankedActive = filter(skill => ACTIVE_SKILLS.includes(skill.skill), character.skills)
+  const rankedCutscene = filter(skill => CUTSCENE_SKILLS.includes(skill.skill), character.skills)
+
+  const activePointsUsed = skillPointsTotal(rankedActive)
+  const cutscenePointsUsed = skillPointsTotal(rankedCutscene)
 
   const maxRanks = reduce(
     (max, rankedSkill) => Math.max(max, rankedSkill.effectiveRank),
@@ -115,23 +116,48 @@ function SkillsChooser() {
                 +
               </button>
             </div>
+            <div className='column'>
+              {activePointsUsed}/6 active points<br />
+              {cutscenePointsUsed}/3 cutscene points
+            </div>
           </div>
           <div className="content">
-            <p>{currentSkillDetails?.description}</p>
-            <p>
-              <strong>Use {currentSkill} to:</strong>
-            </p>
-            <ul>
-              {map(
-                (use) => (
-                  <li key={use}>{use}</li>
-                ),
-                currentSkillDetails?.uses || []
-              )}
-            </ul>
+            {map(
+              (line) => (
+                <p key={line}>{line}</p>
+              ),
+              currentSkillDetails?.description || []
+            )}
+            {currentSkillDetails?.uses.length ? (
+              <>
+                <p>
+                  <strong>Use {currentSkill} to:</strong>
+                </p>
+                <ul>
+                  {map(
+                    (use) => (
+                      <li key={use}>{use}</li>
+                    ),
+                    currentSkillDetails?.uses || []
+                  )}
+                </ul>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
-          {sanityCheck(allocatedRanks > 6, "You cannot spend more than 6 points on skills")}
-          {sanityCheck(maxRanks > 3, "You cannot have a skill ranked higher than 3")}
+          {sanityCheck(
+            activePointsUsed > 6,
+            'You cannot spend more than 6 points on skills'
+          )}
+          {sanityCheck(
+            cutscenePointsUsed > 3,
+            'You cannot spend more than 3 points on cutscene skills'
+          )}
+          {sanityCheck(
+            maxRanks > 3,
+            'You cannot have a skill ranked higher than 3'
+          )}
         </div>
         <div className="column">
           <SkillsPane />
