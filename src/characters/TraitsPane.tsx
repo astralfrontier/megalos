@@ -11,8 +11,10 @@ interface TableRowProps {
 function TableRow(props: TableRowProps) {
   const { label, value } = props
   return (
-    <div className='column is-full'>
-      <p><span className='tag is-primary'>{label}</span></p>
+    <div className="column is-full">
+      <p>
+        <span className="tag is-primary">{label}</span>
+      </p>
       {value}
     </div>
   )

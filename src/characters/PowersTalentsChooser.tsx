@@ -7,9 +7,7 @@ function PowersTalentsChooser() {
 
   return (
     <>
-      <div>
-        TODO Powers & Talents
-      </div>
+      <div>TODO Powers & Talents</div>
     </>
   )
 }

@@ -1,4 +1,19 @@
-import { append, ascend, difference, filter, indexOf, intersection, map, pluck, prop, propEq, reject, sortBy, sortWith } from 'ramda'
+import {
+  append,
+  ascend,
+  difference,
+  filter,
+  indexOf,
+  intersection,
+  map,
+  pluck,
+  prop,
+  propEq,
+  reject,
+  sortBy,
+  sortWith,
+} from 'ramda'
+import { Description } from '../visuals'
 
 export type MegalosClassName = '' | 'Throne' | 'Invoker' | 'Witch'
 
@@ -48,20 +63,26 @@ export interface MegalosTraits {
 
 export interface Homeland {
   name: string
-  description: string[]
+  description: Description
   startingSkills: MegalosSkillName[]
 }
 
 // TODO: aether current rules
 export interface MegalosClass {
   name: MegalosClassName
-  callings: MegalosCallingName[]
+  description: Description
+  callings: MegalosCalling[]
+}
+
+export interface MegalosCalling {
+  name: MegalosCallingName
 }
 
 // TODO: base damage, hp, defenses, soak, recovery, and bonus power
 // TODO: finishers, thrones
 export interface MegalosCalling {
   name: MegalosCallingName
+  description: Description
 }
 
 export enum MegalosSkillType {
@@ -69,13 +90,13 @@ export enum MegalosSkillType {
   ACTIVE,
 
   // Cutscene approaches
-  CUTSCENE
+  CUTSCENE,
 }
 
 export interface MegalosSkill {
   name: MegalosSkillName
   type: MegalosSkillType
-  description: string[]
+  description: Description
   uses: string[]
 }
 
@@ -319,15 +340,201 @@ export const homelands: Homeland[] = [
 export const classes: MegalosClass[] = [
   {
     name: 'Invoker',
-    callings: ['Astromancer', 'Chanter', 'Raconteur'],
+    description: [
+      `Invokers are occult scholars with great
+    knowledge of the higher and lower
+    emanations of the Wellspring and its
+    Path of Emanations. Though not
+    always, Invokers are often holyfolk and
+    priests of the various religions, gods,
+    and cults of the Worlds of MEGALOS.
+    Their magick calls to forces beyond
+    their own world, that they might
+    benefit from communion with such
+    otherworldly powers. Invokers are able
+    to draw forth immense power from the
+    transcendent aether of the void
+    between worlds.`,
+    ],
+    callings: [
+      {
+        name: 'Astromancer',
+        description: [
+          `Astromancers are occult mages who utilize ancient (and often actively forbidden or
+          suppressed) taboo rituals to call upon false divinities formed by the interaction
+          between mortal minds and astral radiance. The many signs of the almagest, the zodiacal
+          godhead of MEGALOS, is clothed in mental constructs and flesh made of cosmic
+          aether. These star-creatures Astromancers summon are called Eidolons.`,
+          `The Astromancer's art is outlawed in many jurisdictions, as many people fear the
+          consequences of drawing the gaze of the stars. Some religions see Eidolons as false
+          gods or daemons and so the Astromancer is often cast as an arch-heretic`,
+        ],
+      },
+      {
+        name: 'Chanter',
+        description: [
+          `Chanters intone otherworldly hymns that act as keys in the locks of their divine seals,
+        turning to release the energy within. They summon the angelic Speakers, entities
+        from an unknown higher emanation who are believed to serve as messengers of the
+        gods. The language of Speakers is, tragically, unknowable by mortalkind. Even Invokers
+        struggle to parse more than a few basic concepts.`,
+          `What is known with certainty is that the Speakers willingly treat with mortals, that
+        they wish to serve as our guides, and that they regard us as "children". The specific
+        forms speakers take vary widely, but always include a pair of large feathered wings.`,
+        ],
+      },
+      {
+        name: 'Raconteur',
+        description: [
+          `Raconteurs are necromancers, folk magicians, storytelling bards, and possessed
+        spirit-warriors. They protect the histories and stories of their people, collect knowledge
+        of the past, and serve as a link between the dead and the living. They tap into
+        the immortal memory of the dead in the River of Souls, the Cosmo-Memory, to
+        dredge up and give life to legends and myths from across time. Their Memory pow-
+        ers allow them to embody legends by channeling those forces- essentially summon-
+        ing a being into themselves where other Invokers summon beings into the world.`,
+          `Raconteurs' magick is often called mythomancy or story magick.`,
+        ],
+      },
+    ],
   },
   {
     name: 'Throne',
-    callings: ['Arklight', 'Champion', 'Shadowblade'],
+    description: [
+      `Thrones are warriors whose mastery
+    over their own bodily essence is
+    unmatched. They use their own life-force,
+    their biogenic aether or cœr, as a
+    weapon, a shield, and a tool. They are
+    unrivaled martial masters. Some
+    Thrones belong to long traditions of
+    martial artists with codified practices
+    dating back centuries, while others are
+    self-taught warriors.`,
+      `Cœr is the refined aether of a creature's
+    soul cultivated and coaxed into a
+    blazing, roaring aura called their cœrona.
+    Cœronas are highly personal and individualized.
+    A Throne can't exactly
+    choose what their cœrona will look like,
+    but it is nevertheless an expression of
+    their soul's truest form.`,
+      `Thrones start strong, but the longer a
+    fight goes on the less power they have
+    to work with. It's in their best interest,
+    therefore, to end fights quickly.`,
+    ],
+    callings: [
+      {
+        name: 'Arklight',
+        description: [
+          `Arklights are devoted to a rigid path of personal fulfillment through moral cultivation.
+        They are warrior monks who see their purpose in the world as the vanquishing
+        or redemption of "evil" and the protection and cultivation of "good". They protect
+        those who cannot protect themselves, work to prevent exploitation of marginalized
+        peoples by those who hold power over them, try to empower communities to
+        defend themselves, and seek out and destroy unjust structures.`,
+          `Arklights are so-called because their carefully cultivated cœr shines from within
+        them with an almost divine radiance to heal the sick and protect the disempowered.`,
+        ],
+      },
+      {
+        name: 'Champion',
+        description: [
+          `The Champion is a Throne whose whole life is about adventure, excitement, and
+        perfecting their martial technique. Champions don't usually see fighting and violence
+        as merely methods of solving problems or exercising power as others do. Nothing so
+        coldly utilitarian. To a Champion, fighting is their hobby, their livelihood, and their
+        favorite pastime.`,
+          `Champions learn their styles in many places, but many join together in informal
+        schools called palaestra. They scour the world for knowledge of new techniques to
+        learn, new palaestra to join, and new foes and rivals who can give them a good fight.`,
+        ],
+      },
+      {
+        name: 'Shadowblade',
+        description: [
+          `Shadowblades are avenging angels, dark knights, and shadowy assassins who bring
+        justice to those who believed themselves untouchable. You are a vigilante who
+        protects the innocent by punishing the wicked. Their cœr powers manifest through
+        their shadow selves, or Darksides, phantasmal forces into which they pour their malice
+        for the wicked. Through pacts and negotiations, their Darkside becomes a being
+        in its own right, ever gaining greater and greater personhood and awareness.`,
+          `Eventually, if the Shadowblade is careful, their Darkside becomes a companion and
+        a partner. Careless Shadowblades, however, are often slain by their own Darksides.`,
+        ],
+      },
+    ],
   },
   {
     name: 'Witch',
-    callings: ['Draloi', 'Psythe', 'Rune Magus'],
+    description: [
+      `Witches are battle mages par
+    excellence, practical magicians whose
+    approach to the mysteries of the
+    eldritch & divine is one both pragmatic
+    & joyful. They are aetherologists who
+    ask how a particular spellform is
+    materially useful, rather than bothering
+    with heady philosophies & conceptual
+    alchemy. As such, they are scorned by
+    wealthy, classically-trained occultists
+    from the balconies of their ivory towers.`,
+      `The name "Witch" was originally meant
+    to be insulting, intending to connote a
+    wild & earthy sort of spellcaster; a
+    peasant dabbling in magicks. Witches
+    took to the name gladly, turning it into
+    a badge of honor to differentiate
+    themselves from the magocratic elite.
+    They're punk rock spellcasters devoted
+    to the democratization of magick and
+    an egalitarian future for aetherology.`,
+    ],
+    callings: [
+      {
+        name: 'Draloi',
+        description: [
+          `The Draloi are masters of biomantic magicks. The body's physical and aetheric
+        humors are intertwined in a delicate balance. Draloi pull at the threads which make up
+        their enemies' bodies and souls and use what they extract to heal and fortify their
+        allies. In many Worlds of MEGALOS, the practices of the Draloi are forbidden, widely
+        feared, or tightly regulated. Their ability to draw the life force out of a living thing is
+        frequently far more feared than their ability to heal with that lifeforce is valued.`,
+          `In that twilight realm between lauded physician and feared mad scientist stands the
+        Draloi. More than a few of them actually revel in this aspect, choosing to lean into
+        vampiric aesthetics if for no other reason than the fun of it.`,
+        ],
+      },
+      {
+        name: 'Psythe',
+        description: [
+          `Psythes are psychic spellcasters. Psythes see themselves as the next step in
+        magickal evolution, from the "dark ages" practices of the Elder Arts into the light of a
+        brave new day. Their magick is derived from their understanding of the mortal mind
+        and its workings, and they wield their mind-magicks with alacrity and precision.`,
+          `Their methods differ from traditional spells mostly in how they are created, though
+        their effects would seem no different to most layfolk. Psythes don't use elaborate
+        incantations, magickal materials, and exotic gestures, but instead visualize and
+        prepare their spells entirely within their own minds, and then use the power of their
+        imaginations to make their envisioned spells a reality.`,
+        ],
+      },
+      {
+        name: 'Rune Magus',
+        description: [
+          `Rune Magi are egalitarian glyph mages who fight the oppressive traditions of the
+        wealthy and powerful to bring magick to the masses. Their art is relatively easy to
+        learn, though just as difficult to master as any trade or art. Rune magick is most
+        effective in the hands of mages who are thoughtful, careful, and prepared.`,
+          `Because it can be learned fairly easily by anyone who can read (and even works well
+        as an introduction to literacy), practitioners of the so-called "High Arts" have always
+        looked down on rune magick. In the past, a shadow-war was fought to eradicate all
+        record of it. Today, Rune Magi are widely seen as a threat to magocratic regimes
+        whose grip on power relies on tightly controlling the people's access to magick.`,
+        ],
+      },
+    ],
   },
 ]
 
@@ -335,7 +542,9 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Attune',
     type: MegalosSkillType.ACTIVE,
-    description: [`Learning about the local aether, identifying magick and spellcraft, and controlling magickal devices.`],
+    description: [
+      `Learning about the local aether, identifying magick and spellcraft, and controlling magickal devices.`,
+    ],
     uses: [
       "Attune to the magickal energies of a complex enchanted object to learn what it's for and how to use it.",
       "Discern how recently magick was used in an area and what that magick's overall aspect was.",
@@ -346,7 +555,8 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Bargain',
     type: MegalosSkillType.ACTIVE,
-    description: [`Make and alter deals, convince others
+    description: [
+      `Make and alter deals, convince others
       to behave in a way they'd rather not in
       exchange for something that you do or
       give them. In order to bargain effectively,
@@ -354,7 +564,8 @@ export const skills: MegalosSkill[] = [
       How much leverage you have (or they
       believe you have) directly affects the
       overall effectiveness of a successful
-      Bargain test.`],
+      Bargain test.`,
+    ],
     uses: [
       "Get a more favorable price on items you're buying or selling.",
       'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
@@ -364,7 +575,8 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Create',
     type: MegalosSkillType.ACTIVE,
-    description: [`Make and alter deals, convince others
+    description: [
+      `Make and alter deals, convince others
       to behave in a way they'd rather not in
       exchange for something that you do or
       give them. In order to bargain effectively,
@@ -372,7 +584,8 @@ export const skills: MegalosSkill[] = [
       How much leverage you have (or they
       believe you have) directly affects the
       overall effectiveness of a successful
-      Bargain test.`],
+      Bargain test.`,
+    ],
     uses: [
       "Get a more favorable price on items you're buying or selling.",
       'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
@@ -382,10 +595,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Drive',
     type: MegalosSkillType.ACTIVE,
-    description: [`Riding, piloting, or steering any sort of
+    description: [
+      `Riding, piloting, or steering any sort of
     vehicle. Some vehicles may require
     more than one operator, but there's
-    usually just one actual driver.`],
+    usually just one actual driver.`,
+    ],
     uses: [
       'Steer a humble mek-walker or airboat.',
       'Pilot a powerful war-walker or airship.',
@@ -396,9 +611,11 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Finesse',
     type: MegalosSkillType.ACTIVE,
-    description: [`Using carefully applied pressures and
+    description: [
+      `Using carefully applied pressures and
       leverage to interact with your environment.
-      This is used whenever you carefully and precisely interact with creatures and objects.`],
+      This is used whenever you carefully and precisely interact with creatures and objects.`,
+    ],
     uses: [
       'Pick locks & disable complex devices.',
       'Agilely reverse a grapple.',
@@ -408,10 +625,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Force',
     type: MegalosSkillType.ACTIVE,
-    description: [`Using brute force to interact with your
+    description: [
+      `Using brute force to interact with your
     environment. This is used whenever
     you push, lift, drag, bend, or break
-    something.`],
+    something.`,
+    ],
     uses: [
       'Lift or move heavy stuff.',
       'Bash, crash, and break things.',
@@ -421,10 +640,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Hunt',
     type: MegalosSkillType.ACTIVE,
-    description: [`Finding people and animals, tracking
+    description: [
+      `Finding people and animals, tracking
     movement based on clues left behind
     in the environment, and killing critters
-    for food and other supplies.`],
+    for food and other supplies.`,
+    ],
     uses: [
       'Track down prey by its leavings & trail.',
       "Recognize when a creature is wounded or has other things going on with it based on what it's left in its wake.",
@@ -434,10 +655,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Inspect',
     type: MegalosSkillType.ACTIVE,
-    description: [`Deducing details about an object, person, or place that you are currently
+    description: [
+      `Deducing details about an object, person, or place that you are currently
     holding, observing, or within. Inspect is
     based on your own internal knowledge
-    and logical processes`],
+    and logical processes`,
+    ],
     uses: [
       'Discern when something which should be there is missing.',
       "Discern when something which shouldn't be there is present.",
@@ -448,9 +671,11 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Learn',
     type: MegalosSkillType.ACTIVE,
-    description: [`Searching for knowledge through gossip, by poring over texts, and generally
+    description: [
+      `Searching for knowledge through gossip, by poring over texts, and generally
       finding out what you don't already
-      know by means of libraries, crowds, interviews, etc.`],
+      know by means of libraries, crowds, interviews, etc.`,
+    ],
     uses: [
       "Learn things you didn't know before.",
       "Search a large trove of information, whether it's digging through a library or canvassing a group of people.",
@@ -459,10 +684,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Move',
     type: MegalosSkillType.ACTIVE,
-    description: [`Moving yourself quickly or skillfully
+    description: [
+      `Moving yourself quickly or skillfully
     through space. This includes things like
     running, jumping, climbing, and swimming. It also covers acrobatic pursuits
-    as well.`],
+    as well.`,
+    ],
     uses: [
       'Win a foot race through speed & agility.',
       'Swim against a powerful current.',
@@ -473,13 +700,15 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Perform',
     type: MegalosSkillType.ACTIVE,
-    description: [`Engaging in a physical, visual and/or
+    description: [
+      `Engaging in a physical, visual and/or
     auditory performance art. This covers
     everything from singing and acting to
     playing instruments and dancing. This
     skill is also used to assume a false identity - not to be confused with acts of
     one-off deception (which would be Talk
-    instead).`],
+    instead).`,
+    ],
     uses: [
       'Perform a song, oratory, dance, or other performance art routine.',
       "Judge the relative skill of another performer's artistry.",
@@ -490,11 +719,13 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Restore',
     type: MegalosSkillType.ACTIVE,
-    description: [`To heal bodies and minds, and to mend
+    description: [
+      `To heal bodies and minds, and to mend
     fraying relationships. Use Restore to fix
     what's broken or breaking in people
     the way you would use Create to fix
-    what's broken or breaking in objects.`],
+    what's broken or breaking in objects.`,
+    ],
     uses: [
       'Diagnose afflictions like poisons, curses, and diseases.',
       'Treat emotional wounds and trauma with therapeutic techniques and counseling over a long period of time.',
@@ -505,9 +736,11 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Sneak',
     type: MegalosSkillType.ACTIVE,
-    description: [`Hiding, moving silently, stealing things
+    description: [
+      `Hiding, moving silently, stealing things
     without being caught, and engaging in
-    all manner of general skulduggery.`],
+    all manner of general skulduggery.`,
+    ],
     uses: [
       'Remain unseen while moving or hiding.',
       'Hide in plain sight, seeming to just “blend in” with a crowd.',
@@ -518,8 +751,10 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Survive',
     type: MegalosSkillType.ACTIVE,
-    description: [`The combined knowledge and behavior or skills required to survive in an inhospitable environment or without the
-    normal support structures of civilization.`],
+    description: [
+      `The combined knowledge and behavior or skills required to survive in an inhospitable environment or without the
+    normal support structures of civilization.`,
+    ],
     uses: [
       'Recognize different plants & animals, as well as their properties as relates to humanity (i.e. “is this edible?”, “is this animal generally aggressive?”, etc.).',
       'Build camps & structures to protect against the local elements.',
@@ -530,10 +765,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Talk',
     type: MegalosSkillType.ACTIVE,
-    description: [`Expressing yourself clearly. Use Talk to
+    description: [
+      `Expressing yourself clearly. Use Talk to
     convince, cajole, bully, or deceive others
     into acting in a way they'd otherwise
-    not based only on your words`],
+    not based only on your words`,
+    ],
     uses: [
       'Explain and express yourself adequately, especially to people predisposed to distrust or misunderstand you.',
       'Convince others who are convincible that your point of view is the correct one.',
@@ -544,10 +781,12 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Watch',
     type: MegalosSkillType.ACTIVE,
-    description: [`To remain vigilant and react to changes
+    description: [
+      `To remain vigilant and react to changes
     in your environment. The Watch skill is
     often used reactively, but you can
-    proactively keep careful vigil as well.`],
+    proactively keep careful vigil as well.`,
+    ],
     uses: [
       'Notice when someone is sneaking up on you or your group.',
       "Detect changes in your environment which signal something that's about to happen.",
@@ -559,7 +798,8 @@ export const skills: MegalosSkill[] = [
   {
     name: 'Cautious (Cutscene)',
     type: MegalosSkillType.CUTSCENE,
-    description: [`Characters that favor the Cautious
+    description: [
+      `Characters that favor the Cautious
     approach tend to be protective, defensive,
     and ungiven to rash action. Often these
     are Arklights, Chanters, Draloi, or Shad-
@@ -567,68 +807,82 @@ export const skills: MegalosSkill[] = [
     waiting for an ideal opportunity or else
     not taking what seems like an unnec-
     essary risk.`,
-    `An example of a Cautious approach's
+      `An example of a Cautious approach's
     outcome would be settling for less
     information than you might otherwise
     get by continuing to spy on an enemy
     for longer, in order to get out while the
-    getting's good.`],
-    uses: []
+    getting's good.`,
+    ],
+    uses: [],
   },
   {
     name: 'Clever (Cutscene)',
     type: MegalosSkillType.CUTSCENE,
-    description: [`Characters that favor the Clever approach tend to be studious, insightful,
+    description: [
+      `Characters that favor the Clever approach tend to be studious, insightful,
     and meditative. Often these are Raconteurs, Arklights, Draloi, Rune Magi, or
     Psythes. A Clever approach favors planning things out ahead of time, and
     working smarter, not harder.`,
-    `An example of a Clever approach's outcome would be facing down a mekari
+      `An example of a Clever approach's outcome would be facing down a mekari
     construct with a specially-tuned device
     designed to nullify the thing's strongest weapons or weaken its protective
-    shields`],
-    uses: []
+    shields`,
+    ],
+    uses: [],
   },
   {
     name: 'Forceful (Cutscene)',
     type: MegalosSkillType.CUTSCENE,
-    description: [`Characters that favor the Forceful approach tend to be brash, powerful, and
+    description: [
+      `Characters that favor the Forceful approach tend to be brash, powerful, and
     assertive. Often these are Champions,
     Raconteurs, Astromancers, and Rune
     Magi. A Forceful approach favors powering through the opposition and never
     listening to naysayers & defeatists.`,
-    `An example of a Forceful approach's
+      `An example of a Forceful approach's
     outcome would be audaciously forcing
     your way in to speak with a monarch
     whose courts' byzantine laws demanded you linger in a bureaucratic
     purgatory for ages before your case
-    could be pled.`],
-    uses: []
+    could be pled.`,
+    ],
+    uses: [],
   },
   {
     name: 'Quick (Cutscene)',
     type: MegalosSkillType.CUTSCENE,
-    description: [`Characters that favor the Quick approach tend to be lithe, agile, and
+    description: [
+      `Characters that favor the Quick approach tend to be lithe, agile, and
     quick-witted. Often Shadowblades, Astromancers, Champions, or Psythes. A
     Quick approach favors getting "in &
     out" unscathed, preferring subtlety &
     speed to precision, innovation, or raw
     power.`,
-    `An example of a Quick approach's outcome would be making it through a
+      `An example of a Quick approach's outcome would be making it through a
     gauntlet of enemy artillery unharmed
     to deliver an important message to a
-    camp cut off from the front lines.`],
-    uses: []
-  }
+    camp cut off from the front lines.`,
+    ],
+    uses: [],
+  },
 ]
 
-export const ACTIVE_SKILLS = pluck("name", filter(propEq("type", MegalosSkillType.ACTIVE), skills) as MegalosSkill[])
-export const CUTSCENE_SKILLS = pluck("name", filter(propEq("type", MegalosSkillType.CUTSCENE), skills) as MegalosSkill[])
+export const ACTIVE_SKILLS = pluck(
+  'name',
+  filter(propEq('type', MegalosSkillType.ACTIVE), skills) as MegalosSkill[]
+)
+export const CUTSCENE_SKILLS = pluck(
+  'name',
+  filter(propEq('type', MegalosSkillType.CUTSCENE), skills) as MegalosSkill[]
+)
 
 // Cache the names of skills for quick sorting
-const skillNames = pluck("name", skills)
+const skillNames = pluck('name', skills)
 
 // Sort skills by appearance in the skills list, thus putting cutscenes at the end
-const skillSortCriteria = (skill: RankedSkill) => indexOf(skill.skill, skillNames)
+const skillSortCriteria = (skill: RankedSkill) =>
+  indexOf(skill.skill, skillNames)
 // const skillSortCriteria = (skill: RankedSkill) => prop("skill")
 
 const skillSorter = sortBy(skillSortCriteria)
@@ -674,7 +928,10 @@ export function recalculateSkills(
   }
 
   // Hide any resulting skills with a rank of 1, as that's the default
-  updatedSkills = reject((skill: RankedSkill) => skill.effectiveRank < 2, updatedSkills)
+  updatedSkills = reject(
+    (skill: RankedSkill) => skill.effectiveRank < 2,
+    updatedSkills
+  )
 
   return skillSorter(updatedSkills)
 }
@@ -685,8 +942,8 @@ export function newCharacter(): MegalosCharacter {
     pronouns: 'they/them',
     homeland: homelands[0].name,
     homelandSkills: [],
-    class: '',
-    calling: '',
+    class: 'Invoker',
+    calling: 'Astromancer',
     skills: [],
     traits: {
       background: '',

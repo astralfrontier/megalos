@@ -7,9 +7,7 @@ function BondChooser() {
 
   return (
     <>
-      <div>
-        TODO Bonds
-      </div>
+      <div>TODO Bonds</div>
     </>
   )
 }

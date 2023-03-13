@@ -1,9 +1,25 @@
-import { append, filter, find, findIndex, map, max, propEq, reduce } from 'ramda'
+import {
+  append,
+  filter,
+  find,
+  findIndex,
+  map,
+  max,
+  propEq,
+  reduce,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
-
+import { describe } from '../visuals'
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
-import { ACTIVE_SKILLS, CUTSCENE_SKILLS, MegalosSkillName, RankedSkill, recalculateSkills, skills } from './data'
+import {
+  ACTIVE_SKILLS,
+  CUTSCENE_SKILLS,
+  MegalosSkillName,
+  RankedSkill,
+  recalculateSkills,
+  skills,
+} from './data'
 import SkillsPane from './SkillsPane'
 
 function sanityCheck(condition: boolean, message: string) {
@@ -32,8 +48,14 @@ function SkillsChooser() {
   //const effectiveRank = character.skills[currentRankedSkill]?.effectiveRank || 1
   const currentSkillDetails = find(propEq('name', currentSkill), skills)
 
-  const rankedActive = filter(skill => ACTIVE_SKILLS.includes(skill.skill), character.skills)
-  const rankedCutscene = filter(skill => CUTSCENE_SKILLS.includes(skill.skill), character.skills)
+  const rankedActive = filter(
+    (skill) => ACTIVE_SKILLS.includes(skill.skill),
+    character.skills
+  )
+  const rankedCutscene = filter(
+    (skill) => CUTSCENE_SKILLS.includes(skill.skill),
+    character.skills
+  )
 
   const activePointsUsed = skillPointsTotal(rankedActive)
   const cutscenePointsUsed = skillPointsTotal(rankedCutscene)
@@ -65,8 +87,7 @@ function SkillsChooser() {
       })
     } else {
       // Update an existing skill
-      character.skills[currentRankedSkill].rank =
-        character.skills[currentRankedSkill].rank + amount
+      character.skills[currentRankedSkill].rank += amount
       setCharacter({
         ...character,
         skills: recalculateSkills(
@@ -116,18 +137,14 @@ function SkillsChooser() {
                 +
               </button>
             </div>
-            <div className='column'>
-              {activePointsUsed}/6 active points<br />
+            <div className="column">
+              {activePointsUsed}/6 active points
+              <br />
               {cutscenePointsUsed}/3 cutscene points
             </div>
           </div>
           <div className="content">
-            {map(
-              (line) => (
-                <p key={line}>{line}</p>
-              ),
-              currentSkillDetails?.description || []
-            )}
+            {describe(currentSkillDetails?.description)}
             {currentSkillDetails?.uses.length ? (
               <>
                 <p>

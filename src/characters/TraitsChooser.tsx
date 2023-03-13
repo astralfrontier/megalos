@@ -15,55 +15,55 @@ interface TraitInputProps {
 }
 
 const exampleBackgroundTraits: MegalosTrait[] = [
-  "Cloudraft pilot",
-  "Consumed by someone else’s revenge",
-  "Desert mekari scavenger",
-  "Exiled wanderer",
-  "Former soldier",
-  "Ivory tower dropout",
-  "Mining Guild yeoman",
-  "Raised by magehunters",
-  "Student of a lost Throne Palaestra",
-  "Wanted sky pirate",
+  'Cloudraft pilot',
+  'Consumed by someone else’s revenge',
+  'Desert mekari scavenger',
+  'Exiled wanderer',
+  'Former soldier',
+  'Ivory tower dropout',
+  'Mining Guild yeoman',
+  'Raised by magehunters',
+  'Student of a lost Throne Palaestra',
+  'Wanted sky pirate',
 ]
 
 const exampleMentalTraits: MegalosTrait[] = [
-  "Always watchful",
-  "Classically educated",
-  "Clever engineer",
-  "Fast learner",
-  "Incorrigible gossip",
+  'Always watchful',
+  'Classically educated',
+  'Clever engineer',
+  'Fast learner',
+  'Incorrigible gossip',
   "Linguist's ear",
-  "“My head is full of bees”",
-  "“No thoughts, head empty”",
-  "Occult enthusiast",
-  "Puzzle solver",
+  '“My head is full of bees”',
+  '“No thoughts, head empty”',
+  'Occult enthusiast',
+  'Puzzle solver',
 ]
 
 const examplePhysicalTraits: MegalosTrait[] = [
-  "Born sprinter",
-  "Captivating beauty",
-  "Delicate precision",
-  "Eagle eyed",
-  "Practiced acrobat",
-  "Quick & quiet",
-  "Rolls with the punches",
-  "Strong as an aurochs",
-  "Unexpected speed",
-  "\"You ever smoke one of these?\"",
+  'Born sprinter',
+  'Captivating beauty',
+  'Delicate precision',
+  'Eagle eyed',
+  'Practiced acrobat',
+  'Quick & quiet',
+  'Rolls with the punches',
+  'Strong as an aurochs',
+  'Unexpected speed',
+  '"You ever smoke one of these?"',
 ]
 
 const exampleSpecialTraits: MegalosTrait[] = [
-  "Alien anatomy",
-  "Blood of the Ancients",
-  "Cat-like features",
-  "Forgotten past",
-  "Haunted by spirits",
-  "Living construct",
-  "Menacing aura",
-  "Reptilian traits",
-  "Touched by the Howling",
-  "Truly unbelievable singing voice",
+  'Alien anatomy',
+  'Blood of the Ancients',
+  'Cat-like features',
+  'Forgotten past',
+  'Haunted by spirits',
+  'Living construct',
+  'Menacing aura',
+  'Reptilian traits',
+  'Touched by the Howling',
+  'Truly unbelievable singing voice',
 ]
 
 function randomTrait(suggestions: MegalosTrait[]): MegalosTrait {
@@ -116,7 +116,7 @@ function TraitsChooser() {
         mental: randomTrait(exampleMentalTraits),
         physical: randomTrait(examplePhysicalTraits),
         special: randomTrait(exampleSpecialTraits),
-      }
+      },
     })
   }
 
@@ -154,11 +154,32 @@ function TraitsChooser() {
           />
 
           <p>
-            <button className='button is-primary' onClick={() => randomizeEverything()}>Random</button>
+            <button
+              className="button is-primary"
+              onClick={() => randomizeEverything()}
+            >
+              Random
+            </button>
           </p>
         </div>
         <div className="column">
-          <TraitsPane />
+          <div className="content">
+            <p>
+              Main characters have four traits, which serve as both roleplaying
+              cues and mechanical bonuses to skill tests that are in any way
+              associated with or could benefit from a trait. You should design
+              each trait to represent some essential element of your character.
+              Your character isn't only their traits, but their traits should be
+              four of their most prominent aspects. The four categories of
+              traits are Background, Physical, Mental, and Special.
+            </p>
+            <p>
+              Background traits deal with your character's past & training;
+              Physical & Mental with their habits of body & mind; and Special
+              covers anything from unusual biology to uncommon supernatural
+              heritage.
+            </p>
+          </div>
         </div>
       </div>
     </>

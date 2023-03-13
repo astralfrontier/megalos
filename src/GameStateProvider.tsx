@@ -39,13 +39,13 @@ export const DiceContext = createContext<DiceState>({
 })
 
 interface CharacterState {
-  character: MegalosCharacter;
-  setCharacter: React.Dispatch<React.SetStateAction<MegalosCharacter>>;
+  character: MegalosCharacter
+  setCharacter: React.Dispatch<React.SetStateAction<MegalosCharacter>>
 }
 
 export const CharacterContext = createContext<CharacterState>({
   character: newCharacter(),
-  setCharacter: () => {}
+  setCharacter: () => {},
 })
 
 function GameStateProvider(props: GameStateProviderProps) {
@@ -71,7 +71,7 @@ function GameStateProvider(props: GameStateProviderProps) {
 
   const characterContextProviderValue = {
     character,
-    setCharacter
+    setCharacter,
   }
 
   return (

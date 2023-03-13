@@ -42,13 +42,11 @@ function CharacterBuilder() {
   return (
     <>
       <div className="box block">
-        <div className='tabs'>
+        <div className="tabs">
           <ul>
             {activeSteps.map((step, i) => (
               <li className={activeStep == i ? 'is-active' : ''}>
-                <a onClick={() => setActiveStep(i)}>
-                  {step.name}
-                </a>
+                <a onClick={() => setActiveStep(i)}>{step.name}</a>
               </li>
             ))}
           </ul>

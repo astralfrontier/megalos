@@ -1,6 +1,6 @@
 import { append, find, intersection, map, propEq, without } from 'ramda'
 import React, { useContext } from 'react'
-
+import { describe } from '../visuals'
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
 import { homelands, MegalosSkillName, recalculateSkills } from './data'
@@ -11,16 +11,22 @@ function HomelandChooser() {
 
   /**
    * When changing homeland, only keep eligible homeland skills
-   * @param event 
+   * @param event
    */
   const homelandSetter: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
-    const newHomeland = find(propEq('name', event.currentTarget.value), homelands)
+    const newHomeland = find(
+      propEq('name', event.currentTarget.value),
+      homelands
+    )
     setCharacter({
       ...character,
       homeland: event.target.value,
-      homelandSkills: intersection(character.homelandSkills, newHomeland?.startingSkills || [])
+      homelandSkills: intersection(
+        character.homelandSkills,
+        newHomeland?.startingSkills || []
+      ),
     })
   }
 
@@ -28,11 +34,13 @@ function HomelandChooser() {
     event
   ) => {
     const skillName = event.currentTarget.value as MegalosSkillName
-    const newHomelandSkills = (event.currentTarget.checked ? append(skillName) : without([skillName]))(character.homelandSkills)
+    const newHomelandSkills = (
+      event.currentTarget.checked ? append(skillName) : without([skillName])
+    )(character.homelandSkills)
     setCharacter({
       ...character,
       homelandSkills: newHomelandSkills,
-      skills: recalculateSkills(character, character.skills, newHomelandSkills)
+      skills: recalculateSkills(character, character.skills, newHomelandSkills),
     })
   }
 
@@ -56,13 +64,7 @@ function HomelandChooser() {
           </GenericInput>
 
           <div className="content">
-            {map(
-              (line) => (
-                <p key={line}>{line}</p>
-              ),
-              homeland?.description || ['No description']
-            )}
-
+            {describe(homeland?.description)}
             <p>
               <strong>Signature Skills:</strong> Characters from this homeland
               choose 2 of the following skills to gain +1 rating.
