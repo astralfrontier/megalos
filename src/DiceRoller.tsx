@@ -11,6 +11,10 @@ interface DiceRollerProps {
 
 import {rollDie} from './utilities';
 
+function avrae(diceCount: number, difficulty: number, resistance: number): React.ReactNode {
+    return `!r ${diceCount}d20k>${difficulty-1} ${resistance} hits needed`
+}
+
 function DiceRoller(_props: DiceRollerProps) {
     const { diceCount, rolls, setRolls, difficulty, resistance } = useContext(DiceContext)
 
@@ -70,6 +74,7 @@ function DiceRoller(_props: DiceRollerProps) {
              <div className='box block'>
                 <p className='is-size-3'>{summary}</p>
                 <p>Click on a single die to reroll it.</p>
+                <p>Avrae command: <span className='is-family-code'>{avrae(diceCount, difficulty, resistance)}</span></p>
             </div>
             <div className='box block'>
                 <DiceSettingsShelf rerolls={rerolls} setRerolls={setRerolls} />
