@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
-import { classes } from './data'
 import { describe } from '../visuals'
+import { classes } from './data'
 
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
@@ -72,8 +72,22 @@ function ClassCallingChooser() {
             </div>
           </div>
           <div className="content">
-            {describe(currentClass?.description)}
-            {describe(currentCalling?.description)}
+            <article className="message">
+              <div className="message-header">
+                <p>Your Class</p>
+              </div>
+              <div className="message-body">
+                {describe(currentClass?.description)}
+              </div>
+            </article>
+            <article className="message">
+              <div className="message-header">
+                <p>Your Calling</p>
+              </div>
+              <div className="message-body">
+                {describe(currentCalling?.description)}
+              </div>
+            </article>
           </div>
         </div>
         <div className="column">TODO</div>
