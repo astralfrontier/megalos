@@ -4,6 +4,7 @@ import React, { useContext } from 'react'
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
 import { describe } from '../visuals'
+import ClassCallingPane from './ClassCallingPane'
 import { classes } from './data'
 
 function ClassCallingChooser() {
@@ -90,7 +91,9 @@ function ClassCallingChooser() {
             </article>
           </div>
         </div>
-        <div className="column">TODO</div>
+        <div className="column">
+          <ClassCallingPane />
+        </div>
       </div>
     </>
   )

@@ -1,18 +1,5 @@
-import {
-  append,
-  ascend,
-  difference,
-  filter,
-  indexOf,
-  intersection,
-  map,
-  pluck,
-  prop,
-  propEq,
-  reject,
-  sortBy,
-  sortWith,
-} from 'ramda'
+import { append, difference, filter, indexOf, map, pluck, propEq, reject, sortBy } from 'ramda'
+
 import { Description } from '../visuals'
 
 export type MegalosClassName = '' | 'Throne' | 'Invoker' | 'Witch'
@@ -67,22 +54,37 @@ export interface Homeland {
   startingSkills: MegalosSkillName[]
 }
 
+export interface MegalosClassBenefits {
+  invocations?: number;
+  arcana?: number;
+  strikes?: number;
+  counters?: number;
+  sorceries?: number;
+  cantrips?: number;
+  talents: number;
+}
+
+export interface MegalosCallingBenefits {
+  role: string;
+  baseHp: number;
+  baseDodge: number;
+  baseWard: number;
+  baseDamage: number;
+  recovery: number;
+}
+
 // TODO: aether current rules
 export interface MegalosClass {
   name: MegalosClassName
   description: Description
+  benefits: MegalosClassBenefits
   callings: MegalosCalling[]
 }
 
 export interface MegalosCalling {
   name: MegalosCallingName
-}
-
-// TODO: base damage, hp, defenses, soak, recovery, and bonus power
-// TODO: finishers, thrones
-export interface MegalosCalling {
-  name: MegalosCallingName
   description: Description
+  benefits: MegalosCallingBenefits
 }
 
 export enum MegalosSkillType {
@@ -356,6 +358,11 @@ export const classes: MegalosClass[] = [
     transcendent aether of the void
     between worlds.`,
     ],
+    benefits: {
+      invocations: 2,
+      arcana: 2,
+      talents: 2
+    },
     callings: [
       {
         name: 'Astromancer',
@@ -369,6 +376,17 @@ export const classes: MegalosClass[] = [
           consequences of drawing the gaze of the stars. Some religions see Eidolons as false
           gods or daemons and so the Astromancer is often cast as an arch-heretic`,
         ],
+        benefits: {
+          role: `Striker - Flexible Artillery. As a Striker Calling, Astromancers gain +4 damage
+          from being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of
+          +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead
+          of +1. Astromancers can only use Light or Medium Armor.`,
+          baseHp: 24,
+          baseDodge: 8,
+          baseWard: 8,
+          baseDamage: 6,
+          recovery: 4
+        },
       },
       {
         name: 'Chanter',
@@ -382,6 +400,15 @@ export const classes: MegalosClass[] = [
         they wish to serve as our guides, and that they regard us as "children". The specific
         forms speakers take vary widely, but always include a pair of large feathered wings.`,
         ],
+        benefits: {
+          role: `Support - Occult Healer. Chanters can only use Light Armor. ◇: Support callings
+        can spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round.`,
+          baseHp: 28,
+          baseDodge: 7,
+          baseWard: 9,
+          baseDamage: 4,
+          recovery: 8
+        },
       },
       {
         name: 'Raconteur',
@@ -395,6 +422,15 @@ export const classes: MegalosClass[] = [
         ing a being into themselves where other Invokers summon beings into the world.`,
           `Raconteurs' magick is often called mythomancy or story magick.`,
         ],
+        benefits: {
+          role: `Tank - Heavy Fighter-Mage. ◇: Tank Callings can inflict TAUNTED on one foe in
+        range 1, once per turn. Raconteurs can only use Medium or Heavy Armor.`,
+          baseHp: 32,
+          baseDodge: 10,
+          baseWard: 10,
+          baseDamage: 4,
+          recovery: 4
+        },
       },
     ],
   },
@@ -424,6 +460,11 @@ export const classes: MegalosClass[] = [
     to work with. It's in their best interest,
     therefore, to end fights quickly.`,
     ],
+    benefits: {
+      strikes: 2,
+      counters: 2,
+      talents: 1
+    },
     callings: [
       {
         name: 'Arklight',
@@ -437,6 +478,15 @@ export const classes: MegalosClass[] = [
           `Arklights are so-called because their carefully cultivated cœr shines from within
         them with an almost divine radiance to heal the sick and protect the disempowered.`,
         ],
+        benefits: {
+          role: `Tank - Battlegroup Leader. ◇: Tank Callings can inflict TAUNTED on one foe in
+          range 1, once per turn. Arklights can only use Medium or Heavy Armor.`,
+          baseHp: 32,
+          baseDodge: 10,
+          baseWard: 10,
+          baseDamage: 4,
+          recovery: 4
+        },
       },
       {
         name: 'Champion',
@@ -450,6 +500,17 @@ export const classes: MegalosClass[] = [
         schools called palaestra. They scour the world for knowledge of new techniques to
         learn, new palaestra to join, and new foes and rivals who can give them a good fight.`,
         ],
+        benefits: {
+          role: `Striker - Mobile Brawler. As a Striker Calling, Champions gain +4 damage from
+          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
+          The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
+          +1. Champions can only use Light or Medium Armor.`,
+          baseHp: 24,
+          baseDodge: 9,
+          baseWard: 7,
+          baseDamage: 6,
+          recovery: 4
+        },
       },
       {
         name: 'Shadowblade',
@@ -463,6 +524,17 @@ export const classes: MegalosClass[] = [
           `Eventually, if the Shadowblade is careful, their Darkside becomes a companion and
         a partner. Careless Shadowblades, however, are often slain by their own Darksides.`,
         ],
+        benefits: {
+          role: `Striker - Darkside Skirmisher. As a Striker Calling, Shadowblades gain +4
+          damage from being Set Up, EMPOWERED, or when exploiting the EXPOSED status,
+          instead of +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks,
+          instead of +1. Shadowblades can only use Light or Medium Armor.`,
+          baseHp: 24,
+          baseDodge: 9,
+          baseWard: 7,
+          baseDamage: 6,
+          recovery: 4
+        },
       },
     ],
   },
@@ -491,6 +563,11 @@ export const classes: MegalosClass[] = [
     to the democratization of magick and
     an egalitarian future for aetherology.`,
     ],
+    benefits: {
+      sorceries: 2,
+      cantrips: 1,
+      talents: 1
+    },
     callings: [
       {
         name: 'Draloi',
@@ -505,6 +582,15 @@ export const classes: MegalosClass[] = [
         Draloi. More than a few of them actually revel in this aspect, choosing to lean into
         vampiric aesthetics if for no other reason than the fun of it.`,
         ],
+        benefits: {
+          role: `Support - Drain Healer. Draloi can only use Light Armor. ◇: Support callings can
+          spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round`,
+          baseHp: 28,
+          baseDodge: 8,
+          baseWard: 8,
+          baseDamage: 4,
+          recovery: 8
+        }
       },
       {
         name: 'Psythe',
@@ -519,6 +605,17 @@ export const classes: MegalosClass[] = [
         prepare their spells entirely within their own minds, and then use the power of their
         imaginations to make their envisioned spells a reality.`,
         ],
+        benefits: {
+          role: `Striker - Psychic Duelist. As a Striker Calling, Psythes gain +4 damage from
+          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2. The
+          bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of +1.
+          Psythes can only use Light or Medium Armor.`,
+          baseHp: 24,
+          baseDodge: 8,
+          baseWard: 8,
+          baseDamage: 6,
+          recovery: 4
+        }
       },
       {
         name: 'Rune Magus',
@@ -533,6 +630,17 @@ export const classes: MegalosClass[] = [
         record of it. Today, Rune Magi are widely seen as a threat to magocratic regimes
         whose grip on power relies on tightly controlling the people's access to magick.`,
         ],
+        benefits: {
+          role: `Striker - Magick Artillery. As a Striker Calling, Rune Magi gain +4 damage from
+          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
+          The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
+          +1. Rune Magi can only use Light or Medium Armor.`,
+          baseHp: 24,
+          baseDodge: 8,
+          baseWard: 8,
+          baseDamage: 6,
+          recovery: 4
+        }
       },
     ],
   },
