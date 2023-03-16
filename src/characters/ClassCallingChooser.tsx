@@ -10,29 +10,28 @@ import { callings, classes } from './data'
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
 
-  const currentClass = find(propEq('name', character.class), classes)
-  const currentCalling = find(
-    propEq('name', character.calling),
-    callings[character.class.name] || []
-  )
-
   function classSetter(event) {
     const newClass = find(propEq('name', event.currentTarget.value), classes)
     if (newClass) {
       setCharacter({
         ...character,
         class: newClass,
-        calling: callings[newClass.name][0]
+        calling: callings[newClass.name][0],
+        powers: []
       })  
     }
   }
+
+  // TODO: when switching callings,
+  // only remove powers that don't meet prerequisites
 
   function callingSetter(event) {
     const newCalling = find(propEq('name', event.currentTarget.value), callings[character.class.name])
     if (newCalling) {
       setCharacter({
         ...character,
-        calling: newCalling
+        calling: newCalling,
+        powers: []
       })  
     }
   }

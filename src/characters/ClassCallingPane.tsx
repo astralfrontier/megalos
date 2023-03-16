@@ -2,7 +2,6 @@ import { find, propEq } from 'ramda'
 import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
-import { classes } from './data'
 
 interface TableRowProps {
   label: string

@@ -60,7 +60,7 @@ export interface MegalosClassBenefits {
   counters?: number;
   sorceries?: number;
   cantrips?: number;
-  talents: number;
+  talents?: number;
 }
 
 export interface MegalosCallingBenefits {
@@ -108,6 +108,28 @@ export interface RankedSkill {
   effectiveRank: number
 }
 
+export type CharacterFilter = (character: MegalosCharacter) => boolean
+
+export type MegalosPowerName = string;
+
+export enum MegalosPowerType {
+  INVOCATION = "Invocation",
+  ARCANA = "Arcana",
+  STRIKE = "Strike",
+  COUNTER = "Counter",
+  SORCERY = "Sorcery",
+  CANTRIP = "Cantrip",
+  TALENT = "Talent",
+}
+
+export interface MegalosPower {
+  name: MegalosPowerName
+  type: MegalosPowerType
+  prerequisites: CharacterFilter[]
+  costs: MegalosClassBenefits
+  // TODO: description
+}
+
 export interface MegalosCharacter {
   name: string
   pronouns: string
@@ -116,6 +138,7 @@ export interface MegalosCharacter {
   class: MegalosClass
   calling: MegalosCalling
   skills: RankedSkill[]
+  powers: MegalosPower[]
   traits: MegalosTraits
 }
 
@@ -1050,6 +1073,7 @@ export function newCharacter(): MegalosCharacter {
     class: classes[0],
     calling: callings[classes[0].name][0],
     skills: [],
+    powers: [],
     traits: {
       background: '',
       mental: '',
