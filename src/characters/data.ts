@@ -977,14 +977,13 @@ export const skills: MegalosSkill[] = [
   },
 ]
 
-export const ACTIVE_SKILLS = pluck(
+// Cache the set of skills by type, for use in the skills chooser (where we track points separately)
+const skillFilter = (type: MegalosSkillType) => pluck(
   'name',
-  filter(propEq('type', MegalosSkillType.ACTIVE), skills) as MegalosSkill[]
-)
-export const CUTSCENE_SKILLS = pluck(
-  'name',
-  filter(propEq('type', MegalosSkillType.CUTSCENE), skills) as MegalosSkill[]
-)
+  filter(propEq('type', type), skills) as MegalosSkill[])
+
+export const ACTIVE_SKILLS = skillFilter(MegalosSkillType.ACTIVE)
+export const CUTSCENE_SKILLS = skillFilter(MegalosSkillType.CUTSCENE)
 
 // Cache the names of skills for quick sorting
 const skillNames = pluck('name', skills)
