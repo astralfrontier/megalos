@@ -33,9 +33,6 @@ function benefit(label: string, value: number | undefined) {
 function ClassCallingPane() {
   const { character } = useContext(CharacterContext)
 
-  const currentClass = find(propEq("name", character.class), classes)
-  const currentCalling = find(propEq("name", character.calling), currentClass?.callings || [])
-
   return (
     <>
       <article className="message">
@@ -43,13 +40,13 @@ function ClassCallingPane() {
           <p>Class Stats</p>
         </div>
         <div className="message-body">
-          {benefit("Invocations", currentClass?.benefits.invocations)}
-          {benefit("Arcana", currentClass?.benefits.arcana)}
-          {benefit("Strikes", currentClass?.benefits.strikes)}
-          {benefit("Counters", currentClass?.benefits.counters)}
-          {benefit("Sorceries", currentClass?.benefits.sorceries)}
-          {benefit("Cantrips", currentClass?.benefits.cantrips)}
-          {benefit("Talents", currentClass?.benefits.talents)}
+          {benefit("Invocations", character.class.benefits.invocations)}
+          {benefit("Arcana", character.class.benefits.arcana)}
+          {benefit("Strikes", character.class.benefits.strikes)}
+          {benefit("Counters", character.class.benefits.counters)}
+          {benefit("Sorceries", character.class.benefits.sorceries)}
+          {benefit("Cantrips", character.class.benefits.cantrips)}
+          {benefit("Talents", character.class.benefits.talents)}
         </div>
       </article>
       <article className="message">
@@ -58,13 +55,13 @@ function ClassCallingPane() {
         </div>
         <div className="message-body">
           <p>
-            <strong>Role:</strong> {currentCalling?.benefits.role}
+            <strong>Role:</strong> {character.calling.benefits.role}
           </p>
-          {benefit("Base HP", currentCalling?.benefits.baseHp)}
-          {benefit("Base Dodge", currentCalling?.benefits.baseDodge)}
-          {benefit("Base Ward", currentCalling?.benefits.baseWard)}
-          {benefit("Base Damage", currentCalling?.benefits.baseDamage)}
-          {benefit("Reovery", currentCalling?.benefits.recovery)}
+          {benefit("Base HP", character.calling.benefits.baseHp)}
+          {benefit("Base Dodge", character.calling.benefits.baseDodge)}
+          {benefit("Base Ward", character.calling.benefits.baseWard)}
+          {benefit("Base Damage", character.calling.benefits.baseDamage)}
+          {benefit("Reovery", character.calling.benefits.recovery)}
         </div>
       </article>
     </>

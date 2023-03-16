@@ -1,11 +1,10 @@
-import { append, difference, filter, indexOf, map, pluck, propEq, reject, sortBy } from 'ramda'
+import { concat, difference, filter, indexOf, map, pluck, propEq, reject, sortBy } from 'ramda'
 
 import { Description } from '../visuals'
 
-export type MegalosClassName = '' | 'Throne' | 'Invoker' | 'Witch'
+export type MegalosClassName = 'Throne' | 'Invoker' | 'Witch'
 
 export type MegalosCallingName =
-  | ''
   | 'Arklight'
   | 'Champion'
   | 'Shadowblade'
@@ -78,7 +77,6 @@ export interface MegalosClass {
   name: MegalosClassName
   description: Description
   benefits: MegalosClassBenefits
-  callings: MegalosCalling[]
 }
 
 export interface MegalosCalling {
@@ -115,8 +113,8 @@ export interface MegalosCharacter {
   pronouns: string
   homeland: string
   homelandSkills: MegalosSkillName[]
-  class: MegalosClassName
-  calling: MegalosCallingName
+  class: MegalosClass
+  calling: MegalosCalling
   skills: RankedSkill[]
   traits: MegalosTraits
 }
@@ -362,77 +360,7 @@ export const classes: MegalosClass[] = [
       invocations: 2,
       arcana: 2,
       talents: 2
-    },
-    callings: [
-      {
-        name: 'Astromancer',
-        description: [
-          `Astromancers are occult mages who utilize ancient (and often actively forbidden or
-          suppressed) taboo rituals to call upon false divinities formed by the interaction
-          between mortal minds and astral radiance. The many signs of the almagest, the zodiacal
-          godhead of MEGALOS, is clothed in mental constructs and flesh made of cosmic
-          aether. These star-creatures Astromancers summon are called Eidolons.`,
-          `The Astromancer's art is outlawed in many jurisdictions, as many people fear the
-          consequences of drawing the gaze of the stars. Some religions see Eidolons as false
-          gods or daemons and so the Astromancer is often cast as an arch-heretic`,
-        ],
-        benefits: {
-          role: `Striker - Flexible Artillery. As a Striker Calling, Astromancers gain +4 damage
-          from being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of
-          +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead
-          of +1. Astromancers can only use Light or Medium Armor.`,
-          baseHp: 24,
-          baseDodge: 8,
-          baseWard: 8,
-          baseDamage: 6,
-          recovery: 4
-        },
-      },
-      {
-        name: 'Chanter',
-        description: [
-          `Chanters intone otherworldly hymns that act as keys in the locks of their divine seals,
-        turning to release the energy within. They summon the angelic Speakers, entities
-        from an unknown higher emanation who are believed to serve as messengers of the
-        gods. The language of Speakers is, tragically, unknowable by mortalkind. Even Invokers
-        struggle to parse more than a few basic concepts.`,
-          `What is known with certainty is that the Speakers willingly treat with mortals, that
-        they wish to serve as our guides, and that they regard us as "children". The specific
-        forms speakers take vary widely, but always include a pair of large feathered wings.`,
-        ],
-        benefits: {
-          role: `Support - Occult Healer. Chanters can only use Light Armor. ◇: Support callings
-        can spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round.`,
-          baseHp: 28,
-          baseDodge: 7,
-          baseWard: 9,
-          baseDamage: 4,
-          recovery: 8
-        },
-      },
-      {
-        name: 'Raconteur',
-        description: [
-          `Raconteurs are necromancers, folk magicians, storytelling bards, and possessed
-        spirit-warriors. They protect the histories and stories of their people, collect knowledge
-        of the past, and serve as a link between the dead and the living. They tap into
-        the immortal memory of the dead in the River of Souls, the Cosmo-Memory, to
-        dredge up and give life to legends and myths from across time. Their Memory pow-
-        ers allow them to embody legends by channeling those forces- essentially summon-
-        ing a being into themselves where other Invokers summon beings into the world.`,
-          `Raconteurs' magick is often called mythomancy or story magick.`,
-        ],
-        benefits: {
-          role: `Tank - Heavy Fighter-Mage. ◇: Tank Callings can inflict TAUNTED on one foe in
-        range 1, once per turn. Raconteurs can only use Medium or Heavy Armor.`,
-          baseHp: 32,
-          baseDodge: 10,
-          baseWard: 10,
-          baseDamage: 4,
-          recovery: 4
-        },
-      },
-    ],
+    }
   },
   {
     name: 'Throne',
@@ -465,78 +393,6 @@ export const classes: MegalosClass[] = [
       counters: 2,
       talents: 1
     },
-    callings: [
-      {
-        name: 'Arklight',
-        description: [
-          `Arklights are devoted to a rigid path of personal fulfillment through moral cultivation.
-        They are warrior monks who see their purpose in the world as the vanquishing
-        or redemption of "evil" and the protection and cultivation of "good". They protect
-        those who cannot protect themselves, work to prevent exploitation of marginalized
-        peoples by those who hold power over them, try to empower communities to
-        defend themselves, and seek out and destroy unjust structures.`,
-          `Arklights are so-called because their carefully cultivated cœr shines from within
-        them with an almost divine radiance to heal the sick and protect the disempowered.`,
-        ],
-        benefits: {
-          role: `Tank - Battlegroup Leader. ◇: Tank Callings can inflict TAUNTED on one foe in
-          range 1, once per turn. Arklights can only use Medium or Heavy Armor.`,
-          baseHp: 32,
-          baseDodge: 10,
-          baseWard: 10,
-          baseDamage: 4,
-          recovery: 4
-        },
-      },
-      {
-        name: 'Champion',
-        description: [
-          `The Champion is a Throne whose whole life is about adventure, excitement, and
-        perfecting their martial technique. Champions don't usually see fighting and violence
-        as merely methods of solving problems or exercising power as others do. Nothing so
-        coldly utilitarian. To a Champion, fighting is their hobby, their livelihood, and their
-        favorite pastime.`,
-          `Champions learn their styles in many places, but many join together in informal
-        schools called palaestra. They scour the world for knowledge of new techniques to
-        learn, new palaestra to join, and new foes and rivals who can give them a good fight.`,
-        ],
-        benefits: {
-          role: `Striker - Mobile Brawler. As a Striker Calling, Champions gain +4 damage from
-          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
-          The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
-          +1. Champions can only use Light or Medium Armor.`,
-          baseHp: 24,
-          baseDodge: 9,
-          baseWard: 7,
-          baseDamage: 6,
-          recovery: 4
-        },
-      },
-      {
-        name: 'Shadowblade',
-        description: [
-          `Shadowblades are avenging angels, dark knights, and shadowy assassins who bring
-        justice to those who believed themselves untouchable. You are a vigilante who
-        protects the innocent by punishing the wicked. Their cœr powers manifest through
-        their shadow selves, or Darksides, phantasmal forces into which they pour their malice
-        for the wicked. Through pacts and negotiations, their Darkside becomes a being
-        in its own right, ever gaining greater and greater personhood and awareness.`,
-          `Eventually, if the Shadowblade is careful, their Darkside becomes a companion and
-        a partner. Careless Shadowblades, however, are often slain by their own Darksides.`,
-        ],
-        benefits: {
-          role: `Striker - Darkside Skirmisher. As a Striker Calling, Shadowblades gain +4
-          damage from being Set Up, EMPOWERED, or when exploiting the EXPOSED status,
-          instead of +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks,
-          instead of +1. Shadowblades can only use Light or Medium Armor.`,
-          baseHp: 24,
-          baseDodge: 9,
-          baseWard: 7,
-          baseDamage: 6,
-          recovery: 4
-        },
-      },
-    ],
   },
   {
     name: 'Witch',
@@ -568,83 +424,228 @@ export const classes: MegalosClass[] = [
       cantrips: 1,
       talents: 1
     },
-    callings: [
-      {
-        name: 'Draloi',
-        description: [
-          `The Draloi are masters of biomantic magicks. The body's physical and aetheric
-        humors are intertwined in a delicate balance. Draloi pull at the threads which make up
-        their enemies' bodies and souls and use what they extract to heal and fortify their
-        allies. In many Worlds of MEGALOS, the practices of the Draloi are forbidden, widely
-        feared, or tightly regulated. Their ability to draw the life force out of a living thing is
-        frequently far more feared than their ability to heal with that lifeforce is valued.`,
-          `In that twilight realm between lauded physician and feared mad scientist stands the
-        Draloi. More than a few of them actually revel in this aspect, choosing to lean into
-        vampiric aesthetics if for no other reason than the fun of it.`,
-        ],
-        benefits: {
-          role: `Support - Drain Healer. Draloi can only use Light Armor. ◇: Support callings can
-          spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round`,
-          baseHp: 28,
-          baseDodge: 8,
-          baseWard: 8,
-          baseDamage: 4,
-          recovery: 8
-        }
-      },
-      {
-        name: 'Psythe',
-        description: [
-          `Psythes are psychic spellcasters. Psythes see themselves as the next step in
-        magickal evolution, from the "dark ages" practices of the Elder Arts into the light of a
-        brave new day. Their magick is derived from their understanding of the mortal mind
-        and its workings, and they wield their mind-magicks with alacrity and precision.`,
-          `Their methods differ from traditional spells mostly in how they are created, though
-        their effects would seem no different to most layfolk. Psythes don't use elaborate
-        incantations, magickal materials, and exotic gestures, but instead visualize and
-        prepare their spells entirely within their own minds, and then use the power of their
-        imaginations to make their envisioned spells a reality.`,
-        ],
-        benefits: {
-          role: `Striker - Psychic Duelist. As a Striker Calling, Psythes gain +4 damage from
-          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2. The
-          bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of +1.
-          Psythes can only use Light or Medium Armor.`,
-          baseHp: 24,
-          baseDodge: 8,
-          baseWard: 8,
-          baseDamage: 6,
-          recovery: 4
-        }
-      },
-      {
-        name: 'Rune Magus',
-        description: [
-          `Rune Magi are egalitarian glyph mages who fight the oppressive traditions of the
-        wealthy and powerful to bring magick to the masses. Their art is relatively easy to
-        learn, though just as difficult to master as any trade or art. Rune magick is most
-        effective in the hands of mages who are thoughtful, careful, and prepared.`,
-          `Because it can be learned fairly easily by anyone who can read (and even works well
-        as an introduction to literacy), practitioners of the so-called "High Arts" have always
-        looked down on rune magick. In the past, a shadow-war was fought to eradicate all
-        record of it. Today, Rune Magi are widely seen as a threat to magocratic regimes
-        whose grip on power relies on tightly controlling the people's access to magick.`,
-        ],
-        benefits: {
-          role: `Striker - Magick Artillery. As a Striker Calling, Rune Magi gain +4 damage from
-          being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
-          The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
-          +1. Rune Magi can only use Light or Medium Armor.`,
-          baseHp: 24,
-          baseDodge: 8,
-          baseWard: 8,
-          baseDamage: 6,
-          recovery: 4
-        }
-      },
-    ],
   },
 ]
+
+export const callings: Record<MegalosClassName, MegalosCalling[]> = {
+  "Invoker": [
+    {
+      name: 'Astromancer',
+      description: [
+        `Astromancers are occult mages who utilize ancient (and often actively forbidden or
+        suppressed) taboo rituals to call upon false divinities formed by the interaction
+        between mortal minds and astral radiance. The many signs of the almagest, the zodiacal
+        godhead of MEGALOS, is clothed in mental constructs and flesh made of cosmic
+        aether. These star-creatures Astromancers summon are called Eidolons.`,
+        `The Astromancer's art is outlawed in many jurisdictions, as many people fear the
+        consequences of drawing the gaze of the stars. Some religions see Eidolons as false
+        gods or daemons and so the Astromancer is often cast as an arch-heretic`,
+      ],
+      benefits: {
+        role: `Striker - Flexible Artillery. As a Striker Calling, Astromancers gain +4 damage
+        from being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of
+        +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead
+        of +1. Astromancers can only use Light or Medium Armor.`,
+        baseHp: 24,
+        baseDodge: 8,
+        baseWard: 8,
+        baseDamage: 6,
+        recovery: 4
+      },
+    },
+    {
+      name: 'Chanter',
+      description: [
+        `Chanters intone otherworldly hymns that act as keys in the locks of their divine seals,
+      turning to release the energy within. They summon the angelic Speakers, entities
+      from an unknown higher emanation who are believed to serve as messengers of the
+      gods. The language of Speakers is, tragically, unknowable by mortalkind. Even Invokers
+      struggle to parse more than a few basic concepts.`,
+        `What is known with certainty is that the Speakers willingly treat with mortals, that
+      they wish to serve as our guides, and that they regard us as "children". The specific
+      forms speakers take vary widely, but always include a pair of large feathered wings.`,
+      ],
+      benefits: {
+        role: `Support - Occult Healer. Chanters can only use Light Armor. ◇: Support callings
+      can spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round.`,
+        baseHp: 28,
+        baseDodge: 7,
+        baseWard: 9,
+        baseDamage: 4,
+        recovery: 8
+      },
+    },
+    {
+      name: 'Raconteur',
+      description: [
+        `Raconteurs are necromancers, folk magicians, storytelling bards, and possessed
+      spirit-warriors. They protect the histories and stories of their people, collect knowledge
+      of the past, and serve as a link between the dead and the living. They tap into
+      the immortal memory of the dead in the River of Souls, the Cosmo-Memory, to
+      dredge up and give life to legends and myths from across time. Their Memory pow-
+      ers allow them to embody legends by channeling those forces- essentially summon-
+      ing a being into themselves where other Invokers summon beings into the world.`,
+        `Raconteurs' magick is often called mythomancy or story magick.`,
+      ],
+      benefits: {
+        role: `Tank - Heavy Fighter-Mage. ◇: Tank Callings can inflict TAUNTED on one foe in
+      range 1, once per turn. Raconteurs can only use Medium or Heavy Armor.`,
+        baseHp: 32,
+        baseDodge: 10,
+        baseWard: 10,
+        baseDamage: 4,
+        recovery: 4
+      },
+    },
+  ],
+  "Throne": [
+    {
+      name: 'Arklight',
+      description: [
+        `Arklights are devoted to a rigid path of personal fulfillment through moral cultivation.
+      They are warrior monks who see their purpose in the world as the vanquishing
+      or redemption of "evil" and the protection and cultivation of "good". They protect
+      those who cannot protect themselves, work to prevent exploitation of marginalized
+      peoples by those who hold power over them, try to empower communities to
+      defend themselves, and seek out and destroy unjust structures.`,
+        `Arklights are so-called because their carefully cultivated cœr shines from within
+      them with an almost divine radiance to heal the sick and protect the disempowered.`,
+      ],
+      benefits: {
+        role: `Tank - Battlegroup Leader. ◇: Tank Callings can inflict TAUNTED on one foe in
+        range 1, once per turn. Arklights can only use Medium or Heavy Armor.`,
+        baseHp: 32,
+        baseDodge: 10,
+        baseWard: 10,
+        baseDamage: 4,
+        recovery: 4
+      },
+    },
+    {
+      name: 'Champion',
+      description: [
+        `The Champion is a Throne whose whole life is about adventure, excitement, and
+      perfecting their martial technique. Champions don't usually see fighting and violence
+      as merely methods of solving problems or exercising power as others do. Nothing so
+      coldly utilitarian. To a Champion, fighting is their hobby, their livelihood, and their
+      favorite pastime.`,
+        `Champions learn their styles in many places, but many join together in informal
+      schools called palaestra. They scour the world for knowledge of new techniques to
+      learn, new palaestra to join, and new foes and rivals who can give them a good fight.`,
+      ],
+      benefits: {
+        role: `Striker - Mobile Brawler. As a Striker Calling, Champions gain +4 damage from
+        being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
+        The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
+        +1. Champions can only use Light or Medium Armor.`,
+        baseHp: 24,
+        baseDodge: 9,
+        baseWard: 7,
+        baseDamage: 6,
+        recovery: 4
+      },
+    },
+    {
+      name: 'Shadowblade',
+      description: [
+        `Shadowblades are avenging angels, dark knights, and shadowy assassins who bring
+      justice to those who believed themselves untouchable. You are a vigilante who
+      protects the innocent by punishing the wicked. Their cœr powers manifest through
+      their shadow selves, or Darksides, phantasmal forces into which they pour their malice
+      for the wicked. Through pacts and negotiations, their Darkside becomes a being
+      in its own right, ever gaining greater and greater personhood and awareness.`,
+        `Eventually, if the Shadowblade is careful, their Darkside becomes a companion and
+      a partner. Careless Shadowblades, however, are often slain by their own Darksides.`,
+      ],
+      benefits: {
+        role: `Striker - Darkside Skirmisher. As a Striker Calling, Shadowblades gain +4
+        damage from being Set Up, EMPOWERED, or when exploiting the EXPOSED status,
+        instead of +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks,
+        instead of +1. Shadowblades can only use Light or Medium Armor.`,
+        baseHp: 24,
+        baseDodge: 9,
+        baseWard: 7,
+        baseDamage: 6,
+        recovery: 4
+      },
+    },
+  ],
+  "Witch": [
+    {
+      name: 'Draloi',
+      description: [
+        `The Draloi are masters of biomantic magicks. The body's physical and aetheric
+      humors are intertwined in a delicate balance. Draloi pull at the threads which make up
+      their enemies' bodies and souls and use what they extract to heal and fortify their
+      allies. In many Worlds of MEGALOS, the practices of the Draloi are forbidden, widely
+      feared, or tightly regulated. Their ability to draw the life force out of a living thing is
+      frequently far more feared than their ability to heal with that lifeforce is valued.`,
+        `In that twilight realm between lauded physician and feared mad scientist stands the
+      Draloi. More than a few of them actually revel in this aspect, choosing to lean into
+      vampiric aesthetics if for no other reason than the fun of it.`,
+      ],
+      benefits: {
+        role: `Support - Drain Healer. Draloi can only use Light Armor. ◇: Support callings can
+        spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round`,
+        baseHp: 28,
+        baseDodge: 8,
+        baseWard: 8,
+        baseDamage: 4,
+        recovery: 8
+      }
+    },
+    {
+      name: 'Psythe',
+      description: [
+        `Psythes are psychic spellcasters. Psythes see themselves as the next step in
+      magickal evolution, from the "dark ages" practices of the Elder Arts into the light of a
+      brave new day. Their magick is derived from their understanding of the mortal mind
+      and its workings, and they wield their mind-magicks with alacrity and precision.`,
+        `Their methods differ from traditional spells mostly in how they are created, though
+      their effects would seem no different to most layfolk. Psythes don't use elaborate
+      incantations, magickal materials, and exotic gestures, but instead visualize and
+      prepare their spells entirely within their own minds, and then use the power of their
+      imaginations to make their envisioned spells a reality.`,
+      ],
+      benefits: {
+        role: `Striker - Psychic Duelist. As a Striker Calling, Psythes gain +4 damage from
+        being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2. The
+        bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of +1.
+        Psythes can only use Light or Medium Armor.`,
+        baseHp: 24,
+        baseDodge: 8,
+        baseWard: 8,
+        baseDamage: 6,
+        recovery: 4
+      }
+    },
+    {
+      name: 'Rune Magus',
+      description: [
+        `Rune Magi are egalitarian glyph mages who fight the oppressive traditions of the
+      wealthy and powerful to bring magick to the masses. Their art is relatively easy to
+      learn, though just as difficult to master as any trade or art. Rune magick is most
+      effective in the hands of mages who are thoughtful, careful, and prepared.`,
+        `Because it can be learned fairly easily by anyone who can read (and even works well
+      as an introduction to literacy), practitioners of the so-called "High Arts" have always
+      looked down on rune magick. In the past, a shadow-war was fought to eradicate all
+      record of it. Today, Rune Magi are widely seen as a threat to magocratic regimes
+      whose grip on power relies on tightly controlling the people's access to magick.`,
+      ],
+      benefits: {
+        role: `Striker - Magick Artillery. As a Striker Calling, Rune Magi gain +4 damage from
+        being Set Up, EMPOWERED, or when exploiting the EXPOSED status, instead of +2.
+        The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead of
+        +1. Rune Magi can only use Light or Medium Armor.`,
+        baseHp: 24,
+        baseDodge: 8,
+        baseWard: 8,
+        baseDamage: 6,
+        recovery: 4
+      }
+    },
+  ]
+}
 
 export const skills: MegalosSkill[] = [
   {
@@ -1006,13 +1007,7 @@ export function recalculateSkills(
   newSkills: RankedSkill[],
   newHomelandSkills: MegalosSkillName[]
 ): RankedSkill[] {
-  // Which skills does the character have as homeland skills,
-  // but has not assigned any ranks to? We'll need to append these to the end
-  const homelandSkillsWithoutRanks = difference(
-    newHomelandSkills,
-    pluck('skill', newSkills)
-  )
-
+  // Add skills already found on the sheet
   let updatedSkills: RankedSkill[] = map(
     (rankedSkill) => ({
       skill: rankedSkill.skill,
@@ -1024,16 +1019,19 @@ export function recalculateSkills(
     newSkills
   )
 
-  for (let newSkill of homelandSkillsWithoutRanks) {
-    updatedSkills = append(
-      {
-        skill: newSkill,
-        rank: 1,
-        effectiveRank: 2,
-      },
-      updatedSkills
-    )
-  }
+  // Add any homeland skills that we didn't invest points into otherwise
+  const homelandSkillsWithoutRanks = difference(
+    newHomelandSkills,
+    pluck('skill', newSkills)
+  )
+
+  updatedSkills = concat(updatedSkills, map(
+    newSkill => ({
+      skill: newSkill,
+      rank: 1,
+      effectiveRank: 2,
+    }), homelandSkillsWithoutRanks
+  ))
 
   // Hide any resulting skills with a rank of 1, as that's the default
   updatedSkills = reject(
@@ -1050,8 +1048,8 @@ export function newCharacter(): MegalosCharacter {
     pronouns: 'they/them',
     homeland: homelands[0].name,
     homelandSkills: [],
-    class: 'Invoker',
-    calling: 'Astromancer',
+    class: classes[0],
+    calling: callings[classes[0].name][0],
     skills: [],
     traits: {
       background: '',

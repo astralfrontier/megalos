@@ -5,7 +5,7 @@ import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
 import { describe } from '../visuals'
 import ClassCallingPane from './ClassCallingPane'
-import { classes } from './data'
+import { callings, classes } from './data'
 
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
@@ -13,23 +13,28 @@ function ClassCallingChooser() {
   const currentClass = find(propEq('name', character.class), classes)
   const currentCalling = find(
     propEq('name', character.calling),
-    currentClass?.callings || []
+    callings[character.class.name] || []
   )
 
   function classSetter(event) {
     const newClass = find(propEq('name', event.currentTarget.value), classes)
-    setCharacter({
-      ...character,
-      class: newClass?.name || '',
-      calling: newClass?.callings[0].name || '',
-    })
+    if (newClass) {
+      setCharacter({
+        ...character,
+        class: newClass,
+        calling: callings[newClass.name][0]
+      })  
+    }
   }
 
   function callingSetter(event) {
-    setCharacter({
-      ...character,
-      calling: event.currentTarget.value,
-    })
+    const newCalling = find(propEq('name', event.currentTarget.value), callings[character.class.name])
+    if (newCalling) {
+      setCharacter({
+        ...character,
+        calling: newCalling
+      })  
+    }
   }
 
   return (
@@ -42,7 +47,7 @@ function ClassCallingChooser() {
                 label={'Class'}
                 help={'Select a class for your character'}
               >
-                <select onChange={classSetter} value={character.class}>
+                <select onChange={classSetter} value={character.class.name}>
                   {map(
                     (cls) => (
                       <option key={cls.name} value={cls.name}>
@@ -59,14 +64,14 @@ function ClassCallingChooser() {
                 label={'Calling'}
                 help={'Select a calling within your chosen class'}
               >
-                <select onChange={callingSetter} value={character.calling}>
+                <select onChange={callingSetter} value={character.calling.name}>
                   {map(
                     (calling) => (
                       <option key={calling.name} value={calling.name}>
                         {calling.name}
                       </option>
                     ),
-                    currentClass?.callings || []
+                    callings[character.class.name] || []
                   )}
                 </select>
               </GenericInput>
@@ -78,7 +83,7 @@ function ClassCallingChooser() {
                 <p>Your Class</p>
               </div>
               <div className="message-body">
-                {describe(currentClass?.description)}
+                {describe(character.class.description)}
               </div>
             </article>
             <article className="message">
@@ -86,7 +91,7 @@ function ClassCallingChooser() {
                 <p>Your Calling</p>
               </div>
               <div className="message-body">
-                {describe(currentCalling?.description)}
+                {describe(character.calling.description)}
               </div>
             </article>
           </div>
