@@ -1,4 +1,4 @@
-import { allPass, append, filter, includes, intersection, map, remove, without } from 'ramda'
+import { allPass, append, assoc, filter, includes, intersection, map, remove, without } from 'ramda'
 import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
@@ -43,10 +43,11 @@ function PowersTalentsChooser() {
   }
 
   function removePower(power: MegalosPower) {
-    setCharacter({
+    let newCharacter: MegalosCharacter = {
       ...character,
       powers: without([power], character.powers)
-    })
+    }
+    setCharacter(assoc("powers", filter(meetsPrerequisites(newCharacter), newCharacter.powers), newCharacter))
   }
 
   return (
