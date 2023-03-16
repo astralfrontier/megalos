@@ -1166,6 +1166,7 @@ const raconteurTalent = (name: MegalosPowerName): MegalosPower => ({
 })
 
 export const powers: MegalosPower[] = [
+  // Invoker
   invokerTalent("Binding of Five"),
   invokerTalent("Blood Seals"),
   chanterTalent("Choir of Benediction"),
@@ -1184,6 +1185,8 @@ export const powers: MegalosPower[] = [
   chanterTalent("Temple Knight"),
   invokerTalent("Unraveling Rapids"),
   invokerTalent("Warrior Priest"),
+
+  // Astromancer
   bonusPower("Cosmic Siphon", isAstromancer),
   invocation("Gygus, Sign of Earth", isAstromancer),
   arcanum("Crushing Gaol of Stone", hasPower("Gygus, Sign of Earth")),
@@ -1197,6 +1200,36 @@ export const powers: MegalosPower[] = [
   arcanum("Shearing Gyre", hasPower("Veliath, Sign of Wind")),
   invocation("Zalraam, Sign of Fire", isAstromancer),
   arcanum("Aetheric Volatility", hasPower("Zalraam, Sign of Fire")),
+
+  // Chanter
+  bonusPower("Chant of Eld", isChanter),
+  invocation("Blade Herald", isChanter),
+  arcanum("A Rain of Blades", hasPower("Blade Herald")),
+  invocation("Lawgiver", isChanter),
+  arcanum("Divine Rebuke", hasPower("Lawgiver")),
+  invocation("Reaper of Souls", isChanter),
+  arcanum("Mortal Swath", hasPower("Reaper of Souls")),
+  invocation("Riverspeaker", isChanter),
+  arcanum("Mortal Reprieve", hasPower("Riverspeaker")),
+  invocation("Stormspeaker", isChanter),
+  arcanum("Stormweaver", hasPower("Stormspeaker")),
+  invocation("Word-Bearer", isChanter),
+  arcanum("The Golden Word", hasPower("Word-Bearer")),
+
+    // Raconteur
+    bonusPower("Undertow", isRaconteur),
+    invocation("The Faerie King", isRaconteur),
+    arcanum("The Faerie King", hasPower("The Faerie's Kiss")),
+    invocation("The Judge", isRaconteur),
+    arcanum("The Judge's Verdic", hasPower("The Judge")),
+    invocation("The Outsider", isRaconteur),
+    arcanum("The Outsider's Claim", hasPower("The Outsider")),
+    invocation("The Parent", isRaconteur),
+    arcanum("The Parent's Sacrifice", hasPower("The Parent")),
+    invocation("The Spider", isRaconteur),
+    arcanum("The Spider's Trick", hasPower("The Spider")),
+    invocation("The Warrior", isRaconteur),
+    arcanum(" The Warrior's Ríastrad", hasPower("The Warrior")),
 ]
 
 /**
