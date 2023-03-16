@@ -2,20 +2,13 @@ import { allPass, append, filter, includes, intersection, map, remove, without }
 import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
-import { MegalosCharacter, MegalosPower } from './data'
-import { powers } from './powers'
+import { meetsPrerequisites, MegalosCharacter, MegalosPower, powers } from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 
 interface TableRowProps {
   power: MegalosPower
   isSelected: boolean
   togglePower: (power: MegalosPower) => any
-}
-
-function meetsPrerequisites(character: MegalosCharacter) {
-  return (power: MegalosPower) => {
-    return allPass(power.prerequisites)(character)
-  }
 }
 
 function TableRow(props: TableRowProps) {
@@ -41,7 +34,6 @@ function PowersTalentsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
 
   const eligiblePowers = filter(meetsPrerequisites(character), powers)
-  const selectedPowers = intersection(eligiblePowers, character.powers)
 
   function addPower(power: MegalosPower) {
     setCharacter({

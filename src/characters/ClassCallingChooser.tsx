@@ -1,11 +1,11 @@
-import { find, map, propEq } from 'ramda'
+import { assoc, find, map, propEq } from 'ramda'
 import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
 import { describe } from '../visuals'
 import ClassCallingPane from './ClassCallingPane'
-import { callings, classes } from './data'
+import { callings, classes, startingPowers } from './data'
 
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
@@ -13,26 +13,25 @@ function ClassCallingChooser() {
   function classSetter(event) {
     const newClass = find(propEq('name', event.currentTarget.value), classes)
     if (newClass) {
-      setCharacter({
+      const newCharacter = {
         ...character,
         class: newClass,
         calling: callings[newClass.name][0],
         powers: []
-      })  
+      }
+      setCharacter(assoc("powers", startingPowers(newCharacter), newCharacter))
     }
   }
-
-  // TODO: when switching callings,
-  // only remove powers that don't meet prerequisites
 
   function callingSetter(event) {
     const newCalling = find(propEq('name', event.currentTarget.value), callings[character.class.name])
     if (newCalling) {
-      setCharacter({
+      const newCharacter = {
         ...character,
         calling: newCalling,
         powers: []
-      })  
+      }
+      setCharacter(assoc("powers", startingPowers(newCharacter), newCharacter))
     }
   }
 

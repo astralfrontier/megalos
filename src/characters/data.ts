@@ -1,4 +1,4 @@
-import { concat, difference, filter, indexOf, map, pluck, propEq, reject, sortBy } from 'ramda'
+import { allPass, assoc, concat, difference, filter, includes, indexOf, map, pathEq, pluck, propEq, reject, sortBy } from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -120,6 +120,7 @@ export enum MegalosPowerType {
   SORCERY = "Sorcery",
   CANTRIP = "Cantrip",
   TALENT = "Talent",
+  CALLING_BONUS = "Calling Bonus Power"
 }
 
 export interface MegalosPower {
@@ -1064,8 +1065,153 @@ export function recalculateSkills(
   return skillSorter(updatedSkills)
 }
 
+// Some filtering functions for writing power prerequisites.
+// Each of these functions takes a character object
+// and returns true (if the requirements are satisfied)
+// or false (if they are not)
+
+export function isClass(name: MegalosClassName): CharacterFilter {
+  return (character: MegalosCharacter) => pathEq(['class', 'name'], name, character)
+}
+
+export const isInvoker = isClass("Invoker")
+export const isThrone = isClass("Throne")
+export const isWitch = isClass("Witch")
+
+export const isAstromancer = isCalling("Astromancer")
+export const isChanter = isCalling("Chanter")
+export const isRaconteur = isCalling("Raconteur")
+
+export function isCalling(name: MegalosCallingName): CharacterFilter {
+  return (character: MegalosCharacter) => pathEq(['calling', 'name'], name, character)
+}
+
+export function hasPower(name: MegalosPowerName) {
+  return (character: MegalosCharacter) => includes(name, pluck("name", character.powers))
+}
+
+/**
+ * For a given character, return a function that
+ * for a given power, returns true if all prerequisites are met
+ */
+export function meetsPrerequisites(character: MegalosCharacter) {
+  return (power: MegalosPower) => {
+    return allPass(power.prerequisites)(character)
+  }
+}
+
+// The master list of talents and powers
+
+const bonusPower = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+  name,
+  type: MegalosPowerType.CALLING_BONUS,
+  prerequisites: [requiredCalling],
+  costs: {}
+})
+
+const classTalent = (name: MegalosPowerName, requiredClass: CharacterFilter): MegalosPower => ({
+  name,
+  type: MegalosPowerType.TALENT,
+  prerequisites: [
+    requiredClass
+  ],
+  costs: {
+    talents: 1
+  }
+})
+
+const invokerTalent = (name: MegalosPowerName): MegalosPower => classTalent(name, isInvoker)
+
+const astromancerTalent = (name: MegalosPowerName): MegalosPower => ({
+  ...classTalent(name, isInvoker),
+  prerequisites: [
+    isAstromancer
+  ]
+})
+
+const invocation = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+  name,
+  type: MegalosPowerType.INVOCATION,
+  prerequisites: [
+    requiredCalling
+  ],
+  costs: {
+    invocations: 1
+  }
+})
+
+const arcanum = (name: MegalosPowerName, requiredInvocation: CharacterFilter): MegalosPower => ({
+  name,
+  type: MegalosPowerType.ARCANA,
+  prerequisites: [
+    requiredInvocation
+  ],
+  costs: {
+    arcana: 1
+  }
+})
+
+const chanterTalent = (name: MegalosPowerName): MegalosPower => ({
+  ...classTalent(name, isInvoker),
+  prerequisites: [
+    isChanter
+  ]
+})
+
+const raconteurTalent = (name: MegalosPowerName): MegalosPower => ({
+  ...classTalent(name, isInvoker),
+  prerequisites: [
+    isRaconteur
+  ]
+})
+
+export const powers: MegalosPower[] = [
+  invokerTalent("Binding of Five"),
+  invokerTalent("Blood Seals"),
+  chanterTalent("Choir of Benediction"),
+  invokerTalent("Closed Circuit"),
+  invokerTalent("Cosmic Bond"),
+  raconteurTalent("Flesh of Legends"),
+  invokerTalent("In the Arms of Angels"),
+  astromancerTalent("Keymaster"),
+  chanterTalent("Medicus"),
+  invokerTalent("Occult Priest"),
+  astromancerTalent("Protective Eidolons"),
+  invokerTalent("Seals of Life"),
+  invokerTalent("Shattered Seals"),
+  astromancerTalent("Starry Divinations"),
+  raconteurTalent("Sermons & Stories"),
+  chanterTalent("Temple Knight"),
+  invokerTalent("Unraveling Rapids"),
+  invokerTalent("Warrior Priest"),
+  bonusPower("Cosmic Siphon", isAstromancer),
+  invocation("Gygus, Sign of Earth", isAstromancer),
+  arcanum("Crushing Gaol of Stone", hasPower("Gygus, Sign of Earth")),
+  invocation("Hajmaul, Sign of Lightning", isAstromancer),
+  arcanum("Tyranny of the Storm", hasPower("Hajmaul, Sign of Lightning")),
+  invocation("Quecklain, Sign of Water", isAstromancer),
+  arcanum("Aqua Regia", hasPower("Quecklain, Sign of Water")),
+  invocation("Safira, Sign of Ice", isAstromancer),
+  arcanum("Diamond Dust", hasPower("Safira, Sign of Ice")),
+  invocation("Veliath, Sign of Wind", isAstromancer),
+  arcanum("Shearing Gyre", hasPower("Veliath, Sign of Wind")),
+  invocation("Zalraam, Sign of Fire", isAstromancer),
+  arcanum("Aetheric Volatility", hasPower("Zalraam, Sign of Fire")),
+]
+
+/**
+ * For a given character, find all starting powers and return those.
+ * Currently this is all calling bonus powers for which they qualify.
+ * @param character 
+ */
+export function startingPowers(character: MegalosCharacter): MegalosPower[] {
+  const allStartingPowers = filter(propEq("type", MegalosPowerType.CALLING_BONUS), powers)
+  const qualifyingStartingPowers = filter(meetsPrerequisites(character), allStartingPowers)
+  return qualifyingStartingPowers
+}
+
 export function newCharacter(): MegalosCharacter {
-  return {
+  const character: MegalosCharacter = {
     name: 'New Character',
     pronouns: 'they/them',
     homeland: homelands[0].name,
@@ -1081,4 +1227,5 @@ export function newCharacter(): MegalosCharacter {
       special: '',
     },
   }
+  return assoc("powers", startingPowers(character), character)
 }

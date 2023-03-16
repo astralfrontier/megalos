@@ -1,4 +1,4 @@
-import { map, times } from 'ramda'
+import { map } from 'ramda'
 import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
