@@ -1,8 +1,9 @@
 import { append, find, intersection, map, propEq, without } from 'ramda'
 import React, { useContext } from 'react'
-import { describe } from '../visuals'
+
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
+import { describe } from '../visuals'
 import { homelands, MegalosSkillName, recalculateSkills } from './data'
 import SkillsPane from './SkillsPane'
 
@@ -20,14 +21,16 @@ function HomelandChooser() {
       propEq('name', event.currentTarget.value),
       homelands
     )
-    setCharacter({
-      ...character,
-      homeland: event.target.value,
-      homelandSkills: intersection(
-        character.homelandSkills,
-        newHomeland?.startingSkills || []
-      ),
-    })
+    if (newHomeland) {
+      setCharacter({
+        ...character,
+        homeland: newHomeland,
+        homelandSkills: intersection(
+          character.homelandSkills,
+          newHomeland.startingSkills || []
+        ),
+      })  
+    }
   }
 
   const homelandSkillSetter: React.ChangeEventHandler<HTMLInputElement> = (
@@ -44,8 +47,6 @@ function HomelandChooser() {
     })
   }
 
-  const homeland = find(propEq('name', character.homeland), homelands)
-
   return (
     <>
       <div className="columns">
@@ -54,7 +55,7 @@ function HomelandChooser() {
             label={'Homeland'}
             help={'Select a homeland for your character'}
           >
-            <select onChange={homelandSetter} value={character.homeland}>
+            <select id='homeland-name-select' onChange={homelandSetter} value={character.homeland.name}>
               {homelands.map((homeland) => (
                 <option key={homeland.name} value={homeland.name}>
                   {homeland.name}
@@ -64,7 +65,7 @@ function HomelandChooser() {
           </GenericInput>
 
           <div className="content">
-            {describe(homeland?.description)}
+            {describe(character.homeland.description)}
             <p>
               <strong>Signature Skills:</strong> Characters from this homeland
               choose 2 of the following skills to gain +1 rating.
@@ -78,6 +79,7 @@ function HomelandChooser() {
                 <div className="column">
                   <label className="checkbox">
                     <input
+                      id={`homeland-skill-checkbox-${skill.toLowerCase()}`}
                       type="checkbox"
                       value={skill}
                       disabled={
@@ -90,7 +92,7 @@ function HomelandChooser() {
                   </label>
                 </div>
               )
-            }, homeland?.startingSkills || [])}
+            }, character.homeland.startingSkills)}
           </div>
         </div>
         <div className="column">

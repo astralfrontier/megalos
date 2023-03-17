@@ -67,7 +67,7 @@ function SkillsPane() {
 
   return (
     <>
-      <article className="message">
+      <article className="message" id="skills-pane">
         <div className="message-header">
           <p>Skills</p>
         </div>

@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import slugify from 'slugify'
 
-import { CharacterContext } from '../GameStateProvider'
 import BondChooser from './BondChooser'
 import ClassCallingChooser from './ClassCallingChooser'
 import HomelandChooser from './HomelandChooser'
@@ -36,7 +36,6 @@ const activeSteps = [
 ]
 
 function CharacterBuilder() {
-  const { character, setCharacter } = useContext(CharacterContext)
   const [activeStep, setActiveStep] = useState<number>(0)
 
   return (
@@ -45,7 +44,7 @@ function CharacterBuilder() {
         <div className="tabs">
           <ul>
             {activeSteps.map((step, i) => (
-              <li className={activeStep == i ? 'is-active' : ''}>
+              <li id={`character-tab-${slugify(step.name)}`} className={activeStep == i ? 'is-active' : ''}>
                 <a onClick={() => setActiveStep(i)}>{step.name}</a>
               </li>
             ))}

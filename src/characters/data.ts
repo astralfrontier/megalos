@@ -134,7 +134,7 @@ export interface MegalosPower {
 export interface MegalosCharacter {
   name: string
   pronouns: string
-  homeland: string
+  homeland: Homeland
   homelandSkills: MegalosSkillName[]
   class: MegalosClass
   calling: MegalosCalling
@@ -1247,7 +1247,7 @@ export function newCharacter(): MegalosCharacter {
   const character: MegalosCharacter = {
     name: 'New Character',
     pronouns: 'they/them',
-    homeland: homelands[0].name,
+    homeland: homelands[0],
     homelandSkills: [],
     class: classes[0],
     calling: callings[classes[0].name][0],

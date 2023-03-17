@@ -1,5 +1,6 @@
 import { assocPath } from 'ramda'
 import React, { useContext, useState } from 'react'
+import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
 import { rollDie } from '../utilities'
@@ -80,6 +81,7 @@ function TraitInput(props: TraitInputProps) {
         <div className="field has-addons">
           <div className="control is-expanded">
             <input
+              id={`trait-input-${slugify(label.toLowerCase())}`}
               className="input"
               type="text"
               placeholder={placeholder}
@@ -88,7 +90,7 @@ function TraitInput(props: TraitInputProps) {
             />
           </div>
           <div className="control">
-            <button onClick={() => setter(randomTrait(suggestions))}>
+            <button id={`trait-randomize-${slugify(label.toLowerCase())}`} onClick={() => setter(randomTrait(suggestions))}>
               <span className="icon">
                 <i className="fa-solid fa-dice"></i>
               </span>
