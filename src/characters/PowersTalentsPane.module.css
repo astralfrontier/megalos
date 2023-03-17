@@ -1,0 +1,20 @@
+/**
+ * .power-display covers the overall power block
+ */
+
+.power-type {
+  font-weight: bold;
+}
+
+/**
+  * We can use CSS classes like:
+  *   .power-type-invocation
+  *   .power-type-arcana
+  *   .power-type-strike
+  *   .power-type-counter
+  *   .power-type-sorcery
+  *   .power-type-cantrip
+  *   .power-type-talent
+  *   .power-type-bonus
+  * to customize the look of individual power types
+ */

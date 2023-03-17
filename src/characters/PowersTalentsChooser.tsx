@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
 import { meetsPrerequisites, MegalosCharacter, MegalosPower, powers } from './data'
-import PowersTalentsPane from './PowersTalentsPane'
+import PowersTalentsPane, { PowerDisplay } from './PowersTalentsPane'
 
 interface TableRowProps {
   power: MegalosPower
@@ -11,14 +11,10 @@ interface TableRowProps {
   togglePower: (power: MegalosPower) => any
 }
 
-function TableRow(props: TableRowProps) {
+function EditablePowerDisplay(props: TableRowProps) {
   const { power, isSelected, togglePower } = props
   return (
-    <div className="columns is-vcentered" key={power.name}>
-      <div className='column is-narrow'>
-        {power.type}
-      </div>
-      <div className="column">{power.name}</div>
+    <PowerDisplay power={power}>
       <div className='column is-narrow'>
         <button className='button is-primary' onClick={() => togglePower(power)}>
           <span className="icon">
@@ -26,7 +22,7 @@ function TableRow(props: TableRowProps) {
           </span>
         </button>
       </div>
-    </div>
+    </PowerDisplay>
   )
 }
 
@@ -57,7 +53,7 @@ function PowersTalentsChooser() {
           {map(
             power => {
               const isSelected = includes(power, character.powers)
-              return <TableRow power={power} isSelected={isSelected} togglePower={isSelected ? removePower : addPower} />
+              return <EditablePowerDisplay power={power} isSelected={isSelected} togglePower={isSelected ? removePower : addPower} />
             },
             eligiblePowers
           )}

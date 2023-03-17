@@ -3,19 +3,22 @@ import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
 import { MegalosPower } from './data'
+import classes from "./PowersTalentsPane.module.css"
 
-interface TableRowProps {
+interface PowerDisplayProps {
   power: MegalosPower
+  children?: React.ReactNode
 }
 
-function TableRow(props: TableRowProps) {
-  const { power } = props
+export function PowerDisplay(props: PowerDisplayProps) {
+  const { power, children } = props
   return (
-    <div className="columns" key={power.name}>
-      <div className={"column is-narrow"}>
+    <div className={`block columns is-vcentered ${classes.powerDisplay}`} key={power.name}>
+      <div className={`column is-narrow ${classes.powerType} ${classes[`powerType${power.type}`]}`}>
         {power.type}
       </div>
       <div className="column">{power.name}</div>
+      {children}
     </div>
   )
 }
@@ -32,7 +35,7 @@ function PowersTalentsPane() {
         <div className="message-body">
           {map(
             (power) => (
-              <TableRow
+              <PowerDisplay
                 power={power}
               />
             ),
