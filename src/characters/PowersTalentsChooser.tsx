@@ -16,7 +16,7 @@ function EditablePowerDisplay(props: TableRowProps) {
   return (
     <PowerDisplay power={power}>
       <div className='column is-narrow'>
-        <button className='button is-primary' onClick={() => togglePower(power)}>
+        <button className={isSelected ? 'button is-warning' : 'button is-primary'} onClick={() => togglePower(power)}>
           <span className="icon">
             <i className={isSelected ? "fa-solid fa-minus" : "fa-solid fa-plus"} />
           </span>
