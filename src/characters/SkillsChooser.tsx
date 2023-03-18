@@ -1,25 +1,10 @@
-import {
-  append,
-  filter,
-  find,
-  findIndex,
-  map,
-  max,
-  propEq,
-  reduce,
-} from 'ramda'
+import { append, filter, find, findIndex, map, max, propEq, reduce } from 'ramda'
 import React, { useContext, useState } from 'react'
-import { describe } from '../visuals'
+
 import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
-import {
-  ACTIVE_SKILLS,
-  CUTSCENE_SKILLS,
-  MegalosSkillName,
-  RankedSkill,
-  recalculateSkills,
-  skills,
-} from './data'
+import { describe } from '../visuals'
+import { ACTIVE_SKILLS, CUTSCENE_SKILLS, MegalosSkillName, RankedSkill, recalculateSkills, skills } from './data'
 import SkillsPane from './SkillsPane'
 
 function sanityCheck(condition: boolean, message: string) {
@@ -107,6 +92,7 @@ function SkillsChooser() {
             <div className="column is-narrow">
               <GenericInput label={'Skill'} help={'Select a skill to modify'}>
                 <select
+                  id='skill-name-select'
                   onChange={(event) =>
                     setCurrentSkill(
                       event.currentTarget.value as MegalosSkillName
@@ -122,6 +108,7 @@ function SkillsChooser() {
             </div>
             <div className="column is-narrow">
               <button
+                id='skill-minus-button'
                 className="button is-primary"
                 onClick={() => modifySkill(-1)}
                 disabled={currentRank < 2}
@@ -130,6 +117,7 @@ function SkillsChooser() {
               </button>
               <button className="button">{currentRank}</button>
               <button
+                id='skill-plus-button'
                 className="button is-primary"
                 onClick={() => modifySkill(1)}
                 disabled={currentRank >= 5}

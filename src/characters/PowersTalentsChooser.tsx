@@ -29,8 +29,7 @@ function EditablePowerDisplay(props: TableRowProps) {
 function PowersTalentsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
 
-  const eligiblePowers = filter(meetsPrerequisites(character), powers)
-
+  // TODO: add any required secondary powers, e.g. when a Throne takes the Tanking talent
   function addPower(power: MegalosPower) {
     setCharacter({
       ...character,
@@ -45,6 +44,9 @@ function PowersTalentsChooser() {
     }
     setCharacter(assoc("powers", filter(meetsPrerequisites(newCharacter), newCharacter.powers), newCharacter))
   }
+
+  // Which powers have met prerequisites?
+  const eligiblePowers = filter(meetsPrerequisites(character), powers)
 
   return (
     <>
