@@ -1,8 +1,8 @@
-import { allPass, append, assoc, filter, includes, intersection, map, remove, without } from 'ramda'
+import { allPass, append, assoc, filter, includes, intersection, map, prop, reject, remove, without } from 'ramda'
 import React, { useContext, useState } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
-import { meetsPrerequisites, MegalosCharacter, MegalosPower, powers } from './data'
+import { meetsPrerequisites, MegalosCharacter, MegalosPower, powers, recalculatePowers } from './data'
 import PowersTalentsPane, { PowerDisplay } from './PowersTalentsPane'
 
 interface TableRowProps {
@@ -29,24 +29,34 @@ function EditablePowerDisplay(props: TableRowProps) {
 function PowersTalentsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
 
-  // TODO: add any required secondary powers, e.g. when a Throne takes the Tanking talent
   function addPower(power: MegalosPower) {
-    setCharacter({
-      ...character,
-      powers: append(power, character.powers)
-    })
+    setCharacter(
+      assoc(
+        "powers",
+        recalculatePowers(
+          character,
+          append(power, character.powers)
+        ),
+        character
+      )
+    )
   }
 
   function removePower(power: MegalosPower) {
-    let newCharacter: MegalosCharacter = {
-      ...character,
-      powers: without([power], character.powers)
-    }
-    setCharacter(assoc("powers", filter(meetsPrerequisites(newCharacter), newCharacter.powers), newCharacter))
+    setCharacter(
+      assoc(
+        "powers",
+        recalculatePowers(
+          character,
+          without([power], character.powers)
+        ),
+        character
+      )
+    )
   }
 
-  // Which powers have met prerequisites?
-  const eligiblePowers = filter(meetsPrerequisites(character), powers)
+  // Which powers have met prerequisites, and aren't mandatory?
+  const eligiblePowers = reject((power: MegalosPower) => power.mandatory, filter(meetsPrerequisites(character), powers))
 
   return (
     <>

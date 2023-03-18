@@ -5,7 +5,7 @@ import { CharacterContext } from '../GameStateProvider'
 import GenericInput from '../GenericInput'
 import { describe } from '../visuals'
 import ClassCallingPane from './ClassCallingPane'
-import { callings, classes, startingPowers } from './data'
+import { callings, classes, recalculatePowers } from './data'
 
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
@@ -19,7 +19,7 @@ function ClassCallingChooser() {
         calling: callings[newClass.name][0],
         powers: []
       }
-      setCharacter(assoc("powers", startingPowers(newCharacter), newCharacter))
+      setCharacter(assoc("powers", recalculatePowers(newCharacter, []), newCharacter))
     }
   }
 
@@ -31,7 +31,7 @@ function ClassCallingChooser() {
         calling: newCalling,
         powers: []
       }
-      setCharacter(assoc("powers", startingPowers(newCharacter), newCharacter))
+      setCharacter(assoc("powers", recalculatePowers(newCharacter, []), newCharacter))
     }
   }
 
