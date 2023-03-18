@@ -4,6 +4,7 @@ import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
 import { meetsPrerequisites, MegalosClassBenefits, MegalosPower, powers, recalculatePowers } from './data'
+import classes from "./PowersTalentsChooser.module.css"
 import PowersTalentsPane from './PowersTalentsPane'
 
 interface BenefitUsedProps {
@@ -96,22 +97,23 @@ function PowersTalentsChooser() {
             {map(
               power => {
                 const isSelected = includes(power, character.powers)
+                const isSelectable = isSelected || hasBudget(power)
                 return (
                   <>
-                    <div className='column is-full'>
-                      <label className="checkbox">
-                        <input
-                          id={`power-checkbox-${slugify(power.name.toLowerCase())}`}
-                          type="checkbox"
-                          value={power.name}
-                          disabled={
-                            !isSelected && !hasBudget(power)
-                          }
-                          checked={isSelected}
-                          onChange={powerSetter}
-                        />{' '}
-                        <strong>{power.type}</strong>: {power.name}
-                      </label>
+                    <div className='column is-half'>
+                      <div className={classes.powersTalentsCheckbox}>
+                        <label className="checkbox" aria-disabled={!isSelectable}>
+                          <input
+                            id={`power-checkbox-${slugify(power.name.toLowerCase())}`}
+                            type="checkbox"
+                            value={power.name}
+                            disabled={!isSelectable}
+                            checked={isSelected}
+                            onChange={powerSetter}
+                          />{' '}
+                          <strong>{power.type}</strong>: {power.name}
+                        </label>
+                      </div>
                     </div>
                   </>
                 )
