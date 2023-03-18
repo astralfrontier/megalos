@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import slugify from 'slugify'
 
-import BondChooser from './BondChooser'
 import ClassCallingChooser from './ClassCallingChooser'
+import FinalSheet from './FinalSheet'
 import HomelandChooser from './HomelandChooser'
 import PowersTalentsChooser from './PowersTalentsChooser'
 import SkillsChooser from './SkillsChooser'
@@ -30,8 +30,8 @@ const activeSteps = [
     element: <PowersTalentsChooser />,
   },
   {
-    name: 'Bonds',
-    element: <BondChooser />,
+    name: 'Sheet',
+    element: <FinalSheet />,
   },
 ]
 
