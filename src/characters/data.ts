@@ -1097,6 +1097,10 @@ export const isArklight = isCalling("Arklight")
 export const isChampion = isCalling("Champion")
 export const isShadowblade = isCalling("Shadowblade")
 
+export const isDraloi = isCalling("Draloi")
+export const isPsythe = isCalling("Psythe")
+export const isRuneMagus = isCalling("Rune Magus")
+
 /**
  * For a given character, return a function that
  * for a given power, returns true if all prerequisites are met
@@ -1200,6 +1204,30 @@ const finisher = (name: MegalosPowerName, requiredCalling: CharacterFilter): Meg
   costs: {}
 })
 
+const cantrip = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+  name,
+  mandatory: false,
+  type: MegalosPowerType.CANTRIP,
+  prerequisites: [
+    requiredCalling
+  ],
+  costs: {
+    cantrips: 1
+  }
+})
+
+const sorcery = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+  name,
+  mandatory: false,
+  type: MegalosPowerType.SORCERY,
+  prerequisites: [
+    requiredCalling
+  ],
+  costs: {
+    sorceries: 1
+  }
+})
+
 export const powers: MegalosPower[] = [
   // Invoker
   classTalent("Binding of Five", isInvoker),
@@ -1288,8 +1316,6 @@ export const powers: MegalosPower[] = [
   classTalent("Sword & Board", either(isArklight, hasPower("Darkest Knight"))),
   classTalent("Wings of the Savior", isArklight),
 
-  bonusPower("Gathering Shadows", hasPower("Darkest Knight")),
-
   // Arklight
   bonusPower("Aegis of Light", isArklight),
   finisher("Warrior of Light", isArklight),
@@ -1332,6 +1358,7 @@ export const powers: MegalosPower[] = [
 
   // Shadowblade
   bonusPower("Soul Eater", (character) => isShadowblade(character) && !hasPower("Darkest Knight")(character)),
+  bonusPower("Gathering Shadows", hasPower("Darkest Knight")),
   finisher("Darkside Release", isShadowblade),
   counter("Blade Twisting", isShadowblade),
   counter("Bloody Mess", isShadowblade),
@@ -1348,6 +1375,77 @@ export const powers: MegalosPower[] = [
   chargedStrike("Flickering Guillotine", isShadowblade),
   chargedStrike("Steel Exorcism", isShadowblade),
   chargedStrike("Vassago's Scythe", isShadowblade),
+
+  // Witch
+  classTalent("Armor of Runes", isRuneMagus),
+  classTalent("Balanced Humors", isDraloi),
+  classTalent("Cauldron Bubble", isWitch),
+  classTalent("Collage Macabre", isPsythe),
+  classTalent("Ego Shield", isPsythe),
+  classTalent("Howling Pact", isWitch),
+  classTalent("Familiar", isWitch),
+  classTalent("Flight Incantation", isWitch),
+  classTalent("L'appel du Vide", isPsythe),
+  classTalent("Lesser Glyphspells", isRuneMagus),
+  classTalent("Ominous Signifiers", isRuneMagus),
+  classTalent("Paroxysm", isDraloi),
+  classTalent("Psychic Network", isPsythe),
+  classTalent("Sang Réal", isDraloi),
+  classTalent("Some for the Doctor", isDraloi),
+  classTalent("Telekine Technique", isWitch),
+  classTalent("Witch's Cackle", isWitch),
+  classTalent("Xenoglossy", isRuneMagus),
+
+  // Draloi
+  bonusPower("Redistribute", isDraloi),
+  cantrip("Bloody Physick", isDraloi),
+  cantrip("Drain Aether", isDraloi),
+  cantrip("Drain Blood", isDraloi),
+  cantrip("Drain Soul", isDraloi),
+  cantrip("Red Flash", isDraloi),
+  cantrip("Sanguine Pavise", isDraloi),
+  sorcery("Blood Alchemy", isDraloi),
+  sorcery("Boiling Bile", isDraloi),
+  sorcery("Chirurgy", isDraloi),
+  sorcery("Conveyance", isDraloi),
+  sorcery("Haemonculus", isDraloi),
+  sorcery("Insanguinate", isDraloi),
+  sorcery("Liquefaction", isDraloi),
+  sorcery("Revivify", isDraloi),
+
+  // Psythe
+  bonusPower("The Pledge", isPsythe),
+  cantrip("Bio-Shock", isPsythe),
+  cantrip("Fog of War", isPsythe),
+  cantrip("Haunt", isPsythe),
+  cantrip("Mind Blades", isPsythe),
+  cantrip("Phantasmagoria", isPsythe),
+  cantrip("The Turn", isPsythe),
+  sorcery("Blade Dance", isPsythe),
+  sorcery("Kinetic Throw", isPsythe),
+  sorcery("Marching Orders", isPsythe),
+  sorcery("Marionette", isPsythe),
+  sorcery("Mirage Arcana", isPsythe),
+  sorcery("The Prestige", isPsythe),
+  sorcery("Psychic Surgery", isPsythe),
+  sorcery("Psything Mind", isPsythe),
+
+  // Rune Magis
+  bonusPower("Xenosyntax", isRuneMagus),
+  cantrip("Anex Malecar (Lesser Truth: Curse of Gravity)", isRuneMagus),
+  cantrip("En Vai Bruma (Lesser Mneme: Harsh Winter)", isRuneMagus),
+  cantrip("En Vai Mani (Lesser Mneme: Compassion)", isRuneMagus),
+  cantrip("Sigil of the Baleful Eye", isRuneMagus),
+  cantrip("Sigil of Combustion", isRuneMagus),
+  cantrip("Sigil of Entanglement", isRuneMagus),
+  sorcery("Asanex Gravos (Greater Truth: Burden of Time)", isRuneMagus),
+  sorcery("En Vas Pyroth (Greater Mneme: Wildfire)", isRuneMagus),
+  sorcery("Logos: Concentrativity", isRuneMagus),
+  sorcery("Logos: Eruption", isRuneMagus),
+  sorcery("Logos: Gravitation", isRuneMagus),
+  sorcery("Logos: Geoglyphic Convergence", isRuneMagus),
+  sorcery("Paracausal Darkness", isRuneMagus),
+  sorcery("Paracausal Light", isRuneMagus),
 ]
 
 const allMandatoryPowers = filter(power => prop("mandatory", power), powers)
