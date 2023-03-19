@@ -60,11 +60,15 @@ function ClassCallingPane() {
           <p>
             <strong>Role:</strong> {roleText(character)}
           </p>
+          <p>
+            <strong>Soak:</strong> {character.calling.role == MegalosRole.TANK ? "2d6" : "1d6"}
+          </p>
           {benefit("Base HP", character.calling.benefits.baseHp)}
           {benefit("Base Dodge", character.calling.benefits.baseDodge)}
           {benefit("Base Ward", character.calling.benefits.baseWard)}
           {benefit("Base Damage", character.calling.benefits.baseDamage)}
           {benefit("Recovery", character.calling.benefits.recovery)}
+          {benefit("Recovery Base (RB)", character.calling.benefits.baseHp / 4)}
         </div>
       </article>
     </>
