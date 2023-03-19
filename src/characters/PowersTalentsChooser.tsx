@@ -93,14 +93,14 @@ function PowersTalentsChooser() {
             <BenefitUsed label='Cantrips' value={benefitsUsed.cantrips} maximum={character.class.benefits.cantrips} />
             <BenefitUsed label='Talents' value={benefitsUsed.talents} maximum={character.class.benefits.talents} />
           </div>
-          <div className='columns is-multiline'>
+          <div className={classes.powersTalentsCheckboxes}>
             {map(
               power => {
                 const isSelected = includes(power, character.powers)
                 const isSelectable = isSelected || hasBudget(power)
                 return (
                   <>
-                    <div className='column is-half'>
+                    <div className='p-3'>
                       <div className={classes.powersTalentsCheckbox}>
                         <label className="checkbox" aria-disabled={!isSelectable}>
                           <input
