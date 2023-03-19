@@ -1,37 +1,37 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { CharacterContext } from '../GameStateProvider'
+import CharacterProfilePane from './CharacterProfilePane'
+import ClassCallingPane from './ClassCallingPane'
 import PowersTalentsPane from './PowersTalentsPane'
 import SkillsPane from './SkillsPane'
-import TraitsPane from "./TraitsPane"
+import TraitsPane from './TraitsPane'
 
 function FinalSheet() {
-  const { character } = useContext(CharacterContext)
-
   return (
     <>
-      <div className="columns is-multiline">
-        <div className="column is-half">
-          <article className="message">
-            <div className="message-header">
-              <p>Character Profile</p>
+      <div className="tile is-ancestor">
+        <div className="tile is-vertical">
+          <div className="tile">
+            <div className="tile is-parent is-vertical">
+              <div className="tile is-child">
+                <CharacterProfilePane />
+              </div>
+              <div className="tile is-child">
+                <TraitsPane />
+              </div>
+              <article className="tile is-child">
+                <SkillsPane />
+              </article>
             </div>
-            <div className="message-body">
-              <p><strong>Name:</strong></p>
-              <p><strong>Homeland:</strong> {character.homeland.name}</p>
-              <p><strong>Pronouns:</strong></p>
-              <p><strong>Class &amp; Calling:</strong> {character.class.name} - {character.calling.name}</p>
+            <div className="tile is-parent is-vertical">
+              <div className="tile is-child">
+                <ClassCallingPane />
+              </div>
+              <div className="tile is-child">
+                <PowersTalentsPane />
+              </div>
             </div>
-          </article>
-        </div>
-        <div className='column is-half'>
-          <TraitsPane />
-        </div>
-        <div className='column is-half'>
-          <SkillsPane />
-        </div>
-        <div className='column is-half'>
-          <PowersTalentsPane />
+          </div>
         </div>
       </div>
     </>
