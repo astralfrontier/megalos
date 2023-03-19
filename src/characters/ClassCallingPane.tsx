@@ -2,22 +2,26 @@ import { find, propEq } from 'ramda'
 import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
+import { MegalosCharacter, MegalosRole } from './data'
 
-interface TableRowProps {
-  label: string
-  value: string
-}
-
-function TableRow(props: TableRowProps) {
-  const { label, value } = props
-  return (
-    <div className="column is-full">
-      <p>
-        <span className="tag is-primary">{label}</span>
-      </p>
-      {value}
-    </div>
-  )
+function roleText(character: MegalosCharacter): string {
+  let text = `${character.calling.role} - ${character.calling.roleDescription}`
+  switch (character.calling.role) {
+    case MegalosRole.STRIKER:
+      text = `${text}. As a Striker calling, you gain +4 damage from being Set Up,
+        EMPOWERED, or when exploiting the EXPOSED status, instead of
+        +2. The bonus from EMPOWERED becomes +2 for AoE & Multi-target attacks, instead
+        of +1. You can only use Light or Medium Armor.`
+        break
+    case MegalosRole.SUPPORT:
+      text = `${text}. You can only use Light Armor. ◇: Support callings
+      can spend 1 Recovery to Heal (RB) to themselves or 1 ally in range 1. Limit 1/round.`
+      break
+    case MegalosRole.TANK:
+      text = `${text}. ◇: Tank Callings can inflict TAUNTED on one foe in
+      range 1, once per turn. You can only use Medium or Heavy Armor.`
+  }
+  return text
 }
 
 function benefit(label: string, value: number | undefined) {
@@ -54,7 +58,7 @@ function ClassCallingPane() {
         </div>
         <div className="message-body">
           <p>
-            <strong>Role:</strong> {character.calling.benefits.role}
+            <strong>Role:</strong> {roleText(character)}
           </p>
           {benefit("Base HP", character.calling.benefits.baseHp)}
           {benefit("Base Dodge", character.calling.benefits.baseDodge)}
