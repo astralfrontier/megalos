@@ -1,9 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { CharacterContext } from '../GameStateProvider'
+import { MegalosCharacter } from './data'
 
-function CharacterProfilePane() {
-  const { character } = useContext(CharacterContext)
+interface CharacterProfilePaneProps {
+  character: MegalosCharacter
+}
+
+function CharacterProfilePane(props: CharacterProfilePaneProps) {
+  const { character } = props
 
   return (
     <>

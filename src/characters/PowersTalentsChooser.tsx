@@ -123,7 +123,7 @@ function PowersTalentsChooser() {
           </div>
         </div>
         <div className="column">
-          <PowersTalentsPane />
+          <PowersTalentsPane character={character} />
         </div>
       </div>
     </>

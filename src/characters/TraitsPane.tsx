@@ -1,7 +1,12 @@
-import { map, times } from 'ramda'
-import React, { useContext } from 'react'
+import React from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
+
+import type { MegalosCharacter } from './data'
+
+interface TraitsPaneProps {
+  character: MegalosCharacter
+}
 
 interface TableRowProps {
   label: string
@@ -20,8 +25,8 @@ function TableRow(props: TableRowProps) {
   )
 }
 
-function TraitsPane() {
-  const { character } = useContext(CharacterContext)
+function TraitsPane(props: TraitsPaneProps) {
+  const { character } = props
 
   return (
     <>

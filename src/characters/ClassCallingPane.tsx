@@ -1,8 +1,10 @@
-import { find, propEq } from 'ramda'
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { CharacterContext } from '../GameStateProvider'
 import { MegalosCharacter, MegalosRole } from './data'
+
+interface ClassCallingPaneProps {
+  character: MegalosCharacter
+}
 
 function roleText(character: MegalosCharacter): string {
   let text = `${character.calling.role} - ${character.calling.roleDescription}`
@@ -33,8 +35,8 @@ function benefit(label: string, value: number | undefined) {
   )
 }
 
-function ClassCallingPane() {
-  const { character } = useContext(CharacterContext)
+function ClassCallingPane(props: ClassCallingPaneProps) {
+  const { character } = props
 
   return (
     <>

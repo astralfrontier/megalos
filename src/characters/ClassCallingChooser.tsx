@@ -95,7 +95,7 @@ function ClassCallingChooser() {
           </div>
         </div>
         <div className="column">
-          <ClassCallingPane />
+          <ClassCallingPane character={character} />
         </div>
       </div>
     </>

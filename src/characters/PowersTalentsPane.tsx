@@ -1,9 +1,12 @@
 import { map } from 'ramda'
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { CharacterContext } from '../GameStateProvider'
-import { MegalosPower } from './data'
+import { MegalosCharacter, MegalosPower } from './data'
 import classes from "./PowersTalentsPane.module.css"
+
+interface PowersTalentsPaneProps {
+  character: MegalosCharacter
+}
 
 interface PowerDisplayProps {
   power: MegalosPower
@@ -23,8 +26,8 @@ export function PowerDisplay(props: PowerDisplayProps) {
   )
 }
 
-function PowersTalentsPane() {
-  const { character } = useContext(CharacterContext)
+function PowersTalentsPane(props: PowersTalentsPaneProps) {
+  const { character } = props
 
   return (
     <>
@@ -36,6 +39,7 @@ function PowersTalentsPane() {
           {map(
             (power) => (
               <PowerDisplay
+                key={power.name}
                 power={power}
               />
             ),

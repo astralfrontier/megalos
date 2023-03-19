@@ -165,7 +165,7 @@ function SkillsChooser() {
           )}
         </div>
         <div className="column">
-          <SkillsPane />
+          <SkillsPane character={character} />
         </div>
       </div>
     </>

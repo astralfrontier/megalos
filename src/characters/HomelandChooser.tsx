@@ -96,7 +96,7 @@ function HomelandChooser() {
           </div>
         </div>
         <div className="column">
-          <SkillsPane />
+          <SkillsPane character={character} />
         </div>
       </div>
     </>
