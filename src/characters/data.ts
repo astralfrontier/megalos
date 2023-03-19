@@ -1,4 +1,4 @@
-import { allPass, assoc, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
+import { allPass, assoc, assocPath, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -115,7 +115,17 @@ export interface RankedSkill {
   effectiveRank: number
 }
 
+/**
+ * Any function that returns true or false if a character meets some condition,
+ * e.g. is a class or calling, or has a power.
+ */
 export type CharacterFilter = (character: MegalosCharacter) => boolean
+
+/**
+ * Any function that mutates the character during display,
+ * e.g. a power that changes your role
+ */
+export type CharacterMutator = (character: MegalosCharacter) => MegalosCharacter
 
 export type MegalosPowerName = string;
 
@@ -139,6 +149,7 @@ export interface MegalosPower {
   prerequisites: CharacterFilter[]
   costs: MegalosClassBenefits
   // TODO: description
+  effect?: CharacterMutator
 }
 
 export interface MegalosCharacter {
@@ -1295,7 +1306,21 @@ export const powers: MegalosPower[] = [
   classTalent("Artillerist", isThrone),
   classTalent("Aura of Might", isThrone),
   classTalent("Crisis Cœr", isThrone),
-  classTalent("Darkest Knight", isShadowblade),
+  {
+    ...classTalent("Darkest Knight", isShadowblade),
+    effect: (character) => ({
+      ...character,
+      calling: {
+        ...character.calling,
+        role: MegalosRole.TANK,
+        benefits: {
+          ...character.calling.benefits,
+          baseHp: 32,
+          baseDamage: 4
+        }
+      }
+    })
+  },
   classTalent("Envenomed Blades", isShadowblade),
   classTalent("Flesh of Spirit, Spirit of Flesh", isThrone),
   classTalent("Greased Lightning", isThrone),
