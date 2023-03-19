@@ -15,7 +15,7 @@ export function PowerDisplay(props: PowerDisplayProps) {
   return (
     <div className={`block columns is-vcentered ${classes.powerDisplay}`} key={power.name}>
       <div className={`column is-narrow ${classes.powerType} ${classes[`powerType${power.type}`]}`}>
-        {power.type}
+        <span className="tag is-primary">{power.type}</span>
       </div>
       <div className="column">{power.name}</div>
       {children}
