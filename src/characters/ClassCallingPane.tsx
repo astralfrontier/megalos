@@ -64,7 +64,7 @@ function ClassCallingPane() {
           {benefit("Base Dodge", character.calling.benefits.baseDodge)}
           {benefit("Base Ward", character.calling.benefits.baseWard)}
           {benefit("Base Damage", character.calling.benefits.baseDamage)}
-          {benefit("Reovery", character.calling.benefits.recovery)}
+          {benefit("Recovery", character.calling.benefits.recovery)}
         </div>
       </article>
     </>
