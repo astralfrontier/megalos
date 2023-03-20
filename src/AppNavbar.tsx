@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { CHARACTER_PATH, DICE_PATH, OUTFITS_PATH, WEAPONS_PATH } from './App'
+import {
+  CHARACTER_PATH,
+  DICE_PATH,
+  OUTFITS_PATH,
+  SOAK_PATH,
+  WEAPONS_PATH,
+} from './App'
 
 const activeNavbarItem = ({ isActive }) =>
   isActive ? 'navbar-item has-background-white' : 'navbar-item'
@@ -41,6 +47,13 @@ function AppNavbar() {
             onClick={() => setIsActive(false)}
           >
             Dice
+          </NavLink>
+          <NavLink
+            className={activeNavbarItem}
+            to={SOAK_PATH}
+            onClick={() => setIsActive(false)}
+          >
+            Soak
           </NavLink>
           <NavLink
             className={activeNavbarItem}

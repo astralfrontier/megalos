@@ -6,6 +6,7 @@ import DefaultLayout from './DefaultLayout'
 import DicePage from './dice/DicePage'
 import GameStateProvider from './GameStateProvider'
 import OutfitPage from './OutfitPage'
+import SoakPage from './SoakPage'
 import WeaponPage from './WeaponPage'
 
 import './App.sass'
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
     element: (
       <DefaultLayout>
         <DicePage />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: SOAK_PATH,
+    element: (
+      <DefaultLayout>
+        <SoakPage />
       </DefaultLayout>
     ),
   },
