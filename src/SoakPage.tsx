@@ -6,6 +6,22 @@ import { plusOrMinus, rollDie } from './utilities'
 
 type DamageType = 'Astral' | 'Physical' | 'Piercing' | 'Toxic' | 'Umbral'
 
+interface FormInputProps {
+  label: string
+  help: string
+  children?: React.ReactNode
+}
+
+function NumberInput(props: FormInputProps) {
+  return (
+    <div className="field">
+      <label className="label">{props.label}</label>
+      <div className="control">{props.children}</div>
+      <p className="help">{props.help}</p>
+    </div>
+  )
+}
+
 function SoakPage() {
   const [soakDice, setSoakDice] = useState<number>(1)
   const [astralSoak, setAstralSoak] = useState<number>(0)
@@ -72,7 +88,7 @@ function SoakPage() {
             </GenericInput>
           </div>
           <div className="column">
-            <GenericInput
+            <NumberInput
               label={'Astral Soak'}
               help={'Your soak bonus against this damage type'}
             >
@@ -84,10 +100,10 @@ function SoakPage() {
                   setAstralSoak(parseInt(event.currentTarget.value))
                 }
               />
-            </GenericInput>
+            </NumberInput>
           </div>
           <div className="column">
-            <GenericInput
+            <NumberInput
               label={'Physical Soak'}
               help={'Your soak bonus against this damage type'}
             >
@@ -99,10 +115,10 @@ function SoakPage() {
                   setPhysicalSoak(parseInt(event.currentTarget.value))
                 }
               />
-            </GenericInput>
+            </NumberInput>
           </div>
           <div className="column">
-            <GenericInput
+            <NumberInput
               label={'Toxic Soak'}
               help={'Your soak bonus against this damage type'}
             >
@@ -114,10 +130,10 @@ function SoakPage() {
                   setToxicSoak(parseInt(event.currentTarget.value))
                 }
               />
-            </GenericInput>
+            </NumberInput>
           </div>
           <div className="column">
-            <GenericInput
+            <NumberInput
               label={'Umbral Soak'}
               help={'Your soak bonus against this damage type'}
             >
@@ -129,7 +145,7 @@ function SoakPage() {
                   setUmbralSoak(parseInt(event.currentTarget.value))
                 }
               />
-            </GenericInput>
+            </NumberInput>
           </div>
         </div>
       </div>
@@ -155,7 +171,7 @@ function SoakPage() {
             </GenericInput>
           </div>
           <div className="column is-narrow">
-            <GenericInput
+            <NumberInput
               label={'Damage Amount'}
               help={'How much damage are you soaking?'}
             >
@@ -167,7 +183,7 @@ function SoakPage() {
                   setDamageAmount(parseInt(event.currentTarget.value))
                 }
               />
-            </GenericInput>
+            </NumberInput>
           </div>
           <div className="column is-narrow">
             <button className="button is-primary" onClick={rollSoak}>
