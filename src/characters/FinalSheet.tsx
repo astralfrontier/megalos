@@ -12,7 +12,10 @@ import TraitsPane from './TraitsPane'
 function FinalSheet() {
   const { character } = useContext(CharacterContext)
 
-  const effects = map((power: MegalosPower) => power.effect, filter(has("effect"), character.powers)) as CharacterMutator[]
+  const effects = map(
+    (power: MegalosPower) => power.effect,
+    filter(has('effect'), character.powers)
+  ) as CharacterMutator[]
   const finalCharacter = reduce(
     (character, effect) => effect(character),
     character,

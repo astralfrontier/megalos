@@ -29,7 +29,7 @@ function HomelandChooser() {
           character.homelandSkills,
           newHomeland.startingSkills || []
         ),
-      })  
+      })
     }
   }
 
@@ -55,7 +55,11 @@ function HomelandChooser() {
             label={'Homeland'}
             help={'Select a homeland for your character'}
           >
-            <select id='homeland-name-select' onChange={homelandSetter} value={character.homeland.name}>
+            <select
+              id="homeland-name-select"
+              onChange={homelandSetter}
+              value={character.homeland.name}
+            >
               {homelands.map((homeland) => (
                 <option key={homeland.name} value={homeland.name}>
                   {homeland.name}

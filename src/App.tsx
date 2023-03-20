@@ -11,6 +11,7 @@ import WeaponPage from './WeaponPage'
 import './App.sass'
 
 export const DICE_PATH = '/'
+export const SOAK_PATH = '/soak'
 export const CHARACTER_PATH = '/character'
 export const OUTFITS_PATH = '/outfits'
 export const WEAPONS_PATH = '/weapons'

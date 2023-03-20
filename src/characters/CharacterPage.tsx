@@ -44,7 +44,10 @@ function CharacterPage() {
         <div className="tabs">
           <ul>
             {activeSteps.map((step, i) => (
-              <li id={`character-tab-${slugify(step.name)}`} className={activeStep == i ? 'is-active' : ''}>
+              <li
+                id={`character-tab-${slugify(step.name)}`}
+                className={activeStep == i ? 'is-active' : ''}
+              >
                 <a onClick={() => setActiveStep(i)}>{step.name}</a>
               </li>
             ))}

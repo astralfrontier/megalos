@@ -90,7 +90,10 @@ function TraitInput(props: TraitInputProps) {
             />
           </div>
           <div className="control">
-            <button id={`trait-randomize-${slugify(label.toLowerCase())}`} onClick={() => setter(randomTrait(suggestions))}>
+            <button
+              id={`trait-randomize-${slugify(label.toLowerCase())}`}
+              onClick={() => setter(randomTrait(suggestions))}
+            >
               <span className="icon">
                 <i className="fa-solid fa-dice"></i>
               </span>

@@ -1,14 +1,14 @@
 .powers-talents-checkboxes {
-    columns: 2
+  columns: 2;
 }
 
 .powers-talents-checkbox > label {
-    /* display: block;
+  /* display: block;
     margin-left: 20px; */
 }
 
 .powers-talents-checkbox > label > input {
-    /* float: left;
+  /* float: left;
     margin-left: -20px;
     margin-right: 7px; */
 }

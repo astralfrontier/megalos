@@ -17,21 +17,28 @@ function ClassCallingChooser() {
         ...character,
         class: newClass,
         calling: callings[newClass.name][0],
-        powers: []
+        powers: [],
       }
-      setCharacter(assoc("powers", recalculatePowers(newCharacter, []), newCharacter))
+      setCharacter(
+        assoc('powers', recalculatePowers(newCharacter, []), newCharacter)
+      )
     }
   }
 
   function callingSetter(event) {
-    const newCalling = find(propEq('name', event.currentTarget.value), callings[character.class.name])
+    const newCalling = find(
+      propEq('name', event.currentTarget.value),
+      callings[character.class.name]
+    )
     if (newCalling) {
       const newCharacter = {
         ...character,
         calling: newCalling,
-        powers: []
+        powers: [],
       }
-      setCharacter(assoc("powers", recalculatePowers(newCharacter, []), newCharacter))
+      setCharacter(
+        assoc('powers', recalculatePowers(newCharacter, []), newCharacter)
+      )
     }
   }
 

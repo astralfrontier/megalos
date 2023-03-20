@@ -43,7 +43,14 @@ function TableRow(props: TableRowProps) {
   const { label, rank, effectiveRank } = props
   return (
     <div className="columns" key={label}>
-      <div className="column is-half" id={`skill-pane-${label.toLowerCase()}`} data-rank={rank} data-effective-rank={effectiveRank}>{label}</div>
+      <div
+        className="column is-half"
+        id={`skill-pane-${label.toLowerCase()}`}
+        data-rank={rank}
+        data-effective-rank={effectiveRank}
+      >
+        {label}
+      </div>
       <div className="column is-half">
         {times(
           () => (

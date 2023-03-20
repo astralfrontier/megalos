@@ -1,4 +1,22 @@
-import { allPass, assoc, assocPath, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
+import {
+  allPass,
+  assoc,
+  assocPath,
+  concat,
+  difference,
+  either,
+  filter,
+  includes,
+  indexOf,
+  map,
+  pathEq,
+  pluck,
+  prop,
+  propEq,
+  reject,
+  sortBy,
+  uniqBy,
+} from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -54,27 +72,27 @@ export interface Homeland {
 }
 
 export enum MegalosRole {
-  STRIKER = "Striker",
-  SUPPORT = "Support",
-  TANK = "Tank",
+  STRIKER = 'Striker',
+  SUPPORT = 'Support',
+  TANK = 'Tank',
 }
 
 export interface MegalosClassBenefits {
-  invocations?: number;
-  arcana?: number;
-  strikes?: number;
-  counters?: number;
-  sorceries?: number;
-  cantrips?: number;
-  talents?: number;
+  invocations?: number
+  arcana?: number
+  strikes?: number
+  counters?: number
+  sorceries?: number
+  cantrips?: number
+  talents?: number
 }
 
 export interface MegalosCallingBenefits {
-  baseHp: number;
-  baseDodge: number;
-  baseWard: number;
-  baseDamage: number;
-  recovery: number;
+  baseHp: number
+  baseDodge: number
+  baseWard: number
+  baseDamage: number
+  recovery: number
 }
 
 // TODO: aether current rules
@@ -87,8 +105,8 @@ export interface MegalosClass {
 export interface MegalosCalling {
   name: MegalosCallingName
   description: Description
-  role: MegalosRole;
-  roleDescription: string;
+  role: MegalosRole
+  roleDescription: string
   benefits: MegalosCallingBenefits
 }
 
@@ -127,19 +145,19 @@ export type CharacterFilter = (character: MegalosCharacter) => boolean
  */
 export type CharacterMutator = (character: MegalosCharacter) => MegalosCharacter
 
-export type MegalosPowerName = string;
+export type MegalosPowerName = string
 
 export enum MegalosPowerType {
-  INVOCATION = "Invocation",
-  ARCANA = "Arcana",
-  CHARGED_STRIKE = "Charged Strike",
-  COMBO_STRIKE = "Combo Strike",
-  COUNTER = "Counter",
-  FINISHER = "Finisher",
-  SORCERY = "Sorcery",
-  CANTRIP = "Cantrip",
-  TALENT = "Talent",
-  CALLING_BONUS = "Bonus"
+  INVOCATION = 'Invocation',
+  ARCANA = 'Arcana',
+  CHARGED_STRIKE = 'Charged Strike',
+  COMBO_STRIKE = 'Combo Strike',
+  COUNTER = 'Counter',
+  FINISHER = 'Finisher',
+  SORCERY = 'Sorcery',
+  CANTRIP = 'Cantrip',
+  TALENT = 'Talent',
+  CALLING_BONUS = 'Bonus',
 }
 
 export interface MegalosPower {
@@ -404,8 +422,8 @@ export const classes: MegalosClass[] = [
     benefits: {
       invocations: 2,
       arcana: 2,
-      talents: 2
-    }
+      talents: 2,
+    },
   },
   {
     name: 'Throne',
@@ -436,7 +454,7 @@ export const classes: MegalosClass[] = [
     benefits: {
       strikes: 2,
       counters: 2,
-      talents: 1
+      talents: 1,
     },
   },
   {
@@ -467,13 +485,13 @@ export const classes: MegalosClass[] = [
     benefits: {
       sorceries: 2,
       cantrips: 1,
-      talents: 1
+      talents: 1,
     },
   },
 ]
 
 export const callings: Record<MegalosClassName, MegalosCalling[]> = {
-  "Invoker": [
+  Invoker: [
     {
       name: 'Astromancer',
       description: [
@@ -487,13 +505,13 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
         gods or daemons and so the Astromancer is often cast as an arch-heretic`,
       ],
       role: MegalosRole.STRIKER,
-      roleDescription: "Flexible Artillery",
+      roleDescription: 'Flexible Artillery',
       benefits: {
         baseHp: 24,
         baseDodge: 8,
         baseWard: 8,
         baseDamage: 6,
-        recovery: 4
+        recovery: 4,
       },
     },
     {
@@ -509,13 +527,13 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       forms speakers take vary widely, but always include a pair of large feathered wings.`,
       ],
       role: MegalosRole.SUPPORT,
-      roleDescription: "Occult Healer",
+      roleDescription: 'Occult Healer',
       benefits: {
         baseHp: 28,
         baseDodge: 7,
         baseWard: 9,
         baseDamage: 4,
-        recovery: 8
+        recovery: 8,
       },
     },
     {
@@ -531,17 +549,17 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
         `Raconteurs' magick is often called mythomancy or story magick.`,
       ],
       role: MegalosRole.TANK,
-      roleDescription: "Heavy Fighter-Mage",
+      roleDescription: 'Heavy Fighter-Mage',
       benefits: {
         baseHp: 32,
         baseDodge: 10,
         baseWard: 10,
         baseDamage: 4,
-        recovery: 4
+        recovery: 4,
       },
     },
   ],
-  "Throne": [
+  Throne: [
     {
       name: 'Arklight',
       description: [
@@ -555,13 +573,13 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       them with an almost divine radiance to heal the sick and protect the disempowered.`,
       ],
       role: MegalosRole.TANK,
-      roleDescription: "Battlegroup Leader",
+      roleDescription: 'Battlegroup Leader',
       benefits: {
         baseHp: 32,
         baseDodge: 10,
         baseWard: 10,
         baseDamage: 4,
-        recovery: 4
+        recovery: 4,
       },
     },
     {
@@ -577,13 +595,13 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       learn, new palaestra to join, and new foes and rivals who can give them a good fight.`,
       ],
       role: MegalosRole.STRIKER,
-      roleDescription: "Mobile Brawler",
+      roleDescription: 'Mobile Brawler',
       benefits: {
         baseHp: 24,
         baseDodge: 9,
         baseWard: 7,
         baseDamage: 6,
-        recovery: 4
+        recovery: 4,
       },
     },
     {
@@ -599,17 +617,17 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       a partner. Careless Shadowblades, however, are often slain by their own Darksides.`,
       ],
       role: MegalosRole.STRIKER,
-      roleDescription: "Darkside Skirmisher",
+      roleDescription: 'Darkside Skirmisher',
       benefits: {
         baseHp: 24,
         baseDodge: 9,
         baseWard: 7,
         baseDamage: 6,
-        recovery: 4
+        recovery: 4,
       },
     },
   ],
-  "Witch": [
+  Witch: [
     {
       name: 'Draloi',
       description: [
@@ -624,14 +642,14 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       vampiric aesthetics if for no other reason than the fun of it.`,
       ],
       role: MegalosRole.SUPPORT,
-      roleDescription: "Drain Healer",
+      roleDescription: 'Drain Healer',
       benefits: {
         baseHp: 28,
         baseDodge: 8,
         baseWard: 8,
         baseDamage: 4,
-        recovery: 8
-      }
+        recovery: 8,
+      },
     },
     {
       name: 'Psythe',
@@ -647,14 +665,14 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       imaginations to make their envisioned spells a reality.`,
       ],
       role: MegalosRole.STRIKER,
-      roleDescription: "Psychic Duelist",
+      roleDescription: 'Psychic Duelist',
       benefits: {
         baseHp: 24,
         baseDodge: 8,
         baseWard: 8,
         baseDamage: 6,
-        recovery: 4
-      }
+        recovery: 4,
+      },
     },
     {
       name: 'Rune Magus',
@@ -670,16 +688,16 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       whose grip on power relies on tightly controlling the people's access to magick.`,
       ],
       role: MegalosRole.STRIKER,
-      roleDescription: "Magick Artillery",
+      roleDescription: 'Magick Artillery',
       benefits: {
         baseHp: 24,
         baseDodge: 8,
         baseWard: 8,
         baseDamage: 6,
-        recovery: 4
-      }
+        recovery: 4,
+      },
     },
-  ]
+  ],
 }
 
 export const skills: MegalosSkill[] = [
@@ -1013,9 +1031,8 @@ export const skills: MegalosSkill[] = [
 ]
 
 // Cache the set of skills by type, for use in the skills chooser (where we track points separately)
-const skillFilter = (type: MegalosSkillType) => pluck(
-  'name',
-  filter(propEq('type', type), skills) as MegalosSkill[])
+const skillFilter = (type: MegalosSkillType) =>
+  pluck('name', filter(propEq('type', type), skills) as MegalosSkill[])
 
 export const ACTIVE_SKILLS = skillFilter(MegalosSkillType.ACTIVE)
 export const CUTSCENE_SKILLS = skillFilter(MegalosSkillType.CUTSCENE)
@@ -1059,13 +1076,17 @@ export function recalculateSkills(
     pluck('skill', newSkills)
   )
 
-  updatedSkills = concat(updatedSkills, map(
-    newSkill => ({
-      skill: newSkill,
-      rank: 1,
-      effectiveRank: 2,
-    }), homelandSkillsWithoutRanks
-  ))
+  updatedSkills = concat(
+    updatedSkills,
+    map(
+      (newSkill) => ({
+        skill: newSkill,
+        rank: 1,
+        effectiveRank: 2,
+      }),
+      homelandSkillsWithoutRanks
+    )
+  )
 
   // Hide any resulting skills with a rank of 1, as that's the default
   updatedSkills = reject(
@@ -1082,32 +1103,35 @@ export function recalculateSkills(
 // or false (if they are not)
 
 export function isClass(name: MegalosClassName): CharacterFilter {
-  return (character: MegalosCharacter) => pathEq(['class', 'name'], name, character)
+  return (character: MegalosCharacter) =>
+    pathEq(['class', 'name'], name, character)
 }
 
 export function isCalling(name: MegalosCallingName): CharacterFilter {
-  return (character: MegalosCharacter) => pathEq(['calling', 'name'], name, character)
+  return (character: MegalosCharacter) =>
+    pathEq(['calling', 'name'], name, character)
 }
 
 export function hasPower(name: MegalosPowerName) {
-  return (character: MegalosCharacter) => includes(name, pluck("name", character.powers))
+  return (character: MegalosCharacter) =>
+    includes(name, pluck('name', character.powers))
 }
 
-export const isInvoker = isClass("Invoker")
-export const isThrone = isClass("Throne")
-export const isWitch = isClass("Witch")
+export const isInvoker = isClass('Invoker')
+export const isThrone = isClass('Throne')
+export const isWitch = isClass('Witch')
 
-export const isAstromancer = isCalling("Astromancer")
-export const isChanter = isCalling("Chanter")
-export const isRaconteur = isCalling("Raconteur")
+export const isAstromancer = isCalling('Astromancer')
+export const isChanter = isCalling('Chanter')
+export const isRaconteur = isCalling('Raconteur')
 
-export const isArklight = isCalling("Arklight")
-export const isChampion = isCalling("Champion")
-export const isShadowblade = isCalling("Shadowblade")
+export const isArklight = isCalling('Arklight')
+export const isChampion = isCalling('Champion')
+export const isShadowblade = isCalling('Shadowblade')
 
-export const isDraloi = isCalling("Draloi")
-export const isPsythe = isCalling("Psythe")
-export const isRuneMagus = isCalling("Rune Magus")
+export const isDraloi = isCalling('Draloi')
+export const isPsythe = isCalling('Psythe')
+export const isRuneMagus = isCalling('Rune Magus')
 
 /**
  * For a given character, return a function that
@@ -1121,193 +1145,204 @@ export function meetsPrerequisites(character: MegalosCharacter) {
 
 // The master list of talents and powers
 
-const bonusPower = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const bonusPower = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: true,
   type: MegalosPowerType.CALLING_BONUS,
   prerequisites: [requiredCalling],
-  costs: {}
+  costs: {},
 })
 
-const classTalent = (name: MegalosPowerName, requiredClass: CharacterFilter): MegalosPower => ({
+const classTalent = (
+  name: MegalosPowerName,
+  requiredClass: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.TALENT,
-  prerequisites: [
-    requiredClass
-  ],
+  prerequisites: [requiredClass],
   costs: {
-    talents: 1
-  }
+    talents: 1,
+  },
 })
 
-const invocation = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const invocation = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.INVOCATION,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    invocations: 1
-  }
+    invocations: 1,
+  },
 })
 
-const arcanum = (name: MegalosPowerName, requiredInvocation: CharacterFilter): MegalosPower => ({
+const arcanum = (
+  name: MegalosPowerName,
+  requiredInvocation: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.ARCANA,
-  prerequisites: [
-    requiredInvocation
-  ],
+  prerequisites: [requiredInvocation],
   costs: {
-    arcana: 1
-  }
+    arcana: 1,
+  },
 })
 
-const chargedStrike = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const chargedStrike = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.CHARGED_STRIKE,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    strikes: 1
-  }
+    strikes: 1,
+  },
 })
 
-const comboStrike = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const comboStrike = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.COMBO_STRIKE,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    strikes: 1
-  }
+    strikes: 1,
+  },
 })
 
-
-const counter = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const counter = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.COUNTER,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    counters: 1
-  }
+    counters: 1,
+  },
 })
 
-const finisher = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const finisher = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: true,
   type: MegalosPowerType.FINISHER,
-  prerequisites: [
-    requiredCalling
-  ],
-  costs: {}
+  prerequisites: [requiredCalling],
+  costs: {},
 })
 
-const cantrip = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const cantrip = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.CANTRIP,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    cantrips: 1
-  }
+    cantrips: 1,
+  },
 })
 
-const sorcery = (name: MegalosPowerName, requiredCalling: CharacterFilter): MegalosPower => ({
+const sorcery = (
+  name: MegalosPowerName,
+  requiredCalling: CharacterFilter
+): MegalosPower => ({
   name,
   mandatory: false,
   type: MegalosPowerType.SORCERY,
-  prerequisites: [
-    requiredCalling
-  ],
+  prerequisites: [requiredCalling],
   costs: {
-    sorceries: 1
-  }
+    sorceries: 1,
+  },
 })
 
 export const powers: MegalosPower[] = [
   // Invoker
-  classTalent("Binding of Five", isInvoker),
-  classTalent("Blood Seals", isInvoker),
-  classTalent("Choir of Benediction", isChanter),
-  classTalent("Closed Circuit", isInvoker),
-  classTalent("Cosmic Bond", isInvoker),
-  classTalent("Flesh of Legends", isRaconteur),
-  classTalent("In the Arms of Angels", isInvoker),
-  classTalent("Keymaster", isAstromancer),
-  classTalent("Medicus", isChanter),
-  classTalent("Occult Priest", isInvoker),
-  classTalent("Protective Eidolons", isAstromancer),
-  classTalent("Seals of Life", isInvoker),
-  classTalent("Shattered Seals", isInvoker),
-  classTalent("Starry Divinations", isAstromancer),
-  classTalent("Sermons & Stories", isRaconteur),
-  classTalent("Temple Knight", isChanter),
-  classTalent("Unraveling Rapids", isInvoker),
-  classTalent("Warrior Priest", isInvoker),
+  classTalent('Binding of Five', isInvoker),
+  classTalent('Blood Seals', isInvoker),
+  classTalent('Choir of Benediction', isChanter),
+  classTalent('Closed Circuit', isInvoker),
+  classTalent('Cosmic Bond', isInvoker),
+  classTalent('Flesh of Legends', isRaconteur),
+  classTalent('In the Arms of Angels', isInvoker),
+  classTalent('Keymaster', isAstromancer),
+  classTalent('Medicus', isChanter),
+  classTalent('Occult Priest', isInvoker),
+  classTalent('Protective Eidolons', isAstromancer),
+  classTalent('Seals of Life', isInvoker),
+  classTalent('Shattered Seals', isInvoker),
+  classTalent('Starry Divinations', isAstromancer),
+  classTalent('Sermons & Stories', isRaconteur),
+  classTalent('Temple Knight', isChanter),
+  classTalent('Unraveling Rapids', isInvoker),
+  classTalent('Warrior Priest', isInvoker),
 
   // Astromancer
-  bonusPower("Cosmic Siphon", isAstromancer),
-  invocation("Gygus, Sign of Earth", isAstromancer),
-  arcanum("Crushing Gaol of Stone", hasPower("Gygus, Sign of Earth")),
-  invocation("Hajmaul, Sign of Lightning", isAstromancer),
-  arcanum("Tyranny of the Storm", hasPower("Hajmaul, Sign of Lightning")),
-  invocation("Quecklain, Sign of Water", isAstromancer),
-  arcanum("Aqua Regia", hasPower("Quecklain, Sign of Water")),
-  invocation("Safira, Sign of Ice", isAstromancer),
-  arcanum("Diamond Dust", hasPower("Safira, Sign of Ice")),
-  invocation("Veliath, Sign of Wind", isAstromancer),
-  arcanum("Shearing Gyre", hasPower("Veliath, Sign of Wind")),
-  invocation("Zalraam, Sign of Fire", isAstromancer),
-  arcanum("Aetheric Volatility", hasPower("Zalraam, Sign of Fire")),
+  bonusPower('Cosmic Siphon', isAstromancer),
+  invocation('Gygus, Sign of Earth', isAstromancer),
+  arcanum('Crushing Gaol of Stone', hasPower('Gygus, Sign of Earth')),
+  invocation('Hajmaul, Sign of Lightning', isAstromancer),
+  arcanum('Tyranny of the Storm', hasPower('Hajmaul, Sign of Lightning')),
+  invocation('Quecklain, Sign of Water', isAstromancer),
+  arcanum('Aqua Regia', hasPower('Quecklain, Sign of Water')),
+  invocation('Safira, Sign of Ice', isAstromancer),
+  arcanum('Diamond Dust', hasPower('Safira, Sign of Ice')),
+  invocation('Veliath, Sign of Wind', isAstromancer),
+  arcanum('Shearing Gyre', hasPower('Veliath, Sign of Wind')),
+  invocation('Zalraam, Sign of Fire', isAstromancer),
+  arcanum('Aetheric Volatility', hasPower('Zalraam, Sign of Fire')),
 
   // Chanter
-  bonusPower("Chant of Eld", isChanter),
-  invocation("Blade Herald", isChanter),
-  arcanum("A Rain of Blades", hasPower("Blade Herald")),
-  invocation("Lawgiver", isChanter),
-  arcanum("Divine Rebuke", hasPower("Lawgiver")),
-  invocation("Reaper of Souls", isChanter),
-  arcanum("Mortal Swath", hasPower("Reaper of Souls")),
-  invocation("Riverspeaker", isChanter),
-  arcanum("Mortal Reprieve", hasPower("Riverspeaker")),
-  invocation("Stormspeaker", isChanter),
-  arcanum("Stormweaver", hasPower("Stormspeaker")),
-  invocation("Word-Bearer", isChanter),
-  arcanum("The Golden Word", hasPower("Word-Bearer")),
+  bonusPower('Chant of Eld', isChanter),
+  invocation('Blade Herald', isChanter),
+  arcanum('A Rain of Blades', hasPower('Blade Herald')),
+  invocation('Lawgiver', isChanter),
+  arcanum('Divine Rebuke', hasPower('Lawgiver')),
+  invocation('Reaper of Souls', isChanter),
+  arcanum('Mortal Swath', hasPower('Reaper of Souls')),
+  invocation('Riverspeaker', isChanter),
+  arcanum('Mortal Reprieve', hasPower('Riverspeaker')),
+  invocation('Stormspeaker', isChanter),
+  arcanum('Stormweaver', hasPower('Stormspeaker')),
+  invocation('Word-Bearer', isChanter),
+  arcanum('The Golden Word', hasPower('Word-Bearer')),
 
   // Raconteur
-  bonusPower("Undertow", isRaconteur),
-  invocation("The Faerie King", isRaconteur),
-  arcanum("The Faerie King", hasPower("The Faerie's Kiss")),
-  invocation("The Judge", isRaconteur),
-  arcanum("The Judge's Verdic", hasPower("The Judge")),
-  invocation("The Outsider", isRaconteur),
-  arcanum("The Outsider's Claim", hasPower("The Outsider")),
-  invocation("The Parent", isRaconteur),
-  arcanum("The Parent's Sacrifice", hasPower("The Parent")),
-  invocation("The Spider", isRaconteur),
-  arcanum("The Spider's Trick", hasPower("The Spider")),
-  invocation("The Warrior", isRaconteur),
-  arcanum(" The Warrior's Ríastrad", hasPower("The Warrior")),
+  bonusPower('Undertow', isRaconteur),
+  invocation('The Faerie King', isRaconteur),
+  arcanum('The Faerie King', hasPower("The Faerie's Kiss")),
+  invocation('The Judge', isRaconteur),
+  arcanum("The Judge's Verdic", hasPower('The Judge')),
+  invocation('The Outsider', isRaconteur),
+  arcanum("The Outsider's Claim", hasPower('The Outsider')),
+  invocation('The Parent', isRaconteur),
+  arcanum("The Parent's Sacrifice", hasPower('The Parent')),
+  invocation('The Spider', isRaconteur),
+  arcanum("The Spider's Trick", hasPower('The Spider')),
+  invocation('The Warrior', isRaconteur),
+  arcanum(" The Warrior's Ríastrad", hasPower('The Warrior')),
 
   // Throne
-  classTalent("Artillerist", isThrone),
-  classTalent("Aura of Might", isThrone),
-  classTalent("Crisis Cœr", isThrone),
+  classTalent('Artillerist', isThrone),
+  classTalent('Aura of Might', isThrone),
+  classTalent('Crisis Cœr', isThrone),
   {
-    ...classTalent("Darkest Knight", isShadowblade),
+    ...classTalent('Darkest Knight', isShadowblade),
     effect: (character) => ({
       ...character,
       calling: {
@@ -1316,178 +1351,194 @@ export const powers: MegalosPower[] = [
         benefits: {
           ...character.calling.benefits,
           baseHp: 32,
-          baseDamage: 4
-        }
-      }
-    })
+          baseDamage: 4,
+        },
+      },
+    }),
   },
-  classTalent("Envenomed Blades", isShadowblade),
-  classTalent("Flesh of Spirit, Spirit of Flesh", isThrone),
-  classTalent("Greased Lightning", isThrone),
-  classTalent("Heart of Darkness", isShadowblade),
-  classTalent("Heart of Iron", isChampion),
-  classTalent("Heart of Light", isArklight),
-  classTalent("Inferno Division", isChampion),
-  classTalent("Liftoff", isThrone),
-  classTalent("Multiattack", isThrone),
-  classTalent("One-Two Punch", isChampion),
-  classTalent("Resurgence", isThrone),
-  classTalent("Snap Kick", isThrone),
-  classTalent("Sneak Attack", isShadowblade),
-  classTalent("Solid Cœr", isThrone),
-  classTalent("Sword & Board", either(isArklight, hasPower("Darkest Knight"))),
-  classTalent("Wings of the Savior", isArklight),
+  classTalent('Envenomed Blades', isShadowblade),
+  classTalent('Flesh of Spirit, Spirit of Flesh', isThrone),
+  classTalent('Greased Lightning', isThrone),
+  classTalent('Heart of Darkness', isShadowblade),
+  classTalent('Heart of Iron', isChampion),
+  classTalent('Heart of Light', isArklight),
+  classTalent('Inferno Division', isChampion),
+  classTalent('Liftoff', isThrone),
+  classTalent('Multiattack', isThrone),
+  classTalent('One-Two Punch', isChampion),
+  classTalent('Resurgence', isThrone),
+  classTalent('Snap Kick', isThrone),
+  classTalent('Sneak Attack', isShadowblade),
+  classTalent('Solid Cœr', isThrone),
+  classTalent('Sword & Board', either(isArklight, hasPower('Darkest Knight'))),
+  classTalent('Wings of the Savior', isArklight),
 
   // Arklight
-  bonusPower("Aegis of Light", isArklight),
-  finisher("Warrior of Light", isArklight),
-  counter("Arken Glow", isArklight),
-  counter("Falcon Dive", isArklight),
+  bonusPower('Aegis of Light', isArklight),
+  finisher('Warrior of Light', isArklight),
+  counter('Arken Glow', isArklight),
+  counter('Falcon Dive', isArklight),
   counter("Lord's Paces", isArklight),
-  counter("Under Wing", isArklight),
-  counter("Wings of Conviction", isArklight),
-  counter("Wings of Divinity", isArklight),
-  counter("Wings of Wrath", isArklight),
-  comboStrike("Battle Brand", isArklight),
-  comboStrike("Endless Waltz", isArklight),
-  comboStrike("Royal Arms", isArklight),
+  counter('Under Wing', isArklight),
+  counter('Wings of Conviction', isArklight),
+  counter('Wings of Divinity', isArklight),
+  counter('Wings of Wrath', isArklight),
+  comboStrike('Battle Brand', isArklight),
+  comboStrike('Endless Waltz', isArklight),
+  comboStrike('Royal Arms', isArklight),
   comboStrike("Thundergod's Steel", isArklight),
   chargedStrike("Armiger's Wrath", isArklight),
   chargedStrike("Confessor's Strike", isArklight),
-  chargedStrike("Desolating Verdict", isArklight),
+  chargedStrike('Desolating Verdict', isArklight),
   chargedStrike("Hospitaler's Cry", isArklight),
-  chargedStrike("Northswain Slash", isArklight),
+  chargedStrike('Northswain Slash', isArklight),
 
   // Champion
-  bonusPower("Wild Charge", isChampion),
-  finisher("Aetherdrive Breaker!", isChampion),
-  counter("Absolute Denial", isChampion),
-  counter("Carnage", isChampion),
-  counter("Devil Deflection", isChampion),
-  counter("Imperial Cancel", isChampion),
-  counter("Suckerpunch", isChampion),
-  counter("Takedown", isChampion),
-  counter("Turnabout", isChampion),
-  comboStrike("Aerial Charge", isChampion),
-  comboStrike("Meteor Drop", isChampion),
-  comboStrike("Outrager", isChampion),
-  comboStrike("Tides of Iron", isChampion),
-  chargedStrike("Astral Drive", isChampion),
-  chargedStrike("Overwhelm", isChampion),
-  chargedStrike("Perfect Slash", isChampion),
-  chargedStrike("Powerbomb", isChampion),
-  chargedStrike("Umbral Cinders", isChampion),
+  bonusPower('Wild Charge', isChampion),
+  finisher('Aetherdrive Breaker!', isChampion),
+  counter('Absolute Denial', isChampion),
+  counter('Carnage', isChampion),
+  counter('Devil Deflection', isChampion),
+  counter('Imperial Cancel', isChampion),
+  counter('Suckerpunch', isChampion),
+  counter('Takedown', isChampion),
+  counter('Turnabout', isChampion),
+  comboStrike('Aerial Charge', isChampion),
+  comboStrike('Meteor Drop', isChampion),
+  comboStrike('Outrager', isChampion),
+  comboStrike('Tides of Iron', isChampion),
+  chargedStrike('Astral Drive', isChampion),
+  chargedStrike('Overwhelm', isChampion),
+  chargedStrike('Perfect Slash', isChampion),
+  chargedStrike('Powerbomb', isChampion),
+  chargedStrike('Umbral Cinders', isChampion),
 
   // Shadowblade
-  bonusPower("Soul Eater", (character) => isShadowblade(character) && !hasPower("Darkest Knight")(character)),
-  bonusPower("Gathering Shadows", hasPower("Darkest Knight")),
-  finisher("Darkside Release", isShadowblade),
-  counter("Blade Twisting", isShadowblade),
-  counter("Bloody Mess", isShadowblade),
+  bonusPower(
+    'Soul Eater',
+    (character) =>
+      isShadowblade(character) && !hasPower('Darkest Knight')(character)
+  ),
+  bonusPower('Gathering Shadows', hasPower('Darkest Knight')),
+  finisher('Darkside Release', isShadowblade),
+  counter('Blade Twisting', isShadowblade),
+  counter('Bloody Mess', isShadowblade),
   counter("Drakul's Grasp", isShadowblade),
-  counter("Embrace of Night", isShadowblade),
-  counter("Shadow Nemesis", isShadowblade),
-  counter("Wraithwalker", isShadowblade),
-  comboStrike("Abyssal Venom", isShadowblade),
-  comboStrike("Carving Strike", isShadowblade),
-  comboStrike("Chaos Swarm", isShadowblade),
-  comboStrike("Cloak & Dagger", isShadowblade),
-  chargedStrike("Abyssal Crush", isShadowblade),
-  chargedStrike("Blackfire Blast", isShadowblade),
-  chargedStrike("Flickering Guillotine", isShadowblade),
-  chargedStrike("Steel Exorcism", isShadowblade),
+  counter('Embrace of Night', isShadowblade),
+  counter('Shadow Nemesis', isShadowblade),
+  counter('Wraithwalker', isShadowblade),
+  comboStrike('Abyssal Venom', isShadowblade),
+  comboStrike('Carving Strike', isShadowblade),
+  comboStrike('Chaos Swarm', isShadowblade),
+  comboStrike('Cloak & Dagger', isShadowblade),
+  chargedStrike('Abyssal Crush', isShadowblade),
+  chargedStrike('Blackfire Blast', isShadowblade),
+  chargedStrike('Flickering Guillotine', isShadowblade),
+  chargedStrike('Steel Exorcism', isShadowblade),
   chargedStrike("Vassago's Scythe", isShadowblade),
 
   // Witch
-  classTalent("Armor of Runes", isRuneMagus),
-  classTalent("Balanced Humors", isDraloi),
-  classTalent("Cauldron Bubble", isWitch),
-  classTalent("Collage Macabre", isPsythe),
-  classTalent("Ego Shield", isPsythe),
-  classTalent("Howling Pact", isWitch),
-  classTalent("Familiar", isWitch),
-  classTalent("Flight Incantation", isWitch),
+  classTalent('Armor of Runes', isRuneMagus),
+  classTalent('Balanced Humors', isDraloi),
+  classTalent('Cauldron Bubble', isWitch),
+  classTalent('Collage Macabre', isPsythe),
+  classTalent('Ego Shield', isPsythe),
+  classTalent('Howling Pact', isWitch),
+  classTalent('Familiar', isWitch),
+  classTalent('Flight Incantation', isWitch),
   classTalent("L'appel du Vide", isPsythe),
-  classTalent("Lesser Glyphspells", isRuneMagus),
-  classTalent("Ominous Signifiers", isRuneMagus),
-  classTalent("Paroxysm", isDraloi),
-  classTalent("Psychic Network", isPsythe),
-  classTalent("Sang Réal", isDraloi),
-  classTalent("Some for the Doctor", isDraloi),
-  classTalent("Telekine Technique", isWitch),
+  classTalent('Lesser Glyphspells', isRuneMagus),
+  classTalent('Ominous Signifiers', isRuneMagus),
+  classTalent('Paroxysm', isDraloi),
+  classTalent('Psychic Network', isPsythe),
+  classTalent('Sang Réal', isDraloi),
+  classTalent('Some for the Doctor', isDraloi),
+  classTalent('Telekine Technique', isWitch),
   classTalent("Witch's Cackle", isWitch),
-  classTalent("Xenoglossy", isRuneMagus),
+  classTalent('Xenoglossy', isRuneMagus),
 
   // Draloi
-  bonusPower("Redistribute", isDraloi),
-  cantrip("Bloody Physick", isDraloi),
-  cantrip("Drain Aether", isDraloi),
-  cantrip("Drain Blood", isDraloi),
-  cantrip("Drain Soul", isDraloi),
-  cantrip("Red Flash", isDraloi),
-  cantrip("Sanguine Pavise", isDraloi),
-  sorcery("Blood Alchemy", isDraloi),
-  sorcery("Boiling Bile", isDraloi),
-  sorcery("Chirurgy", isDraloi),
-  sorcery("Conveyance", isDraloi),
-  sorcery("Haemonculus", isDraloi),
-  sorcery("Insanguinate", isDraloi),
-  sorcery("Liquefaction", isDraloi),
-  sorcery("Revivify", isDraloi),
+  bonusPower('Redistribute', isDraloi),
+  cantrip('Bloody Physick', isDraloi),
+  cantrip('Drain Aether', isDraloi),
+  cantrip('Drain Blood', isDraloi),
+  cantrip('Drain Soul', isDraloi),
+  cantrip('Red Flash', isDraloi),
+  cantrip('Sanguine Pavise', isDraloi),
+  sorcery('Blood Alchemy', isDraloi),
+  sorcery('Boiling Bile', isDraloi),
+  sorcery('Chirurgy', isDraloi),
+  sorcery('Conveyance', isDraloi),
+  sorcery('Haemonculus', isDraloi),
+  sorcery('Insanguinate', isDraloi),
+  sorcery('Liquefaction', isDraloi),
+  sorcery('Revivify', isDraloi),
 
   // Psythe
-  bonusPower("The Pledge", isPsythe),
-  cantrip("Bio-Shock", isPsythe),
-  cantrip("Fog of War", isPsythe),
-  cantrip("Haunt", isPsythe),
-  cantrip("Mind Blades", isPsythe),
-  cantrip("Phantasmagoria", isPsythe),
-  cantrip("The Turn", isPsythe),
-  sorcery("Blade Dance", isPsythe),
-  sorcery("Kinetic Throw", isPsythe),
-  sorcery("Marching Orders", isPsythe),
-  sorcery("Marionette", isPsythe),
-  sorcery("Mirage Arcana", isPsythe),
-  sorcery("The Prestige", isPsythe),
-  sorcery("Psychic Surgery", isPsythe),
-  sorcery("Psything Mind", isPsythe),
+  bonusPower('The Pledge', isPsythe),
+  cantrip('Bio-Shock', isPsythe),
+  cantrip('Fog of War', isPsythe),
+  cantrip('Haunt', isPsythe),
+  cantrip('Mind Blades', isPsythe),
+  cantrip('Phantasmagoria', isPsythe),
+  cantrip('The Turn', isPsythe),
+  sorcery('Blade Dance', isPsythe),
+  sorcery('Kinetic Throw', isPsythe),
+  sorcery('Marching Orders', isPsythe),
+  sorcery('Marionette', isPsythe),
+  sorcery('Mirage Arcana', isPsythe),
+  sorcery('The Prestige', isPsythe),
+  sorcery('Psychic Surgery', isPsythe),
+  sorcery('Psything Mind', isPsythe),
 
   // Rune Magis
-  bonusPower("Xenosyntax", isRuneMagus),
-  cantrip("Anex Malecar (Lesser Truth: Curse of Gravity)", isRuneMagus),
-  cantrip("En Vai Bruma (Lesser Mneme: Harsh Winter)", isRuneMagus),
-  cantrip("En Vai Mani (Lesser Mneme: Compassion)", isRuneMagus),
-  cantrip("Sigil of the Baleful Eye", isRuneMagus),
-  cantrip("Sigil of Combustion", isRuneMagus),
-  cantrip("Sigil of Entanglement", isRuneMagus),
-  sorcery("Asanex Gravos (Greater Truth: Burden of Time)", isRuneMagus),
-  sorcery("En Vas Pyroth (Greater Mneme: Wildfire)", isRuneMagus),
-  sorcery("Logos: Concentrativity", isRuneMagus),
-  sorcery("Logos: Eruption", isRuneMagus),
-  sorcery("Logos: Gravitation", isRuneMagus),
-  sorcery("Logos: Geoglyphic Convergence", isRuneMagus),
-  sorcery("Paracausal Darkness", isRuneMagus),
-  sorcery("Paracausal Light", isRuneMagus),
+  bonusPower('Xenosyntax', isRuneMagus),
+  cantrip('Anex Malecar (Lesser Truth: Curse of Gravity)', isRuneMagus),
+  cantrip('En Vai Bruma (Lesser Mneme: Harsh Winter)', isRuneMagus),
+  cantrip('En Vai Mani (Lesser Mneme: Compassion)', isRuneMagus),
+  cantrip('Sigil of the Baleful Eye', isRuneMagus),
+  cantrip('Sigil of Combustion', isRuneMagus),
+  cantrip('Sigil of Entanglement', isRuneMagus),
+  sorcery('Asanex Gravos (Greater Truth: Burden of Time)', isRuneMagus),
+  sorcery('En Vas Pyroth (Greater Mneme: Wildfire)', isRuneMagus),
+  sorcery('Logos: Concentrativity', isRuneMagus),
+  sorcery('Logos: Eruption', isRuneMagus),
+  sorcery('Logos: Gravitation', isRuneMagus),
+  sorcery('Logos: Geoglyphic Convergence', isRuneMagus),
+  sorcery('Paracausal Darkness', isRuneMagus),
+  sorcery('Paracausal Light', isRuneMagus),
 ]
 
-const allMandatoryPowers = filter(power => prop("mandatory", power), powers)
+const allMandatoryPowers = filter((power) => prop('mandatory', power), powers)
 
 /**
  * For a given character, find all starting powers and return those.
  * Currently this is all calling bonus powers for which they qualify.
- * @param character 
+ * @param character
  */
-export function recalculatePowers(character: MegalosCharacter, newPowers: MegalosPower[]): MegalosPower[] {
+export function recalculatePowers(
+  character: MegalosCharacter,
+  newPowers: MegalosPower[]
+): MegalosPower[] {
   const newCharacter = assoc('powers', newPowers, character)
 
   // Add any mandatory powers the character ought to have
-  const addedMandatoryPowers = concat(newPowers, filter(meetsPrerequisites(newCharacter), allMandatoryPowers))
+  const addedMandatoryPowers = concat(
+    newPowers,
+    filter(meetsPrerequisites(newCharacter), allMandatoryPowers)
+  )
 
   // Remove any newly disqualifying powers
-  const qualifyingPowers = filter(meetsPrerequisites(newCharacter), addedMandatoryPowers)
+  const qualifyingPowers = filter(
+    meetsPrerequisites(newCharacter),
+    addedMandatoryPowers
+  )
 
   // Sort powers by their appearance in the master powers list
-  return uniqBy(prop("name"), sortBy(power => indexOf(power, powers), qualifyingPowers))
+  return uniqBy(
+    prop('name'),
+    sortBy((power) => indexOf(power, powers), qualifyingPowers)
+  )
 }
 
 export function newCharacter(): MegalosCharacter {
@@ -1507,5 +1558,9 @@ export function newCharacter(): MegalosCharacter {
       special: '',
     },
   }
-  return assoc("powers", recalculatePowers(character, character.powers), character)
+  return assoc(
+    'powers',
+    recalculatePowers(character, character.powers),
+    character
+  )
 }

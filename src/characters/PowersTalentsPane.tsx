@@ -2,7 +2,7 @@ import { map } from 'ramda'
 import React from 'react'
 
 import { MegalosCharacter, MegalosPower } from './data'
-import classes from "./PowersTalentsPane.module.css"
+import classes from './PowersTalentsPane.module.css'
 
 interface PowersTalentsPaneProps {
   character: MegalosCharacter
@@ -16,8 +16,15 @@ interface PowerDisplayProps {
 export function PowerDisplay(props: PowerDisplayProps) {
   const { power, children } = props
   return (
-    <div className={`block columns is-vcentered ${classes.powerDisplay}`} key={power.name}>
-      <div className={`column is-narrow ${classes.powerType} ${classes[`powerType${power.type}`]}`}>
+    <div
+      className={`block columns is-vcentered ${classes.powerDisplay}`}
+      key={power.name}
+    >
+      <div
+        className={`column is-narrow ${classes.powerType} ${
+          classes[`powerType${power.type}`]
+        }`}
+      >
         <span className="tag is-primary">{power.type}</span>
       </div>
       <div className="column">{power.name}</div>
@@ -38,10 +45,7 @@ function PowersTalentsPane(props: PowersTalentsPaneProps) {
         <div className="message-body">
           {map(
             (power) => (
-              <PowerDisplay
-                key={power.name}
-                power={power}
-              />
+              <PowerDisplay key={power.name} power={power} />
             ),
             character.powers
           )}
