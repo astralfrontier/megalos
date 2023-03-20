@@ -103,7 +103,7 @@ const modValues = [
   },
 ]
 
-function WeaponBuilder() {
+function WeaponPage() {
   const { presets, setPresets } = useContext(DiceContext)
 
   const [size, setSize] = useState<number>(0)
@@ -293,4 +293,4 @@ function WeaponBuilder() {
   )
 }
 
-export default WeaponBuilder
+export default WeaponPage

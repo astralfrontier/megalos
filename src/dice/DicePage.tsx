@@ -5,7 +5,7 @@ import DiceSettingsShelf from './DiceSettingsShelf'
 import DiceShelf from './DiceShelf'
 import PresetShelf from './PresetShelf'
 
-interface DiceRollerProps {
+interface DicePageProps {
   children?: React.ReactNode
 }
 
@@ -19,7 +19,7 @@ function avrae(
   return `!r ${diceCount}d20k>${difficulty - 1} ${resistance} hits needed`
 }
 
-function DiceRoller(_props: DiceRollerProps) {
+function DicePage(_props: DicePageProps) {
   const { diceCount, rolls, setRolls, difficulty, resistance } =
     useContext(DiceContext)
 
@@ -96,4 +96,4 @@ function DiceRoller(_props: DiceRollerProps) {
   )
 }
 
-export default DiceRoller
+export default DicePage

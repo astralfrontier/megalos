@@ -35,7 +35,7 @@ const activeSteps = [
   },
 ]
 
-function CharacterBuilder() {
+function CharacterPage() {
   const [activeStep, setActiveStep] = useState<number>(0)
 
   return (
@@ -60,4 +60,4 @@ function CharacterBuilder() {
   )
 }
 
-export default CharacterBuilder
+export default CharacterPage

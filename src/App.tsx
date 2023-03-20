@@ -1,14 +1,14 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import CharacterPage from './characters/CharacterPage'
 import DefaultLayout from './DefaultLayout'
-import DiceRoller from './dice/DiceRoller'
+import DicePage from './dice/DicePage'
 import GameStateProvider from './GameStateProvider'
-import OutfitBuilder from './OutfitBuilder'
-import WeaponBuilder from './WeaponBuilder'
+import OutfitPage from './OutfitPage'
+import WeaponPage from './WeaponPage'
 
 import './App.sass'
-import CharacterBuilder from './characters/CharacterBuilder'
 
 export const DICE_PATH = '/'
 export const CHARACTER_PATH = '/character'
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     path: DICE_PATH,
     element: (
       <DefaultLayout>
-        <DiceRoller />
+        <DicePage />
       </DefaultLayout>
     ),
   },
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     path: CHARACTER_PATH,
     element: (
       <DefaultLayout>
-        <CharacterBuilder />
+        <CharacterPage />
       </DefaultLayout>
     ),
   },
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     path: OUTFITS_PATH,
     element: (
       <DefaultLayout>
-        <OutfitBuilder />
+        <OutfitPage />
       </DefaultLayout>
     ),
   },
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     path: WEAPONS_PATH,
     element: (
       <DefaultLayout>
-        <WeaponBuilder />
+        <WeaponPage />
       </DefaultLayout>
     ),
   },
