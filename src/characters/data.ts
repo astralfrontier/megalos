@@ -166,7 +166,7 @@ export interface MegalosPower {
   type: MegalosPowerType
   prerequisites: CharacterFilter[]
   costs: MegalosClassBenefits
-  // TODO: description
+  description?: Description
   effect?: CharacterMutator
 }
 
@@ -1293,24 +1293,152 @@ const sorcery = (
 
 export const powers: MegalosPower[] = [
   // Invoker
-  classTalent('Binding of Five', isInvoker),
-  classTalent('Blood Seals', isInvoker),
-  classTalent('Choir of Benediction', isChanter),
-  classTalent('Closed Circuit', isInvoker),
-  classTalent('Cosmic Bond', isInvoker),
-  classTalent('Flesh of Legends', isRaconteur),
-  classTalent('In the Arms of Angels', isInvoker),
-  classTalent('Keymaster', isAstromancer),
-  classTalent('Medicus', isChanter),
-  classTalent('Occult Priest', isInvoker),
-  classTalent('Protective Eidolons', isAstromancer),
-  classTalent('Seals of Life', isInvoker),
-  classTalent('Shattered Seals', isInvoker),
-  classTalent('Starry Divinations', isAstromancer),
-  classTalent('Sermons & Stories', isRaconteur),
-  classTalent('Temple Knight', isChanter),
-  classTalent('Unraveling Rapids', isInvoker),
-  classTalent('Warrior Priest', isInvoker),
+  {
+    ...classTalent('Binding of Five', isInvoker),
+    description: [
+      `My maximum Aether Current dice increases to 5, but my maximum HP is
+    reduced by -5 as well.`,
+    ],
+  },
+  {
+    ...classTalent('Blood Seals', isInvoker),
+    description: [
+      `The first time I'm _injured_ in each combat encounter while hosting an
+    Invocation, I immediately regain up to 2 spent AC dice and roll them to
+    generate seals.`,
+    ],
+  },
+  {
+    ...classTalent('Choir of Benediction', isChanter),
+    description: [
+      `When I use my **_Chant of Eld_ Minor Action** while hosting a Speaker, the
+    Speaker echoes the chant. Increase Barrier gained by +1 and the range to
+    1. At levels 3 & again at 9 the Heal effect is also improved by +1.`,
+    ],
+  },
+  {
+    ...classTalent('Closed Circuit', isInvoker),
+    description: [
+      `When I use an Arcanum power I can choose to Sacrifice 5 HP in order to
+    reduce its seal cost to 1. At level 3 the HP Sacrifice required is reduced to 3.`,
+    ],
+  },
+  {
+    ...classTalent('Cosmic Bond', isInvoker),
+    description: [
+      `When I spend my last Seal, I roll a d6. If its result is the same type of
+    number as the last seal spent (even numbers for Astral Seals, odd
+    numbers for Umbral Seals), I am refunded the spent seal. This can only
+    happen once per Invocation hosted.`,
+    ],
+  },
+  {
+    ...classTalent('Flesh of Legends', isRaconteur),
+    description: [`Whenever I host a new Invocation, I gain SHIELDED.`],
+  },
+  {
+    ...classTalent('In the Arms of Angels', isInvoker),
+    description: [
+      `I can fly at will. Any movement I take can be flight instead of its normal
+    movement type.`,
+    ],
+  },
+  {
+    ...classTalent('Keymaster', isAstromancer),
+    description: [
+      `Whenever I use an Invocation power, I can teleport 1 either before or after
+    resolving the power.`,
+    ],
+  },
+  {
+    ...classTalent('Medicus', isChanter),
+    description: [
+      `Whenever I heal an ally with an action costing Recovery, myself & all other
+    allies not healed by the power Heal 2. This amount increases by +1 at level
+    3 and again at level 9.`,
+    ],
+  },
+  {
+    ...classTalent('Occult Priest', isInvoker),
+    description: [
+      `I am an ordained & recognized priest of a religion. This counts as a **trait** for
+    all rolls related to fulfilling my role as an intermediary between the higher
+    emanations and the physical world, and for dispensing religious
+    teachings and performing rituals.`,
+    ],
+  },
+  {
+    ...classTalent('Protective Eidolons', isAstromancer),
+    description: [
+      `While I'm hosting an Invocation, I gain +1 to both Dodge & Ward, and +1 on
+    Soak rolls.`,
+    ],
+  },
+  {
+    ...classTalent('Seals of Life', isInvoker),
+    description: [
+      `I heal 3 once per turn when I spend one or more Seals. At level 3 I also
+    gain Barrier 1.`,
+    ],
+  },
+  {
+    ...classTalent('Shattered Seals', isInvoker),
+    description: [
+      `I can shatter a seal as a free action on my turn, granting me additional
+    esoteric power immediately, but straining my connection to the cosmic
+    aether. A shattered seal acts as either an Astral or Umbral Seal (I choose
+    which), but once spent, my maximum number of AC dice is reduced by -1
+    until the end of the encounter. I can only shatter one seal per round. This
+    is considered a blasphemous act by many religions' clergies, and those
+    schooled in magicks are likely to be appalled by the sensation of the
+    rancid aether seeping from a shattered seal.`,
+    ],
+  },
+  {
+    ...classTalent('Starry Divinations', isAstromancer),
+    description: [
+      `Once per session, I can declare that I've received a vision or divination
+    from the almagest about a particular place or person. The GM will tell me
+    3 secrets about the subject, at least one of which should be to my
+    immediate benefit`,
+    ],
+  },
+  {
+    ...classTalent('Sermons & Stories', isRaconteur),
+    description: [
+      `When we take a long rest, I can spin tales from threads of spirit magick to
+    invigorate the soul. My allies and I can choose to either regain an
+    additional +5 HP from the rest, regain an extra point of Recovery, or
+    remove the stressed status from one bond.`,
+    ],
+  },
+  {
+    ...classTalent('Temple Knight', isChanter),
+    description: [
+      `When wielding a melee weapon, I gain +4 Armor HP and may grant
+    Barrier 1 to any ally in my zone once per round when I inflict damage with
+    a melee Basic Attack action. At level 3, the Armor HP bonus increases to
+    +6. At level 9 the Barrier increases to Barrier 2.`,
+    ],
+  },
+  {
+    ...classTalent('Unraveling Rapids', isInvoker),
+    description: [
+      `My damaging Invocation powers inflict +3 damage against undead,
+    daemons, summoned creatures, and anything else that's from a different
+    emanation or plane of existence.`,
+    ],
+  },
+  {
+    ...classTalent('Warrior Priest', isInvoker),
+    description: [
+      `I do not suffer the first instance of the stacking damage penalty for using
+    multiple actions with the Attack tag in the same round, but the penalty
+    still accrues. For instance, if I use two attacks, neither suffers the penalty,
+    and if I use three attacks, the third only suffers a -2 penalty. This doesn't
+    stack with similar effects which allow me to ignore this penalty.`,
+    ],
+  },
 
   // Astromancer
   bonusPower('Cosmic Siphon', isAstromancer),
@@ -1358,11 +1486,30 @@ export const powers: MegalosPower[] = [
   arcanum(" The Warrior's Ríastrad", hasPower('The Warrior')),
 
   // Throne
-  classTalent('Artillerist', isThrone),
-  classTalent('Aura of Might', isThrone),
-  classTalent('Crisis Cœr', isThrone),
+  {
+    ...classTalent('Artillerist', isThrone),
+    description: [
+      `When wielding a ranged weapon I gain +3 on one die in my die pool
+    whenever I roll attacks. I choose the die to gain the bonus after rolling.`,
+    ],
+  },
+  {
+    ...classTalent('Aura of Might', isThrone),
+    description: [`Allies in Aura 0 gain +1 CD for every 2 unspent AC dice.`],
+  },
+  {
+    ...classTalent('Crisis Cœr', isThrone),
+    description: [`When I have 0 AC dice I gain Advantage with attack rolls.`],
+  },
   {
     ...classTalent('Darkest Knight', isShadowblade),
+    description: [
+      `My role changes to **Tank**: my Base HP becomes 32, my base
+      damage is reduced to 4, and my soak changes to 2d6. My calling bonus
+      ability changes to **_Gathering Shadows_**. Whenever I would inflict the
+      AFRAID condition, I can choose to inflict TAUNTED instead. If I retrain out
+      of this talent later, I need to remember to undo these changes.`,
+    ],
     effect: (character) => ({
       ...character,
       calling: {
@@ -1376,22 +1523,130 @@ export const powers: MegalosPower[] = [
       },
     }),
   },
-  classTalent('Envenomed Blades', isShadowblade),
-  classTalent('Flesh of Spirit, Spirit of Flesh', isThrone),
-  classTalent('Greased Lightning', isThrone),
-  classTalent('Heart of Darkness', isShadowblade),
-  classTalent('Heart of Iron', isChampion),
-  classTalent('Heart of Light', isArklight),
-  classTalent('Inferno Division', isChampion),
-  classTalent('Liftoff', isThrone),
-  classTalent('Multiattack', isThrone),
-  classTalent('One-Two Punch', isChampion),
-  classTalent('Resurgence', isThrone),
-  classTalent('Snap Kick', isThrone),
-  classTalent('Sneak Attack', isShadowblade),
-  classTalent('Solid Cœr', isThrone),
-  classTalent('Sword & Board', either(isArklight, hasPower('Darkest Knight'))),
-  classTalent('Wings of the Savior', isArklight),
+  {
+    ...classTalent('Envenomed Blades', isShadowblade),
+    description: [
+      `Targets damaged by my Finisher suffer SICK. At level 3 the status' severity
+    increases to SICK (15).`,
+    ],
+  },
+  {
+    ...classTalent('Executioner', isThrone),
+    description: [
+      `When wielding melee weapons, I trigger Surges on attack rolls of 19 or 20,
+      and my Surges spent on bonus damage add +5 damage instead of +3.`,
+    ],
+  },
+  {
+    ...classTalent('Flesh of Spirit, Spirit of Flesh', isThrone),
+    description: [
+      `My maximum Aether Current dice increases to 5, but my maximum HP is
+      reduced by -5 as well.`,
+    ],
+  },
+  {
+    ...classTalent('Greased Lightning', isThrone),
+    description: [
+      `1/ round: I can use a Counter without spending a Reaction Opportunity by
+    instead spending an AC die. At level 9, I can do this up to twice per round.`,
+    ],
+  },
+  {
+    ...classTalent('Heart of Darkness', isShadowblade),
+    description: [
+      `At the end of my turns, if I inflicted damage on at least 1 foe that turn, I
+    heal 2. At levels 3 & 9 this talent improves to Heal 3 & 4, respectively.`,
+    ],
+  },
+  {
+    ...classTalent('Heart of Iron', isChampion),
+    description: [
+      `After resolving damage from any source, as long as I am not reduced to 0
+    HP by the damage, I Heal 1. At level 3 this talent improves to Heal 2.`,
+    ],
+  },
+  {
+    ...classTalent('Heart of Light', isArklight),
+    description: [
+      `At the start of each of my turns, one ally per unspent AC die in range 1
+    heals 2. At levels 3 & 9 the healing effect improves by +1.`,
+    ],
+  },
+  {
+    ...classTalent('Inferno Division', isChampion),
+    description: [
+      `Targets damaged by my Finisher are WOUNDED. At level 3 the status'
+    severity increases to WOUNDED (15).`,
+    ],
+  },
+  {
+    ...classTalent('Liftoff', isThrone),
+    description: [
+      `I can fly at will. Any movement I take can be flight instead of its normal
+    movement type.`,
+    ],
+  },
+  {
+    ...classTalent('Multiattack', isThrone),
+    description: [
+      `I do not suffer the first instance of the stacking damage penalty for using
+    multiple actions with the Attack tag in the same round, but the penalty
+    still accrues. For instance, if I use two attacks, neither suffers the penalty,
+    and if I use three attacks, the third only suffers a -2 penalty. This doesn't
+    stack with similar effects which allow me to ignore this penalty.`,
+    ],
+  },
+  {
+    ...classTalent('One-Two Punch', isChampion),
+    description: [
+      `I gain Advantage on the attack roll with the 2nd Strike of Combo actions.`,
+    ],
+  },
+  {
+    ...classTalent('Resurgence', isThrone),
+    description: [
+      `When I am first _Injured_ in an encounter I regain up to 2 spent AC dice.`,
+    ],
+  },
+  {
+    ...classTalent('Snap Kick', isThrone),
+    description: [
+      `My **Auto-Attack Free Action** occurs at the end of my turn instead of the
+    end of the round.`,
+    ],
+  },
+  {
+    ...classTalent('Sneak Attack', isShadowblade),
+    description: [
+      `I gain +2 CD against foes engaged with at least one of my allies. I do not
+    gain this benefit against enemies I've TAUNTED. This bonus to CD
+    increases by +1 at levels 3 & 9.`,
+    ],
+  },
+  {
+    ...classTalent('Solid Cœr', isThrone),
+    description: [
+      `I gain +1 Dodge & +1 on Soak rolls as long as I have more than 0 AC dice.`,
+    ],
+  },
+  {
+    ...classTalent(
+      'Sword & Board',
+      either(isArklight, hasPower('Darkest Knight'))
+    ),
+    description: [
+      `My Base Damage counts as 6 for purposes of Auto-Attacks & Punishment
+    Reactions.`,
+    ],
+  },
+  {
+    ...classTalent('Wings of the Savior', isArklight),
+    description: [
+      `When an Injured ally in Aura 0 suffers damage, I can choose to suffer that
+  damage for them instead. I apply my soak to this damage (or don't if it's
+  Piercing) as normal. At level 3, this Aura increases to 2.`,
+    ],
+  },
 
   // Arklight
   bonusPower('Aegis of Light', isArklight),
@@ -1458,24 +1713,154 @@ export const powers: MegalosPower[] = [
   chargedStrike("Vassago's Scythe", isShadowblade),
 
   // Witch
-  classTalent('Armor of Runes', isRuneMagus),
-  classTalent('Balanced Humors', isDraloi),
-  classTalent('Cauldron Bubble', isWitch),
-  classTalent('Collage Macabre', isPsythe),
-  classTalent('Ego Shield', isPsythe),
-  classTalent('Howling Pact', isWitch),
-  classTalent('Familiar', isWitch),
-  classTalent('Flight Incantation', isWitch),
-  classTalent("L'appel du Vide", isPsythe),
-  classTalent('Lesser Glyphspells', isRuneMagus),
-  classTalent('Ominous Signifiers', isRuneMagus),
-  classTalent('Paroxysm', isDraloi),
-  classTalent('Psychic Network', isPsythe),
-  classTalent('Sang Réal', isDraloi),
-  classTalent('Some for the Doctor', isDraloi),
-  classTalent('Telekine Technique', isWitch),
-  classTalent("Witch's Cackle", isWitch),
-  classTalent('Xenoglossy', isRuneMagus),
+  {
+    ...classTalent('Armor of Runes', isRuneMagus),
+    description: [
+      `When I use a Sorcery, I gain +1 to Defense per Weak Aether Charge and +2
+    per Surging Aether Charge expended, to a maximum of +4. This bonus
+    lasts until the end of my next turn.`,
+    ],
+  },
+  {
+    ...classTalent('Balanced Humors', isDraloi),
+    description: [
+      `When I use a Sacrifice power, I gain +3 on save rolls until the end of my
+    next turn. Bonus increases to +5 at level 3`,
+    ],
+  },
+  {
+    ...classTalent('Cauldron Bubble', isWitch),
+    description: [
+      `Elixirs & Phoenix Ashes I use have +2 Heal & +1 Raise, respectively. At the
+    end of any combat encounter during which I spent IP, I regain 1 spent IP.
+    At level 9, the bonuses to Heal & Raise increase to +4 & +2.`,
+    ],
+  },
+  {
+    ...classTalent('Collage Macabre', isPsythe),
+    description: [
+      `Foes that are AFRAID of me suffer +1 damage from all of my abilities.
+    Bonus increases to +2 & +3 at levels 3 & 9, respectively.`,
+    ],
+  },
+  {
+    ...classTalent('Ego Shield', isPsythe),
+    description: [
+      `While I have any active phantasms, I gain +1 to Soak rolls. Bonus increases
+    to +2 at level 3.`,
+    ],
+  },
+  {
+    ...classTalent('Howling Pact', isWitch),
+    description: [
+      `My maximum Aether Current dice increases to 5, but my maximum HP is
+    reduced by -5 as well.`,
+    ],
+  },
+  {
+    ...classTalent('Familiar', isWitch),
+    description: [
+      `I have created a being from my own Aether and other materials which
+    serves as my familiar. It can be no larger than an average adult person or
+    large wolf. It is sentient, has its own personality separate from me, and
+    can speak. If I have it helping me, I can add +1 to one die of my choice on
+    all d20-based rolls. It cannot function further than 300 feet from me
+    (about 90 meters); it will discorporate into aether and teleport back to my
+    side if it ever gets too far away. It cannot act on its own in a way that
+    would prompt a skill test or attack roll, it can only aid me.`,
+    ],
+  },
+  {
+    ...classTalent('Flight Incantation', isWitch),
+    description: [
+      `I can fly at will. Any movement I take can be flight instead of its normal
+    movement type.`,
+    ],
+  },
+  {
+    ...classTalent("L'appel du Vide", isPsythe),
+    description: [
+      `Once per round when I inflict AFRAID, 1 affected foe also suffers EXPOSED.`,
+    ],
+  },
+  {
+    ...classTalent('Lesser Glyphspells', isRuneMagus),
+    description: [
+      `I know a variety of lesser glyphs that can be woven together to easily
+    perform some minor magicks. This includes things like:
+
+    - Briefly doubling my voice's decibel level.
+    - Igniting or snuffing out nearby candles & campfires.
+    - Strengthening or revitalizing ailing plants & crops.
+    - Blessing water so that mundane impurities are removed & it is safer to drink.
+    - Mending minor breaks, tears, and stains in clothing and small objects.
+    - Opening or closing unlocked doors and containers from a zone away.
+    - Blessing a sick person to feel a bit better immediately and recover 50% faster.`,
+    ],
+  },
+  {
+    ...classTalent('Ominous Signifiers', isRuneMagus),
+    description: [
+      `Using **_Xenosyntax_** grants me a second temporary Weak Aether Charge
+    for one of my known cantrips. This Aether Charge must be expended
+    before the end of my current turn, or it is lost.`,
+    ],
+  },
+  {
+    ...classTalent('Paroxysm', isDraloi),
+    description: [
+      `When my Drain cantrips inflict damage, up to 2 other foes in the target's
+    zone suffer 2 piercing damage. At level 3 this increases to 3 piercing
+    damage.`,
+    ],
+  },
+  {
+    ...classTalent('Psychic Network', isPsythe),
+    description: [
+      `I can add up to 6 other sentient creatures to a psychic network hosted by
+    my own mind. We can communicate silently with one another at the
+    speed of thought over a distance of up to 1 mile. Each participant can
+    choose to “mute” any or all others, speak only to certain specific other
+    participants, leave the network at will, and generally set their level of
+    participation in the network as they wish. Distance increases to 10 miles at
+    level 3 and 100 miles at level 9.`,
+    ],
+  },
+  {
+    ...classTalent('Sang Réal', isDraloi),
+    description: [
+      `The first time I'm Injured in a combat encounter, I regain 1 spent AC die.
+    At level 3 this increases to up to 2 spent AC dice. AC dice gained by this
+    talent are rolled for Aether Charges with Advantage.`,
+    ],
+  },
+  {
+    ...classTalent('Some for the Doctor', isDraloi),
+    description: [
+      `When I heal an ally using a power or action that requires me to spend
+    Recovery, I also heal 3 HP. This Healing increases by +1 at levels 3 & 9.`,
+    ],
+  },
+  {
+    ...classTalent('Telekine Technique', isWitch),
+    description: [`Any melee weapon I wield gains +1 range.`],
+  },
+  {
+    ...classTalent("Witch's Cackle", isWitch),
+    description: [
+      `When I'm missed by an attack, I cackle involuntarily & gain a +1 bonus to
+    my Defense until the next time I'm hit. This effect can stack up to +3.`,
+    ],
+  },
+  {
+    ...classTalent('Xenoglossy', isRuneMagus),
+    description: [
+      `If I spend a point of Grit, I can force my mind to temporarily expand,
+    allowing me to understand all written & spoken languages for a scene. If
+    the game isn't using the optional Language rules, this talent is
+    unavailable.`,
+    ],
+  },
 
   // Draloi
   bonusPower('Redistribute', isDraloi),
