@@ -1,11 +1,29 @@
-import { add, append, assoc, filter, find, has, includes, map, propEq, reduce, reject, without } from 'ramda'
+import {
+  add,
+  append,
+  assoc,
+  filter,
+  find,
+  has,
+  includes,
+  map,
+  propEq,
+  reduce,
+  reject,
+  without,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
 import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
 import { describe } from '../visuals'
-import { meetsPrerequisites, MegalosClassBenefits, MegalosPower, powers, recalculatePowers } from './data'
-import classes from './PowersTalentsChooser.module.css'
+import {
+  meetsPrerequisites,
+  MegalosClassBenefits,
+  MegalosPower,
+  powers,
+  recalculatePowers,
+} from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 
 interface BenefitsTabProps {
@@ -175,14 +193,14 @@ function PowersTalentsChooser() {
               />
             </ul>
           </div>
-          <div className={classes.powersTalentsCheckboxes}>
+          <div>
             {map((power) => {
               const isSelected = includes(power, character.powers)
               const isSelectable = isSelected || hasBudget(power)
               return (
                 <>
-                  <div className="p-3">
-                    <div className={classes.powersTalentsCheckbox}>
+                  <div className="block card">
+                    <div className="card-content">
                       <label className="checkbox" aria-disabled={!isSelectable}>
                         <input
                           id={`power-checkbox-${slugify(
@@ -194,11 +212,15 @@ function PowersTalentsChooser() {
                           checked={isSelected}
                           onChange={powerSetter}
                         />{' '}
-                        <strong>{power.type}</strong>: {power.name}
+                        <strong>
+                          {power.type}: {power.name}
+                        </strong>
                       </label>
+                      <div className={isSelectable ? '' : 'has-text-grey'}>
+                        {describe(power.description)}
+                      </div>
                     </div>
                   </div>
-                  <div className="mx-5">{describe(power.description)}</div>
                 </>
               )
             }, displayedPowers)}
