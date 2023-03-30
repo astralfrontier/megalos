@@ -1,51 +1,40 @@
-import {
-  add,
-  append,
-  assoc,
-  filter,
-  find,
-  includes,
-  map,
-  propEq,
-  reduce,
-  reject,
-  without,
-} from 'ramda'
-import React, { useContext } from 'react'
+import { add, append, assoc, filter, find, has, includes, map, propEq, reduce, reject, without } from 'ramda'
+import React, { useContext, useState } from 'react'
 import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
-import {
-  meetsPrerequisites,
-  MegalosClassBenefits,
-  MegalosPower,
-  powers,
-  recalculatePowers,
-} from './data'
+import { describe } from '../visuals'
+import { meetsPrerequisites, MegalosClassBenefits, MegalosPower, powers, recalculatePowers } from './data'
 import classes from './PowersTalentsChooser.module.css'
 import PowersTalentsPane from './PowersTalentsPane'
 
-interface BenefitUsedProps {
+interface BenefitsTabProps {
   label: string
   value: number | undefined
   maximum: number | undefined
+  selectedTab: string
+  setSelectedTab: React.Dispatch<React.SetStateAction<string>>
 }
 
-function BenefitUsed(props: BenefitUsedProps) {
+function BenefitsTab(props: BenefitsTabProps) {
   if (!props.maximum) {
     return <></>
   } else {
     const value = props.value || 0
     return (
       <>
-        <div className="column has-text-centered">
-          <p>
+        <li
+          className={
+            props.selectedTab == props.label.toLowerCase() ? 'is-active' : ''
+          }
+        >
+          <a onClick={() => props.setSelectedTab(props.label.toLowerCase())}>
             <strong className={value > props.maximum ? 'has-text-danger' : ''}>
               {props.label}
             </strong>
             : {value}/{props.maximum}
-          </p>
-        </div>
+          </a>
+        </li>
       </>
     )
   }
@@ -69,6 +58,7 @@ function addPowerCost(
 
 function PowersTalentsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
+  const [selectedTab, setSelectedTab] = useState<string>('talents')
 
   const benefitsUsed = reduce(
     addPowerCost,
@@ -88,6 +78,11 @@ function PowersTalentsChooser() {
   const eligiblePowers = reject(
     (power: MegalosPower) => power.mandatory,
     filter(meetsPrerequisites(character), powers)
+  )
+
+  const displayedPowers = filter(
+    (power: MegalosPower) => has(selectedTab, power.costs),
+    eligiblePowers
   )
 
   const powerSetter: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -127,42 +122,58 @@ function PowersTalentsChooser() {
     <>
       <div className="columns">
         <div className="column">
-          <div className="columns">
-            <BenefitUsed
-              label="Invocations"
-              value={benefitsUsed.invocations}
-              maximum={character.class.benefits.invocations}
-            />
-            <BenefitUsed
-              label="Arcana"
-              value={benefitsUsed.arcana}
-              maximum={character.class.benefits.arcana}
-            />
-            <BenefitUsed
-              label="Strikes"
-              value={benefitsUsed.strikes}
-              maximum={character.class.benefits.strikes}
-            />
-            <BenefitUsed
-              label="Counters"
-              value={benefitsUsed.counters}
-              maximum={character.class.benefits.counters}
-            />
-            <BenefitUsed
-              label="Sorceries"
-              value={benefitsUsed.sorceries}
-              maximum={character.class.benefits.sorceries}
-            />
-            <BenefitUsed
-              label="Cantrips"
-              value={benefitsUsed.cantrips}
-              maximum={character.class.benefits.cantrips}
-            />
-            <BenefitUsed
-              label="Talents"
-              value={benefitsUsed.talents}
-              maximum={character.class.benefits.talents}
-            />
+          <div className="tabs">
+            <ul>
+              <BenefitsTab
+                label="Talents"
+                value={benefitsUsed.talents}
+                maximum={character.class.benefits.talents}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Invocations"
+                value={benefitsUsed.invocations}
+                maximum={character.class.benefits.invocations}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Arcana"
+                value={benefitsUsed.arcana}
+                maximum={character.class.benefits.arcana}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Strikes"
+                value={benefitsUsed.strikes}
+                maximum={character.class.benefits.strikes}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Counters"
+                value={benefitsUsed.counters}
+                maximum={character.class.benefits.counters}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Sorceries"
+                value={benefitsUsed.sorceries}
+                maximum={character.class.benefits.sorceries}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <BenefitsTab
+                label="Cantrips"
+                value={benefitsUsed.cantrips}
+                maximum={character.class.benefits.cantrips}
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+            </ul>
           </div>
           <div className={classes.powersTalentsCheckboxes}>
             {map((power) => {
@@ -187,9 +198,10 @@ function PowersTalentsChooser() {
                       </label>
                     </div>
                   </div>
+                  <div className="mx-5">{describe(power.description)}</div>
                 </>
               )
-            }, eligiblePowers)}
+            }, displayedPowers)}
           </div>
         </div>
         <div className="column">
