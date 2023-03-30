@@ -1,29 +1,10 @@
-import {
-  add,
-  append,
-  assoc,
-  filter,
-  find,
-  has,
-  includes,
-  map,
-  propEq,
-  reduce,
-  reject,
-  without,
-} from 'ramda'
+import { add, append, assoc, filter, find, has, includes, map, propEq, reduce, reject, without } from 'ramda'
 import React, { useContext, useState } from 'react'
 import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
 import { describe } from '../visuals'
-import {
-  meetsPrerequisites,
-  MegalosClassBenefits,
-  MegalosPower,
-  powers,
-  recalculatePowers,
-} from './data'
+import { meetsPrerequisites, MegalosClassBenefits, MegalosPower, powers, recalculatePowers } from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 
 interface BenefitsTabProps {
@@ -224,6 +205,8 @@ function PowersTalentsChooser() {
                 </>
               )
             }, displayedPowers)}
+            {displayedPowers.length == 0 ? 
+            <p>Don't see any powers? Make sure you meet the prerequisites. For example, you can't select Arcana until you've selected an Invocation.</p> : <></>}
           </div>
         </div>
         <div className="column">
