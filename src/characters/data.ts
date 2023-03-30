@@ -1,22 +1,4 @@
-import {
-  allPass,
-  assoc,
-  assocPath,
-  concat,
-  difference,
-  either,
-  filter,
-  includes,
-  indexOf,
-  map,
-  pathEq,
-  pluck,
-  prop,
-  propEq,
-  reject,
-  sortBy,
-  uniqBy,
-} from 'ramda'
+import { allPass, assoc, assocPath, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -567,9 +549,9 @@ export const callings: Record<MegalosClassName, MegalosCalling[]> = {
       spirit-warriors. They protect the histories and stories of their people, collect knowledge
       of the past, and serve as a link between the dead and the living. They tap into
       the immortal memory of the dead in the River of Souls, the Cosmo-Memory, to
-      dredge up and give life to legends and myths from across time. Their Memory pow-
-      ers allow them to embody legends by channeling those forces- essentially summon-
-      ing a being into themselves where other Invokers summon beings into the world.`,
+      dredge up and give life to legends and myths from across time. Their Memory
+      powers allow them to embody legends by channeling those forces- essentially
+      summoning a being into themselves where other Invokers summon beings into the world.`,
         `Raconteurs' magick is often called mythomancy or story magick.`,
       ],
       role: MegalosRole.TANK,
@@ -1441,19 +1423,175 @@ export const powers: MegalosPower[] = [
   },
 
   // Astromancer
-  bonusPower('Cosmic Siphon', isAstromancer),
-  invocation('Gygus, Sign of Earth', isAstromancer),
-  arcanum('Crushing Gaol of Stone', hasPower('Gygus, Sign of Earth')),
-  invocation('Hajmaul, Sign of Lightning', isAstromancer),
-  arcanum('Tyranny of the Storm', hasPower('Hajmaul, Sign of Lightning')),
-  invocation('Quecklain, Sign of Water', isAstromancer),
-  arcanum('Aqua Regia', hasPower('Quecklain, Sign of Water')),
-  invocation('Safira, Sign of Ice', isAstromancer),
-  arcanum('Diamond Dust', hasPower('Safira, Sign of Ice')),
-  invocation('Veliath, Sign of Wind', isAstromancer),
-  arcanum('Shearing Gyre', hasPower('Veliath, Sign of Wind')),
-  invocation('Zalraam, Sign of Fire', isAstromancer),
-  arcanum('Aetheric Volatility', hasPower('Zalraam, Sign of Fire')),
+  {
+    ...bonusPower('Cosmic Siphon', isAstromancer),
+    description: [
+      `The Astromancer creates a surging darkness, an echo of the utterblack between the
+stars. This gnawing void tears at the aether of their foes to bolster their own.
+
+_Damage a foe, regain a spent Aether Current die if hosting an Invocation_
+`,
+    ],
+  },
+  {
+    ...invocation('Gygus, Sign of Earth', isAstromancer),
+    description: [
+      `**Astral Power - Rockslide**
+
+Gygus' mighty fist crashes down and a wave of earth rises before it like a tidal wave.
+
+_Up to three foes take damage and are pushed, improved damage for difficult or lethal terrain_
+
+**Umbral Power - Bow Down, Skychild**
+
+Gygus summons a rippling distortion of gravity to crush your foes with the weight of the earth itself.
+
+_Creates difficult terrain that can do damage to foes_
+`,
+    ],
+  },
+  {
+    ...arcanum('Crushing Gaol of Stone', hasPower('Gygus, Sign of Earth')),
+    description: [
+      `Earthen slabs form to entomb your foe and crush the life out of them.
+
+_Target is immobilized and stunned._
+`,
+    ],
+  },
+  {
+    ...invocation('Hajmaul, Sign of Lightning', isAstromancer),
+    description: [
+      `**Astral Power - Brilliant Scourge**
+
+Hajmaul dramatically lunges forth, and a cascade of burning coruscation follows.
+
+_One foe takes astral damage and is wounded._
+
+**Umbral Power - Levinflash**
+
+_Multiple foes take damage._
+      `,
+    ],
+  },
+  {
+    ...arcanum('Tyranny of the Storm', hasPower('Hajmaul, Sign of Lightning')),
+    description: [
+      `Bolts of catastrophic fury blast the battlefield, leaving your foes scarred and burned.
+
+_All foes take heavy damage and are wounded._
+    `,
+    ],
+  },
+  {
+    ...invocation('Quecklain, Sign of Water', isAstromancer),
+    description: [
+      `**Astral Power - Fall Before Me**
+
+Quecklain reaches out with bone and tentacle, and impure waters crash down.
+
+_Several foes take toxic damage, more if they are sick or wounded._
+
+**Umbral Power - Crown of Pestilence**
+
+A sickly, pale light shimmers from Quecklain's decayed royal regalia. Disease & woe
+betide your foes, as a withering rot sets into the very battlefield itself.
+
+_Foes entering a designated area take damage and become sick._
+`,
+    ],
+  },
+  {
+    ...arcanum('Aqua Regia', hasPower('Quecklain, Sign of Water')),
+    description: [
+      `Quecklain conjures forth an annihilating whorl of hungering alchemical bile.
+
+_A target takes damage and becomes sick and wounded._
+`,
+    ],
+  },
+  {
+    ...invocation('Safira, Sign of Ice', isAstromancer),
+    description: [
+      `**Astral Power - Cold Snap**
+
+Safira creates a polar vortex of freezing ice aether, searing your foes with frostbite.
+
+_Multiple targets take damage and are slowed, slowed targets are immobilized._
+
+**Umbral Power - Winter's Scythe**
+
+Safira conjures a curving talon of ice and carves an icy blue cross into your foe.
+
+_A target takes damage, more if slowed or immobilized._
+`,
+    ],
+  },
+  {
+    ...arcanum('Diamond Dust', hasPower('Safira, Sign of Ice')),
+    description: [
+      `Safira skates around the battlefield briefly, leaving behind a trail of spreading frost
+    that explodes into entombing ice with a leisurely snap of their fingers.
+
+_Several foes take damage and are immobilized, immobilized foes take more damage and are exposed._
+`,
+    ],
+  },
+  {
+    ...invocation('Veliath, Sign of Wind', isAstromancer),
+    description: [
+      `**Astral Power - Wake Turbulence**
+
+Like a pair of bladed wings, Veliath flies you across the battlefield with a destructive wake of blasting air.
+
+_Fly to a zone, inflict damage on foes as you pass._
+
+**Umbral Power - Typhoon Blades**
+
+Veliath becomes a bouquet of gleaming swords that follows your arms and movements as you dance and sweep through your enemies.
+
+_Allocate damage to foes in range._
+`,
+    ],
+  },
+  {
+    ...arcanum('Shearing Gyre', hasPower('Veliath, Sign of Wind')),
+    description: [
+      `Veliath contorts the air to create a whirling gyre of shredding winds that sucks your
+      foes into its tumultuous center like a deadly vortex.
+
+_Create a zone that damages and sucks in enemies._
+`,
+    ],
+  },
+  {
+    ...invocation('Zalraam, Sign of Fire', isAstromancer),
+    description: [
+      `**Astral Power - Slag Beam**
+
+Zalraam fires a ray of fire so fine, so bright it scars the eyes to look directly upon it. It
+shears through the finest steel and melts lesser metals to a pulpy mass of slag.
+
+_Target takes damage, do more damage against exposed targets._
+
+**Umbral Power - Fulminate!**
+
+Zalraam cackles madly, a sound like a guttering blast furnace, as a surge of explosive
+aether appears and bursts, knocking your foes to the ground.
+
+_Inflict damage and dazed on multiple targets._
+`,
+    ],
+  },
+  {
+    ...arcanum('Aetheric Volatility', hasPower('Zalraam, Sign of Fire')),
+    description: [
+      `Zalraam creates a disturbance within the corporeal and incorporeal aether of your
+      foes' bodies & souls, turning them into walking time bombs.
+
+_Damage several targets, who become explosive._
+`],
+  },
 
   // Chanter
   bonusPower('Chant of Eld', isChanter),
