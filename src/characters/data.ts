@@ -398,6 +398,30 @@ export const homelands: Homeland[] = [
     ],
     startingSkills: ['Attune', 'Create', 'Hunt', 'Inspect', 'Survive'],
   },
+  {
+    name: 'Unique Homeland',
+    description: [
+      `Create your own homeland, or pick one from the Oradam Rift setting.`,
+    ],
+    startingSkills: [
+      'Attune',
+      'Bargain',
+      'Create',
+      'Drive',
+      'Finesse',
+      'Force',
+      'Hunt',
+      'Inspect',
+      'Learn',
+      'Move',
+      'Perform',
+      'Restore',
+      'Sneak',
+      'Survive',
+      'Talk',
+      'Watch',
+    ],
+  },
 ]
 
 export const classes: MegalosClass[] = [
