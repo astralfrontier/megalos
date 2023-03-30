@@ -738,20 +738,16 @@ export const skills: MegalosSkill[] = [
     name: 'Create',
     type: MegalosSkillType.ACTIVE,
     description: [
-      `Make and alter deals, convince others
-      to behave in a way they'd rather not in
-      exchange for something that you do or
-      give them. In order to bargain effectively,
-      you must have something to offer to or withhold from the other party.
-      How much leverage you have (or they
-      believe you have) directly affects the
-      overall effectiveness of a successful
-      Bargain test.`,
+      `Engineering solutions to problems,
+      crafting new objects from raw materi-
+      als, and making all manner of artistic or
+      useful objects. Used as the skill for
+      coalescence crafting`,
     ],
     uses: [
-      "Get a more favorable price on items you're buying or selling.",
-      'Get people to bend the rules for you in exchange for doing (or not doing) something for them.',
-      'Renegotiate a deal for better terms once the balance of power has shifted between the relevant parties.',
+      "To evaluate the relative skill of an object's crafters.",
+      'To theorize or design a practical item of some sort.',
+      'Coalescence (Rest Activity): To create or repair a piece of equipment or art.',
     ],
   },
   {
