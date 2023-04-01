@@ -427,7 +427,7 @@ export const classes: MegalosClass[] = [
     ],
     benefits: {
       invocations: 2,
-      arcana: 2,
+      arcana: 1,
       talents: 2,
     },
   },
