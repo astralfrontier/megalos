@@ -1,22 +1,4 @@
-import {
-  allPass,
-  assoc,
-  assocPath,
-  concat,
-  difference,
-  either,
-  filter,
-  includes,
-  indexOf,
-  map,
-  pathEq,
-  pluck,
-  prop,
-  propEq,
-  reject,
-  sortBy,
-  uniqBy,
-} from 'ramda'
+import { allPass, assoc, assocPath, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -445,7 +427,7 @@ export const classes: MegalosClass[] = [
     ],
     benefits: {
       invocations: 2,
-      arcana: 2,
+      arcana: 1,
       talents: 2,
     },
   },
