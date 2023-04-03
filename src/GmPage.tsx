@@ -1,4 +1,18 @@
-import { always, append, assoc, assocPath, dropLast, filter, flatten, join, map, remove, repeat, uniq } from 'ramda'
+import {
+  always,
+  append,
+  assoc,
+  assocPath,
+  dropLast,
+  filter,
+  flatten,
+  isEmpty,
+  join,
+  map,
+  remove,
+  repeat,
+  uniq,
+} from 'ramda'
 import React, { useEffect, useState } from 'react'
 
 import GenericInput from './GenericInput'
@@ -17,7 +31,7 @@ interface Combatant {
   fast: boolean
   ap: number
   acted: boolean
-  conditions: string[]
+  notes: string
 }
 
 interface InitiativePartitionProps {
@@ -102,7 +116,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
             <span
               onClick={() => {
                 const newName = prompt('New combatant name', combatant.name)
-                if (newName) {
+                if (!isEmpty(newName)) {
                   updateCombatant(idx, cidx, 'name', newName)
                 }
               }}
@@ -130,6 +144,18 @@ function InitiativePartition(props: InitiativePartitionProps) {
                 updateCombatant(idx, cidx, 'acted', event.currentTarget.checked)
               }
             />
+          </td>
+          <td>
+            <span
+              onClick={() => {
+                const newNotes = prompt('New notes', combatant.notes)
+                if (newNotes != null) {
+                  updateCombatant(idx, cidx, 'notes', newNotes)
+                }
+              }}
+            >
+              {combatant.notes || '(no notes)'}
+            </span>
           </td>
         </tr>
       ))}
@@ -179,7 +205,7 @@ function GmPage() {
       fast: false,
       acted: true,
       ap: 0,
-      conditions: [],
+      notes: '',
     }
     const newPartition = append(newCombatant, initiativeOrder[partition])
     setInitiativeOrder(assocPath([partition], newPartition, initiativeOrder))
@@ -240,6 +266,7 @@ function GmPage() {
                   <th>Type</th>
                   <th>AP</th>
                   <th>Acted</th>
+                  <th>Notes</th>
                 </tr>
               </thead>
               <tbody>
@@ -294,10 +321,16 @@ function GmPage() {
                 </button>
               </div>
             </div>
-            <div className='content'>
-              <p>Click on the <button className='delete'></button> button next to a name to delete a combatant.</p>
-              <p>Click on a combatant's name to change it.</p>
-              <p>Click the checkbox in the AP column to act <strong>fast</strong>, uncheck to act <strong>slow</strong></p>
+            <div className="content">
+              <p>
+                Click on the <button className="delete"></button> button next to
+                a name to delete a combatant.
+              </p>
+              <p>Click on a combatant's name or notes to change them.</p>
+              <p>
+                Click the checkbox in the AP column to act <strong>fast</strong>
+                , uncheck to act <strong>slow</strong>
+              </p>
               <p>Click the checkbox in Acted once a combatant has acted</p>
             </div>
           </div>
