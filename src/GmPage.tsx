@@ -288,9 +288,10 @@ function GmPage() {
               </div>
               <div className="column">
                 <button
-                  className="button is-primary"
+                  className={
+                    hasEveryoneActed ? 'button is-primary' : 'button is-danger'
+                  }
                   onClick={onClickInitializeRound}
-                  disabled={!hasEveryoneActed}
                 >
                   New Round
                 </button>
@@ -308,8 +309,7 @@ function GmPage() {
                   <strong>fast</strong>, uncheck to act <strong>slow</strong>.
                 </li>
                 <li>
-                  Click the checkbox in Acted once a combatant has acted. You
-                  must mark everyone as Acted before you can start a new round.
+                  Click the checkbox in Acted once a combatant has acted. The New Round button will be red until everyone has been marked.
                 </li>
               </ul>
             </div>
