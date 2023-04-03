@@ -12,7 +12,7 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.3.0",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "bulma": "^0.9.4",
     "ramda": "^0.29.0",
     "react": "^18.2.0",
