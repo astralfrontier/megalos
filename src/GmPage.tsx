@@ -1,26 +1,7 @@
-import {
-  all,
-  always,
-  append,
-  assoc,
-  assocPath,
-  dropLast,
-  filter,
-  flatten,
-  isEmpty,
-  join,
-  map,
-  prop,
-  remove,
-  repeat,
-} from 'ramda'
+import { all, always, append, assoc, assocPath, dropLast, filter, flatten, isEmpty, join, map, prop, remove, repeat } from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import {
-  Combatant,
-  CombatantType,
-  InitiativeContext,
-} from './GameStateProvider'
+import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
@@ -64,10 +45,10 @@ const startingAp = [
 ]
 
 const partitionLabels = [
-  'Fast Actions',
-  'Enemy Actions',
-  'Slow Actions',
-  'Elite/Boss Actions',
+  '🚀 Fast Actions',
+  '🗡️ Enemy Actions',
+  '🐢 Slow Actions',
+  '💀 Elite/Boss Actions',
 ]
 
 // Given an unsorted list of combatants, return the
@@ -103,6 +84,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
               onClick={() => deleteCombatant(idx, cidx)}
             ></button>
             <span
+              className="clickable"
               onClick={() => {
                 const newName = prompt('New combatant name', combatant.name)
                 if (!isEmpty(newName)) {
@@ -136,6 +118,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
           </td>
           <td>
             <span
+              className="clickable"
               onClick={() => {
                 const newNotes = prompt('New notes', combatant.notes)
                 if (newNotes != null) {
@@ -249,7 +232,7 @@ function GmPage() {
       </div>
       <div className="box block">
         <div className="columns">
-          <div className="column">
+          <div className="column is-two-thirds">
             <table className="table is-fullwidth">
               <thead>
                 <tr>
@@ -331,7 +314,7 @@ function GmPage() {
               </ul>
             </div>
           </div>
-          <div className="column">
+          <div className="column is-one-third">
             <div className="content">
               <ul>
                 <li>
@@ -344,6 +327,9 @@ function GmPage() {
                   statuses & conditions
                 </li>
                 <li>
+                  At most one <strong>Reaction</strong> per turn
+                </li>
+                <li>
                   <strong>At the end of each combatant's turn,</strong> attempt
                   one save roll vs. a Status effect
                 </li>
@@ -352,7 +338,7 @@ function GmPage() {
                   auto-attacks in MC - Boss - Elite - Minion order
                 </li>
               </ul>
-              <h3 className="title">Major Actions</h3>
+              <h3 className="title">Major Actions (◆◆)</h3>
               <ul>
                 <li>Flurry of Strikes (Attack)</li>
                 <li>Grappling Maneuver (Attack)</li>
@@ -360,7 +346,7 @@ function GmPage() {
                 <li>Sprint (Movement, Vulnerable)</li>
                 <li>Use a Major Power (Magickal)</li>
               </ul>
-              <h3 className="title">Minor Actions</h3>
+              <h3 className="title">Minor Actions (◆)</h3>
               <ul>
                 <li>Charging! (Magickal)</li>
                 <li>Dash (Movement)</li>
