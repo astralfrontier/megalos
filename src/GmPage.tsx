@@ -1,4 +1,5 @@
 import {
+  all,
   always,
   append,
   assoc,
@@ -9,9 +10,9 @@ import {
   isEmpty,
   join,
   map,
+  prop,
   remove,
   repeat,
-  uniq,
 } from 'ramda'
 import React, { useContext, useState } from 'react'
 
@@ -159,6 +160,9 @@ function GmPage() {
     CombatantType.MC
   )
 
+  // Require everyone to have acted before you can start a new round
+  const hasEveryoneActed = all(prop('acted'), flatten(initiativeOrder))
+
   function onClickInitializeRound(_event) {
     // Skip the bonus enemy round and see who our combatants are
     const combatants = flatten(dropLast(1, initiativeOrder))
@@ -182,17 +186,20 @@ function GmPage() {
   }
 
   function createCombatant() {
-    const partition = newCombatantType == CombatantType.MC ? 0 : 1
-    const newCombatant: Combatant = {
-      name: 'New Combatant',
-      type: newCombatantType,
-      fast: false,
-      acted: true,
-      ap: 0,
-      notes: '',
+    const name = prompt('New combatant name', 'New Combatant')
+    if (!isEmpty(name)) {
+      const partition = newCombatantType == CombatantType.MC ? 0 : 1
+      const newCombatant: Combatant = {
+        name: name || 'New Combatant',
+        type: newCombatantType,
+        fast: false,
+        acted: true,
+        ap: 0,
+        notes: '',
+      }
+      const newPartition = append(newCombatant, initiativeOrder[partition])
+      setInitiativeOrder(assocPath([partition], newPartition, initiativeOrder))
     }
-    const newPartition = append(newCombatant, initiativeOrder[partition])
-    setInitiativeOrder(assocPath([partition], newPartition, initiativeOrder))
   }
 
   return (
@@ -300,22 +307,28 @@ function GmPage() {
                 <button
                   className="button is-primary"
                   onClick={onClickInitializeRound}
+                  disabled={!hasEveryoneActed}
                 >
                   New Round
                 </button>
               </div>
             </div>
             <div className="content">
-              <p>
-                Click on the <button className="delete"></button> button next to
-                a name to delete a combatant.
-              </p>
-              <p>Click on a combatant's name or notes to change them.</p>
-              <p>
-                Click the checkbox in the AP column to act <strong>fast</strong>
-                , uncheck to act <strong>slow</strong>
-              </p>
-              <p>Click the checkbox in Acted once a combatant has acted</p>
+              <ul>
+                <li>
+                  Click on the <button className="delete"></button> button next
+                  to a name to delete a combatant.
+                </li>
+                <li>Click on a combatant's name or notes to change them.</li>
+                <li>
+                  Click the checkbox in the AP column to act{' '}
+                  <strong>fast</strong>, uncheck to act <strong>slow</strong>.
+                </li>
+                <li>
+                  Click the checkbox in Acted once a combatant has acted. You
+                  must mark everyone as Acted before you can start a new round.
+                </li>
+              </ul>
             </div>
           </div>
           <div className="column">
