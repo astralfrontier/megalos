@@ -5,6 +5,7 @@ import CharacterPage from './characters/CharacterPage'
 import DefaultLayout from './DefaultLayout'
 import DicePage from './dice/DicePage'
 import GameStateProvider from './GameStateProvider'
+import GmPage from './GmPage'
 import OutfitPage from './OutfitPage'
 import SoakPage from './SoakPage'
 import WeaponPage from './WeaponPage'
@@ -16,6 +17,7 @@ export const SOAK_PATH = '/soak'
 export const CHARACTER_PATH = '/character'
 export const OUTFITS_PATH = '/outfits'
 export const WEAPONS_PATH = '/weapons'
+export const GM_SHEET_PATH = '/gm'
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
     element: (
       <DefaultLayout>
         <WeaponPage />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: GM_SHEET_PATH,
+    element: (
+      <DefaultLayout>
+        <GmPage />
       </DefaultLayout>
     ),
   },
