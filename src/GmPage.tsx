@@ -13,26 +13,14 @@ import {
   repeat,
   uniq,
 } from 'ramda'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
+import {
+  Combatant,
+  CombatantType,
+  InitiativeContext,
+} from './GameStateProvider'
 import GenericInput from './GenericInput'
-
-enum CombatantType {
-  MC = 'MC',
-  ELITE = 'Elite',
-  BOSS = 'Boss',
-  MINION = 'Minion',
-}
-
-interface Combatant {
-  name: string
-  type: CombatantType
-  // Only used for MCs
-  fast: boolean
-  ap: number
-  acted: boolean
-  notes: string
-}
 
 interface InitiativePartitionProps {
   partition: Combatant[]
@@ -164,13 +152,9 @@ function InitiativePartition(props: InitiativePartitionProps) {
 }
 
 function GmPage() {
-  const [grit, setGrit] = useState<number>(0)
-  const [initiativeOrder, setInitiativeOrder] = useState<Combatant[][]>([
-    [],
-    [],
-    [],
-    [],
-  ])
+  const { grit, setGrit, initiativeOrder, setInitiativeOrder } =
+    useContext(InitiativeContext)
+
   const [newCombatantType, setNewCombatantType] = useState<CombatantType>(
     CombatantType.MC
   )

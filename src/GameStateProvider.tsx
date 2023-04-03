@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+
 import { MegalosCharacter, newCharacter } from './characters/data'
 
 export interface Preset {
@@ -6,6 +7,23 @@ export interface Preset {
   diceCount: number
   difficulty: number
   resistance: number
+}
+
+export enum CombatantType {
+  MC = 'MC',
+  ELITE = 'Elite',
+  BOSS = 'Boss',
+  MINION = 'Minion',
+}
+
+export interface Combatant {
+  name: string
+  type: CombatantType
+  // Only used for MCs
+  fast: boolean
+  ap: number
+  acted: boolean
+  notes: string
 }
 
 export interface DiceState {
@@ -48,6 +66,20 @@ export const CharacterContext = createContext<CharacterState>({
   setCharacter: () => {},
 })
 
+interface InitiativeState {
+  grit: number
+  setGrit: React.Dispatch<React.SetStateAction<number>>
+  initiativeOrder: Combatant[][]
+  setInitiativeOrder: React.Dispatch<React.SetStateAction<Combatant[][]>>
+}
+
+export const InitiativeContext = createContext<InitiativeState>({
+  grit: 0,
+  setGrit: () => {},
+  initiativeOrder: [[], [], [], []],
+  setInitiativeOrder: () => {},
+})
+
 function GameStateProvider(props: GameStateProviderProps) {
   const [diceCount, setDiceCount] = useState<number>(1)
   const [rolls, setRolls] = useState<number[]>([1])
@@ -55,6 +87,13 @@ function GameStateProvider(props: GameStateProviderProps) {
   const [resistance, setResistance] = useState<number>(1)
   const [presets, setPresets] = useState<Preset[]>([])
   const [character, setCharacter] = useState<MegalosCharacter>(newCharacter)
+  const [grit, setGrit] = useState<number>(0)
+  const [initiativeOrder, setInitiativeOrder] = useState<Combatant[][]>([
+    [],
+    [],
+    [],
+    [],
+  ])
 
   const diceContextProviderValue = {
     diceCount,
@@ -74,10 +113,19 @@ function GameStateProvider(props: GameStateProviderProps) {
     setCharacter,
   }
 
+  const initiativeContextProviderValue = {
+    grit,
+    setGrit,
+    initiativeOrder,
+    setInitiativeOrder,
+  }
+
   return (
     <DiceContext.Provider value={diceContextProviderValue}>
       <CharacterContext.Provider value={characterContextProviderValue}>
-        {props.children}
+        <InitiativeContext.Provider value={initiativeContextProviderValue}>
+          {props.children}
+        </InitiativeContext.Provider>
       </CharacterContext.Provider>
     </DiceContext.Provider>
   )
