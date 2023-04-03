@@ -1,4 +1,22 @@
-import { allPass, assoc, assocPath, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
+import {
+  allPass,
+  assoc,
+  assocPath,
+  concat,
+  difference,
+  either,
+  filter,
+  includes,
+  indexOf,
+  map,
+  pathEq,
+  pluck,
+  prop,
+  propEq,
+  reject,
+  sortBy,
+  uniqBy,
+} from 'ramda'
 
 import { Description } from '../visuals'
 
@@ -1590,23 +1608,108 @@ _Inflict damage and dazed on multiple targets._
       foes' bodies & souls, turning them into walking time bombs.
 
 _Damage several targets, who become explosive._
-`],
+`,
+    ],
   },
 
   // Chanter
-  bonusPower('Chant of Eld', isChanter),
-  invocation('Blade Herald', isChanter),
-  arcanum('A Rain of Blades', hasPower('Blade Herald')),
-  invocation('Lawgiver', isChanter),
-  arcanum('Divine Rebuke', hasPower('Lawgiver')),
-  invocation('Reaper of Souls', isChanter),
-  arcanum('Mortal Swath', hasPower('Reaper of Souls')),
-  invocation('Riverspeaker', isChanter),
-  arcanum('Mortal Reprieve', hasPower('Riverspeaker')),
-  invocation('Stormspeaker', isChanter),
-  arcanum('Stormweaver', hasPower('Stormspeaker')),
-  invocation('Word-Bearer', isChanter),
-  arcanum('The Golden Word', hasPower('Word-Bearer')),
+  {
+    ...bonusPower('Chant of Eld', isChanter),
+    description: [
+      `The Chanter intones a primal call that stirs slumbering forces deep within the earth
+and wind. Plants quicken and bloom, hearts race with purpose, resolve strengthens.
+
+_Targets heal and gain a barrier against damage._`,
+    ],
+  },
+  {
+    ...invocation('Blade Herald', isChanter),
+    description: [
+      `**Astral Power - Cleansing Slash**
+
+The Herald holds their blade aloft and lets divine power rain down with every blow.
+
+_One foe is damaged, one ally is protected and cleansed._
+
+**Umbral Power - Judgment Blade**
+
+The Herald mutters a dark oath and passes judgment upon your foes.
+
+_One foe is damaged, and if defeated, allies are healed._
+`,
+    ],
+  },
+  {
+    ...arcanum('A Rain of Blades', hasPower('Blade Herald')),
+    description: [
+      `Many portals to an emanation of swords appear, issuing a torrent of bladed death.
+
+_Several targets are damaged, and you and allies are healed._
+`,
+    ],
+  },
+  {
+    ...invocation('Lawgiver', isChanter),
+    description: [
+      `**Astral Power - Law's Forbearance**
+
+The Lawgiver holds their hand aloft while proclaiming syllables of warding.
+
+_Targets are shielded from harm._
+
+**Umbral Power - Empyrean Mandate**
+
+The Lawgiver marks an enemy for punishment & death.
+
+_A target takes damage and is marked; attacks against marked targets provide a barrier to allies._
+`,
+    ],
+  },
+  {
+    ...arcanum('Divine Rebuke', hasPower('Lawgiver')),
+    description: [
+      `A final judgment is proclaimed, and the ways of the world are forever changed.
+
+_Foes are damaged, allies are healed._
+`,
+    ],
+  },
+  {
+    ...invocation('Reaper of Souls', isChanter),
+    description: [
+      `**Astral Power - Scythe of Sorrow**
+
+The Reaper swings wide and a flash of deadly steel sweeps across your foes.
+
+_Several foes are damaged, and if they are _injured_, it does more damage and allies are healed._
+
+**Umbral Power - Omen of Loss**
+
+The Reaper ominously points at your foes, sending a twist of steaming shadows to
+fall upon them. Their minds are overcome by dread visions of their own demise.
+
+_A target takes damage and is exposed, while an ally is set up for success._
+`,
+    ],
+  },
+  {
+    ...arcanum('Mortal Swath', hasPower('Reaper of Souls')),
+    description: [
+      `Many bright, dancing scythes swirl about, cutting a bloody wake all around you.
+
+_Many foes take damage, allies are healed based on how many are injured or defeated by the attack._
+`,
+    ],
+  },
+  { ...invocation('Riverspeaker', isChanter), description: [``] },
+  {
+    ...arcanum('Mortal Reprieve', hasPower('Riverspeaker')),
+    description: [``],
+  },
+  { ...invocation('Stormspeaker', isChanter), description: [``] },
+  { ...arcanum('Stormweaver', hasPower('Stormspeaker')), description: [``] },
+  { ...invocation('Word-Bearer', isChanter), description: [``] },
+  { ...arcanum('The Golden Word', hasPower('Word-Bearer')), description: [``] },
 
   // Raconteur
   bonusPower('Undertow', isRaconteur),
