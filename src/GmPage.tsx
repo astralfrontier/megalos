@@ -1,26 +1,21 @@
-import { all, always, append, assoc, assocPath, dropLast, filter, flatten, isEmpty, isNil, join, map, prop, remove, repeat } from 'ramda'
+import { all, always, append, assoc, assocPath, both, evolve, filter, isEmpty, isNil, join, map, prop, remove, repeat, times } from 'ramda'
 import React, { useContext, useState } from 'react'
 
 import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
-  partition: Combatant[]
-  idx: number
-  updateCombatant: (
-    idx: number,
-    cidx: number,
-    field: string,
-    value: any
-  ) => void
-  deleteCombatant: (idx: number, cidx: number) => void
+  combatants: Combatant[]
+  partition: number
+  updateCombatant: (idx: number, field: string, value: any) => void
+  deleteCombatant: (idx: number) => void
 }
 
 // Element 0 is fast MCs
 // Element 1 is enemies
 // Element 2 is slow MCs
 // Element 3 is boss/elite enemies
-const initiativeSortingRules = [
+const partitioningRules = [
   filter(
     (combatant: Combatant) =>
       combatant.type == CombatantType.MC && combatant.fast
@@ -37,7 +32,7 @@ const initiativeSortingRules = [
   ),
 ]
 
-const startingAp = [
+const partitioningAp = [
   always(2),
   always(2),
   always(3),
@@ -51,48 +46,33 @@ const partitionLabels = [
   '💀 Elite/Boss Actions',
 ]
 
-// Given an unsorted list of combatants, return the
-function initializeRound(combatants: Combatant[]): Combatant[][] {
-  const actedCombatants = combatants.map(assoc('acted', false))
-  const bucketedCombatants = map(
-    (filterRule) => filterRule(actedCombatants),
-    initiativeSortingRules
-  )
-  return bucketedCombatants.map((partition, idx) =>
-    map(
-      (combatant) => assoc('ap', startingAp[idx](combatant), combatant),
-      partition
-    )
-  )
-}
-
-function bossIdx(idx: number): number {
-  return idx == 3 ? 1 : idx
-}
-
 function InitiativePartition(props: InitiativePartitionProps) {
-  const { partition, idx, updateCombatant, deleteCombatant } = props
+  const { combatants, partition, updateCombatant, deleteCombatant } = props
+
+  const myCombatants = partitioningRules[partition](combatants)
+
+  const actedProperty = partition == 3 ? 'actedBonus' : 'acted'
 
   return (
     <>
       <tr>
         <td colSpan={5}>
-          <strong>{partitionLabels[idx]}</strong>
+          <strong>{partitionLabels[partition]}</strong>
         </td>
       </tr>
-      {partition.map((combatant, cidx) => (
+      {myCombatants.map((combatant) => (
         <tr>
           <td>
             <button
               className="delete"
-              onClick={() => deleteCombatant(idx, cidx)}
+              onClick={() => deleteCombatant(combatant.order || 0)}
             ></button>
             <span
               className="clickable"
               onClick={() => {
                 const newName = prompt('New combatant name', combatant.name)
                 if (!isNil(newName) && !isEmpty(newName)) {
-                  updateCombatant(bossIdx(idx), cidx, 'name', newName)
+                  updateCombatant(combatant.order || 0, 'name', newName)
                 }
               }}
             >
@@ -105,18 +85,26 @@ function InitiativePartition(props: InitiativePartitionProps) {
               type={'checkbox'}
               checked={combatant.fast}
               onChange={(event) =>
-                updateCombatant(idx, cidx, 'fast', event.currentTarget.checked)
+                updateCombatant(
+                  combatant.order || 0,
+                  'fast',
+                  event.currentTarget.checked
+                )
               }
               disabled={combatant.type != CombatantType.MC}
             />
-            {join('', repeat('◆', combatant.ap))}◇
+            {join('', repeat('◆', partitioningAp[partition](combatant)))}◇
           </td>
           <td>
             <input
               type={'checkbox'}
-              checked={combatant.acted}
+              checked={combatant[actedProperty]}
               onChange={(event) =>
-                updateCombatant(idx, cidx, 'acted', event.currentTarget.checked)
+                updateCombatant(
+                  combatant.order || 0,
+                  actedProperty,
+                  event.currentTarget.checked
+                )
               }
             />
           </td>
@@ -126,7 +114,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
               onClick={() => {
                 const newNotes = prompt('New notes', combatant.notes)
                 if (newNotes != null) {
-                  updateCombatant(bossIdx(idx), cidx, 'notes', newNotes)
+                  updateCombatant(combatant.order || 0, 'notes', newNotes)
                 }
               }}
             >
@@ -140,7 +128,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
 }
 
 function GmPage() {
-  const { grit, setGrit, initiativeOrder, setInitiativeOrder } =
+  const { grit, setGrit, combatants, setCombatants } =
     useContext(InitiativeContext)
 
   const [newCombatantType, setNewCombatantType] = useState<CombatantType>(
@@ -148,46 +136,48 @@ function GmPage() {
   )
 
   // Require everyone to have acted before you can start a new round
-  const hasEveryoneActed = all(prop('acted'), flatten(initiativeOrder))
+  const hasEveryoneActed = all(both(prop('acted'), prop('actedBonus')), combatants)
 
   function onClickInitializeRound(_event) {
-    // Skip the bonus enemy round and see who our combatants are
-    const combatants = flatten(dropLast(1, initiativeOrder))
-    setInitiativeOrder(initializeRound(combatants))
+    const newCombatants = map((combatant) => {
+      const hasActed = assoc('acted', false, combatant)
+      const hasBonusActed = assoc(
+        'actedBonus',
+        combatant.type == CombatantType.MC ||
+          combatant.type == CombatantType.MINION,
+        hasActed
+      )
+      return hasBonusActed
+    }, combatants)
+    setCombatants(newCombatants)
   }
 
-  function updateCombatant(
-    idx: number,
-    cidx: number,
-    field: string,
-    value: any
-  ) {
-    const newState = assocPath([idx, cidx, field], value, initiativeOrder)
-    setInitiativeOrder(newState)
+  function updateCombatant(idx: number, field: string, value: any) {
+    setCombatants(assocPath([idx, field], value, combatants))
   }
 
-  function deleteCombatant(idx: number, cidx: number) {
-    const newPartition = remove(cidx, 1, initiativeOrder[idx])
-    const newState = assocPath([idx], newPartition, initiativeOrder)
-    setInitiativeOrder(newState)
+  function deleteCombatant(idx: number) {
+    setCombatants(remove(idx, 1, combatants))
   }
 
   function createCombatant() {
     const name = prompt('New combatant name', 'New Combatant')
-    if (!isEmpty(name)) {
-      const partition = newCombatantType == CombatantType.MC ? 0 : 1
+    if (!isNil(name) && !isEmpty(name)) {
       const newCombatant: Combatant = {
         name: name || 'New Combatant',
         type: newCombatantType,
         fast: false,
         acted: true,
-        ap: 0,
+        actedBonus: true,
         notes: '',
       }
-      const newPartition = append(newCombatant, initiativeOrder[partition])
-      setInitiativeOrder(assocPath([partition], newPartition, initiativeOrder))
+      setCombatants(append(newCombatant, combatants))
     }
   }
+
+  const indexedCombatants = combatants.map((combatant, i) =>
+    assoc('order', i, combatant)
+  )
 
   return (
     <>
@@ -291,14 +281,17 @@ function GmPage() {
                 </tr>
               </thead>
               <tbody>
-                {initiativeOrder.map((partition, idx) => (
-                  <InitiativePartition
-                    partition={partition}
-                    idx={idx}
-                    updateCombatant={updateCombatant}
-                    deleteCombatant={deleteCombatant}
-                  />
-                ))}
+                {times(
+                  (i) => (
+                    <InitiativePartition
+                      combatants={indexedCombatants}
+                      partition={i}
+                      updateCombatant={updateCombatant}
+                      deleteCombatant={deleteCombatant}
+                    />
+                  ),
+                  4
+                )}
               </tbody>
             </table>
             <div className="content">
@@ -335,8 +328,8 @@ function GmPage() {
                   At most one <strong>Reaction</strong> per turn
                 </li>
                 <li>
-                  Disadvantage on every Attack-type action after the first on
-                  your turn
+                  Stacking Disadvantage on every Attack-type action after the
+                  first on your turn
                 </li>
                 <li>
                   <strong>At the end of each combatant's turn,</strong> attempt

@@ -17,12 +17,13 @@ export enum CombatantType {
 }
 
 export interface Combatant {
+  order?: number
   name: string
   type: CombatantType
   // Only used for MCs
   fast: boolean
-  ap: number
   acted: boolean
+  actedBonus: boolean
   notes: string
 }
 
@@ -69,15 +70,15 @@ export const CharacterContext = createContext<CharacterState>({
 interface InitiativeState {
   grit: number
   setGrit: React.Dispatch<React.SetStateAction<number>>
-  initiativeOrder: Combatant[][]
-  setInitiativeOrder: React.Dispatch<React.SetStateAction<Combatant[][]>>
+  combatants: Combatant[]
+  setCombatants: React.Dispatch<React.SetStateAction<Combatant[]>>
 }
 
 export const InitiativeContext = createContext<InitiativeState>({
   grit: 0,
   setGrit: () => {},
-  initiativeOrder: [[], [], [], []],
-  setInitiativeOrder: () => {},
+  combatants: [],
+  setCombatants: () => {},
 })
 
 function GameStateProvider(props: GameStateProviderProps) {
@@ -88,12 +89,7 @@ function GameStateProvider(props: GameStateProviderProps) {
   const [presets, setPresets] = useState<Preset[]>([])
   const [character, setCharacter] = useState<MegalosCharacter>(newCharacter)
   const [grit, setGrit] = useState<number>(0)
-  const [initiativeOrder, setInitiativeOrder] = useState<Combatant[][]>([
-    [],
-    [],
-    [],
-    [],
-  ])
+  const [combatants, setCombatants] = useState<Combatant[]>([])
 
   const diceContextProviderValue = {
     diceCount,
@@ -116,8 +112,8 @@ function GameStateProvider(props: GameStateProviderProps) {
   const initiativeContextProviderValue = {
     grit,
     setGrit,
-    initiativeOrder,
-    setInitiativeOrder,
+    combatants,
+    setCombatants,
   }
 
   return (
