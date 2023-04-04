@@ -1,7 +1,6 @@
 import {
   allPass,
   assoc,
-  assocPath,
   concat,
   difference,
   either,
@@ -19,6 +18,7 @@ import {
 } from 'ramda'
 
 import { Description } from '../visuals'
+import powerDescriptions from './powers.yaml'
 
 export type MegalosClassName = 'Throne' | 'Invoker' | 'Witch'
 
@@ -1167,18 +1167,21 @@ export function meetsPrerequisites(character: MegalosCharacter) {
 
 const bonusPower = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: true,
   type: MegalosPowerType.CALLING_BONUS,
   prerequisites: [requiredCalling],
   costs: {},
+  description: description ? [description] : [],
 })
 
 const classTalent = (
   name: MegalosPowerName,
-  requiredClass: CharacterFilter
+  requiredClass: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1187,11 +1190,13 @@ const classTalent = (
   costs: {
     talents: 1,
   },
+  description: description ? [description] : [],
 })
 
 const invocation = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1200,11 +1205,13 @@ const invocation = (
   costs: {
     invocations: 1,
   },
+  description: description ? [description] : [],
 })
 
 const arcanum = (
   name: MegalosPowerName,
-  requiredInvocation: CharacterFilter
+  requiredInvocation: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1213,11 +1220,13 @@ const arcanum = (
   costs: {
     arcana: 1,
   },
+  description: description ? [description] : [],
 })
 
 const chargedStrike = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1226,11 +1235,13 @@ const chargedStrike = (
   costs: {
     strikes: 1,
   },
+  description: description ? [description] : [],
 })
 
 const comboStrike = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1239,11 +1250,13 @@ const comboStrike = (
   costs: {
     strikes: 1,
   },
+  description: description ? [description] : [],
 })
 
 const counter = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1252,22 +1265,26 @@ const counter = (
   costs: {
     counters: 1,
   },
+  description: description ? [description] : [],
 })
 
 const finisher = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: true,
   type: MegalosPowerType.FINISHER,
   prerequisites: [requiredCalling],
   costs: {},
+  description: description ? [description] : [],
 })
 
 const cantrip = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1276,11 +1293,13 @@ const cantrip = (
   costs: {
     cantrips: 1,
   },
+  description: description ? [description] : [],
 })
 
 const sorcery = (
   name: MegalosPowerName,
-  requiredCalling: CharacterFilter
+  requiredCalling: CharacterFilter,
+  description?: string
 ): MegalosPower => ({
   name,
   mandatory: false,
@@ -1289,17 +1308,12 @@ const sorcery = (
   costs: {
     sorceries: 1,
   },
+  description: description ? [description] : [],
 })
 
 export const powers: MegalosPower[] = [
   // Invoker
-  {
-    ...classTalent('Binding of Five', isInvoker),
-    description: [
-      `My maximum Aether Current dice increases to 5, but my maximum HP is
-    reduced by -5 as well.`,
-    ],
-  },
+  classTalent('Binding of Five', isInvoker, powerDescriptions.BindingOfFive),
   {
     ...classTalent('Blood Seals', isInvoker),
     description: [
