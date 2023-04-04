@@ -1,12 +1,33 @@
-import { all, always, append, assoc, assocPath, both, evolve, filter, isEmpty, isNil, join, map, prop, remove, repeat, times } from 'ramda'
+import {
+  all,
+  always,
+  append,
+  assoc,
+  assocPath,
+  both,
+  filter,
+  isEmpty,
+  isNil,
+  join,
+  map,
+  prop,
+  remove,
+  repeat,
+  times,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
+import {
+  Combatant,
+  CombatantType,
+  InitiativeContext,
+} from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
   combatants: Combatant[]
   partition: number
+  isActive: boolean
   updateCombatant: (idx: number, field: string, value: any) => void
   deleteCombatant: (idx: number) => void
 }
@@ -47,20 +68,19 @@ const partitionLabels = [
 ]
 
 function InitiativePartition(props: InitiativePartitionProps) {
-  const { combatants, partition, updateCombatant, deleteCombatant } = props
-
-  const myCombatants = partitioningRules[partition](combatants)
+  const { combatants, partition, isActive, updateCombatant, deleteCombatant } =
+    props
 
   const actedProperty = partition == 3 ? 'actedBonus' : 'acted'
 
   return (
     <>
-      <tr>
+      <tr className={isActive ? 'is-selected' : ''}>
         <td colSpan={5}>
           <strong>{partitionLabels[partition]}</strong>
         </td>
       </tr>
-      {myCombatants.map((combatant) => (
+      {combatants.map((combatant) => (
         <tr>
           <td>
             <button
@@ -127,6 +147,10 @@ function InitiativePartition(props: InitiativePartitionProps) {
   )
 }
 
+function reindex(combatants: Combatant[]): Combatant[] {
+  return combatants.map((combatant, i) => assoc('order', i, combatant))
+}
+
 function GmPage() {
   const { grit, setGrit, combatants, setCombatants } =
     useContext(InitiativeContext)
@@ -135,20 +159,12 @@ function GmPage() {
     CombatantType.MC
   )
 
-  // Require everyone to have acted before you can start a new round
-  const hasEveryoneActed = all(both(prop('acted'), prop('actedBonus')), combatants)
-
   function onClickInitializeRound(_event) {
-    const newCombatants = map((combatant) => {
-      const hasActed = assoc('acted', false, combatant)
-      const hasBonusActed = assoc(
-        'actedBonus',
-        combatant.type == CombatantType.MC ||
-          combatant.type == CombatantType.MINION,
-        hasActed
-      )
-      return hasBonusActed
-    }, combatants)
+    const newCombatants = map(
+      (combatant) =>
+        assoc('actedBonus', false, assoc('acted', false, combatant)),
+      combatants
+    )
     setCombatants(newCombatants)
   }
 
@@ -157,7 +173,7 @@ function GmPage() {
   }
 
   function deleteCombatant(idx: number) {
-    setCombatants(remove(idx, 1, combatants))
+    setCombatants(reindex(remove(idx, 1, combatants)))
   }
 
   function createCombatant() {
@@ -171,13 +187,26 @@ function GmPage() {
         actedBonus: true,
         notes: '',
       }
-      setCombatants(append(newCombatant, combatants))
+      setCombatants(reindex(append(newCombatant, combatants)))
     }
   }
 
-  const indexedCombatants = combatants.map((combatant, i) =>
-    assoc('order', i, combatant)
+  // Split combatants into Fast, Enemy, Slow, Boss partitions
+  const partitionedCombatants = map(
+    (rule) => rule(combatants),
+    partitioningRules
   )
+
+  // In which partitions has everyone taken an action?
+  const partitionsByActed = partitionedCombatants.map((partition, i) =>
+    all(prop(i == 3 ? 'actedBonus' : 'acted'), partition)
+  )
+
+  // Where is the first place nobody has acted?
+  const firstPendingPartition = partitionsByActed.indexOf(false)
+
+  // Has everyone gone? (indicating we can enable the "New Round" button)
+  const hasEveryoneActed = firstPendingPartition == -1
 
   return (
     <>
@@ -284,7 +313,8 @@ function GmPage() {
                 {times(
                   (i) => (
                     <InitiativePartition
-                      combatants={indexedCombatants}
+                      combatants={partitionedCombatants[i]}
+                      isActive={i == firstPendingPartition}
                       partition={i}
                       updateCombatant={updateCombatant}
                       deleteCombatant={deleteCombatant}
