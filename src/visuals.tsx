@@ -5,10 +5,10 @@ export type Description = string[]
 
 export function describe(text: Description | undefined | null) {
   return (
-    <>
+    <div className="content">
       {(text || []).map((line, i) => (
         <ReactMarkdown key={i}>{line}</ReactMarkdown>
       ))}
-    </>
+    </div>
   )
 }

@@ -1314,317 +1314,114 @@ const sorcery = (
 export const powers: MegalosPower[] = [
   // Invoker
   classTalent('Binding of Five', isInvoker, powerDescriptions.BindingOfFive),
-  {
-    ...classTalent('Blood Seals', isInvoker),
-    description: [
-      `The first time I'm _injured_ in each combat encounter while hosting an
-    Invocation, I immediately regain up to 2 spent AC dice and roll them to
-    generate seals.`,
-    ],
-  },
-  {
-    ...classTalent('Choir of Benediction', isChanter),
-    description: [
-      `When I use my **_Chant of Eld_ Minor Action** while hosting a Speaker, the
-    Speaker echoes the chant. Increase Barrier gained by +1 and the range to
-    1. At levels 3 & again at 9 the Heal effect is also improved by +1.`,
-    ],
-  },
-  {
-    ...classTalent('Closed Circuit', isInvoker),
-    description: [
-      `When I use an Arcanum power I can choose to Sacrifice 5 HP in order to
-    reduce its seal cost to 1. At level 3 the HP Sacrifice required is reduced to 3.`,
-    ],
-  },
-  {
-    ...classTalent('Cosmic Bond', isInvoker),
-    description: [
-      `When I spend my last Seal, I roll a d6. If its result is the same type of
-    number as the last seal spent (even numbers for Astral Seals, odd
-    numbers for Umbral Seals), I am refunded the spent seal. This can only
-    happen once per Invocation hosted.`,
-    ],
-  },
-  {
-    ...classTalent('Flesh of Legends', isRaconteur),
-    description: [`Whenever I host a new Invocation, I gain SHIELDED.`],
-  },
-  {
-    ...classTalent('In the Arms of Angels', isInvoker),
-    description: [
-      `I can fly at will. Any movement I take can be flight instead of its normal
-    movement type.`,
-    ],
-  },
-  {
-    ...classTalent('Keymaster', isAstromancer),
-    description: [
-      `Whenever I use an Invocation power, I can teleport 1 either before or after
-    resolving the power.`,
-    ],
-  },
-  {
-    ...classTalent('Medicus', isChanter),
-    description: [
-      `Whenever I heal an ally with an action costing Recovery, myself & all other
-    allies not healed by the power Heal 2. This amount increases by +1 at level
-    3 and again at level 9.`,
-    ],
-  },
-  {
-    ...classTalent('Occult Priest', isInvoker),
-    description: [
-      `I am an ordained & recognized priest of a religion. This counts as a **trait** for
-    all rolls related to fulfilling my role as an intermediary between the higher
-    emanations and the physical world, and for dispensing religious
-    teachings and performing rituals.`,
-    ],
-  },
-  {
-    ...classTalent('Protective Eidolons', isAstromancer),
-    description: [
-      `While I'm hosting an Invocation, I gain +1 to both Dodge & Ward, and +1 on
-    Soak rolls.`,
-    ],
-  },
-  {
-    ...classTalent('Seals of Life', isInvoker),
-    description: [
-      `I heal 3 once per turn when I spend one or more Seals. At level 3 I also
-    gain Barrier 1.`,
-    ],
-  },
-  {
-    ...classTalent('Shattered Seals', isInvoker),
-    description: [
-      `I can shatter a seal as a free action on my turn, granting me additional
-    esoteric power immediately, but straining my connection to the cosmic
-    aether. A shattered seal acts as either an Astral or Umbral Seal (I choose
-    which), but once spent, my maximum number of AC dice is reduced by -1
-    until the end of the encounter. I can only shatter one seal per round. This
-    is considered a blasphemous act by many religions' clergies, and those
-    schooled in magicks are likely to be appalled by the sensation of the
-    rancid aether seeping from a shattered seal.`,
-    ],
-  },
-  {
-    ...classTalent('Starry Divinations', isAstromancer),
-    description: [
-      `Once per session, I can declare that I've received a vision or divination
-    from the almagest about a particular place or person. The GM will tell me
-    3 secrets about the subject, at least one of which should be to my
-    immediate benefit`,
-    ],
-  },
-  {
-    ...classTalent('Sermons & Stories', isRaconteur),
-    description: [
-      `When we take a long rest, I can spin tales from threads of spirit magick to
-    invigorate the soul. My allies and I can choose to either regain an
-    additional +5 HP from the rest, regain an extra point of Recovery, or
-    remove the stressed status from one bond.`,
-    ],
-  },
-  {
-    ...classTalent('Temple Knight', isChanter),
-    description: [
-      `When wielding a melee weapon, I gain +4 Armor HP and may grant
-    Barrier 1 to any ally in my zone once per round when I inflict damage with
-    a melee Basic Attack action. At level 3, the Armor HP bonus increases to
-    +6. At level 9 the Barrier increases to Barrier 2.`,
-    ],
-  },
-  {
-    ...classTalent('Unraveling Rapids', isInvoker),
-    description: [
-      `My damaging Invocation powers inflict +3 damage against undead,
-    daemons, summoned creatures, and anything else that's from a different
-    emanation or plane of existence.`,
-    ],
-  },
-  {
-    ...classTalent('Warrior Priest', isInvoker),
-    description: [
-      `I do not suffer the first instance of the stacking damage penalty for using
-    multiple actions with the Attack tag in the same round, but the penalty
-    still accrues. For instance, if I use two attacks, neither suffers the penalty,
-    and if I use three attacks, the third only suffers a -2 penalty. This doesn't
-    stack with similar effects which allow me to ignore this penalty.`,
-    ],
-  },
+  classTalent('Blood Seals', isInvoker, powerDescriptions.BloodSeals),
+  classTalent(
+    'Choir of Benediction',
+    isChanter,
+    powerDescriptions.ChoirOfBenediction
+  ),
+  classTalent('Closed Circuit', isInvoker, powerDescriptions.ClosedCircuit),
+  classTalent('Cosmic Bond', isInvoker, powerDescriptions.CosmicBond),
+  classTalent(
+    'Flesh of Legends',
+    isRaconteur,
+    powerDescriptions.FleshOfLegends
+  ),
+  classTalent(
+    'In the Arms of Angels',
+    isInvoker,
+    powerDescriptions.InTheArmsOfAngels
+  ),
+  classTalent('Keymaster', isAstromancer, powerDescriptions.Keymaster),
+  classTalent('Medicus', isChanter, powerDescriptions.Medicus),
+  classTalent('Occult Priest', isInvoker, powerDescriptions.OccultPriest),
+  classTalent(
+    'Protective Eidolons',
+    isAstromancer,
+    powerDescriptions.ProtectiveEidolons
+  ),
+  classTalent('Seals of Life', isInvoker, powerDescriptions.SealsOfLife),
+  classTalent('Shattered Seals', isInvoker, powerDescriptions.ShatteredSeals),
+  classTalent(
+    'Starry Divinations',
+    isAstromancer,
+    powerDescriptions.StarryDivinations
+  ),
+  classTalent(
+    'Sermons & Stories',
+    isRaconteur,
+    powerDescriptions.SermonsAndStories
+  ),
+  classTalent('Temple Knight', isChanter, powerDescriptions.TempleKnight),
+  classTalent(
+    'Unraveling Rapids',
+    isInvoker,
+    powerDescriptions.UnravelingRapids
+  ),
+  classTalent('Warrior Priest', isInvoker, powerDescriptions.WarriorPriest),
 
   // Astromancer
-  {
-    ...bonusPower('Cosmic Siphon', isAstromancer),
-    description: [
-      `The Astromancer creates a surging darkness, an echo of the utterblack between the
-stars. This gnawing void tears at the aether of their foes to bolster their own.
-
-_Damage a foe, regain a spent Aether Current die if hosting an Invocation_
-`,
-    ],
-  },
-  {
-    ...invocation('Gygus, Sign of Earth', isAstromancer),
-    description: [
-      `**Astral Power - Rockslide**
-
-Gygus' mighty fist crashes down and a wave of earth rises before it like a tidal wave.
-
-_Up to three foes take damage and are pushed, improved damage for difficult or lethal terrain_
-
-**Umbral Power - Bow Down, Skychild**
-
-Gygus summons a rippling distortion of gravity to crush your foes with the weight of the earth itself.
-
-_Creates difficult terrain that can do damage to foes_
-`,
-    ],
-  },
-  {
-    ...arcanum('Crushing Gaol of Stone', hasPower('Gygus, Sign of Earth')),
-    description: [
-      `Earthen slabs form to entomb your foe and crush the life out of them.
-
-_Target is immobilized and stunned._
-`,
-    ],
-  },
-  {
-    ...invocation('Hajmaul, Sign of Lightning', isAstromancer),
-    description: [
-      `**Astral Power - Brilliant Scourge**
-
-Hajmaul dramatically lunges forth, and a cascade of burning coruscation follows.
-
-_One foe takes astral damage and is wounded._
-
-**Umbral Power - Levinflash**
-
-_Multiple foes take damage._
-      `,
-    ],
-  },
-  {
-    ...arcanum('Tyranny of the Storm', hasPower('Hajmaul, Sign of Lightning')),
-    description: [
-      `Bolts of catastrophic fury blast the battlefield, leaving your foes scarred and burned.
-
-_All foes take heavy damage and are wounded._
-    `,
-    ],
-  },
-  {
-    ...invocation('Quecklain, Sign of Water', isAstromancer),
-    description: [
-      `**Astral Power - Fall Before Me**
-
-Quecklain reaches out with bone and tentacle, and impure waters crash down.
-
-_Several foes take toxic damage, more if they are sick or wounded._
-
-**Umbral Power - Crown of Pestilence**
-
-A sickly, pale light shimmers from Quecklain's decayed royal regalia. Disease & woe
-betide your foes, as a withering rot sets into the very battlefield itself.
-
-_Foes entering a designated area take damage and become sick._
-`,
-    ],
-  },
-  {
-    ...arcanum('Aqua Regia', hasPower('Quecklain, Sign of Water')),
-    description: [
-      `Quecklain conjures forth an annihilating whorl of hungering alchemical bile.
-
-_A target takes damage and becomes sick and wounded._
-`,
-    ],
-  },
-  {
-    ...invocation('Safira, Sign of Ice', isAstromancer),
-    description: [
-      `**Astral Power - Cold Snap**
-
-Safira creates a polar vortex of freezing ice aether, searing your foes with frostbite.
-
-_Multiple targets take damage and are slowed, slowed targets are immobilized._
-
-**Umbral Power - Winter's Scythe**
-
-Safira conjures a curving talon of ice and carves an icy blue cross into your foe.
-
-_A target takes damage, more if slowed or immobilized._
-`,
-    ],
-  },
-  {
-    ...arcanum('Diamond Dust', hasPower('Safira, Sign of Ice')),
-    description: [
-      `Safira skates around the battlefield briefly, leaving behind a trail of spreading frost
-    that explodes into entombing ice with a leisurely snap of their fingers.
-
-_Several foes take damage and are immobilized, immobilized foes take more damage and are exposed._
-`,
-    ],
-  },
-  {
-    ...invocation('Veliath, Sign of Wind', isAstromancer),
-    description: [
-      `**Astral Power - Wake Turbulence**
-
-Like a pair of bladed wings, Veliath flies you across the battlefield with a destructive wake of blasting air.
-
-_Fly to a zone, inflict damage on foes as you pass._
-
-**Umbral Power - Typhoon Blades**
-
-Veliath becomes a bouquet of gleaming swords that follows your arms and movements as you dance and sweep through your enemies.
-
-_Allocate damage to foes in range._
-`,
-    ],
-  },
-  {
-    ...arcanum('Shearing Gyre', hasPower('Veliath, Sign of Wind')),
-    description: [
-      `Veliath contorts the air to create a whirling gyre of shredding winds that sucks your
-      foes into its tumultuous center like a deadly vortex.
-
-_Create a zone that damages and sucks in enemies._
-`,
-    ],
-  },
-  {
-    ...invocation('Zalraam, Sign of Fire', isAstromancer),
-    description: [
-      `**Astral Power - Slag Beam**
-
-Zalraam fires a ray of fire so fine, so bright it scars the eyes to look directly upon it. It
-shears through the finest steel and melts lesser metals to a pulpy mass of slag.
-
-_Target takes damage, do more damage against exposed targets._
-
-**Umbral Power - Fulminate!**
-
-Zalraam cackles madly, a sound like a guttering blast furnace, as a surge of explosive
-aether appears and bursts, knocking your foes to the ground.
-
-_Inflict damage and dazed on multiple targets._
-`,
-    ],
-  },
-  {
-    ...arcanum('Aetheric Volatility', hasPower('Zalraam, Sign of Fire')),
-    description: [
-      `Zalraam creates a disturbance within the corporeal and incorporeal aether of your
-      foes' bodies & souls, turning them into walking time bombs.
-
-_Damage several targets, who become explosive._
-`,
-    ],
-  },
+  bonusPower('Cosmic Siphon', isAstromancer, powerDescriptions.CosmicSiphon),
+  invocation(
+    'Gygus, Sign of Earth',
+    isAstromancer,
+    powerDescriptions.GygusSignOfEarth
+  ),
+  arcanum(
+    'Crushing Gaol of Stone',
+    hasPower('Gygus, Sign of Earth'),
+    powerDescriptions.CrushingGaolOfStone
+  ),
+  invocation(
+    'Hajmaul, Sign of Lightning',
+    isAstromancer,
+    powerDescriptions.HajmaulSignOfLightning
+  ),
+  arcanum(
+    'Tyranny of the Storm',
+    hasPower('Hajmaul, Sign of Lightning'),
+    powerDescriptions.TyrannyOfTheStorm
+  ),
+  invocation(
+    'Quecklain, Sign of Water',
+    isAstromancer,
+    powerDescriptions.QuecklainSignOfWater
+  ),
+  arcanum(
+    'Aqua Regia',
+    hasPower('Quecklain, Sign of Water'),
+    powerDescriptions.AquaRegia
+  ),
+  invocation(
+    'Safira, Sign of Ice',
+    isAstromancer,
+    powerDescriptions.SafiraSignOfIce
+  ),
+  arcanum(
+    'Diamond Dust',
+    hasPower('Safira, Sign of Ice'),
+    powerDescriptions.DiamondDust
+  ),
+  invocation(
+    'Veliath, Sign of Wind',
+    isAstromancer,
+    powerDescriptions.VeliathSignOfWind
+  ),
+  arcanum(
+    'Shearing Gyre',
+    hasPower('Veliath, Sign of Wind'),
+    powerDescriptions.ShearingGyre
+  ),
+  invocation(
+    'Zalraam, Sign of Fire',
+    isAstromancer,
+    powerDescriptions.ZalraamSignOfFire
+  ),
+  arcanum(
+    'Aetheric Volatility',
+    hasPower('Zalraam, Sign of Fire'),
+    powerDescriptions.AethericVolatility
+  ),
 
   // Chanter
   {
