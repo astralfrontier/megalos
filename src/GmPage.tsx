@@ -1,26 +1,7 @@
-import {
-  all,
-  always,
-  append,
-  assoc,
-  assocPath,
-  dropLast,
-  filter,
-  flatten,
-  isEmpty,
-  join,
-  map,
-  prop,
-  remove,
-  repeat,
-} from 'ramda'
+import { all, always, append, assoc, assocPath, dropLast, filter, flatten, isEmpty, isNil, join, map, prop, remove, repeat } from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import {
-  Combatant,
-  CombatantType,
-  InitiativeContext,
-} from './GameStateProvider'
+import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
@@ -85,6 +66,10 @@ function initializeRound(combatants: Combatant[]): Combatant[][] {
   )
 }
 
+function bossIdx(idx: number): number {
+  return idx == 3 ? 1 : idx
+}
+
 function InitiativePartition(props: InitiativePartitionProps) {
   const { partition, idx, updateCombatant, deleteCombatant } = props
 
@@ -106,8 +91,8 @@ function InitiativePartition(props: InitiativePartitionProps) {
               className="clickable"
               onClick={() => {
                 const newName = prompt('New combatant name', combatant.name)
-                if (!isEmpty(newName)) {
-                  updateCombatant(idx, cidx, 'name', newName)
+                if (!isNil(newName) && !isEmpty(newName)) {
+                  updateCombatant(bossIdx(idx), cidx, 'name', newName)
                 }
               }}
             >
@@ -141,7 +126,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
               onClick={() => {
                 const newNotes = prompt('New notes', combatant.notes)
                 if (newNotes != null) {
-                  updateCombatant(idx, cidx, 'notes', newNotes)
+                  updateCombatant(bossIdx(idx), cidx, 'notes', newNotes)
                 }
               }}
             >
@@ -348,6 +333,10 @@ function GmPage() {
                 </li>
                 <li>
                   At most one <strong>Reaction</strong> per turn
+                </li>
+                <li>
+                  Disadvantage on every Attack-type action after the first on
+                  your turn
                 </li>
                 <li>
                   <strong>At the end of each combatant's turn,</strong> attempt
