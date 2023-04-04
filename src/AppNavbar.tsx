@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import {
-  CHARACTER_PATH,
-  DICE_PATH,
-  OUTFITS_PATH,
-  SOAK_PATH,
-  WEAPONS_PATH,
-} from './App'
+import { CHARACTER_PATH, DICE_PATH, GM_SHEET_PATH, OUTFITS_PATH, SOAK_PATH, WEAPONS_PATH } from './App'
 
 const activeNavbarItem = ({ isActive }) =>
   isActive ? 'navbar-item has-background-white' : 'navbar-item'
@@ -75,6 +69,13 @@ function AppNavbar() {
             onClick={() => setIsActive(false)}
           >
             Weapons
+          </NavLink>
+          <NavLink
+            className={activeNavbarItem}
+            to={GM_SHEET_PATH}
+            onClick={() => setIsActive(false)}
+          >
+            GM Tools
           </NavLink>
         </div>
       </div>
