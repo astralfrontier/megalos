@@ -1,27 +1,7 @@
-import {
-  all,
-  always,
-  append,
-  assoc,
-  assocPath,
-  both,
-  filter,
-  isEmpty,
-  isNil,
-  join,
-  map,
-  prop,
-  remove,
-  repeat,
-  times,
-} from 'ramda'
+import { all, always, append, assoc, assocPath, both, filter, isEmpty, isNil, join, map, prop, remove, repeat, times } from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import {
-  Combatant,
-  CombatantType,
-  InitiativeContext,
-} from './GameStateProvider'
+import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
@@ -386,7 +366,7 @@ function GmPage() {
                 <li>Strike (Attack)</li>
                 <li>Take Cover (Movement)</li>
                 <li>Use an Inventory Item (Inventory, Vulnerable)</li>
-                <li>Use a Minor Power (Magaickal)</li>
+                <li>Use a Minor Power (Magickal)</li>
               </ul>
             </div>
           </div>
