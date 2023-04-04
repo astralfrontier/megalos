@@ -1,7 +1,26 @@
-import { all, always, append, assoc, assocPath, dropLast, filter, flatten, isEmpty, join, map, prop, remove, repeat } from 'ramda'
+import {
+  all,
+  always,
+  append,
+  assoc,
+  assocPath,
+  dropLast,
+  filter,
+  flatten,
+  isEmpty,
+  join,
+  map,
+  prop,
+  remove,
+  repeat,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
+import {
+  Combatant,
+  CombatantType,
+  InitiativeContext,
+} from './GameStateProvider'
 import GenericInput from './GenericInput'
 
 interface InitiativePartitionProps {
@@ -72,7 +91,7 @@ function InitiativePartition(props: InitiativePartitionProps) {
   return (
     <>
       <tr>
-        <td colSpan={4}>
+        <td colSpan={5}>
           <strong>{partitionLabels[idx]}</strong>
         </td>
       </tr>
