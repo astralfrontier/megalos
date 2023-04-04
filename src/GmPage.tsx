@@ -233,27 +233,6 @@ function GmPage() {
       <div className="box block">
         <div className="columns">
           <div className="column is-two-thirds">
-            <table className="table is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Combatant</th>
-                  <th>Type</th>
-                  <th>AP</th>
-                  <th>Acted</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {initiativeOrder.map((partition, idx) => (
-                  <InitiativePartition
-                    partition={partition}
-                    idx={idx}
-                    updateCombatant={updateCombatant}
-                    deleteCombatant={deleteCombatant}
-                  />
-                ))}
-              </tbody>
-            </table>
             <div className="columns is-vcentered">
               <div className="column">
                 <GenericInput
@@ -297,6 +276,27 @@ function GmPage() {
                 </button>
               </div>
             </div>
+            <table className="table is-fullwidth is-striped">
+              <thead>
+                <tr>
+                  <th>Combatant</th>
+                  <th>Type</th>
+                  <th>AP</th>
+                  <th>Acted</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                {initiativeOrder.map((partition, idx) => (
+                  <InitiativePartition
+                    partition={partition}
+                    idx={idx}
+                    updateCombatant={updateCombatant}
+                    deleteCombatant={deleteCombatant}
+                  />
+                ))}
+              </tbody>
+            </table>
             <div className="content">
               <ul>
                 <li>
@@ -309,7 +309,8 @@ function GmPage() {
                   <strong>fast</strong>, uncheck to act <strong>slow</strong>.
                 </li>
                 <li>
-                  Click the checkbox in Acted once a combatant has acted. The New Round button will be red until everyone has been marked.
+                  Click the checkbox in Acted once a combatant has acted. The
+                  New Round button will be red until everyone has been marked.
                 </li>
               </ul>
             </div>
