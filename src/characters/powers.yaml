@@ -7,8 +7,8 @@ BloodSeals: |
   generate seals.
 ChoirOfBenediction: |
   When I use my **_Chant of Eld_ Minor Action** while hosting a Speaker, the
-  Speaker echoes the chant. Increase Barrier gained by +1 and the range to
-  1. At levels 3 & again at 9 the Heal effect is also improved by +1.
+  Speaker echoes the chant. Increase Barrier gained by +1 and the range to 1.
+  At levels 3 & again at 9 the Heal effect is also improved by +1.
 ClosedCircuit: |
   When I use an Arcanum power I can choose to Sacrifice 5 HP in order to
   reduce its seal cost to 1. At level 3 the HP Sacrifice required is reduced to 3.
