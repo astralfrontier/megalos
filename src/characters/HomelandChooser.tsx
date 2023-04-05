@@ -80,7 +80,7 @@ function HomelandChooser() {
             {map((skill) => {
               const isChecked = character.homelandSkills.includes(skill)
               return (
-                <div className="column is-narrow">
+                <div className="column is-one-fifth">
                   <label className="checkbox">
                     <input
                       id={`homeland-skill-checkbox-${skill.toLowerCase()}`}
