@@ -1,8 +1,9 @@
 import { map } from 'ramda'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { MegalosCharacter, MegalosPower } from './data'
 import classes from './PowersTalentsPane.module.css'
+import { describe } from '../visuals'
 
 interface PowersTalentsPaneProps {
   character: MegalosCharacter
@@ -10,25 +11,39 @@ interface PowersTalentsPaneProps {
 
 interface PowerDisplayProps {
   power: MegalosPower
-  children?: React.ReactNode
 }
 
-export function PowerDisplay(props: PowerDisplayProps) {
-  const { power, children } = props
+function PowerDisplay(props: PowerDisplayProps) {
+  const [showDescription, setShowDescription] = useState<boolean>(false)
+
+  const { power } = props
   return (
-    <div
-      className={`block columns is-vcentered ${classes.powerDisplay}`}
-      key={power.name}
-    >
+    <div className="block">
       <div
-        className={`column is-narrow ${classes.powerType} ${
-          classes[`powerType${power.type}`]
-        }`}
+        className={`columns is-vcentered ${classes.powerDisplay}`}
+        key={power.name}
       >
-        <span className="tag is-primary">{power.type}</span>
+        <div
+          className={`column is-narrow ${classes.powerType} ${
+            classes[`powerType${power.type}`]
+          }`}
+        >
+          <span className="tag is-primary">{power.type}</span>
+        </div>
+        <div
+          className="column clickable"
+          onClick={() => setShowDescription(!showDescription)}
+        >
+          {power.name}
+        </div>
       </div>
-      <div className="column">{power.name}</div>
-      {children}
+      {showDescription ? (
+        <div className="columns">
+          <div className="column">{describe(power.description)}</div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
@@ -49,6 +64,9 @@ function PowersTalentsPane(props: PowersTalentsPaneProps) {
             ),
             character.powers
           )}
+          <p>
+            <em>Click on a power name to see a full description</em>
+          </p>
         </div>
       </article>
     </>
