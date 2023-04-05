@@ -1424,118 +1424,82 @@ export const powers: MegalosPower[] = [
   ),
 
   // Chanter
-  {
-    ...bonusPower('Chant of Eld', isChanter),
-    description: [
-      `The Chanter intones a primal call that stirs slumbering forces deep within the earth
-and wind. Plants quicken and bloom, hearts race with purpose, resolve strengthens.
-
-_Targets heal and gain a barrier against damage._`,
-    ],
-  },
-  {
-    ...invocation('Blade Herald', isChanter),
-    description: [
-      `**Astral Power - Cleansing Slash**
-
-The Herald holds their blade aloft and lets divine power rain down with every blow.
-
-_One foe is damaged, one ally is protected and cleansed._
-
-**Umbral Power - Judgment Blade**
-
-The Herald mutters a dark oath and passes judgment upon your foes.
-
-_One foe is damaged, and if defeated, allies are healed._
-`,
-    ],
-  },
-  {
-    ...arcanum('A Rain of Blades', hasPower('Blade Herald')),
-    description: [
-      `Many portals to an emanation of swords appear, issuing a torrent of bladed death.
-
-_Several targets are damaged, and you and allies are healed._
-`,
-    ],
-  },
-  {
-    ...invocation('Lawgiver', isChanter),
-    description: [
-      `**Astral Power - Law's Forbearance**
-
-The Lawgiver holds their hand aloft while proclaiming syllables of warding.
-
-_Targets are shielded from harm._
-
-**Umbral Power - Empyrean Mandate**
-
-The Lawgiver marks an enemy for punishment & death.
-
-_A target takes damage and is marked; attacks against marked targets provide a barrier to allies._
-`,
-    ],
-  },
-  {
-    ...arcanum('Divine Rebuke', hasPower('Lawgiver')),
-    description: [
-      `A final judgment is proclaimed, and the ways of the world are forever changed.
-
-_Foes are damaged, allies are healed._
-`,
-    ],
-  },
-  {
-    ...invocation('Reaper of Souls', isChanter),
-    description: [
-      `**Astral Power - Scythe of Sorrow**
-
-The Reaper swings wide and a flash of deadly steel sweeps across your foes.
-
-_Several foes are damaged, and if they are _injured_, it does more damage and allies are healed._
-
-**Umbral Power - Omen of Loss**
-
-The Reaper ominously points at your foes, sending a twist of steaming shadows to
-fall upon them. Their minds are overcome by dread visions of their own demise.
-
-_A target takes damage and is exposed, while an ally is set up for success._
-`,
-    ],
-  },
-  {
-    ...arcanum('Mortal Swath', hasPower('Reaper of Souls')),
-    description: [
-      `Many bright, dancing scythes swirl about, cutting a bloody wake all around you.
-
-_Many foes take damage, allies are healed based on how many are injured or defeated by the attack._
-`,
-    ],
-  },
-  { ...invocation('Riverspeaker', isChanter), description: [``] },
-  {
-    ...arcanum('Mortal Reprieve', hasPower('Riverspeaker')),
-    description: [``],
-  },
-  { ...invocation('Stormspeaker', isChanter), description: [``] },
-  { ...arcanum('Stormweaver', hasPower('Stormspeaker')), description: [``] },
-  { ...invocation('Word-Bearer', isChanter), description: [``] },
-  { ...arcanum('The Golden Word', hasPower('Word-Bearer')), description: [``] },
+  bonusPower('Chant of Eld', isChanter, powerDescriptions.ChantOfEld),
+  invocation('Blade Herald', isChanter, powerDescriptions.BladeHerald),
+  arcanum(
+    'A Rain of Blades',
+    hasPower('Blade Herald'),
+    powerDescriptions.ARainOfBlades
+  ),
+  invocation('Lawgiver', isChanter, powerDescriptions.Lawgiver),
+  arcanum(
+    'Divine Rebuke',
+    hasPower('Lawgiver'),
+    powerDescriptions.DivineRebuke
+  ),
+  invocation('Reaper of Souls', isChanter, powerDescriptions.ReaperOfSouls),
+  arcanum(
+    'Mortal Swath',
+    hasPower('Reaper of Souls'),
+    powerDescriptions.MortalSwath
+  ),
+  invocation('Riverspeaker', isChanter, powerDescriptions.Riverspeaker),
+  arcanum(
+    'Mortal Reprieve',
+    hasPower('Riverspeaker'),
+    powerDescriptions.MortalReprieve
+  ),
+  invocation('Stormspeaker', isChanter, powerDescriptions.Stormspeaker),
+  arcanum(
+    'Stormweaver',
+    hasPower('Stormspeaker'),
+    powerDescriptions.Stormweaver
+  ),
+  invocation('Word-Bearer', isChanter, powerDescriptions.WordBearer),
+  arcanum(
+    'The Golden Word',
+    hasPower('Word-Bearer'),
+    powerDescriptions.TheGoldenWord
+  ),
 
   // Raconteur
-  bonusPower('Undertow', isRaconteur),
-  invocation('The Faerie King', isRaconteur),
-  arcanum('The Faerie King', hasPower("The Faerie's Kiss")),
-  invocation('The Judge', isRaconteur),
-  arcanum("The Judge's Verdic", hasPower('The Judge')),
-  invocation('The Outsider', isRaconteur),
-  arcanum("The Outsider's Claim", hasPower('The Outsider')),
-  invocation('The Parent', isRaconteur),
-  arcanum("The Parent's Sacrifice", hasPower('The Parent')),
-  invocation('The Spider', isRaconteur),
-  arcanum("The Spider's Trick", hasPower('The Spider')),
-  invocation('The Warrior', isRaconteur),
-  arcanum(" The Warrior's Ríastrad", hasPower('The Warrior')),
+  bonusPower('Undertow', isRaconteur, powerDescriptions.Undertow),
+  invocation('The Faerie King', isRaconteur, powerDescriptions.TheFaerieKing),
+  arcanum(
+    "The Faerie's Kiss",
+    hasPower('The Faerie King'),
+    powerDescriptions.TheFaeriesKiss
+  ),
+  invocation('The Judge', isRaconteur, powerDescriptions.TheJudge),
+  arcanum(
+    "The Judge's Verdict",
+    hasPower('The Judge'),
+    powerDescriptions.TheJudgesVerdict
+  ),
+  invocation('The Outsider', isRaconteur, powerDescriptions.TheOutsider),
+  arcanum(
+    "The Outsider's Claim",
+    hasPower('The Outsider'),
+    powerDescriptions.TheOutsidersClaim
+  ),
+  invocation('The Parent', isRaconteur, powerDescriptions.TheParent),
+  arcanum(
+    "The Parent's Sacrifice",
+    hasPower('The Parent'),
+    powerDescriptions.TheParentsSacrifice
+  ),
+  invocation('The Spider', isRaconteur, powerDescriptions.TheSpider),
+  arcanum(
+    "The Spider's Trick",
+    hasPower('The Spider'),
+    powerDescriptions.TheSpidersTrick
+  ),
+  invocation('The Warrior', isRaconteur, powerDescriptions.TheWarrior),
+  arcanum(
+    "The Warrior's Ríastrad",
+    hasPower('The Warrior'),
+    powerDescriptions.TheWarriorsRíastrad
+  ),
 
   // Throne
   {

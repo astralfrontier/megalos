@@ -190,13 +190,13 @@ QuecklainSignOfWater: |
 AquaRegia: |
   Quecklain conjures forth an annihilating whorl of hungering alchemical bile.
 
-  _Major Action ◆◆ Attack, Auto-Hit_
-  **Cost**: 2 Seals, Invocation is lost
-  **Target**: 1 target in range 1
-  **Hit**: (CD+3) toxic damage & the target is SICK (15) & WOUNDED (15).
+  _Major Action ◆◆ Attack, Auto-Hit_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: 1 target in range 1  
+  **Hit**: (CD+3) toxic damage & the target is SICK (15) & WOUNDED (15).  
   **Special**: If a foe is defeated while suffering from either of these statuses, the
-  remaining condition(s) pass to another foe in range 1 of the defeated foe.
-  **Advance**: Damage from this WOUNDED condition is increased by +1.
+  remaining condition(s) pass to another foe in range 1 of the defeated foe.  
+  **Advance**: Damage from this WOUNDED condition is increased by +1.  
   **Advance**: Increase the range to 3.
 SafiraSignOfIce: |
   > Astral Power - Cold Snap
@@ -309,3 +309,469 @@ AethericVolatility: |
   themselves and all other foes in their zone.  
   **Advance**: Increase initial Hit damage by +2.  
   **Advance**: Can target allies as well, but they take no damage from this power.
+ChantOfEld: |
+  The Chanter intones a primal call that stirs slumbering forces deep within the earth
+  and wind. Plants quicken and bloom, hearts race with purpose, resolve strengthens.
+
+  _Minor Action ◆ AoE, Limited_  
+  **Target**: AoE (3) allies in range 0  
+  **Effect**: Targets heal 3 & gain Barrier 1.  
+  **Limit**: If I want to use this power outside of a combat encounter, I must spend 1
+  Recovery to do so.  
+  **Advance**: Increase Barrier effect by +2.  
+  **Advance**: I can trade out allied targets for foes in range (action gains the Autohit tag),
+  inflicting 3 piercing damage instead of granting Barrier to them.
+BladeHerald: |
+  > Astral Power - Cleansing Slash
+  The Herald holds their blade aloft and lets divine power rain down with every blow.
+
+  _Minor Action ◆ Attack, Cleanse_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Effect**: Self or 1 ally in range gains Barrier 1 & Cleanse 1.  
+  **Advance**: Increase damage by +2.  
+  **Advance**: I may Barrier & Cleanse a second target in range.
+
+  > Umbral Power - Judgment Blade
+  The Herald mutters a dark oath and passes judgment upon your foes.
+
+  _Minor Action ◆ Attack, Healing_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) umbral damage, +2 damage vs Injured targets.  
+  **Special**: If target is defeated by this, all allies in target's zone Heal 3.  
+  **Advance**: Damage vs Injured targets increases to +4.  
+  **Advance**: Conditional Heal effect increases to 5.
+ARainOfBlades: |
+  Many portals to an emanation of swords appear, issuing a torrent of bladed death.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Healing_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: AoE (3) in range 1  
+  **Hit**: (CD + 3) physical damage and WOUNDED.  
+  **Effect**: Self & up to 2 allies in range Heal (RB).  
+  **Advance**: Damage increased by +3.  
+  **Advance**: Heal increased by +3.
+Lawgiver: |
+  > Astral Power - Law’s Forbearance
+  The Lawgiver holds their hand aloft while proclaiming syllables of warding.
+
+  _Minor Action ◆ AoE_  
+  **Cost**: 1 Astral Seal  
+  **Target**: AoE (3) allies in range 1  
+  **Effect**: Targets gain Barrier 1 and SHIELDED.  
+  **Advance**: Increase Barrier to 2 and range to 2.  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2
+  Astral Seals to repeat its effect on a different zone in range.
+
+  > Umbral Power - Empyrean Mandate
+  The Lawgiver marks an enemy for punishment & death.
+
+  _Minor Action ◆ Attack, Mark_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 2  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage & the target is Marked until start of my next turn.  
+  **Mark**: Allies who damage the marked target gain Barrier 1.  
+  **Advance**: Increase Barrier to 2.  
+  **Advance**: +2 damage & allies’ attacking Marked creature gain +1 damage.
+DivineRebuke: |
+  A final judgment is proclaimed, and the ways of the world are forever changed.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Healing_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: 1 foe in range 2  
+  **Hit**: (CD) astral damage; all other foes in target’s zone suffer 3 piercing damage.  
+  **Effect**: 2 targets of my choice (self or allies) Heal (RB), +2 for each target Injured
+  or defeated by this power.  
+  **Advance**: Damage increased by +3, secondary piercing damage increased to 4.  
+  **Advance**: Heal bonus increased to +3 per target Injured or defeated.
+ReaperOfSouls: |
+  > Astral Power - Scythe of Sorrow
+  The Reaper swings wide and a flash of deadly steel sweeps across your foes.
+
+  _Minor Action ◆ Attack, AoE, Healing_  
+  **Cost**: 1 Astral Seal  
+  **Target**: AoE (3) in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: 4 piercing damage.  
+  **Special**: If any targets are Injured or become so from this damage, they suffer
+  +2 more damage & I or an ally in range 1 can heal 3.  
+  **Advance**: Increase to AoE (5).  
+  **Advance**: Increase Hit damage and conditional Heal effect by +1.
+
+  > Umbral Power - Omen of Loss
+  The Reaper ominously points at your foes, sending a twist of steaming shadows to
+  fall upon them. Their minds are overcome by dread visions of their own demise.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: 5 piercing damage and target is EXPOSED.  
+  **Effect**: One ally in range 1 is Set Up.  
+  **Advance**: Also inflict SICK on all targets.  
+  **Advance**: Add the AoE keyword and change range to “AoE (2) foes in range 1”.
+MortalSwath: |
+  Many bright, dancing scythes swirl about, cutting a bloody wake all around you.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Healing, Multi-Target_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: Up to 5 foes in the combat encounter  
+  **Hit**: 6 piercing damage.  
+  **Special**: Myself and up to 2 allies Heal 1 for each enemy hit or Heal 2 for each
+  enemy Injured or defeated by this damage.  
+  **Advance**: Damage increased by +2.  
+  **Advance**: Total Healing to self & each allied target increased by +2.
+Riverspeaker: |
+  > Astral Power - Gift of Prophecy
+  The Riverspeaker gifts your allies a brief vision of the psilken tapestry onto which all
+  fates and possibilities are woven.
+
+  _Minor Action ◆_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 ally in range 1  
+  **Effect**: Target gains SHIELDED, EMPOWERED, and is Set Up.  
+  **Advance**: Target also gains Barrier 2.  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2
+  Astral Seals to repeat its effect on a different target in range.
+
+  > Umbral Power - The River Flows On
+  A portal opens and a blast of rapids from the River of Souls scours foes & tears apart
+  their magicks before returning to the realms of the Dead.
+
+  _Minor Action ◆ Attack, Auto-Hit, Dispel_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: AoE (3) foes in range 2  
+  **Hit**: Targets suffer 3 piercing damage and Dispel 2.  
+  **Advance**: Increase damage by +2.  
+  **Advance**: I can trade out foe targets for allies, dealing no damage to them,
+  granting Barrier 1 and Cleanse 1 instead of Dispel 2.
+MortalReprieve: |
+  The Riverspeaker grants you shelter from the storm beneath her vast black wings. A
+  shield of dark feathers swirls about you and your allies.
+
+  _Major Action ◆◆ Raise, Multi-Target_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: Self & all allies in the combat encounter.  
+  **Effect**: Targets gain a magickal shield that reduces the damage from the next
+  damaging attack to hit them to 0. K.O.d allies also gain Raise 1 before receiving
+  this boon. Shield disappears at the end of combat if not consumed.  
+  **Advance**: Increases Raise effect to 5.  
+  **Advance**: Targets gain SHIELDED after the unique effect wears off.
+Stormspeaker: |
+  > Astral Power - Soothing Rains
+  The Stormspeaker calls upon a silver rain that wash away wounds and afflictions.
+
+  _Minor Action ◆ Power Terrain, Healing, Cleanse_  
+  **Cost**: 1 Astral Seal, 1 Recovery  
+  **Target**: 1 zone in range 1  
+  **Effect**: Create a zone of power terrain at the targeted zone. Allies that start
+  their turns in or move through this zone gain Cleanse 1 and are Healed 3.
+  Power terrain expires on a roll of 1-2 on a d6, rolled at the end of each of your
+  turns after this one.  
+  **Advance**: Increase Heal to 4.  
+  **Advance**: Improve expiry chance to 1 on d6, increase range to 3.
+
+  > Umbral Power - Levinrod
+  The Stormspeaker summons a gnarled staff, like a twisted tree made of scored
+  wrought iron, and hurls it at your enemies, calling down powerful thunderbolts.
+
+  _Minor Action ◆ Power Terrain_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 zone within range 2.  
+  **Effect**: Create a zone of power terrain at the targeted zone. Foes that start their
+  turns in or move through this zone suffer 3 piercing damage. This Power
+  terrain expires on a roll of 1-3 on a d6, rolled at the end of each of your turns
+  after this one.  
+  **Advance**: Increase Damage to 5.  
+  **Advance**: Improve expiry chance to 1 on d6, increase range to 3.
+Stormweaver: |
+  The Stormspeaker calls out with a voice like a great tolling of bells cutting through
+  the din of a hurricane. The storm is roused and a deluge comes.
+
+  _Major Action ◆◆ Power Terrain_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: All zones of Stormspeaker Power Terrain  
+  **Effect**: Existing zones of power terrain created by Levinrod or Soothing Rains
+  become permanent until the end of the combat encounter. All enemies
+  currently in a zone of Levinrod power terrain suffer that terrain’s piercing
+  damage immediately. All allies currently in a zone of Soothing Rains power
+  terrain Heal for that terrain’s Healing amount.  
+  **Advance**: Damage triggered by this power is increased by +3.  
+  **Advance**: Healing triggered by this power is increased by +1.
+WordBearer: |
+  > Astral Power - Divine Utterance
+  The Word-Bearer speaks a string of syllables that sound like the feeling of safety,
+  and leave the taste of mercy in your mouth.
+
+  _Minor Action ◆_  
+  **Cost**: 1 Astral Seal  
+  **Target**: Self or 1 ally in range 3  
+  **Effect**: Target gains Barrier 1 immediately and Barrier 1 at the start of their next
+  turn.  
+  **Advance**: Injured targets also Heal 4.  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2
+  Astral Seals to repeat its effect on a different target in range.
+
+  > Umbral Power - Word of Justice
+  The Word-Bearer proclaims a single incomprehensible word of divine power that
+  sounds like an axe beheading a heinous villain.
+
+  _Minor Action ◆ Attack, Mark, Healing_  
+  **Cost**: 1 Umbral Seal, 1 Recovery  
+  **Target**: 1 foe in range 3  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage & target is Marked until the start of my next turn.  
+  **Mark**: Allies who damage the Marked target Heal (½ RB), once per ally.  
+  **Advance**: Increase Healing by +1.  
+  **Advance**: I can forgo spending 1 Recovery to change the Mark effect to “Mark:
+  Allies who damage the Marked target gain Barrier 3.”
+TheGoldenWord: |
+  The Word-Bearer opens their mouth and no sound is heard. Divine power in the form
+  of a silent word washes over you.
+
+  _Major Action ◆◆ Healing, Raise_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: 1 ally in range 3  
+  **Effect**: Target Heals (RB×2), gains REGEN & Cleanse 2. If used on K.O.d target,
+  Raise (RB) instead of Healing.  
+  **Advance**: Spend a 3rd AP ◆ to also heal myself for (RB).  
+  **Advance**: I can choose to use this power with the following changes: “Target: 2
+  allies in range 3”, Heal reduced to (RB+1), Raise reduced to (RB-1).
+Undertow: |
+  Dark waters from the River of Souls surge forth from your strike, dragging your foes
+  to you and filling them with a terminal panic.
+
+  _Minor Action ◆ Attack, AoE_  
+  **Target**: AoE (2) foes in range 1  
+  **Test**: Weapon Dice vs Ward.  
+  **Hit**: (½ CD) physical damage.  
+  **Effect**: Targets are pulled 1 & TAUNTED.  
+  **Advance**: Increase damage by +2.  
+  **Advance**: I can choose to teleport myself adjacent to the target instead of
+  pulling them to me.
+TheFaerieKing: |
+  > Astral Power - The Dancing Plague
+  The Faerie King’s mirthsome scoundrelry fills the air with predatory music.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) physical damage & EXPOSED.  
+  **Special**: If the target is defeated by this, all foes in their zone suffer EXPOSED.  
+  **Advance**: Range 1 & I may teleport adjacent to the target before resolving.  
+  **Advance**: Special effect occurs even if target is not defeated by this attack.
+
+  > Umbral Power - Panikos
+  The Faerie King grows wroth, and a darkness erupts from you in shrieking cries.
+
+  _Minor Action ◆ Attack, AoE_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: AoE (3) foes in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage and all targets are AFRAID.  
+  **Advance**: Increase damage by +3.  
+  **Advance**: Increase AoE to (4) and range to 1.
+TheFaeriesKiss: |
+  You bestow a chaste (?) kiss upon a friend or foe, empowered with all the Faerie
+  King’s capricious favor or all their subtle spite.
+
+  _Major Action ◆◆ Auto-Hit, Healing_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: 1 ally or 1 foe in range 0  
+  **Ally Effect**: Ally & I gain REGEN and SHIELDED; we both Heal (RB).  
+  **Foe Effect**: Foe suffers 5 piercing damage, DAZED, SICK, and WOUNDED.  
+  **Advance**: Range 3 & I may teleport adjacent to the target before resolving.  
+  **Advance**: Heal and damage increased by +2.
+TheJudge: |
+  > Astral Power - Balance of Power
+  The Judge’s parable of power fills you with a - perhaps unearned - righteousness.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Special**: If I have more total HP (HP + Armor HP) than the target before
+  resolving this attack, I gain Advantage on the attack & +1 damage.  
+  **Advance**: If the target is Injured, they suffer +2 damage.  
+  **Advance**: Target & all foes in range 0 suffer TAUNTED.
+
+  > Umbral Power - Tip the Scales
+  The Judge, gleefully corrupt, puts their thumb on the scales of power in your favor.
+
+  _Minor Action ◆ Attack, Mark_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) umbral damage & the target is Marked until start of my next turn.  
+  **Mark**: Allies who attack the target count as being Set Up before the attack.  
+  **Advance**: Also apply AFRAID to all foes in range other than the main target.  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2
+  Umbral Seals to repeat its effect on a different target in range.
+TheJudgesVerdict: |
+  The Judge’s gavel falls upon my foe; a tale of woe & judicial corruption coming to a
+  shockingly lethal conclusion.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Movement_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: 1 foe in range 3  
+  **Hit**: (CD+5) physical damage.  
+  **Effect**: Target is teleported adjacent to me and STUNNED.  
+  **Advance**: All foes in target’s starting zone suffer AFRAID.  
+  **Advance**: If the target is Injured or defeated by this attack, I gain REGEN.
+TheOutsider: |
+  > Astral Power - River Wraiths
+  Terrible geists of the River of Souls claw at your foes in violent swirling eddies.
+
+  _Minor Action ◆ Attack, Multi-Target_  
+  **Cost**: 1 Astral Seal  
+  **Target**: Up to 3 foes in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage & WOUNDED.  
+  **Special**: TAUNTED targets suffer +2 damage.  
+  **Advance**: Increase bonus damage to TAUNTED targets to +4.  
+  **Advance**: Increase targets to 4 and all hit targets are also pulled 1.
+
+  > Umbral Power - Blinkstrike
+  The Outsider teaches you to walk hidden paths– there is no truth to distance and no
+  substance to time while you host the Outsider within yourself.
+
+  _Minor Action ◆ Attack, Movement_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 2  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Effect**: Teleport adjacent to the target before resolving the attack.  
+  **Advance**: Increase range and damage by +1.  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2
+  Umbral Seals to repeat its effect on a different target in range.
+TheOutsidersClaim: |
+  The Outsider takes what is theirs. What was promised. It is only fair.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Multi-Target_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: Up to 3 foes in range 2  
+  **Hit**: (CD+2) physical damage.  
+  **Effect**: Teleport targets adjacent to me before resolving the power.  
+  **Advance**: Damage increased by +3.  
+  **Advance**: Range and number of targets increase by +1.
+TheParent: |
+  > Astral Power - Hearth & Home
+  The Parent protects their family, they create a place where those in their charge can
+  grow, learn, and flourish.
+
+  _Minor Action ◆ AoE_  
+  **Cost**: 1 Astral Seal  
+  **Target**: AoE (2) allies in range 1  
+  **Effect**: Targets gain Barrier 1 and Cleanse 1.  
+  **Advance**: Increase range & Barrier effect by +1.  
+  **Advance**: Gains Multi-Target tag and range becomes “Up to 3 allies in range 1”.
+
+  > Umbral Power - Beat the Bounds
+  Whether by force of will, of arms, or of wit, The Parent always clears away the evils
+  that would threaten their family.
+
+  _Minor Action ◆ Attack, AoE, Dispel_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: AoE (2) foes in range 0  
+  **Hit**: (½ CD) umbral damage and targets are TAUNTED.  
+  **Effect**: Targets suffer Dispel 1.  
+  **Advance**: Increase AoE to (3) and range to 1.  
+  **Advance**: I can use this power as a Major Action to increase damage to (CD).
+TheParentsSacrifice: |
+  The Parent puts everything they are on the line to ensure their family stays safe.
+
+  _Major Action ◆◆ Healing, Multi-Target, Sacrifice (6)_  
+  **Cost**: 2 Seals, 1 Recovery, Invocation is lost  
+  **Target**: Up to 3 allies in range 3.  
+  **Effect**: Targets Heal (RB).  
+  **Sacrifice**: Targets also heal half the amount of HP sacrificed. If I Sacrificed the
+  maximum amount of HP, targets also regain 1 spent Aether Current die.  
+  **Advance**: Increases Sacrifice to (10).  
+  **Advance**: If I Sacrifice the maximum amount of HP, I gain REGEN.
+TheSpider: |
+  > Astral Power - Venomous Strikes
+  They say The Spider’s lies are as venomous as its bite. They’re wrong. Its improbable
+  fangs drip with a venom that burns through reality itself.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) toxic damage & SICK.  
+  **Special**: TAUNTED targets suffer +2 damage.  
+  **Advance**: Increase damage to (CD).  
+  **Advance**: Up to 2 other foes in the target’s zone suffer SICK.
+
+  > Umbral Power - Psilken Skein
+  The Spider weaves the Psilk, a mysterious fabric of possibility and time, to draw your
+  foes to you and weigh them down in leaden recursive probabilities.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage, the target is pulled 1 & SLOWED.  
+  **Effect**: 1 ally in my zone is Set Up.  
+  **Advance**: Increase damage to (CD).  
+  **Advance**: I can use this power as a Major Action and increase the Cost to 2  
+  **Umbral** Seals to repeat its effect on a different target in range.
+TheSpidersTrick: |
+  The Spider weaves time & space to create a gauntlet of trials for my enemies.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Movement_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: 1 foe in range 1  
+  **Hit**: (CD+2) physical damage.  
+  **Effect**: The target & I swap positions via teleportation. If the target ends this
+  movement engaged with any allies, it suffers 2 piercing damage for each ally.
+  If I end this movement engaged with any foes, they each suffer 2 piercing
+  damage & TAUNTED.  
+  **Advance**: Range increases to 3.  
+  **Advance**: Instances of piercing damage inflicted by this power increase to 3.
+TheWarrior: |
+  > Astral Power - Spinning Leap
+  With a whirling sweep, you bend & flip in the air like a razor-sharp top before crashing
+  down upon your foe with an explosion of aetheric power.
+
+  _Minor Action ◆ Attack_  
+  **Cost**: 1 Astral Seal  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Dodge.  
+  **Hit**: (CD+1) physical damage.  
+  **Special**: Fly adjacent to the target before resolving the attack. If the target is
+  TAUNTED by me, I gain Advantage on the attack roll.  
+  **Advance**: Increase Range to 3.  
+  **Advance**: Inflict 2 piercing damage on all other foes in target’s zone.
+
+  > Umbral Power - Hail of Spears
+  The Warrior bids your weapon transform into a glowing spear, which you hurl into
+  the sky into a dark cloud overhead from which issues forth a torrent of bladed death.
+
+  _Minor Action ◆ Attack, AoE_  
+  **Cost**: 1 Umbral Seal  
+  **Target**: AoE (3) foes in range 1  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: 4 piercing damage & WOUNDED.  
+  **Advance**: Increase damage by +2.  
+  **Advance**: Add “Effect: Targets are TAUNTED”.
+TheWarriorsRíastrad: |
+  The Warrior brings about a mighty and horrific transformation.
+  Your whole body becomes a turgid mass of writhing muscle and steely bones. None can stand against
+  the horrifying power of your tortured form in the throes of this Warp-Spasm.
+
+  _Major Action ◆◆ Attack, Auto-Hit_  
+  **Cost**: 2 Seals, Invocation is lost  
+  **Target**: 1 foe in range 0  
+  **Hit**: (CD+5) physical damage.  
+  **Effect**: I gain EMPOWERED and SHIELDED.  
+  **Special**: If the target is defeated by this, all foes in range 1 suffer EXPOSED.  
+  **Advance**: EMPOWERED & SHIELDED conditions last 3 rounds instead of 2.  
+  **Advance**: Increase range to 2 and I can fly adjacent to the target before
+  resolving the attack.
