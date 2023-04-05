@@ -1,3 +1,4 @@
+import ViteYaml from '@modyfi/vite-plugin-yaml'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { defineConfig } from 'vite'
@@ -9,7 +10,7 @@ export default defineConfig({
       localsConvention: 'camelCaseOnly',
     },
   },
-  plugins: [react()],
+  plugins: [react(), ViteYaml()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

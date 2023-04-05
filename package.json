@@ -17,10 +17,12 @@
     "ramda": "=0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.6",
     "react-router-dom": "^6.10.0",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
+    "@modyfi/vite-plugin-yaml": "^1.0.4",
     "@types/ramda": "=0.28.23",
     "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",
