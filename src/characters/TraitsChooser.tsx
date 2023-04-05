@@ -1,4 +1,4 @@
-import { assocPath } from 'ramda'
+import { assocPath, without } from 'ramda'
 import React, { useContext, useState } from 'react'
 import slugify from 'slugify'
 
@@ -67,9 +67,13 @@ const exampleSpecialTraits: MegalosTrait[] = [
   'Truly unbelievable singing voice',
 ]
 
-function randomTrait(suggestions: MegalosTrait[]): MegalosTrait {
-  const dieRoll = rollDie(1, suggestions.length)
-  return suggestions[dieRoll - 1]
+function randomTrait(
+  currentTrait: MegalosTrait,
+  suggestions: MegalosTrait[]
+): MegalosTrait {
+  const curatedSuggestions = without([currentTrait], suggestions)
+  const dieRoll = rollDie(1, curatedSuggestions.length)
+  return curatedSuggestions[dieRoll - 1]
 }
 
 function TraitInput(props: TraitInputProps) {
@@ -92,7 +96,7 @@ function TraitInput(props: TraitInputProps) {
           <div className="control">
             <button
               id={`trait-randomize-${slugify(label.toLowerCase())}`}
-              onClick={() => setter(randomTrait(suggestions))}
+              onClick={() => setter(randomTrait(getter, suggestions))}
             >
               <span className="icon">
                 <i className="fa-solid fa-dice"></i>
@@ -117,10 +121,13 @@ function TraitsChooser() {
     setCharacter({
       ...character,
       traits: {
-        background: randomTrait(exampleBackgroundTraits),
-        mental: randomTrait(exampleMentalTraits),
-        physical: randomTrait(examplePhysicalTraits),
-        special: randomTrait(exampleSpecialTraits),
+        background: randomTrait(
+          character.traits.background,
+          exampleBackgroundTraits
+        ),
+        mental: randomTrait(character.traits.mental, exampleMentalTraits),
+        physical: randomTrait(character.traits.physical, examplePhysicalTraits),
+        special: randomTrait(character.traits.special, exampleSpecialTraits),
       },
     })
   }
