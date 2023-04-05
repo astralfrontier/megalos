@@ -15,7 +15,7 @@ import {
   reject,
   without,
 } from 'ramda'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
@@ -95,6 +95,10 @@ function addPowerCost(
 function PowersTalentsChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
   const [selectedTab, setSelectedTab] = useState<string>('talents')
+
+  useEffect(() => {
+    setSelectedTab('talents')
+  }, [character.class.name])
 
   const benefitsUsed = reduce(
     addPowerCost,
