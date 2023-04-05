@@ -1311,9 +1311,29 @@ const sorcery = (
   description: description ? [description] : [],
 })
 
+const reduceHpByFive = {
+  effect: (character: MegalosCharacter) => ({
+    ...character,
+    calling: {
+      ...character.calling,
+      benefits: {
+        ...character.calling.benefits,
+        baseHp: character.calling.benefits.baseHp - 5,
+      },
+    },
+  }),
+}
+
 export const powers: MegalosPower[] = [
   // Invoker
-  classTalent('Binding of Five', isInvoker, powerDescriptions.BindingOfFive),
+  {
+    ...classTalent(
+      'Binding of Five',
+      isInvoker,
+      powerDescriptions.BindingOfFive
+    ),
+    ...reduceHpByFive,
+  },
   classTalent('Blood Seals', isInvoker, powerDescriptions.BloodSeals),
   classTalent(
     'Choir of Benediction',
@@ -1518,7 +1538,7 @@ export const powers: MegalosPower[] = [
         role: MegalosRole.TANK,
         benefits: {
           ...character.calling.benefits,
-          baseHp: 32,
+          baseHp: character.calling.benefits.baseHp + 8,
           baseDamage: 4,
         },
       },
@@ -1530,12 +1550,14 @@ export const powers: MegalosPower[] = [
     powerDescriptions.EnvenomedBlades
   ),
   classTalent('Executioner', isThrone, powerDescriptions.Executioner),
-  // TODO: reduce HP
-  classTalent(
-    'Flesh of Spirit, Spirit of Flesh',
-    isThrone,
-    powerDescriptions.FleshOfSpiritSpiritOfFlesh
-  ),
+  {
+    ...classTalent(
+      'Flesh of Spirit, Spirit of Flesh',
+      isThrone,
+      powerDescriptions.FleshOfSpiritSpiritOfFlesh
+    ),
+    ...reduceHpByFive,
+  },
   classTalent(
     'Greased Lightning',
     isThrone,
