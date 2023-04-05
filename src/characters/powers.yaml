@@ -1188,9 +1188,9 @@ TidesOfIron: |
 
   **1st Strike:**  
   _Minor Action ◆ Attack, Combo_  
-  **Target*: 1 foe in Weapon Range  
-  **Test*: Weapon Dice vs Dodge  
-  **Hit*: (CD) physical damage. 2 other foes in the primary target’s zone suffer 2 piercing damage.
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage. 2 other foes in the primary target’s zone suffer 2 piercing damage.
 
   **2nd Strike:**  
   _Minor Action ◆ Attack, Auto-Hit, Combo_  
@@ -1213,12 +1213,12 @@ Overwhelm: |
   A hurricane of steel and aether emanates from your violent swings. Woe betide those
   who draw too close.
 
-  _Major Action ◆◆ Attack, AoE, Charged_ 
-  **Target**: AoE (3) foes in range 0 
-  **Test**: Weapon Dice vs Dodge 
-  **Hit**: (½ CD) physical damage. 
-  **Charged**: Increase damage to (CD) & AoE to (5). 
-  **Advance**: Targets Injured by this attack gain EXPOSED. 
+  _Major Action ◆◆ Attack, AoE, Charged_  
+  **Target**: AoE (3) foes in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) physical damage.  
+  **Charged**: Increase damage to (CD) & AoE to (5).  
+  **Advance**: Targets Injured by this attack gain EXPOSED.  
   **Advance**: Charged version inflicts +3 damage.
 PerfectSlash: |
   A single, immaculate strike, practiced endlessly to exhaustion that it might serve well
@@ -1253,6 +1253,15 @@ UmbralCinders: |
   **Advance**: Increase Charged range to 3.  
   **Advance**: Worsen WOUNDED statuses inflicted as a result of this power to WOUNDED (15).
 SoulEater: |
+  Your Darkside looms over your strikes, tearing at your foes’ souls to invigorate you.
+
+  _Minor Action ◆ Attack_  
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Special**: If the target is Injured or becomes Injured by this attack, I gain REGEN.  
+  **Advance**: Target either Dodge or Ward, whichever is lower.  
+  **Advance**: Gain Advantage with this attack against Injured foes.
 GatheringShadows: |
   Your Darkside pools in a writhing mass of shadows which lash out like barbed
   ebon chains, inky fetters, or tearing claws to pull your foes into range.
@@ -1264,18 +1273,189 @@ GatheringShadows: |
   **Advance**: Increase damage by +1.
   **Advance**: Increase range to 2.
 DarksideRelease: |
+  Your Darkside makes for itself a body from the energy of your cœrona. It tears across
+  the battlefield sowing death and reaping a bounty of vital aether.
+
+  _Free Action ◇ Finisher, Auto-Hit, Heal_  
+  **Trigger**: I Injure a foe or damage an Injured foe  
+  **Limit**: 1 / round  
+  **Cost**: 1 Aether Current die  
+  **Hit**: I roll the AC die spent to activate this power twice and inflict piercing
+  damage on the triggering target equal to the higher of the two rolls. Divide the
+  result by 2 (rounded up to the nearest whole number) and inflict that much
+  piercing damage on a 2nd target within range 1 of the triggering target. Then
+  Divide the damage dealt to the 2nd target by 2 (rounded up) and inflict that
+  much piercing damage on a 3rd target within range 1 of the 2nd target.  
+  **Special**: I Heal 2 for each target damaged by this action.
 BladeTwisting: |
+  Put a li’l extra mustard on it.
+
+  _Reaction ◇_  
+  **Trigger**: I damage a non-Injured foe & fail to Injure them.  
+  **Effect**: Inflict +1 damage and SICK on the target of the triggering attack.  
+  **Advance**: Worsen status to SICK (15).  
+  **Advance**: Increase damage bonus to +3.
 BloodyMess: |
+  Teach them the true meaning of “fear”.
+
+  _Reaction ◇_  
+  **Trigger**: I defeat a foe  
+  **Effect**: Up to 3 foes within range 1 of the triggering foe become AFRAID of me.  
+  **Advance**: Increase to range 2 and maximum affected foes to 5.  
+  **Advance**: Targets who were already AFRAID of me are pushed 1 away from the foe that triggered this reaction.
 DrakulsGrasp: |
+  If they would take from you, you’ll simply
+  have to take back from them.
+
+  _Reaction ◇ Healing_  
+  **Trigger**: I am Injured by a foe in melee  
+  **Effect**: I inflict 3 piercing damage on the foe & Heal 3.  
+  **Advance**: Increase damage & Heal by +1.  
+  **Advance**: Change Trigger to “Trigger: I am Injured by a foe within range 2” and Effect to “Effect: I teleport adjacent to triggering foe. They suffer 3 piercing damage & I Heal 3.”
 EmbraceOfNight: |
+  Your Darkside digs in to finish the job.
+
+  _Reaction ◇_  
+  **Trigger**: A foe is damaged but not defeated by my Finisher  
+  **Effect**: Triggering foe suffers 3 piercing damage & is DAZED.  
+  **Advance**: Increase damage to 5.  
+  **Advance**: Worsen status to DAZED (15).
 ShadowNemesis: |
+  Your Darkside reminds you: Why suffer
+  alone, when you could retaliate in kind?
+
+  _Reaction ◇_  
+  **Trigger**: I am hit by an attack by a foe within range 3  
+  **Effect**: I teleport adjacent to the attacking foe, and they become EXPOSED.  
+  **Advance**: I also become Set Up.  
+  **Advance**: I gain a +2 bonus to Soak against the triggering attack.
 Wraithwalker: |
+  You are as smoke & shadow - untouchable.
+
+  _Reaction ◇_  
+  **Trigger**: I trigger a Reaction  
+  **Effect**: I suffer no damage from the Reaction & the foe that used the Reaction is AFRAID of me.  
+  **Advance**: I can teleport 1 after resolving this action.  
+  **Advance**: Triggering foe also suffers 3 piercing damage.
 AbyssalVenom: |
+  Born of your shadowy cœr, dark soul-poisons coat your weapon that eat through
+  flesh & spell alike.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) toxic damage.  
+  **Effect**: Target suffers SICK.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo, Dispel_  
+  **Target**: AoE (3) foes in Weapon Range  
+  **Hit**: (½ CD) toxic damage & Dispel 1.  
+  **Advance**: Increase range of both Strikes by +1.  
+  **Advance**: Targets roll soak with disadvantage against both Strikes.
 CarvingStrike: |
+  Razor-edged shadows wreathe your weapon, becoming a jagged cutting spiral.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage & WOUNDED.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo_  
+  **Target**: 1 foe in range 0  
+  **Hit**: (½ CD) physical damage.  
+  **Special**: WOUNDED targets suffer +1d6 damage.  
+  **Advance**: 1 instance of the WOUNDED status worsens to WOUNDED (15).  
+  **Advance**: For both strikes, change Target to “Target: 1 foe in range 1” and add “Special: Teleport adjacent to target before resolving this attack.”
 ChaosSwarm: |
+  A swarm of deadly shadows follows your strikes, shrieking like an undulating mass of
+  sparrows as it tears into your foes & surrounds you like a rippling shield.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo_  
+  **Target**: AoE (3) foes in Weapon Range  
+  **Hit**: 3 piercing damage & all targets become AFRAID of me.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo_  
+  **Target**: AoE (3) in Weapon Range  
+  **Hit**: (½ CD) physical damage.  
+  **Effect**: I gain SHIELDED.  
+  **Special**: I can choose to fly to the targeted zone before resolving the attack.  
+  **Advance**: Increase AoE of both Strikes to (4).  
+  **Advance**: Increase damage of the 1st Strike to 5.
 CloakAndDagger: |
+  Stepping through corridors of Darkness, you become an indistinct twist of shadow
+  that seems barely there at all– until suddenly it strikes.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) physical damage.  
+  **Effect**: I gain CLOAKED.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo, Movement_  
+  **Target**: 1 foe in range 0  
+  **Hit**: (½ CD) physical damage.  
+  **Special**: I gain CLOAKED & teleport 2 after resolving the attack.  
+  **Advance**: Increase damage of 1st Strike to (CD).  
+  **Advance**: 2nd Strike gains “Effect: Inflict 2 piercing damage to a foe in the end zone after Teleporting.”
 AbyssalCrush: |
+  Giant clawed hands of shadow swing from behind you as you wield your weapon.
+
+  _Major Action ◆◆ Attack, Charged, Forced Movement_  
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) umbral damage & target is Pushed 1.  
+  **Charged**: Increase damage by +2 & Hit gains “target is STUNNED”.  
+  **Advance**: Charged version increases the Push & damage bonus by +1 each.  
+  **Advance**: If the target is pushed into an end zone with other foes in it, those other foes suffer 2 piercing damage.
 BlackfireBlast: |
+  You draw in a mass of crackling Dark aether, shaping it into a roaring orb of destruction.
+  When you hurl this explosive mass at your foes, it burns and freezes them.
+
+  _Major Action ◆◆ Attack, AoE, Charged_  
+  **Target**: AoE (2) foes in range 2  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage.  
+  **Charged**: Increase damage to (CD) & AoE to (4). Add “Effect: Targets suffer WOUNDED.”  
+  **Advance**: Increase range to 3.  
+  **Advance**: Charged version’s damage is increased by +3.
 FlickeringGuillotine: |
+  Honing your Darkside into the shape of a curved blade, your next attack is echoed by
+  your shadowy assistant with deadly precision.
+
+  _Major Action ◆◆ Attack, Charged_  
+  **Target**: 1 foe in range Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage and target is SLOWED.  
+  **Charged**: +3 damage. If this attack Injures or defeats the target, I regain 1 spent AC die.  
+  **Advance**: If the target is defeated by this action, all foes in their zone become AFRAID of me.  
+  **Advance**: Charged version also inflicts +2 more damage & WOUNDED if the target is Injured by the action.
 SteelExorcism: |
+  The Darkness within becomes a devouring mass of anti-magic, and your strikes destroy the blessings & spellcraft of their victims.
+
+  _Major Action ◆◆ Attack, Charged, Dispel_  
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage & Dispel 1.  
+  **Charged**: +2 damage & target becomes “Target: AoE (3) in Weapon Range”.  
+  **Advance**: Increase to Dispel 2.  
+  **Advance**: If the target has no effects to Dispel, they suffer +3 damage instead.
 VassagosScythe: |
+  Wielding your Darkside itself like a weapon, you feed the darkling beast your own living aether
+  in order to fuel its deadly rampage.
+
+  _Major Action ◆◆ Attack, AoE, Charged, Sacrifice (4)_  
+  **Target**: AoE (3) foes in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) umbral damage.  
+  **Special**: Gain a bonus to one Weapon Die rolled equal to the HP Sacrificed.  
+  **Charged**: Base damage becomes (CD), increase damage equal to HP Sacrificed.  
+  **Advance**: Increase Sacrifice to (8).  
+  **Advance**: If this attack defeats a non-minion target, I regain half the HP sacrificed (rounded up to the nearest whole number).
