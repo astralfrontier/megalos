@@ -446,7 +446,7 @@ export const classes: MegalosClass[] = [
     benefits: {
       invocations: 2,
       arcana: 1,
-      talents: 2,
+      talents: 1,
     },
   },
   {
@@ -477,7 +477,7 @@ export const classes: MegalosClass[] = [
     ],
     benefits: {
       strikes: 2,
-      counters: 2,
+      counters: 1,
       talents: 1,
     },
   },
