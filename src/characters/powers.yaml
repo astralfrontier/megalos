@@ -775,3 +775,69 @@ TheWarriorsRíastrad: |
   **Advance**: EMPOWERED & SHIELDED conditions last 3 rounds instead of 2.  
   **Advance**: Increase range to 2 and I can fly adjacent to the target before
   resolving the attack.
+Artillerist: |
+  When wielding a ranged weapon I gain +3 on one die in my die pool
+  whenever I roll attacks. I choose the die to gain the bonus after rolling.
+AuraOfMight: |
+  Allies in Aura 0 gain +1 CD for every 2 unspent AC dice.
+CrisisCœr: |
+  When I have 0 AC dice I gain Advantage with attack rolls.
+DarkestKnight: |
+  My role changes to **Tank**: my Base HP becomes 32, my base
+  damage is reduced to 4, and my soak changes to 2d6. My calling bonus
+  ability changes to **_Gathering Shadows_**. Whenever I would inflict the
+  AFRAID condition, I can choose to inflict TAUNTED instead. If I retrain out
+  of this talent later, I need to remember to undo these changes.
+EnvenomedBlades: |
+  Targets damaged by my Finisher suffer SICK. At level 3 the status' severity
+  increases to SICK (15).
+Executioner: |
+  When wielding melee weapons, I trigger Surges on attack rolls of 19 or 20,
+  and my Surges spent on bonus damage add +5 damage instead of +3.
+FleshOfSpiritSpiritOfFlesh: |
+  My maximum Aether Current dice increases to 5, but my maximum HP is
+  reduced by -5 as well.
+GreasedLightning: |
+  1/ round: I can use a Counter without spending a Reaction Opportunity by
+  instead spending an AC die. At level 9, I can do this up to twice per round.
+HeartOfDarkness: |
+  At the end of my turns, if I inflicted damage on at least 1 foe that turn, I
+  heal 2. At levels 3 & 9 this talent improves to Heal 3 & 4, respectively.
+HeartOfIron: |
+  After resolving damage from any source, as long as I am not reduced to 0
+  HP by the damage, I Heal 1. At level 3 this talent improves to Heal 2.
+HeartOfLight: |
+  At the start of each of my turns, one ally per unspent AC die in range 1
+  heals 2. At levels 3 & 9 the healing effect improves by +1.
+InfernoDivision: |
+  Targets damaged by my Finisher are WOUNDED. At level 3 the status'
+  severity increases to WOUNDED (15).
+Liftoff: |
+  I can fly at will. Any movement I take can be flight instead of its normal
+  movement type.
+Multiattack: |
+  I do not suffer the first instance of the stacking damage penalty for using
+  multiple actions with the Attack tag in the same round, but the penalty
+  still accrues. For instance, if I use two attacks, neither suffers the penalty,
+  and if I use three attacks, the third only suffers a -2 penalty. This doesn't
+  stack with similar effects which allow me to ignore this penalty.
+OneTwoPunch: |
+  I gain Advantage on the attack roll with the 2nd Strike of Combo actions.
+Resurgence: |
+  When I am first _Injured_ in an encounter I regain up to 2 spent AC dice.
+SnapKick: |
+  My **Auto-Attack Free Action** occurs at the end of my turn instead of the
+  end of the round.
+SneakAttack: |
+  I gain +2 CD against foes engaged with at least one of my allies. I do not
+  gain this benefit against enemies I've TAUNTED. This bonus to CD
+  increases by +1 at levels 3 & 9.
+SolidCœr: |
+  I gain +1 Dodge & +1 on Soak rolls as long as I have more than 0 AC dice.
+SwordAndBoard: |
+  My Base Damage counts as 6 for purposes of Auto-Attacks & Punishment
+  Reactions.
+WingsOfTheSavior: |
+  When an Injured ally in Aura 0 suffers damage, I can choose to suffer that
+  damage for them instead. I apply my soak to this damage (or don't if it's
+  Piercing) as normal. At level 3, this Aura increases to 2.

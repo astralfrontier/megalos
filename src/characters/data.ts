@@ -1502,30 +1502,15 @@ export const powers: MegalosPower[] = [
   ),
 
   // Throne
+  classTalent('Artillerist', isThrone, powerDescriptions.Artillerist),
+  classTalent('Aura of Might', isThrone, powerDescriptions.AuraOfMight),
+  classTalent('Crisis Cœr', isThrone, powerDescriptions.CrisisCœr),
   {
-    ...classTalent('Artillerist', isThrone),
-    description: [
-      `When wielding a ranged weapon I gain +3 on one die in my die pool
-    whenever I roll attacks. I choose the die to gain the bonus after rolling.`,
-    ],
-  },
-  {
-    ...classTalent('Aura of Might', isThrone),
-    description: [`Allies in Aura 0 gain +1 CD for every 2 unspent AC dice.`],
-  },
-  {
-    ...classTalent('Crisis Cœr', isThrone),
-    description: [`When I have 0 AC dice I gain Advantage with attack rolls.`],
-  },
-  {
-    ...classTalent('Darkest Knight', isShadowblade),
-    description: [
-      `My role changes to **Tank**: my Base HP becomes 32, my base
-      damage is reduced to 4, and my soak changes to 2d6. My calling bonus
-      ability changes to **_Gathering Shadows_**. Whenever I would inflict the
-      AFRAID condition, I can choose to inflict TAUNTED instead. If I retrain out
-      of this talent later, I need to remember to undo these changes.`,
-    ],
+    ...classTalent(
+      'Darkest Knight',
+      isShadowblade,
+      powerDescriptions.DarkestKnight
+    ),
     effect: (character) => ({
       ...character,
       calling: {
@@ -1539,130 +1524,52 @@ export const powers: MegalosPower[] = [
       },
     }),
   },
-  {
-    ...classTalent('Envenomed Blades', isShadowblade),
-    description: [
-      `Targets damaged by my Finisher suffer SICK. At level 3 the status' severity
-    increases to SICK (15).`,
-    ],
-  },
-  {
-    ...classTalent('Executioner', isThrone),
-    description: [
-      `When wielding melee weapons, I trigger Surges on attack rolls of 19 or 20,
-      and my Surges spent on bonus damage add +5 damage instead of +3.`,
-    ],
-  },
-  {
-    ...classTalent('Flesh of Spirit, Spirit of Flesh', isThrone),
-    description: [
-      `My maximum Aether Current dice increases to 5, but my maximum HP is
-      reduced by -5 as well.`,
-    ],
-  },
-  {
-    ...classTalent('Greased Lightning', isThrone),
-    description: [
-      `1/ round: I can use a Counter without spending a Reaction Opportunity by
-    instead spending an AC die. At level 9, I can do this up to twice per round.`,
-    ],
-  },
-  {
-    ...classTalent('Heart of Darkness', isShadowblade),
-    description: [
-      `At the end of my turns, if I inflicted damage on at least 1 foe that turn, I
-    heal 2. At levels 3 & 9 this talent improves to Heal 3 & 4, respectively.`,
-    ],
-  },
-  {
-    ...classTalent('Heart of Iron', isChampion),
-    description: [
-      `After resolving damage from any source, as long as I am not reduced to 0
-    HP by the damage, I Heal 1. At level 3 this talent improves to Heal 2.`,
-    ],
-  },
-  {
-    ...classTalent('Heart of Light', isArklight),
-    description: [
-      `At the start of each of my turns, one ally per unspent AC die in range 1
-    heals 2. At levels 3 & 9 the healing effect improves by +1.`,
-    ],
-  },
-  {
-    ...classTalent('Inferno Division', isChampion),
-    description: [
-      `Targets damaged by my Finisher are WOUNDED. At level 3 the status'
-    severity increases to WOUNDED (15).`,
-    ],
-  },
-  {
-    ...classTalent('Liftoff', isThrone),
-    description: [
-      `I can fly at will. Any movement I take can be flight instead of its normal
-    movement type.`,
-    ],
-  },
-  {
-    ...classTalent('Multiattack', isThrone),
-    description: [
-      `I do not suffer the first instance of the stacking damage penalty for using
-    multiple actions with the Attack tag in the same round, but the penalty
-    still accrues. For instance, if I use two attacks, neither suffers the penalty,
-    and if I use three attacks, the third only suffers a -2 penalty. This doesn't
-    stack with similar effects which allow me to ignore this penalty.`,
-    ],
-  },
-  {
-    ...classTalent('One-Two Punch', isChampion),
-    description: [
-      `I gain Advantage on the attack roll with the 2nd Strike of Combo actions.`,
-    ],
-  },
-  {
-    ...classTalent('Resurgence', isThrone),
-    description: [
-      `When I am first _Injured_ in an encounter I regain up to 2 spent AC dice.`,
-    ],
-  },
-  {
-    ...classTalent('Snap Kick', isThrone),
-    description: [
-      `My **Auto-Attack Free Action** occurs at the end of my turn instead of the
-    end of the round.`,
-    ],
-  },
-  {
-    ...classTalent('Sneak Attack', isShadowblade),
-    description: [
-      `I gain +2 CD against foes engaged with at least one of my allies. I do not
-    gain this benefit against enemies I've TAUNTED. This bonus to CD
-    increases by +1 at levels 3 & 9.`,
-    ],
-  },
-  {
-    ...classTalent('Solid Cœr', isThrone),
-    description: [
-      `I gain +1 Dodge & +1 on Soak rolls as long as I have more than 0 AC dice.`,
-    ],
-  },
-  {
-    ...classTalent(
-      'Sword & Board',
-      either(isArklight, hasPower('Darkest Knight'))
-    ),
-    description: [
-      `My Base Damage counts as 6 for purposes of Auto-Attacks & Punishment
-    Reactions.`,
-    ],
-  },
-  {
-    ...classTalent('Wings of the Savior', isArklight),
-    description: [
-      `When an Injured ally in Aura 0 suffers damage, I can choose to suffer that
-  damage for them instead. I apply my soak to this damage (or don't if it's
-  Piercing) as normal. At level 3, this Aura increases to 2.`,
-    ],
-  },
+  classTalent(
+    'Envenomed Blades',
+    isShadowblade,
+    powerDescriptions.EnvenomedBlades
+  ),
+  classTalent('Executioner', isThrone, powerDescriptions.Executioner),
+  // TODO: reduce HP
+  classTalent(
+    'Flesh of Spirit, Spirit of Flesh',
+    isThrone,
+    powerDescriptions.FleshOfSpiritSpiritOfFlesh
+  ),
+  classTalent(
+    'Greased Lightning',
+    isThrone,
+    powerDescriptions.GreasedLightning
+  ),
+  classTalent(
+    'Heart of Darkness',
+    isShadowblade,
+    powerDescriptions.HeartOfDarkness
+  ),
+  classTalent('Heart of Iron', isChampion, powerDescriptions.HeartOfIron),
+  classTalent('Heart of Light', isArklight, powerDescriptions.HeartOfLight),
+  classTalent(
+    'Inferno Division',
+    isChampion,
+    powerDescriptions.InfernoDivision
+  ),
+  classTalent('Liftoff', isThrone, powerDescriptions.Liftoff),
+  classTalent('Multiattack', isThrone, powerDescriptions.Multiattack),
+  classTalent('One-Two Punch', isChampion, powerDescriptions.OneTwoPunch),
+  classTalent('Resurgence', isThrone, powerDescriptions.Resurgence),
+  classTalent('Snap Kick', isThrone, powerDescriptions.SnapKick),
+  classTalent('Sneak Attack', isShadowblade, powerDescriptions.SneakAttack),
+  classTalent('Solid Cœr', isThrone, powerDescriptions.SolidCœr),
+  classTalent(
+    'Sword & Board',
+    either(isArklight, hasPower('Darkest Knight')),
+    powerDescriptions.SwordAndBoard
+  ),
+  classTalent(
+    'Wings of the Savior',
+    isArklight,
+    powerDescriptions.WingsOfTheSavior
+  ),
 
   // Arklight
   bonusPower('Aegis of Light', isArklight),
