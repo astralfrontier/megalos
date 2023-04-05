@@ -1715,205 +1715,146 @@ export const powers: MegalosPower[] = [
   ),
 
   // Witch
+  classTalent('Armor of Runes', isRuneMagus, powerDescriptions.ArmorOfRunes),
+  classTalent('Balanced Humors', isDraloi, powerDescriptions.BalancedHumors),
+  classTalent('Cauldron Bubble', isWitch, powerDescriptions.CauldronBubble),
+  classTalent('Collage Macabre', isPsythe, powerDescriptions.CollageMacabre),
+  classTalent('Ego Shield', isPsythe, powerDescriptions.EgoShield),
   {
-    ...classTalent('Armor of Runes', isRuneMagus),
-    description: [
-      `When I use a Sorcery, I gain +1 to Defense per Weak Aether Charge and +2
-    per Surging Aether Charge expended, to a maximum of +4. This bonus
-    lasts until the end of my next turn.`,
-    ],
+    ...classTalent('Howling Pact', isWitch, powerDescriptions.HowlingPact),
+    ...reduceHpByFive,
   },
-  {
-    ...classTalent('Balanced Humors', isDraloi),
-    description: [
-      `When I use a Sacrifice power, I gain +3 on save rolls until the end of my
-    next turn. Bonus increases to +5 at level 3`,
-    ],
-  },
-  {
-    ...classTalent('Cauldron Bubble', isWitch),
-    description: [
-      `Elixirs & Phoenix Ashes I use have +2 Heal & +1 Raise, respectively. At the
-    end of any combat encounter during which I spent IP, I regain 1 spent IP.
-    At level 9, the bonuses to Heal & Raise increase to +4 & +2.`,
-    ],
-  },
-  {
-    ...classTalent('Collage Macabre', isPsythe),
-    description: [
-      `Foes that are AFRAID of me suffer +1 damage from all of my abilities.
-    Bonus increases to +2 & +3 at levels 3 & 9, respectively.`,
-    ],
-  },
-  {
-    ...classTalent('Ego Shield', isPsythe),
-    description: [
-      `While I have any active phantasms, I gain +1 to Soak rolls. Bonus increases
-    to +2 at level 3.`,
-    ],
-  },
-  {
-    ...classTalent('Howling Pact', isWitch),
-    description: [
-      `My maximum Aether Current dice increases to 5, but my maximum HP is
-    reduced by -5 as well.`,
-    ],
-  },
-  {
-    ...classTalent('Familiar', isWitch),
-    description: [
-      `I have created a being from my own Aether and other materials which
-    serves as my familiar. It can be no larger than an average adult person or
-    large wolf. It is sentient, has its own personality separate from me, and
-    can speak. If I have it helping me, I can add +1 to one die of my choice on
-    all d20-based rolls. It cannot function further than 300 feet from me
-    (about 90 meters); it will discorporate into aether and teleport back to my
-    side if it ever gets too far away. It cannot act on its own in a way that
-    would prompt a skill test or attack roll, it can only aid me.`,
-    ],
-  },
-  {
-    ...classTalent('Flight Incantation', isWitch),
-    description: [
-      `I can fly at will. Any movement I take can be flight instead of its normal
-    movement type.`,
-    ],
-  },
-  {
-    ...classTalent("L'appel du Vide", isPsythe),
-    description: [
-      `Once per round when I inflict AFRAID, 1 affected foe also suffers EXPOSED.`,
-    ],
-  },
-  {
-    ...classTalent('Lesser Glyphspells', isRuneMagus),
-    description: [
-      `I know a variety of lesser glyphs that can be woven together to easily
-    perform some minor magicks. This includes things like:
-
-    - Briefly doubling my voice's decibel level.
-    - Igniting or snuffing out nearby candles & campfires.
-    - Strengthening or revitalizing ailing plants & crops.
-    - Blessing water so that mundane impurities are removed & it is safer to drink.
-    - Mending minor breaks, tears, and stains in clothing and small objects.
-    - Opening or closing unlocked doors and containers from a zone away.
-    - Blessing a sick person to feel a bit better immediately and recover 50% faster.`,
-    ],
-  },
-  {
-    ...classTalent('Ominous Signifiers', isRuneMagus),
-    description: [
-      `Using **_Xenosyntax_** grants me a second temporary Weak Aether Charge
-    for one of my known cantrips. This Aether Charge must be expended
-    before the end of my current turn, or it is lost.`,
-    ],
-  },
-  {
-    ...classTalent('Paroxysm', isDraloi),
-    description: [
-      `When my Drain cantrips inflict damage, up to 2 other foes in the target's
-    zone suffer 2 piercing damage. At level 3 this increases to 3 piercing
-    damage.`,
-    ],
-  },
-  {
-    ...classTalent('Psychic Network', isPsythe),
-    description: [
-      `I can add up to 6 other sentient creatures to a psychic network hosted by
-    my own mind. We can communicate silently with one another at the
-    speed of thought over a distance of up to 1 mile. Each participant can
-    choose to “mute” any or all others, speak only to certain specific other
-    participants, leave the network at will, and generally set their level of
-    participation in the network as they wish. Distance increases to 10 miles at
-    level 3 and 100 miles at level 9.`,
-    ],
-  },
-  {
-    ...classTalent('Sang Réal', isDraloi),
-    description: [
-      `The first time I'm Injured in a combat encounter, I regain 1 spent AC die.
-    At level 3 this increases to up to 2 spent AC dice. AC dice gained by this
-    talent are rolled for Aether Charges with Advantage.`,
-    ],
-  },
-  {
-    ...classTalent('Some for the Doctor', isDraloi),
-    description: [
-      `When I heal an ally using a power or action that requires me to spend
-    Recovery, I also heal 3 HP. This Healing increases by +1 at levels 3 & 9.`,
-    ],
-  },
-  {
-    ...classTalent('Telekine Technique', isWitch),
-    description: [`Any melee weapon I wield gains +1 range.`],
-  },
-  {
-    ...classTalent("Witch's Cackle", isWitch),
-    description: [
-      `When I'm missed by an attack, I cackle involuntarily & gain a +1 bonus to
-    my Defense until the next time I'm hit. This effect can stack up to +3.`,
-    ],
-  },
-  {
-    ...classTalent('Xenoglossy', isRuneMagus),
-    description: [
-      `If I spend a point of Grit, I can force my mind to temporarily expand,
-    allowing me to understand all written & spoken languages for a scene. If
-    the game isn't using the optional Language rules, this talent is
-    unavailable.`,
-    ],
-  },
+  classTalent('Familiar', isWitch, powerDescriptions.Familiar),
+  classTalent(
+    'Flight Incantation',
+    isWitch,
+    powerDescriptions.FlightIncantation
+  ),
+  classTalent("L'appel du Vide", isPsythe, powerDescriptions.LappelDuVide),
+  classTalent(
+    'Lesser Glyphspells',
+    isRuneMagus,
+    powerDescriptions.LesserGlyphspells
+  ),
+  classTalent(
+    'Ominous Signifiers',
+    isRuneMagus,
+    powerDescriptions.OminousSignifiers
+  ),
+  classTalent('Paroxysm', isDraloi, powerDescriptions.Paroxysm),
+  classTalent('Psychic Network', isPsythe, powerDescriptions.PsychicNetwork),
+  classTalent('Sang Réal', isDraloi, powerDescriptions.SangRéal),
+  classTalent(
+    'Some for the Doctor',
+    isDraloi,
+    powerDescriptions.SomeForTheDoctor
+  ),
+  classTalent(
+    'Telekine Technique',
+    isWitch,
+    powerDescriptions.TelekineTechnique
+  ),
+  classTalent("Witch's Cackle", isWitch, powerDescriptions.WitchsCackle),
+  classTalent('Xenoglossy', isRuneMagus, powerDescriptions.Xenoglossy),
 
   // Draloi
-  bonusPower('Redistribute', isDraloi),
-  cantrip('Bloody Physick', isDraloi),
-  cantrip('Drain Aether', isDraloi),
-  cantrip('Drain Blood', isDraloi),
-  cantrip('Drain Soul', isDraloi),
-  cantrip('Red Flash', isDraloi),
-  cantrip('Sanguine Pavise', isDraloi),
-  sorcery('Blood Alchemy', isDraloi),
-  sorcery('Boiling Bile', isDraloi),
-  sorcery('Chirurgy', isDraloi),
-  sorcery('Conveyance', isDraloi),
-  sorcery('Haemonculus', isDraloi),
-  sorcery('Insanguinate', isDraloi),
-  sorcery('Liquefaction', isDraloi),
-  sorcery('Revivify', isDraloi),
+  bonusPower('Redistribute', isDraloi, powerDescriptions.Redistribute),
+  cantrip('Bloody Physick', isDraloi, powerDescriptions.BloodyPhysick),
+  cantrip('Drain Aether', isDraloi, powerDescriptions.DrainAether),
+  cantrip('Drain Blood', isDraloi, powerDescriptions.DrainBlood),
+  cantrip('Drain Soul', isDraloi, powerDescriptions.DrainSoul),
+  cantrip('Red Flash', isDraloi, powerDescriptions.RedFlash),
+  cantrip('Sanguine Pavise', isDraloi, powerDescriptions.SanguinePavise),
+  sorcery('Blood Alchemy', isDraloi, powerDescriptions.BloodAlchemy),
+  sorcery('Boiling Bile', isDraloi, powerDescriptions.BoilingBile),
+  sorcery('Chirurgy', isDraloi, powerDescriptions.Chirurgy),
+  sorcery('Conveyance', isDraloi, powerDescriptions.Conveyance),
+  sorcery('Haemonculus', isDraloi, powerDescriptions.Haemonculus),
+  sorcery('Insanguinate', isDraloi, powerDescriptions.Insanguinate),
+  sorcery('Liquefaction', isDraloi, powerDescriptions.Liquefaction),
+  sorcery('Revivify', isDraloi, powerDescriptions.Revivify),
 
   // Psythe
-  bonusPower('The Pledge', isPsythe),
-  cantrip('Bio-Shock', isPsythe),
-  cantrip('Fog of War', isPsythe),
-  cantrip('Haunt', isPsythe),
-  cantrip('Mind Blades', isPsythe),
-  cantrip('Phantasmagoria', isPsythe),
-  cantrip('The Turn', isPsythe),
-  sorcery('Blade Dance', isPsythe),
-  sorcery('Kinetic Throw', isPsythe),
-  sorcery('Marching Orders', isPsythe),
-  sorcery('Marionette', isPsythe),
-  sorcery('Mirage Arcana', isPsythe),
-  sorcery('The Prestige', isPsythe),
-  sorcery('Psychic Surgery', isPsythe),
-  sorcery('Psything Mind', isPsythe),
+  bonusPower('The Pledge', isPsythe, powerDescriptions.ThePledge),
+  cantrip('Bio-Shock', isPsythe, powerDescriptions.BioShock),
+  cantrip('Fog of War', isPsythe, powerDescriptions.FogOfWar),
+  cantrip('Haunt', isPsythe, powerDescriptions.Haunt),
+  cantrip('Mind Blades', isPsythe, powerDescriptions.MindBlades),
+  cantrip('Phantasmagoria', isPsythe, powerDescriptions.Phantasmagoria),
+  cantrip('The Turn', isPsythe, powerDescriptions.TheTurn),
+  sorcery('Blade Dance', isPsythe, powerDescriptions.BladeDance),
+  sorcery('Kinetic Throw', isPsythe, powerDescriptions.KineticThrow),
+  sorcery('Marching Orders', isPsythe, powerDescriptions.MarchingOrders),
+  sorcery('Marionette', isPsythe, powerDescriptions.Marionette),
+  sorcery('Mirage Arcana', isPsythe, powerDescriptions.MirageArcana),
+  sorcery('The Prestige', isPsythe, powerDescriptions.ThePrestige),
+  sorcery('Psychic Surgery', isPsythe, powerDescriptions.PsychicSurgery),
+  sorcery('Psything Mind', isPsythe, powerDescriptions.PsythingMind),
 
   // Rune Magis
-  bonusPower('Xenosyntax', isRuneMagus),
-  cantrip('Anex Malecar (Lesser Truth: Curse of Gravity)', isRuneMagus),
-  cantrip('En Vai Bruma (Lesser Mneme: Harsh Winter)', isRuneMagus),
-  cantrip('En Vai Mani (Lesser Mneme: Compassion)', isRuneMagus),
-  cantrip('Sigil of the Baleful Eye', isRuneMagus),
-  cantrip('Sigil of Combustion', isRuneMagus),
-  cantrip('Sigil of Entanglement', isRuneMagus),
-  sorcery('Asanex Gravos (Greater Truth: Burden of Time)', isRuneMagus),
-  sorcery('En Vas Pyroth (Greater Mneme: Wildfire)', isRuneMagus),
-  sorcery('Logos: Concentrativity', isRuneMagus),
-  sorcery('Logos: Eruption', isRuneMagus),
-  sorcery('Logos: Gravitation', isRuneMagus),
-  sorcery('Logos: Geoglyphic Convergence', isRuneMagus),
-  sorcery('Paracausal Darkness', isRuneMagus),
-  sorcery('Paracausal Light', isRuneMagus),
+  bonusPower('Xenosyntax', isRuneMagus, powerDescriptions.Xenosyntax),
+  cantrip(
+    'Anex Malecar (Lesser Truth: Curse of Gravity)',
+    isRuneMagus,
+    powerDescriptions.AnexMalecar
+  ),
+  cantrip(
+    'En Vai Bruma (Lesser Mneme: Harsh Winter)',
+    isRuneMagus,
+    powerDescriptions.EnVaiBruma
+  ),
+  cantrip(
+    'En Vai Mani (Lesser Mneme: Compassion)',
+    isRuneMagus,
+    powerDescriptions.EnVaiMani
+  ),
+  cantrip(
+    'Sigil of the Baleful Eye',
+    isRuneMagus,
+    powerDescriptions.SigilOfTheBalefulEye
+  ),
+  cantrip(
+    'Sigil of Combustion',
+    isRuneMagus,
+    powerDescriptions.SigilOfCombustion
+  ),
+  cantrip(
+    'Sigil of Entanglement',
+    isRuneMagus,
+    powerDescriptions.SigilOfEntanglement
+  ),
+  sorcery(
+    'Asanex Gravos (Greater Truth: Burden of Time)',
+    isRuneMagus,
+    powerDescriptions.AsanexGravos
+  ),
+  sorcery(
+    'En Vas Pyroth (Greater Mneme: Wildfire)',
+    isRuneMagus,
+    powerDescriptions.EnVasPyroth
+  ),
+  sorcery(
+    'Logos: Concentrativity',
+    isRuneMagus,
+    powerDescriptions.LogosConcentrativity
+  ),
+  sorcery('Logos: Eruption', isRuneMagus, powerDescriptions.LogosEruption),
+  sorcery(
+    'Logos: Gravitation',
+    isRuneMagus,
+    powerDescriptions.LogosGravitation
+  ),
+  sorcery(
+    'Logos: Geoglyphic Convergence',
+    isRuneMagus,
+    powerDescriptions.LogosGeoglyphicConvergence
+  ),
+  sorcery(
+    'Paracausal Darkness',
+    isRuneMagus,
+    powerDescriptions.ParacausalDarkness
+  ),
+  sorcery('Paracausal Light', isRuneMagus, powerDescriptions.ParacausalLight),
 ]
 
 const allMandatoryPowers = filter((power) => prop('mandatory', power), powers)

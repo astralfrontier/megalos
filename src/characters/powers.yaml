@@ -1459,3 +1459,126 @@ VassagosScythe: |
   **Charged**: Base damage becomes (CD), increase damage equal to HP Sacrificed.  
   **Advance**: Increase Sacrifice to (8).  
   **Advance**: If this attack defeats a non-minion target, I regain half the HP sacrificed (rounded up to the nearest whole number).
+ArmorOfRunes: |
+  When I use a Sorcery, I gain +1 to Defense per Weak Aether Charge and +2
+  per Surging Aether Charge expended, to a maximum of +4. This bonus
+  lasts until the end of my next turn.
+BalancedHumors: |
+  When I use a Sacrifice power, I gain +3 on save rolls until the end of my
+  next turn. Bonus increases to +5 at level 3
+CauldronBubble: |
+  Elixirs & Phoenix Ashes I use have +2 Heal & +1 Raise, respectively. At the
+  end of any combat encounter during which I spent IP, I regain 1 spent IP.
+  At level 9, the bonuses to Heal & Raise increase to +4 & +2.
+CollageMacabre: |
+  Foes that are AFRAID of me suffer +1 damage from all of my abilities.
+  Bonus increases to +2 & +3 at levels 3 & 9, respectively.
+EgoShield: |
+  While I have any active phantasms, I gain +1 to Soak rolls. Bonus increases
+  to +2 at level 3.
+HowlingPact: |
+  My maximum Aether Current dice increases to 5, but my maximum HP is
+  reduced by -5 as well.
+Familiar: |
+  I have created a being from my own Aether and other materials which
+  serves as my familiar. It can be no larger than an average adult person or
+  large wolf. It is sentient, has its own personality separate from me, and
+  can speak. If I have it helping me, I can add +1 to one die of my choice on
+  all d20-based rolls. It cannot function further than 300 feet from me
+  (about 90 meters); it will discorporate into aether and teleport back to my
+  side if it ever gets too far away. It cannot act on its own in a way that
+  would prompt a skill test or attack roll, it can only aid me.
+FlightIncantation: |
+  I can fly at will. Any movement I take can be flight instead of its normal
+  movement type.
+LappelDuVide: |
+  Once per round when I inflict AFRAID, 1 affected foe also suffers EXPOSED.
+LesserGlyphspells: |
+  I know a variety of lesser glyphs that can be woven together to easily
+  perform some minor magicks. This includes things like:
+
+  - Briefly doubling my voice's decibel level.
+  - Igniting or snuffing out nearby candles & campfires.
+  - Strengthening or revitalizing ailing plants & crops.
+  - Blessing water so that mundane impurities are removed & it is safer to drink.
+  - Mending minor breaks, tears, and stains in clothing and small objects.
+  - Opening or closing unlocked doors and containers from a zone away.
+  - Blessing a sick person to feel a bit better immediately and recover 50% faster.`,
+OminousSignifiers: |
+  Using **_Xenosyntax_** grants me a second temporary Weak Aether Charge
+  for one of my known cantrips. This Aether Charge must be expended
+  before the end of my current turn, or it is lost.`,
+Paroxysm: |
+  When my Drain cantrips inflict damage, up to 2 other foes in the target's
+  zone suffer 2 piercing damage. At level 3 this increases to 3 piercing
+  damage.
+PsychicNetwork: |
+  I can add up to 6 other sentient creatures to a psychic network hosted by
+  my own mind. We can communicate silently with one another at the
+  speed of thought over a distance of up to 1 mile. Each participant can
+  choose to “mute” any or all others, speak only to certain specific other
+  participants, leave the network at will, and generally set their level of
+  participation in the network as they wish. Distance increases to 10 miles at
+  level 3 and 100 miles at level 9.
+SangRéal: |
+  The first time I'm Injured in a combat encounter, I regain 1 spent AC die.
+  At level 3 this increases to up to 2 spent AC dice. AC dice gained by this
+  talent are rolled for Aether Charges with Advantage.
+SomeForTheDoctor: |
+  When I heal an ally using a power or action that requires me to spend
+  Recovery, I also heal 3 HP. This Healing increases by +1 at levels 3 & 9.
+TelekineTechnique: |
+  Any melee weapon I wield gains +1 range.
+WitchsCackle: |
+  When I'm missed by an attack, I cackle involuntarily & gain a +1 bonus to
+  my Defense until the next time I'm hit. This effect can stack up to +3.
+Xenoglossy: |
+  If I spend a point of Grit, I can force my mind to temporarily expand,
+  allowing me to understand all written & spoken languages for a scene. If
+  the game isn't using the optional Language rules, this talent is
+  unavailable.
+Redistribute: |
+BloodyPhysick: |
+DrainAether: |
+DrainBlood: |
+DrainSoul: |
+RedFlash: |
+SanguinePavise: |
+BloodAlchemy: |
+BoilingBile: |
+Chirurgy: |
+Conveyance: |
+Haemonculus: |
+Insanguinate: |
+Liquefaction: |
+Revivify: |
+ThePledge: |
+BioShock: |
+FogOfWar: |
+Haunt: |
+MindBlades: |
+Phantasmagoria: |
+TheTurn: |
+BladeDance: |
+KineticThrow: |
+MarchingOrders: |
+Marionette: |
+MirageArcana: |
+ThePrestige: |
+PsychicSurgery: |
+PsythingMind: |
+Xenosyntax: |
+AnexMalecar: |
+EnVaiBruma: |
+EnVaiMani: |
+SigilOfTheBalefulEye: |
+SigilOfCombustion: |
+SigilOfEntanglement: |
+AsanexGravos: |
+EnVasPyroth: |
+LogosConcentrativity: |
+LogosEruption: |
+LogosGravitation: |
+LogosGeoglyphicConvergence: |
+ParacausalDarkness: |
+ParacausalLight: |
