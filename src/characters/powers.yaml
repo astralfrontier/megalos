@@ -1692,20 +1692,159 @@ Revivify: |
   **Advance**: Increase to Sacrifice (8) and base Raise to 6.  
   **Advance**: I can use this as a Minor Action on an ally in range 0 instead.
 ThePledge: |
+  The house lights fade… the orchestra slowly builds… the actors appear on stage…
+
+  _Minor Action ◆ Phantasm_  
+  **Target**: 1 zone in range 1  
+  **Effect**: I create a phantasm of myself in the targeted zone. If the targeted zone has one or more foes, 1 of those foes suffers 2 piercing damage.  
+  **Advance**: Foes damaged by this power gain AFRAID.  
+  **Advance**: I can use this power as a Major Action to repeat its effect on a different target in range.
 BioShock: |
+  Nothing quite like a fistful of bioelectric lightning!
+
+  _Minor Action ◆ Cantrip, Attack, Auto-Hit_  
+  **Target**: 1 foe in range 1  
+  **Hit**: 3 piercing damage and the target is STUNNED.  
+  **Weak Charge Effect**: 1 foe in range gains AFRAID.  
+  **Surging Charge Effect**: 2 foes in range gain AFRAID.  
+  **Advance**: Increase damage to 5.  
+  **Advance**: I can use this as a Major Action to change the Target to “Target: AoE (2) in range 1.”
 FogOfWar: |
+  An illusory mist rolls into being from nowhere, shrouding your deadly phantasms.
+
+  _Minor Action ◆ Cantrip, Power Terrain_  
+  **Target**: 1 zone in range 2  
+  **Effect**: Create a zone of power terrain at the targeted zone. Foes that start their turns in
+  or move through this zone suffer DAZED, lasting only until the end of their current turn.
+  If I have phantasms in the zone, 1 foe per phantasm suffers 3 piercing damage when
+  they gain DAZED from this power. Power terrain expires on a roll of 1-3 on a d6, rolled at
+  the end of each of my turns.  
+  **Weak Charge Effect**: I gain Barrier 1.  
+  **Surging Charge Effect**: I gain Barrier 2.  
+  **Advance**: Power terrain only expires on a roll of 1 on the d6.  
+  **Advance**: I can use this power as a Major Action to repeat its effect.
 Haunt: |
+  Your psychic presence fills your foe with overwhelming, caustic dread.
+
+  _Minor Action ◆ Attack, Cantrip_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) toxic damage & the target suffers AFRAID.  
+  **Special**: If target is already AFRAID, the status worsens to AFRAID (15).  
+  **Weak Charge Effect**: 1 foe in same zone as a phantasm suffers 3 piercing damage.  
+  **Surging Charge Effect**: 1 foe in same zone as a phantasm suffers 4 piercing damage.  
+  **Advance**: Increase range to 3.  
+  **Advance**: Increase damage by +3.
 MindBlades: |
+  Shimmering blades of telekine force surround you before firing off at your foes.
+
+  _Minor Action ◆ Attack, Cantrip_  
+  **Target**: AoE (3) foes in range 1  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) physical damage.  
+  **Miss**: 2 piercing damage.  
+  **Weak Charge Effect**: 1 foe in same zone as a phantasm suffers 3 piercing damage.  
+  **Surging Charge Effect**: 1 foe in same zone as a phantasm suffers 4 piercing damage.  
+  **Advance**: Increase AoE to (4).  
+  **Advance**: If targeted zone has a phantasm in it, increase damage by +2.
 Phantasmagoria: |
+  My phantasm briefly transforms into a deadly shape- all blades & teeth & tentacles.
+
+  _Minor Action ◆ Attack, Cantrip, AoE, Auto-Hit, Phantasm_  
+  **Target**: 1 of my phantasms in range 1  
+  **Hit**: Up to 3 foes in the same zone as the phantasm suffer 4 piercing damage.  
+  **Weak Charge Effect**: I gain Barrier 1.  
+  **Surging Charge Effect**: I gain Barrier 2.  
+  **Advance**: Increase Barrier to 4.  
+  **Advance**: Increase AoE to (X+1) and range to 2.
 TheTurn: |
+  A surprise twist; tables & tides begin to turn. The time draws near for the Big Reveal.
+
+  _Minor Action ◆ Cantrip, Phantasm_  
+  **Target**: 1 zone in range 1  
+  **Effect**: I create a phantasm of myself. If I create it in the same zone as one or more allies, 1 of those allies gains Barrier 3.  
+  **Weak Charge Effect**: 1 foe in same zone as a phantasm suffers 3 piercing damage.  
+  **Surging Charge Effect**: 1 foe in same zone as a phantasm suffers 4 piercing damage.  
+  **Advance**: Allies affected by this power are also Set Up.  
+  **Advance**: I can use this power as a Major Action to repeat its effect.
 BladeDance: |
+  Briefly enter a meditative flow-state, attacking and parrying instantly & without ego.
+
+  _Major Action ◆◆ Sorcery, Attack_  
+  **Target**: 1 foe in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage & I gain SHIELDED.  
+  **Miss**: Half damage & I gain +1 on soak rolls until the start of my next turn.  
+  **Advance**: Increase damage by +3.  
+  **Advance**: I gain Advantage on the attack roll.
 KineticThrow: |
+  Crush a foe in your telekine grip and hurl them across the battlefield.
+
+  _Major Action ◆◆ Sorcery, Attack, Forced Movement_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) physical damage & slide 1 the target. If their end zone contains other foes, up to 2 of those foes suffer 2 piercing damage.  
+  **Advance**: Increase range & slide to 2.  
+  **Advance**: Increase the piercing damage to secondary targets to 3, and inflict that damage on the primary target as well.
 MarchingOrders: |
+  CHANGE PLACES!!
+
+  _Major Action ◆◆ Sorcery, Movement_  
+  **Effect**: All phantasms I have currently active can teleport 2 in any direction of my choice.  
+  **Advance**: Increase to teleport 3, and I can teleport 3 as well.  
+  **Advance**: 1 foe in each of the phantasms’ end zones suffers 1 piercing damage.
 Marionette: |
+  You briefly hijack a foe’s nervous system and drive them to attack one of their allies.
+
+  _Major Action ◆◆ Sorcery, Forced Movement_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Effect**: Target slides 2 and lashes out at a foe of my choice, inflicting 4 piercing  
+  **damage** on that target and granting Set Up to 1 ally in that zone.  
+  **Advance**: Increase range & slide to 3.  
+  **Advance**: Increase damage to 5 and the damaged foe is also EXPOSED.
 MirageArcana: |
+  Your illusions weft & weave into one another, turning the battlefield into a confusing
+  hellscape of invisible deathtraps & chaos.
+
+  _Major Action ◆◆ Sorcery, Power Terrain_  
+  **Target**: 1 zone in range 2  
+  **Effect**: 1 zone within range 2. Effect: Create a zone of power terrain at the
+  targeted zone. Allies who start their turn in this terrain or move through it gain
+  CLOAKED & are Set Up. Power terrain expires on a roll of 1-3 on a d6, rolled at the
+  end of each of my turns.  
+  **Advance**: Power terrain only expires on a roll of 1 on the d6.  
+  **Advance**: My phantasms in the targeted zone each inflict 2 piercing damage on
+  1 foe in that zone.
 ThePrestige: |
+  At last! The denouement! A roar of applause! A final curtain!
+
+  _Major Action ◆◆ Sorcery, Phantasm_  
+  **Effect**: All phantasms I control inflict 5 piercing damage on 1 foe of my choice in
+  their zone. After resolving all Aether Charge effects, all Phantasms expire. I may
+  teleport 1 before or after resolving this power.  
+  **Advance**: AFRAID targets suffer +2 damage.  
+  **Advance**: I also gain CLOAKED after teleporting.
 PsychicSurgery: |
+  Mind over matter. You will your body become whole again.
+
+  _Major Action ◆◆ Sorcery, Healing_  
+  **Cost**: 1 Recovery  
+  **Target**: Self  
+  **Effect**: I heal (RB + 2).  
+  **Advance**: I also gain Cleanse 1 when I use this power.  
+  **Advance**: I can use this on an ally in range 0, instead of myself.
 PsythingMind: |
+  A luminous blade of psychic energy sweeps across your foes.
+
+  _Major Action ◆◆ Sorcery, Attack, AoE_  
+  **Target**: AoE (3) in Weapon Range  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Miss**: Half damage.  
+  **Special**: If any non-minion targets are Injured or defeated by this power, I regain 1 AC die.  
+  **Advance**: Increase damage by +2.  
+  **Advance**: If I regain an AC die from this power, I can immediately add it as a Surging Charge to a cantrip of my choice.
 Xenosyntax: |
 AnexMalecar: |
 EnVaiBruma: |
