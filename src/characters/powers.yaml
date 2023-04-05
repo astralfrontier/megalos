@@ -841,3 +841,262 @@ WingsOfTheSavior: |
   When an Injured ally in Aura 0 suffers damage, I can choose to suffer that
   damage for them instead. I apply my soak to this damage (or don't if it's
   Piercing) as normal. At level 3, this Aura increases to 2.
+AegisOfLight: |
+  A light shines from within your heart, crystallizing into a magicked shield of aether.
+  Your cœrona protects you from harm, bolstered by this crystallized energy.
+
+  _Reaction ◇ Forfend_  
+  **Trigger**: I suffer damage for the first time in a combat encounter  
+  **Effect**: I gain Forfend (6), and can immediately apply up to 6 of the damage
+  suffered to my Forfend pool.  
+  **Advance**: Increase to Forfend (12).  
+  **Advance**: I gain +1 on Soak while I have any damage in my Forfend pool.
+WarriorOfLight: |
+  Your resolve strengthens and a pure aetheric light coalesces into a weapon in your
+  hands. With this blade of light will you smite your foes & bring succor to the wounded.
+
+  _Free Action ◇ Finisher, Auto-Hit, Healing, Multi-Target_  
+  **Trigger**: I Injure a foe or damage an Injured foe  
+  **Limit**: 1 / round  
+  **Cost**: 1 Aether Current die  
+  **Hit**: I roll the AC die spent to activate this power and inflict piercing damage on
+  the triggering target equal to the roll. Then I choose one:
+  - Up to 3 allies in range 1. Targets heal for the amount rolled.
+  - Up to 3 foes in range 1. Targets suffer piercing damage equal to the amount rolled.
+  - Up to 4 creatures in range 0. Allies heal for half the amount rolled. Foes suffer half the amount rolled as piercing damage.
+ArkenGlow: |
+  Your cœr shines bright, cleansing afflictions.
+
+  _Reaction ◇_  
+  **Trigger**: An ally within range 1 fails a save  
+  **Effect**: Triggering ally can roll the save again.  
+  **Advance**: Increase range to 2.  
+  **Advance**: The ally’s second roll has Advantage.
+FalconDive: |
+  Dive at your foe, weapon in hand, to punish
+  their temerity with steel.
+
+  _Reaction ◇ Attack, Auto-Hit_  
+  **Trigger**: An ally within range 1 is damaged by a melee attack  
+  **Effect**: I fly adjacent to the triggering ally’s attacker and perform an Auto-Attack free action on the attacker.  
+  **Advance**: Increase range to 2.  
+  **Advance**: Inflict 2 piercing damage on all other enemies in the zone.
+LordsPaces: |
+  Your iron will ensures they pay the toll.
+
+  _Reaction ◇ Attack, Auto-Hit_  
+  **Trigger**: An enemy enters my zone  
+  **Effect**: I perform an Auto-Attack free action on the attacker.  
+  **Advance**: Triggering enemy is SLOWED.  
+  **Advance**: Triggering enemy is TAUNTED
+UnderWing: |
+  You have vowed that your flock shall never know pain without swift justice following.
+
+  _Reaction ◇_  
+  **Trigger**: An ally within range 1 is Injured by a foe’s attack  
+  **Effect**: I fly adjacent to the triggering ally. Triggering ally gains Barrier 1 & the foe that Injured them is TAUNTED.  
+  **Advance**: Increase range & Barrier by +1.  
+  **Advance**: TAUNTED foe also suffers 2 piercing damage.
+WingsOfConviction: |
+  Wings of light bloom from your back, their
+  aetheric feathers dispersing over your allies
+  and filling them with determination.
+
+  _Reaction ◇_  
+  **Trigger**: I use my Finisher  
+  **Effect**: All allies healed by my Finisher gain EMPOWERED for 1 round.  
+  **Advance**: One affected ally is also Set Up.  
+  **Advance**: One foe in range 1 is EXPOSED.
+WingsOfDivinity: |
+  Wings of light bloom from your back, their
+  aetheric feathers dispersing over your allies
+  and soothing their wounds.
+
+  _Reaction ◇_  
+  **Trigger**: I use my Finisher  
+  **Effect**: All allies healed by my Finisher gain REGEN for 1 round.  
+  **Advance**: One affected ally gains SHIELDED.  
+  **Advance**: Effect gains “I can remove up to 3 damage from my Forfend pool”.
+WingsOfWrath: |
+  Wings of light bloom from your back, their
+  glowing feathers dispersing over your foes
+  like explosive blades of aether.
+
+  _Reaction ◇_  
+  **Trigger**: I use my Finisher  
+  **Effect**: Up to 3 foes within range 1 not damaged by my Finisher suffer 2 piercing damage.  
+  **Advance**: Increase range to 3.  
+  **Advance**: Increase maximum number of targets to 5.
+BattleBrand: |
+  Your weapon blazes with burning light, branding your foes and burning them to ash.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage.  
+  **Effect**: Target is TAUNTED.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo_  
+  Target: All TAUNTED foes in range 1  
+  **Hit**: 4 piercing damage & targets suffer Disadvantage on their next save roll.  
+  **Advance**: 2nd Strike improves to 5 piercing damage.  
+  **Advance**: Gain Advantage on the attack roll with 1st Strike.
+EndlessWaltz: |
+  A dance of death; strike, parry, riposte. They expose their weakness to your allies and
+  fall beneath your warding blade, their steel hardly even biting your flesh.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) physical damage.  
+  **Effect**: If the target is TAUNTED, I gain SHIELDED.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo, Mark_  
+  **Target**: 1 foe in range 0 hit by the 1st Strike of this power this turn.  
+  **Hit**: 5 piercing damage and target is Marked until start of my next turn.  
+  **Mark**: Allies who attack this target gain +1 on their attack rolls & damage.  
+  **Advance**: 1st Strike’s damage improves to (CD).  
+  **Advance**: Marked status extends to the end of next turn, and the bonus to hit and damage improves to +2.
+RoyalArms: |
+  Your swing creates a giant ghostly weapon whose sweep knocks a foe closer before it
+  crashes down again in an explosion of astral aether.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo, Forced Movement_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage.  
+  **Effect**: Target is Pulled 1.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo, Forced Movement_  
+  **Target**: AoE (3) in range 1  
+  **Hit**: ([½ CD]+2) astral damage.  
+  **Effect**: Targets are Pulled 1.  
+  **Advance**: Increase AoE of 2nd Strike to (4).  
+  **Advance**: Increase range of both strikes to 2.
+ThundergodsSteel: |
+  You call out to the skies and tremble as the brilliance of a thousand bolts blind thine
+  enemies and tears their flesh asunder.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, AoE, Combo_  
+  **Target**: AoE (3) in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) umbral damage.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo_  
+  **Target**: AoE (3) in range 0  
+  **Hit**: ([½ CD]+2) umbral damage.  
+  **Effect**: Targets suffer Disadvantage on their next attack roll.  
+  **Advance**: Inflict +2 damage with 2nd Strike.  
+  **Advance**: Increase AoE of both strikes to (4).
+ArmigersWrath: |
+  You summon the spectral weapons of great warriors of eld, which dance and slash
+  and swing in a glorious flurry of controlled destruction.
+
+  _Major Action ◆◆ Attack, AoE, Charged_  
+  **Target**: AoE (3) foes in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (½ CD) umbral damage.  
+  **Special**: TAUNTED enemies suffer +3 damage.  
+  **Charged**: Increase Range to 1 and all targets suffer EXPOSED.  
+  **Advance**: Increase AoE to (5).  
+  **Advance**: Targets that aren’t TAUNTED suffer TAUNTED.
+ConfessorsStrike: |
+  You leverage the weight- the weight of doubt, of guilt, of fear- within your foe’s soul to
+  crush their body & resolve alike.
+
+  _Major Action ◆◆ Attack, Charged_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Effect**: Target suffers Disadvantage on their next attack roll.  
+  **Charged**: Increase Range to 1 and damage by +4.  
+  **Advance**: Target is DAZED instead of gaining Disadvantage on their next attack.  
+  **Advance**: If the target has damaged one of your allies since your last turn, they suffer +3 additional damage.
+DesolatingVerdict: |
+  You have had enough of this villain’s hate & venom. Your mighty blow sends them flying away and weighs them down with magicked fetters.
+
+  _Major Action ◆◆ Attack, Charged, Forced Movement_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Effect**: Target is Pushed 2.  
+  **Charged**: Increase Damage by +2 and target is SLOWED.  
+  **Advance**: Increase Push to 3.  
+  **Advance**: If the target ends the forced movement in a zone with no allies, they suffer 2 Piercing damage.
+HospitalersCry: |
+  A surge of astral aether buffets your foes and bolsters your friends.
+
+  _Major Action ◆◆ Attack, Charged_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage.  
+  **Effect**: 1 ally in range 0 gains Barrier 1.  
+  **Charged**: Gains the Multi-Target tag. Change Target to “Up to 2 foes in range 1.”  
+  **Change** Effect to “Effect: Up to 2 allies in range 1 gain Barrier 1 & Cleanse 1.”  
+  **Advance**: Increase damage & Barrier by +1.  
+  **Advance**: Charged version affects up to 3 foes & 3 allies.
+NorthswainSlash: |
+  A chill wind blows and ice-blue energy wreathes your weapon. Chains of ice bind
+  your foe in place as you strike them repeatedly.
+
+  _Major Action ◆◆ Attack, Charged_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) astral damage.  
+  **Effect**: Target is SLOWED.  
+  **Charged**: Increase range to 1 and Effect becomes “Effect: Target is IMMOBILIZED”.  
+  **Advance**: Charged version increases damage by +3.  
+  **Advance**: Base range increases to 1 & Charged range increases to 2.
+WildCharge: |
+AetherdriveBreaker: |
+AbsoluteDenial: |
+Carnage: |
+DevilDeflection: |
+ImperialCancel: |
+Suckerpunch: |
+Takedown: |
+Turnabout: |
+AerialCharge: |
+MeteorDrop: |
+Outrager: |
+TidesOfIron: |
+AstralDrive: |
+Overwhelm: |
+PerfectSlash: |
+Powerbomb: |
+UmbralCinders: |
+SoulEater: |
+GatheringShadows: |
+  Your Darkside pools in a writhing mass of shadows which lash out like barbed
+  ebon chains, inky fetters, or tearing claws to pull your foes into range.
+
+  _Minor Action ◆ Attack, AoE, Auto-Hit_
+  **Target**: AoE (3) foes in range 1
+  **Hit**: 3 piercing damage.
+  **Effect**: Targets are pulled 1 & TAUNTED.
+  **Advance**: Increase damage by +1.
+  **Advance**: Increase range to 2.
+DarksideRelease: |
+BladeTwisting: |
+BloodyMess: |
+DrakulsGrasp: |
+EmbraceOfNight: |
+ShadowNemesis: |
+Wraithwalker: |
+AbyssalVenom: |
+CarvingStrike: |
+ChaosSwarm: |
+CloakAndDagger: |
+AbyssalCrush: |
+BlackfireBlast: |
+FlickeringGuillotine: |
+SteelExorcism: |
+VassagosScythe: |

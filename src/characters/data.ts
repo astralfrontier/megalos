@@ -1594,68 +1594,125 @@ export const powers: MegalosPower[] = [
   ),
 
   // Arklight
-  bonusPower('Aegis of Light', isArklight),
-  finisher('Warrior of Light', isArklight),
-  counter('Arken Glow', isArklight),
-  counter('Falcon Dive', isArklight),
-  counter("Lord's Paces", isArklight),
-  counter('Under Wing', isArklight),
-  counter('Wings of Conviction', isArklight),
-  counter('Wings of Divinity', isArklight),
-  counter('Wings of Wrath', isArklight),
-  comboStrike('Battle Brand', isArklight),
-  comboStrike('Endless Waltz', isArklight),
-  comboStrike('Royal Arms', isArklight),
-  comboStrike("Thundergod's Steel", isArklight),
-  chargedStrike("Armiger's Wrath", isArklight),
-  chargedStrike("Confessor's Strike", isArklight),
-  chargedStrike('Desolating Verdict', isArklight),
-  chargedStrike("Hospitaler's Cry", isArklight),
-  chargedStrike('Northswain Slash', isArklight),
+  bonusPower('Aegis of Light', isArklight, powerDescriptions.AegisOfLight),
+  finisher('Warrior of Light', isArklight, powerDescriptions.WarriorOfLight),
+  counter('Arken Glow', isArklight, powerDescriptions.ArkenGlow),
+  counter('Falcon Dive', isArklight, powerDescriptions.FalconDive),
+  counter("Lord's Paces", isArklight, powerDescriptions.LordsPaces),
+  counter('Under Wing', isArklight, powerDescriptions.UnderWing),
+  counter(
+    'Wings of Conviction',
+    isArklight,
+    powerDescriptions.WingsOfConviction
+  ),
+  counter('Wings of Divinity', isArklight, powerDescriptions.WingsOfDivinity),
+  counter('Wings of Wrath', isArklight, powerDescriptions.WingsOfWrath),
+  comboStrike('Battle Brand', isArklight, powerDescriptions.BattleBrand),
+  comboStrike('Endless Waltz', isArklight, powerDescriptions.EndlessWaltz),
+  comboStrike('Royal Arms', isArklight, powerDescriptions.RoyalArms),
+  comboStrike(
+    "Thundergod's Steel",
+    isArklight,
+    powerDescriptions.ThundergodsSteel
+  ),
+  chargedStrike("Armiger's Wrath", isArklight, powerDescriptions.ArmigersWrath),
+  chargedStrike(
+    "Confessor's Strike",
+    isArklight,
+    powerDescriptions.ConfessorsStrike
+  ),
+  chargedStrike(
+    'Desolating Verdict',
+    isArklight,
+    powerDescriptions.DesolatingVerdict
+  ),
+  chargedStrike(
+    "Hospitaler's Cry",
+    isArklight,
+    powerDescriptions.HospitalersCry
+  ),
+  chargedStrike(
+    'Northswain Slash',
+    isArklight,
+    powerDescriptions.NorthswainSlash
+  ),
 
   // Champion
-  bonusPower('Wild Charge', isChampion),
-  finisher('Aetherdrive Breaker!', isChampion),
-  counter('Absolute Denial', isChampion),
-  counter('Carnage', isChampion),
-  counter('Devil Deflection', isChampion),
-  counter('Imperial Cancel', isChampion),
-  counter('Suckerpunch', isChampion),
-  counter('Takedown', isChampion),
-  counter('Turnabout', isChampion),
-  comboStrike('Aerial Charge', isChampion),
-  comboStrike('Meteor Drop', isChampion),
-  comboStrike('Outrager', isChampion),
-  comboStrike('Tides of Iron', isChampion),
-  chargedStrike('Astral Drive', isChampion),
-  chargedStrike('Overwhelm', isChampion),
-  chargedStrike('Perfect Slash', isChampion),
-  chargedStrike('Powerbomb', isChampion),
-  chargedStrike('Umbral Cinders', isChampion),
+  bonusPower('Wild Charge', isChampion, powerDescriptions.WildCharge),
+  finisher(
+    'Aetherdrive Breaker!',
+    isChampion,
+    powerDescriptions.AetherdriveBreaker
+  ),
+  counter('Absolute Denial', isChampion, powerDescriptions.AbsoluteDenial),
+  counter('Carnage', isChampion, powerDescriptions.Carnage),
+  counter('Devil Deflection', isChampion, powerDescriptions.DevilDeflection),
+  counter('Imperial Cancel', isChampion, powerDescriptions.ImperialCancel),
+  counter('Suckerpunch', isChampion, powerDescriptions.Suckerpunch),
+  counter('Takedown', isChampion, powerDescriptions.Takedown),
+  counter('Turnabout', isChampion, powerDescriptions.Turnabout),
+  comboStrike('Aerial Charge', isChampion, powerDescriptions.AerialCharge),
+  comboStrike('Meteor Drop', isChampion, powerDescriptions.MeteorDrop),
+  comboStrike('Outrager', isChampion, powerDescriptions.Outrager),
+  comboStrike('Tides of Iron', isChampion, powerDescriptions.TidesOfIron),
+  chargedStrike('Astral Drive', isChampion, powerDescriptions.AstralDrive),
+  chargedStrike('Overwhelm', isChampion, powerDescriptions.Overwhelm),
+  chargedStrike('Perfect Slash', isChampion, powerDescriptions.PerfectSlash),
+  chargedStrike('Powerbomb', isChampion, powerDescriptions.Powerbomb),
+  chargedStrike('Umbral Cinders', isChampion, powerDescriptions.UmbralCinders),
 
   // Shadowblade
   bonusPower(
     'Soul Eater',
     (character) =>
-      isShadowblade(character) && !hasPower('Darkest Knight')(character)
+      isShadowblade(character) && !hasPower('Darkest Knight')(character),
+    powerDescriptions.SoulEater
   ),
-  bonusPower('Gathering Shadows', hasPower('Darkest Knight')),
-  finisher('Darkside Release', isShadowblade),
-  counter('Blade Twisting', isShadowblade),
-  counter('Bloody Mess', isShadowblade),
-  counter("Drakul's Grasp", isShadowblade),
-  counter('Embrace of Night', isShadowblade),
-  counter('Shadow Nemesis', isShadowblade),
-  counter('Wraithwalker', isShadowblade),
-  comboStrike('Abyssal Venom', isShadowblade),
-  comboStrike('Carving Strike', isShadowblade),
-  comboStrike('Chaos Swarm', isShadowblade),
-  comboStrike('Cloak & Dagger', isShadowblade),
-  chargedStrike('Abyssal Crush', isShadowblade),
-  chargedStrike('Blackfire Blast', isShadowblade),
-  chargedStrike('Flickering Guillotine', isShadowblade),
-  chargedStrike('Steel Exorcism', isShadowblade),
-  chargedStrike("Vassago's Scythe", isShadowblade),
+  bonusPower(
+    'Gathering Shadows',
+    hasPower('Darkest Knight'),
+    powerDescriptions.GatheringShadows
+  ),
+  finisher(
+    'Darkside Release',
+    isShadowblade,
+    powerDescriptions.DarksideRelease
+  ),
+  counter('Blade Twisting', isShadowblade, powerDescriptions.BladeTwisting),
+  counter('Bloody Mess', isShadowblade, powerDescriptions.BloodyMess),
+  counter("Drakul's Grasp", isShadowblade, powerDescriptions.DrakulsGrasp),
+  counter('Embrace of Night', isShadowblade, powerDescriptions.EmbraceOfNight),
+  counter('Shadow Nemesis', isShadowblade, powerDescriptions.ShadowNemesis),
+  counter('Wraithwalker', isShadowblade, powerDescriptions.Wraithwalker),
+  comboStrike('Abyssal Venom', isShadowblade, powerDescriptions.AbyssalVenom),
+  comboStrike('Carving Strike', isShadowblade, powerDescriptions.CarvingStrike),
+  comboStrike('Chaos Swarm', isShadowblade, powerDescriptions.ChaosSwarm),
+  comboStrike(
+    'Cloak & Dagger',
+    isShadowblade,
+    powerDescriptions.CloakAndDagger
+  ),
+  chargedStrike('Abyssal Crush', isShadowblade, powerDescriptions.AbyssalCrush),
+  chargedStrike(
+    'Blackfire Blast',
+    isShadowblade,
+    powerDescriptions.BlackfireBlast
+  ),
+  chargedStrike(
+    'Flickering Guillotine',
+    isShadowblade,
+    powerDescriptions.FlickeringGuillotine
+  ),
+  chargedStrike(
+    'Steel Exorcism',
+    isShadowblade,
+    powerDescriptions.SteelExorcism
+  ),
+  chargedStrike(
+    "Vassago's Scythe",
+    isShadowblade,
+    powerDescriptions.VassagosScythe
+  ),
 
   // Witch
   {
