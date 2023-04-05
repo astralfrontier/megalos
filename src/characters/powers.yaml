@@ -1554,8 +1554,8 @@ BloodyPhysick: |
   **Cost**: Either the target or I must spend 1 Recovery  
   **Target**: 1 Injured ally in range 1  
   **Effect**: Target Heals (RB) + amount of HP sacrificed.  
-  **Weak** Charge Effect: 1 Ally in range Heals 2.  
-  **Surging** Charge Effect: 2 Allies in range Heal 2.  
+  **Weak Charge Effect**: 1 Ally in range Heals 2.  
+  **Surging Charge Effect**: 2 Allies in range Heal 2.  
   **Advance**: Increase to Sacrifice (6).  
   **Advance**: This Cantrip always generates a Surging Charge.
 DrainAether: |
@@ -1566,8 +1566,8 @@ DrainAether: |
   **Target**: 1 foe in range 1  
   **Test**: Weapon Dice vs Ward  
   **Hit**: (½ CD) astral damage and target is SLOWED.  
-  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 2.  
-  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Weak Charge Effect**: 1 foe in range suffers 2 piercing damage & I heal 2.  
+  **Surging Charge Effect**: 2 foes in range suffer 2 piercing damage & I heal 2.  
   **Advance**: Increase damage by +3.  
   **Advance**: Target a 2nd foe in range.
 DrainBlood: |
@@ -1577,8 +1577,8 @@ DrainBlood: |
   **Target**: 1 foe in range 1  
   **Test**: Weapon Dice vs Ward  
   **Hit**: (½ CD) toxic damage and I gain REGEN.  
-  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 1.  
-  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Weak Charge Effect**: 1 foe in range suffers 2 piercing damage & I heal 1.  
+  **Surging Charge Effect**: 2 foes in range suffer 2 piercing damage & I heal 2.  
   **Advance**: On Hit, I also Heal 2.  
   **Advance**: Increase damage by +3.
 DrainSoul: |
@@ -1589,8 +1589,8 @@ DrainSoul: |
   **Target**: 1 foe in range 1  
   **Test**: Weapon Dice vs Ward  
   **Hit**: (½ CD) astral damage and target is AFRAID.  
-  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 1.  
-  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Weak Charge Effect**: 1 foe in range suffers 2 piercing damage & I heal 1.  
+  **Surging Charge Effect**: 2 foes in range suffer 2 piercing damage & I heal 2.  
   **Advance**: Increase damage by +3.  
   **Advance**: On a Hit, I also gain EMPOWERED.
 RedFlash: |
@@ -1601,8 +1601,8 @@ RedFlash: |
   **Target**: AoE (X) allies in range 1  
   **Effect**: Targets gain Barrier 2 & Cleanse 1.  
   **Special**: AoE is equal to the amount of HP Sacrificed.  
-  **Weak** Charge Effect: I gain Barrier 1.  
-  **Surging** Charge Effect: 1 ally & I gain Barrier 1.  
+  **Weak Charge Effect**: I gain Barrier 1.  
+  **Surging Charge Effect**: 1 ally & I gain Barrier 1.  
   **Advance**: Increase Barrier to 4.  
   **Advance**: Increase AoE to (X+1) and range to 2.
 SanguinePavise: |
@@ -1612,15 +1612,16 @@ SanguinePavise: |
   _Minor Action ◆ Cantrip, Sacrifice (3)_  
   **Target**: 1 ally in range 1  
   **Effect**: Target gains Barrier 1, +1 more per HP sacrificed.  
-  **Weak** Charge Effect: 1 Ally in range Heals 2.  
-  **Surging** Charge Effect: 2 Allies in range Heal 2.  
+  **Weak Charge Effect**: 1 Ally in range Heals 2.  
+  **Surging Charge Effect**: 2 Allies in range Heal 2.  
   **Advance**: Increase to Sacrifice (6).  
   **Advance**: Increase range and base Barrier by +1.
 BloodAlchemy: |
   A bit of blood alchemy never hurt anyone… too badly… at least not recently.
 
   _Major Action ◆◆ Sorcery, Healing, Sacrifice (8)_  
-  **Effect**: I regain 1 spent point of Recovery for every 4 HP sacrificed. One ally in my zone also heals 4 HP as long as I sacrificed at least 8 HP to use this power.  
+  **Effect**: I regain 1 spent point of Recovery for every 4 HP sacrificed.
+  One ally in my zone also heals 4 HP as long as I sacrificed at least 8 HP to use this power.  
   **Advance**: Increase to Sacrifice (12).  
   **Advance**: 1 ally in my zone gains REGEN.
 BoilingBile: |
@@ -1640,7 +1641,8 @@ Chirurgy: |
   _Major Action ◆◆ Sorcery, AoE, Healing, Sacrifice (4)_  
   **Cost**: I must spend 1 Recovery  
   **Target**: AoE (2) allies in range 0  
-  **Effect**: I gain a pool of Healing equal to my (RB + 2) + (HP sacrificed). I can spread this HP out over any of the targets as a Heal effect.  
+  **Effect**: I gain a pool of Healing equal to my (RB + 2) + (HP sacrificed).
+  I can spread this HP out over any of the targets as a Heal effect.  
   **Advance**: Increase to Sacrifice (8).  
   **Advance**: Increase number of possible targets to all allies in aura 1.
 Conveyance: |
@@ -1656,7 +1658,9 @@ Haemonculus: |
   that lives only to suffer in my stead.
 
   _Major Action ◆◆ Sorcery_  
-  **Effect**: I create a looming shade of blood which hovers behind me, suffering some of the harm I would suffer. I gain Barrier 3. While I have any Barrier remaining, I also gain +1 on Soak rolls.  
+  **Effect**: I create a looming shade of blood which hovers behind me,
+  suffering some of the harm I would suffer. I gain Barrier 3. While I have any Barrier remaining,
+  I also gain +1 on Soak rolls.  
   **Advance**: Increase to Barrier 5.  
   **Advance**: Increase to +2 bonus on Soak rolls while active.
 Insanguinate: |
@@ -1674,7 +1678,9 @@ Liquefaction: |
 
   _Major Action ◆◆ Sorcery, Movement_  
   **Target**: 1 zone in range 2  
-  **Effect**: I disperse into a cloud or rapidly moving torrent of blood, flying to a zone in range 2. I cannot trigger reactions based on movement for this movement. Up to 3 foes whose zones I move through suffer WOUNDED (5).  
+  **Effect**: I disperse into a cloud or rapidly moving torrent of blood,
+  flying to a zone in range 2. I cannot trigger reactions based on movement for this movement.
+  Up to 3 foes whose zones I move through suffer WOUNDED (5).  
   **Advance**: Increase severity of status to WOUNDED (10).  
   **Advance**: Up to 3 allies whose zones I move through gain Cleanse 1.
 Revivify: |
