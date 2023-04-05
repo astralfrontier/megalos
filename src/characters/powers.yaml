@@ -1056,23 +1056,202 @@ NorthswainSlash: |
   **Advance**: Charged version increases damage by +3.  
   **Advance**: Base range increases to 1 & Charged range increases to 2.
 WildCharge: |
+  You charge headlong into your foes, weapon swinging and battlecry roaring.
+
+  _Minor Action ◆ Attack, Daemon’s Bargain, Movement_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Special**: May not use this power while engaged with the target. Move adjacent to the target before resolving the attack.  
+  **Daemon’s** Bargain: Damage becomes piercing, but I suffer EXPOSED. Power gains the Cooldown tag.  
+  **Advance**: Increase range to 3.  
+  **Advance**: Daemon’s Bargain effect also increases damage by +2.
 AetherdriveBreaker: |
+  Your cœrona flares like a blazing bonfire as you lash out with a flurry of wild strikes.
+
+  _Free Action ◇ Finisher, Auto-Hit, Daemon’s Bargain_  
+  **Trigger**: I Injure a foe or damage an Injured foe  
+  **Limit**: 1 / round  
+  **Cost**: 1 Aether Current die  
+  **Hit**: I roll the AC die spent to activate this power and inflict piercing damage on the triggering target equal to the roll. If I rolled an odd number, the target also suffers EXPOSED. If I rolled an even number, I roll the die again and inflict that much additional damage.  
+  **Special**: If the triggering target is defeated by the damage of this Finisher, I become Set Up.  
+  **Daemon’s** Bargain: I can spend & roll a 2nd AC die on this Finisher, but I suffer EXPOSED.
 AbsoluteDenial: |
+  They’ll wish they’d never even tried.
+
+  _Reaction ◇_  
+  **Trigger**: I’m hit by a damaging attack  
+  **Effect**: My Soak increases by +2. If I soak all damage from the attack, the triggering foe suffers 2 piercing damage.  
+  **Advance**: Increase Soak bonus & conditional damage to 4.  
+  **Advance**: Roll soak with advantage against triggering attack.
 Carnage: |
+  Too much blood is never enough.
+
+  _Reaction ◇_  
+  **Trigger**: I defeat a foe with my Finisher  
+  **Effect**: I perform an Auto-Attack free action on another foe within weapon range.  
+  **Advance**: Trigger changes to “Trigger: I damage a foe with my Finisher”.  
+  **Advance**: Also inflict ½ Base Damage (3) on yet another foe within Weapon Range.
 DevilDeflection: |
+  Turn their own attacks against their allies.
+
+  _Reaction ◇_  
+  **Trigger**: A foe damages me in melee  
+  **Effect**: I suffer -2 damage from the triggering attack & another foe in range 0 suffers 2 piercing damage.  
+  **Advance**: Increase damage to the secondary foe to 4.  
+  **Advance**: Inflict 2 piercing damage on the triggering foe.
 ImperialCancel: |
+  “Feinting” doesn’t even begin to describe it.
+
+  _Reaction ◇_  
+  **Trigger**: I use an action with the Attack tag  
+  **Effect**: Triggering action does not count against the normal stacking penalty to damage for taking multiple actions with the Attack tag, and inflicts +1 damage.  
+  **Advance**: Teleport 1 before resolving triggering action.  
+  **Advance**: All attacks after the triggering action inflict +1 damage as well.
 Suckerpunch: |
+  They leave themselves wide open, and you decide to capitalize.
+
+  _Reaction ◇_  
+  **Trigger**: A foe in range 0 misses me or an ally with an attack  
+  **Effect**: Triggering foe suffers 2 piercing damage & DAZED.  
+  **Advance**: Increase damage to 4.  
+  **Advance**: Triggering foe inflicts -2 damage with all attacks until the end of their next turn.
 Takedown: |
+  OH? YOU ARE APPROACHING ME??
+
+  _Reaction ◇_  
+  **Trigger**: A foe enters my zone  
+  **Effect**: Triggering foe suffers 2 piercing damage & STUNNED.  
+  **Advance**: Increase damage to 4.  
+  **Advance**: After STUNNED wears off, the target is SLOWED (5).
 Turnabout: |
+  Let’s just see how well they like it.
+
+  _Reaction ◇_  
+  **Trigger**: A foe within Weapon Range Injures me or damages me while I’m Injured.  
+  **Effect**: Triggering foe suffers Piercing damage equal to my Base Damage (6).  
+  **Advance**: Trigger condition can apply to allies in range 0 as well as myself.  
+  **Advance**: Triggering foe inflicts -2 damage with all attacks until the end of their next turn.
 AerialCharge: |
+  You explode forth, weapon gleaming, leaving a crater on the ground behind you.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo, Movement_  
+  **Target**: 1 foe in range 2  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Special**: Fly adjacent to the target before resolving the attack.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo_  
+  **Target**: 1 foe in range 0  
+  **Hit**: (½ CD) physical damage & target is DAZED.  
+  **Advance**: Increase range of 1st Strike to 3.  
+  **Advance**: 2nd Strike inflicts +3 damage if the target was hit by the 1st Strike of this power this round.
 MeteorDrop: |
+  With a blast of compressed wind aether you take to the sky to divebomb your foe
+  from above, crashing down like the fist of an angry god.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo, Movement_  
+  **Target**: 1 foe in range 1  
+  **Hit**: 5 piercing damage.  
+  **Special**: Fly adjacent to the target before resolving the attack.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, AoE, Auto-Hit, Combo, Forced Movement_  
+  **Target**: AoE (all foes not damaged by 1st Strike of this power this turn) in range 0  
+  **Hit**: 3 piercing damage and Pushed 1.  
+  **Advance**: Increase range of 1st Strike to 3.  
+  **Advance**: Increase damage of both strikes by +2.
 Outrager: |
+  Your bloodlust takes over and your weapon cleaves wildly, all thought of survival and
+  sense goes completely out the window.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage.  
+  **Effect**: I suffer 3 piercing damage.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo_  
+  **Target**: 1 foe in range 0  
+  **Hit**: (CD+2) physical damage.  
+  **Effect**: I suffer 6 piercing damage  
+  **Advance**: Increase damage to target & self by +1 for both Strikes.  
+  **Advance**: Once per round, if this damage defeats my target I Heal 3.
 TidesOfIron: |
+  Your mighty strikes send deflected blasts of power in all directions, battering more
+  foes than just the one you’re mainly focused on.
+
+  **1st Strike:**  
+  _Minor Action ◆ Attack, Combo_  
+  **Target*: 1 foe in Weapon Range  
+  **Test*: Weapon Dice vs Dodge  
+  **Hit*: (CD) physical damage. 2 other foes in the primary target’s zone suffer 2 piercing damage.
+
+  **2nd Strike:**  
+  _Minor Action ◆ Attack, Auto-Hit, Combo_  
+  **Target**: 1 foe in Weapon Range  
+  **Hit**: (½ CD) physical damage. 2 other foes in the primary target’s zone suffer 2 piercing damage.  
+  **Advance**: Increases the damage to secondary targets by +1 with both strikes.  
+  **Advance**: If both strikes are used on the same turn, gain Advantage on the attack roll with the 2nd Strike.
 AstralDrive: |
+  Your cœrona burns with a surge of astral aether, impelling you forth to destroy.
+
+  _Major Action ◆◆ Attack, Charged, Movement_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) astral damage. The next source of astral damage the target suffers before the start of my next turn becomes piercing damage.  
+  **Special**: Move adjacent to the target before resolving the attack.  
+  **Charged**: Increase damage by +2. Change Target to AoE (2) in range 2.  
+  **Advance**: Increase Charged AoE to (3).  
+  **Advance**: Increase next source of astral damage the target suffers by +2 before it becomes piercing.
 Overwhelm: |
+  A hurricane of steel and aether emanates from your violent swings. Woe betide those
+  who draw too close.
+
+  _Major Action ◆◆ Attack, AoE, Charged_ 
+  **Target**: AoE (3) foes in range 0 
+  **Test**: Weapon Dice vs Dodge 
+  **Hit**: (½ CD) physical damage. 
+  **Charged**: Increase damage to (CD) & AoE to (5). 
+  **Advance**: Targets Injured by this attack gain EXPOSED. 
+  **Advance**: Charged version inflicts +3 damage.
 PerfectSlash: |
+  A single, immaculate strike, practiced endlessly to exhaustion that it might serve well
+  in the heat of battle. None can escape it, and few can survive it.
+
+  _Major Action ◆◆ Attack, Auto-Hit, Charged_  
+  **Target**: 1 foe in range 0  
+  **Hit**: (CD) physical damage.  
+  **Charged**: Increase Damage by +3. Generate 1 Surge on this attack despite not rolling to hit.  
+  **Advance**: Target rolls Soak with disadvantage against the Charged version.  
+  **Advance**: Charged version also inflicts (½ CD) physical damage on a second target in range.
 Powerbomb: |
+  Grab a foe and take off to the skies before hurling them like a comet into their allies.
+
+  _Major Action ◆◆ Attack, Charged, Forced Movement, Movement_  
+  **Target**: 1 foe in range 0  
+  **Test**: Weapon Dice vs Dodge  
+  **Hit**: (CD) physical damage. Target is Pushed 1 & I fly to where they end their movement. All foes in this end zone suffer 3 piercing damage.  
+  **Charged**: Increase range of Push & Fly to 2, increase piercing damage to foes at end zone to 5.  
+  **Advance**: Charge version gains “Effect: Main target is STUNNED”.  
+  **Advance**: Foes damaged in the end zone inflict -2 damage with all attacks until the start of my next turn.
 UmbralCinders: |
+  Fragments of umbral energies cling to your foes and ignite in a burst of destructive
+  power when catalyzed.
+
+  _Major Action ◆◆ Attack, Charged_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (CD) umbral damage. The next time the target would suffer umbral damage before the start of my next turn, they are also WOUNDED.  
+  **Special**: Move adjacent to the target before resolving the attack.  
+  **Charged**: Increase damage by +3. Target becomes “Target: AoE (3) in range 1.”  
+  **Advance**: Increase Charged range to 3.  
+  **Advance**: Worsen WOUNDED statuses inflicted as a result of this power to WOUNDED (15).
 SoulEater: |
 GatheringShadows: |
   Your Darkside pools in a writhing mass of shadows which lash out like barbed
