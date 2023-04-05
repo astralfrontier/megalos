@@ -1,10 +1,32 @@
-import { add, append, assoc, filter, find, has, includes, map, propEq, reduce, reject, without } from 'ramda'
+import {
+  add,
+  all,
+  append,
+  assoc,
+  filter,
+  find,
+  has,
+  includes,
+  lte,
+  map,
+  path,
+  propEq,
+  reduce,
+  reject,
+  without,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
 import slugify from 'slugify'
 
 import { CharacterContext } from '../GameStateProvider'
 import { describe } from '../visuals'
-import { meetsPrerequisites, MegalosClassBenefits, MegalosPower, powers, recalculatePowers } from './data'
+import {
+  meetsPrerequisites,
+  MegalosClassBenefits,
+  MegalosPower,
+  powers,
+  recalculatePowers,
+} from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 
 interface BenefitsTabProps {
@@ -15,6 +37,22 @@ interface BenefitsTabProps {
   setSelectedTab: React.Dispatch<React.SetStateAction<string>>
 }
 
+const BENEFIT_TYPES = [
+  'talents',
+  'invocations',
+  'arcana',
+  'strikes',
+  'counters',
+  'sorceries',
+  'cantrips',
+]
+
+const EMPTY_BENEFIT_COSTS: MegalosClassBenefits = reduce(
+  (costs, benefit) => assoc(benefit, 0, costs),
+  {},
+  BENEFIT_TYPES
+)
+
 function BenefitsTab(props: BenefitsTabProps) {
   if (!props.maximum) {
     return <></>
@@ -22,14 +60,10 @@ function BenefitsTab(props: BenefitsTabProps) {
     const value = props.value || 0
     return (
       <>
-        <li
-          className={
-            props.selectedTab == props.label.toLowerCase() ? 'is-active' : ''
-          }
-        >
-          <a onClick={() => props.setSelectedTab(props.label.toLowerCase())}>
+        <li className={props.selectedTab == props.label ? 'is-active' : ''}>
+          <a onClick={() => props.setSelectedTab(props.label)}>
             <strong className={value > props.maximum ? 'has-text-danger' : ''}>
-              {props.label}
+              {props.label.charAt(0).toUpperCase() + props.label.slice(1)}
             </strong>
             : {value}/{props.maximum}
           </a>
@@ -39,20 +73,23 @@ function BenefitsTab(props: BenefitsTabProps) {
   }
 }
 
-// TODO: functionalize so we don't have to enumerate over every object key
 function addPowerCost(
   benefits: MegalosClassBenefits,
   power: MegalosPower
 ): MegalosClassBenefits {
-  return {
-    invocations: add(benefits.invocations || 0, power.costs.invocations || 0),
-    arcana: add(benefits.arcana || 0, power.costs.arcana || 0),
-    strikes: add(benefits.strikes || 0, power.costs.strikes || 0),
-    counters: add(benefits.counters || 0, power.costs.counters || 0),
-    sorceries: add(benefits.sorceries || 0, power.costs.sorceries || 0),
-    cantrips: add(benefits.cantrips || 0, power.costs.cantrips || 0),
-    talents: add(benefits.talents || 0, power.costs.talents || 0),
-  }
+  return reduce(
+    (costs, benefit) =>
+      assoc(
+        benefit,
+        add(
+          path([benefit], benefits) || 0,
+          path(['costs', benefit], power) || 0
+        ),
+        costs
+      ),
+    {},
+    BENEFIT_TYPES
+  )
 }
 
 function PowersTalentsChooser() {
@@ -61,15 +98,7 @@ function PowersTalentsChooser() {
 
   const benefitsUsed = reduce(
     addPowerCost,
-    {
-      invocations: 0,
-      arcana: 0,
-      strikes: 0,
-      counters: 0,
-      sorceries: 0,
-      cantrips: 0,
-      talents: 0,
-    },
+    EMPTY_BENEFIT_COSTS,
     character.powers
   )
 
@@ -101,19 +130,13 @@ function PowersTalentsChooser() {
 
   function hasBudget(power: MegalosPower) {
     const budgetWithPower = addPowerCost(benefitsUsed, power)
-    return (
-      (budgetWithPower.invocations || 0) <=
-        (character.class.benefits.invocations || 0) &&
-      (budgetWithPower.arcana || 0) <= (character.class.benefits.arcana || 0) &&
-      (budgetWithPower.strikes || 0) <=
-        (character.class.benefits.strikes || 0) &&
-      (budgetWithPower.counters || 0) <=
-        (character.class.benefits.counters || 0) &&
-      (budgetWithPower.sorceries || 0) <=
-        (character.class.benefits.sorceries || 0) &&
-      (budgetWithPower.cantrips || 0) <=
-        (character.class.benefits.cantrips || 0) &&
-      (budgetWithPower.talents || 0) <= (character.class.benefits.talents || 0)
+    return all(
+      (benefit) =>
+        lte(
+          (path([benefit], budgetWithPower) as number) || 0,
+          path(['class', 'benefits', benefit], character) || 0
+        ),
+      BENEFIT_TYPES
     )
   }
 
@@ -123,55 +146,18 @@ function PowersTalentsChooser() {
         <div className="column">
           <div className="tabs">
             <ul>
-              <BenefitsTab
-                label="Talents"
-                value={benefitsUsed.talents}
-                maximum={character.class.benefits.talents}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Invocations"
-                value={benefitsUsed.invocations}
-                maximum={character.class.benefits.invocations}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Arcana"
-                value={benefitsUsed.arcana}
-                maximum={character.class.benefits.arcana}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Strikes"
-                value={benefitsUsed.strikes}
-                maximum={character.class.benefits.strikes}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Counters"
-                value={benefitsUsed.counters}
-                maximum={character.class.benefits.counters}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Sorceries"
-                value={benefitsUsed.sorceries}
-                maximum={character.class.benefits.sorceries}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
-              <BenefitsTab
-                label="Cantrips"
-                value={benefitsUsed.cantrips}
-                maximum={character.class.benefits.cantrips}
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab}
-              />
+              {map(
+                (benefit) => (
+                  <BenefitsTab
+                    label={benefit}
+                    value={path([benefit], benefitsUsed)}
+                    maximum={path(['class', 'benefits', benefit], character)}
+                    selectedTab={selectedTab}
+                    setSelectedTab={setSelectedTab}
+                  />
+                ),
+                BENEFIT_TYPES
+              )}
             </ul>
           </div>
           <div>
@@ -205,8 +191,15 @@ function PowersTalentsChooser() {
                 </>
               )
             }, displayedPowers)}
-            {displayedPowers.length == 0 ? 
-            <p>Don't see any powers? Make sure you meet the prerequisites. For example, you can't select Arcana until you've selected an Invocation.</p> : <></>}
+            {displayedPowers.length == 0 ? (
+              <p>
+                Don't see any powers? Make sure you meet the prerequisites. For
+                example, you can't select Arcana until you've selected an
+                Invocation.
+              </p>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div className="column">
