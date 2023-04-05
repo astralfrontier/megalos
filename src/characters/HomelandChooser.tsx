@@ -22,12 +22,18 @@ function HomelandChooser() {
       homelands
     )
     if (newHomeland) {
+      const newHomelandSkills = intersection(
+        character.homelandSkills,
+        newHomeland.startingSkills || []
+      )
       setCharacter({
         ...character,
         homeland: newHomeland,
-        homelandSkills: intersection(
-          character.homelandSkills,
-          newHomeland.startingSkills || []
+        homelandSkills: newHomelandSkills,
+        skills: recalculateSkills(
+          character,
+          character.skills,
+          newHomelandSkills
         ),
       })
     }
