@@ -1538,20 +1538,153 @@ Xenoglossy: |
   the game isn't using the optional Language rules, this talent is
   unavailable.
 Redistribute: |
+  The Draloi performs a relatively graceless, brute force act of leechcraft,
+  violently tearing a small amount of living aether from a foe and suffusing an ally with it.
+
+  _Minor Action ◆ Attack, Auto-Hit, Healing_  
+  **Target**: 1 foe in range 1  
+  **Hit**: 5 piercing damage.  
+  **Effect**: 1 ally in range Heals 5.  
+  **Advance**: Increase damage & Heal by +1.  
+  **Advance**: I can increase this power to a Major Action to target a second foe in range & heal a different ally in range, as well.
 BloodyPhysick: |
+  By mixing your own aetheric humors with spellcraft, you create healing magicks.
+
+  _Minor Action ◆ Cantrip, Healing, Sacrifice (3)_  
+  **Cost**: Either the target or I must spend 1 Recovery  
+  **Target**: 1 Injured ally in range 1  
+  **Effect**: Target Heals (RB) + amount of HP sacrificed.  
+  **Weak** Charge Effect: 1 Ally in range Heals 2.  
+  **Surging** Charge Effect: 2 Allies in range Heal 2.  
+  **Advance**: Increase to Sacrifice (6).  
+  **Advance**: This Cantrip always generates a Surging Charge.
 DrainAether: |
+  You siphon the activated aether directly out of a victim’s aura,
+  causing them to become sluggish & have difficulty accumulating more.
+
+  _Minor Action ◆ Attack, Cantrip_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage and target is SLOWED.  
+  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 2.  
+  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Advance**: Increase damage by +3.  
+  **Advance**: Target a 2nd foe in range.
 DrainBlood: |
+  You rip the blood from their body and sublimate it into nebulized life force.
+
+  _Minor Action ◆ Attack, Cantrip_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) toxic damage and I gain REGEN.  
+  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 1.  
+  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Advance**: On Hit, I also Heal 2.  
+  **Advance**: Increase damage by +3.
 DrainSoul: |
+  You dig deep within your victim’s aura to start siphoning away the outer layers of
+  their incorporeal soul. Their will crumbles and a supernatural dread takes hold.
+
+  _Minor Action ◆ Attack, Cantrip_  
+  **Target**: 1 foe in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) astral damage and target is AFRAID.  
+  **Weak** Charge Effect: 1 foe in range suffers 2 piercing damage & I heal 1.  
+  **Surging** Charge Effect: 2 foes in range suffer 2 piercing damage & I heal 2.  
+  **Advance**: Increase damage by +3.  
+  **Advance**: On a Hit, I also gain EMPOWERED.
 RedFlash: |
+  A crimson star of living aether drifts away from your hand before bursting in a red
+  flash, shearing away afflictions and surrounding my allies with protective energy.
+
+  _Minor Action ◆ Cantrip, AoE, Sacrifice (3)_  
+  **Target**: AoE (X) allies in range 1  
+  **Effect**: Targets gain Barrier 2 & Cleanse 1.  
+  **Special**: AoE is equal to the amount of HP Sacrificed.  
+  **Weak** Charge Effect: I gain Barrier 1.  
+  **Surging** Charge Effect: 1 ally & I gain Barrier 1.  
+  **Advance**: Increase Barrier to 4.  
+  **Advance**: Increase AoE to (X+1) and range to 2.
 SanguinePavise: |
+  A glowing red shield of magick surrounds your ally for a moment before disappearing
+  again. It only becomes briefly tangible when protecting them from harm.
+
+  _Minor Action ◆ Cantrip, Sacrifice (3)_  
+  **Target**: 1 ally in range 1  
+  **Effect**: Target gains Barrier 1, +1 more per HP sacrificed.  
+  **Weak** Charge Effect: 1 Ally in range Heals 2.  
+  **Surging** Charge Effect: 2 Allies in range Heal 2.  
+  **Advance**: Increase to Sacrifice (6).  
+  **Advance**: Increase range and base Barrier by +1.
 BloodAlchemy: |
+  A bit of blood alchemy never hurt anyone… too badly… at least not recently.
+
+  _Major Action ◆◆ Sorcery, Healing, Sacrifice (8)_  
+  **Effect**: I regain 1 spent point of Recovery for every 4 HP sacrificed. One ally in my zone also heals 4 HP as long as I sacrificed at least 8 HP to use this power.  
+  **Advance**: Increase to Sacrifice (12).  
+  **Advance**: 1 ally in my zone gains REGEN.
 BoilingBile: |
+  Deadly black fumes erupt into being where I point, burning and caustic.
+
+  _Major Action ◆◆ Attack, AoE, Sorcery_  
+  **Target**: AoE (2) foes in range 1  
+  **Test**: Weapon Dice vs Ward  
+  **Hit**: (½ CD) toxic damage and targets suffer WOUNDED.  
+  **Miss**: WOUNDED (5).  
+  **Advance**: Increase damage by +2.  
+  **Advance**: Increase AoE to (3) and range to 3.
 Chirurgy: |
+  Blood-red threads of aether fly around me in a flurry of activity, stitching wounds
+  closed, soothing burns & bruises, and knitting broken bones.
+
+  _Major Action ◆◆ Sorcery, AoE, Healing, Sacrifice (4)_  
+  **Cost**: I must spend 1 Recovery  
+  **Target**: AoE (2) allies in range 0  
+  **Effect**: I gain a pool of Healing equal to my (RB + 2) + (HP sacrificed). I can spread this HP out over any of the targets as a Heal effect.  
+  **Advance**: Increase to Sacrifice (8).  
+  **Advance**: Increase number of possible targets to all allies in aura 1.
 Conveyance: |
+  Their blood is your river; you disappear into one body and messily burst from another.
+
+  _Major Action ◆◆ Sorcery, Movement_  
+  **Target**: 1 ally or foe in my zone & 1 ally or foe in range 3  
+  **Effect**: I teleport through the 1st target, and exit the 2nd target. Allied targets gain Barrier 1, while foe targets suffer 3 piercing damage.  
+  **Advance**: Increase Barrier & damage effects by +1.  
+  **Advance**: Add a 3rd target in between the 1st & 2nd targets.
 Haemonculus: |
+  Using forbidden techniques of life-binding, I create a martyrshade of blood & soulstuff
+  that lives only to suffer in my stead.
+
+  _Major Action ◆◆ Sorcery_  
+  **Effect**: I create a looming shade of blood which hovers behind me, suffering some of the harm I would suffer. I gain Barrier 3. While I have any Barrier remaining, I also gain +1 on Soak rolls.  
+  **Advance**: Increase to Barrier 5.  
+  **Advance**: Increase to +2 bonus on Soak rolls while active.
 Insanguinate: |
+  The eldest of all leechcraft, I weave a spell to infuse my very blood into an ally’s body.
+
+  _Major Action ◆◆ Sorcery, Healing, Sacrifice (6)_  
+  **Target**: 1 ally in range 1  
+  **Effect**: Heal target (RB) + (HP sacrificed × 2).  
+  **Special**: If I sacrifice 3 or more HP this power gains the Cooldown tag.  
+  **Advance**: Increase to Sacrifice (12).  
+  **Advance**: I gain REGEN if I sacrifice 3 or more HP.
 Liquefaction: |
+  I dissolve into a mass of bloody aetheric liquid, shredding and burning foes as I move
+  through and around them.
+
+  _Major Action ◆◆ Sorcery, Movement_  
+  **Target**: 1 zone in range 2  
+  **Effect**: I disperse into a cloud or rapidly moving torrent of blood, flying to a zone in range 2. I cannot trigger reactions based on movement for this movement. Up to 3 foes whose zones I move through suffer WOUNDED (5).  
+  **Advance**: Increase severity of status to WOUNDED (10).  
+  **Advance**: Up to 3 allies whose zones I move through gain Cleanse 1.
 Revivify: |
+  Biomancy can even give life to the lifeless, if you’re willing to make sacrifices…
+
+  _Major Action ◆◆ Sorcery, Sacrifice (4)_  
+  **Target**: 1 K.O.d ally in range 3  
+  **Effect**: Raise 3 + (HP sacrificed × 2).  
+  **Advance**: Increase to Sacrifice (8) and base Raise to 6.  
+  **Advance**: I can use this as a Minor Action on an ally in range 0 instead.
 ThePledge: |
 BioShock: |
 FogOfWar: |
