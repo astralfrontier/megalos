@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import GenericInput from './GenericInput'
+import ImportExportModal from './ImportExportModal'
 import { rollDie } from './utilities'
 
 const outfitValues = {
@@ -204,6 +205,19 @@ function OutfitPage() {
       break
   }
 
+  const copyableOutfitText = `${outfitName}
+${outfitDesc}
+${outfitForm} Outfit ◯ ${modValues[mod].name}
+Defense Bonus: ${plusOrMinus(
+    finalDefenseBonus
+  )} ${defenseBonusAnnotation}, Armor HP: ${finalArmorHP}, Soak Bonus: ${plusOrMinus(
+    finalSoakBonus
+  )} ${soakAnnotation}, Inventory Points: ${finalInventoryPoints}
+${
+  outfitForm === 'Heavy' ? `Heavy: Disadvantage on Move & Sneak tests.\n` : ''
+}${modValues[mod].name}: ${modValues[mod].value}
+`
+
   return (
     <>
       <div className="box block">
@@ -385,6 +399,9 @@ function OutfitPage() {
             <strong>{modValues[mod].name}: </strong>
             {modValues[mod].value}
           </div>
+        </div>
+        <div className="mt-2">
+          <ImportExportModal exportedText={copyableOutfitText} />
         </div>
       </div>
     </>

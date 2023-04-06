@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 
 import { DiceContext, Preset } from './GameStateProvider'
 import GenericInput from './GenericInput'
+import ImportExportModal from './ImportExportModal'
 import { plusOrMinus, rollDie } from './utilities'
 
 const weaponValues = {
@@ -166,6 +167,20 @@ function WeaponPage() {
     alert('Preset added to Dice roller')
   }
 
+  const copyableWeaponText = `${weaponName}
+${weaponDesc}
+${weaponValues.size[size].label} Weapon ✧ ${weaponValues.range[range].label}, ${
+    weaponValues.weaponType[weaponType].label
+  }, ${modValues[mod].name}
+Weapon Dice: ${finalWeaponDice}, Damage Bonus: ${plusOrMinus(
+    finalDamageBonus
+  )}, Range: ${finalRange}
+${weaponValues.weaponType[weaponType].label}: ${
+    weaponValues.weaponType[weaponType].help
+  }
+${modValues[mod].name}: ${modValues[mod].value}
+`
+
   return (
     <>
       <div className="box block">
@@ -284,9 +299,13 @@ function WeaponPage() {
           </div>
         </div>
         <div className="mt-2">
-          <button className="button is-primary" onClick={() => addAsPreset()}>
+          <button
+            className="button is-primary mr-2"
+            onClick={() => addAsPreset()}
+          >
             Add Preset
           </button>
+          <ImportExportModal exportedText={copyableWeaponText} />
         </div>
       </div>
     </>
