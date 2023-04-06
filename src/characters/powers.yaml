@@ -1503,11 +1503,11 @@ LesserGlyphspells: |
   - Blessing water so that mundane impurities are removed & it is safer to drink.
   - Mending minor breaks, tears, and stains in clothing and small objects.
   - Opening or closing unlocked doors and containers from a zone away.
-  - Blessing a sick person to feel a bit better immediately and recover 50% faster.`,
+  - Blessing a sick person to feel a bit better immediately and recover 50% faster.
 OminousSignifiers: |
   Using **_Xenosyntax_** grants me a second temporary Weak Aether Charge
   for one of my known cantrips. This Aether Charge must be expended
-  before the end of my current turn, or it is lost.`,
+  before the end of my current turn, or it is lost.
 Paroxysm: |
   When my Drain cantrips inflict damage, up to 2 other foes in the target's
   zone suffer 2 piercing damage. At level 3 this increases to 3 piercing
@@ -1799,8 +1799,8 @@ Marionette: |
   _Major Action ◆◆ Sorcery, Forced Movement_  
   **Target**: 1 foe in range 1  
   **Test**: Weapon Dice vs Ward  
-  **Effect**: Target slides 2 and lashes out at a foe of my choice, inflicting 4 piercing  
-  **damage** on that target and granting Set Up to 1 ally in that zone.  
+  **Effect**: Target slides 2 and lashes out at a foe of my choice, inflicting 4 piercing
+  damage on that target and granting Set Up to 1 ally in that zone.  
   **Advance**: Increase range & slide to 3.  
   **Advance**: Increase damage to 5 and the damaged foe is also EXPOSED.
 MirageArcana: |
