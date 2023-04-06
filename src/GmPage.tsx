@@ -1,8 +1,31 @@
-import { all, always, append, assoc, assocPath, both, filter, isEmpty, isNil, join, map, prop, remove, repeat, times } from 'ramda'
+import {
+  all,
+  always,
+  append,
+  assoc,
+  assocPath,
+  both,
+  filter,
+  isEmpty,
+  isNil,
+  join,
+  map,
+  prop,
+  reject,
+  remove,
+  repeat,
+  split,
+  times,
+} from 'ramda'
 import React, { useContext, useState } from 'react'
 
-import { Combatant, CombatantType, InitiativeContext } from './GameStateProvider'
+import {
+  Combatant,
+  CombatantType,
+  InitiativeContext,
+} from './GameStateProvider'
 import GenericInput from './GenericInput'
+import ImportExportModal from './ImportExportModal'
 
 interface InitiativePartitionProps {
   combatants: Combatant[]
@@ -139,7 +162,7 @@ function GmPage() {
     CombatantType.MC
   )
 
-  function onClickInitializeRound(_event) {
+  function onClickInitializeRound(_event: any) {
     const newCombatants = map(
       (combatant) =>
         assoc('actedBonus', false, assoc('acted', false, combatant)),
@@ -171,6 +194,25 @@ function GmPage() {
     }
   }
 
+  function importCombatants(text: string) {
+    const lines = reject(
+      (line: string) => isEmpty(line) || line.startsWith('#'),
+      split('\n', text)
+    )
+    const newCombatants: Combatant[] = map((line: string) => {
+      const [type, name] = split(':', line)
+      return {
+        name,
+        type: type as CombatantType,
+        fast: false,
+        acted: false,
+        actedBonus: false,
+        notes: '',
+      }
+    }, lines)
+    setCombatants(newCombatants)
+  }
+
   // Split combatants into Fast, Enemy, Slow, Boss partitions
   const partitionedCombatants = map(
     (rule) => rule(combatants),
@@ -187,6 +229,14 @@ function GmPage() {
 
   // Has everyone gone? (indicating we can enable the "New Round" button)
   const hasEveryoneActed = firstPendingPartition == -1
+
+  const copyableCombatants = join(
+    '\n',
+    map(
+      (combatant: Combatant) => `${combatant.type}:${combatant.name}`,
+      combatants
+    )
+  )
 
   return (
     <>
@@ -262,11 +312,15 @@ function GmPage() {
               </div>
               <div className="column">
                 <button
-                  className="button is-primary"
+                  className="button is-primary mr-2"
                   onClick={() => createCombatant()}
                 >
                   Create
                 </button>
+                <ImportExportModal
+                  exportedText={copyableCombatants}
+                  importFunction={importCombatants}
+                />
               </div>
               <div className="column">
                 <button

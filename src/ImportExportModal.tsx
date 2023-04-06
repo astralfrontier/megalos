@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface ImportExportModalProps {
   exportedText: string
@@ -7,7 +7,12 @@ interface ImportExportModalProps {
 
 function ImportExportModal(props: ImportExportModalProps) {
   const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [content, setContent] = useState<string>('')
   const { exportedText, importFunction } = props
+
+  useEffect(() => {
+    setContent(props.exportedText)
+  }, [props.exportedText])
 
   const buttonLabel = importFunction ? 'Import/Export' : 'Export'
 
@@ -31,12 +36,24 @@ function ImportExportModal(props: ImportExportModalProps) {
             ></button>
           </header>
           <section className="modal-card-body">
-            <textarea className="textarea" value={exportedText} rows={8} />
+            <textarea
+              className="textarea"
+              value={content}
+              onChange={(event) => setContent(event.currentTarget.value)}
+              rows={8}
+            />
           </section>
           {importFunction ? (
             <footer className="modal-card-foot">
-              <button className="button is-success">Save changes</button>
-              <button className="button">Cancel</button>
+              <button
+                className="button is-success"
+                onClick={() => {
+                  importFunction(content)
+                  setModalVisible(false)
+                }}
+              >
+                Import
+              </button>
             </footer>
           ) : (
             <></>
