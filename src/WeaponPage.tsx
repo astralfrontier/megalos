@@ -58,7 +58,7 @@ const weaponValues = {
   ],
 }
 
-const modValues = [
+const weaponModValues = [
   {
     name: 'Astral',
     value: 'Basic Attacks inflict Astral damage instead of Physical',
@@ -110,7 +110,7 @@ function WeaponPage() {
   const [size, setSize] = useState<number>(0)
   const [range, setRange] = useState<number>(0)
   const [weaponType, setWeaponType] = useState<number>(0)
-  const [mod, setMod] = useState<number>(0)
+  const [weaponMod, setWeaponMod] = useState<number>(0)
   const [weaponName, setWeaponName] = useState<string>('My New Weapon')
   const [weaponDesc, setWeaponDesc] = useState<string>(
     "My weapon's description"
@@ -134,7 +134,7 @@ function WeaponPage() {
     setSize(rollDie(1, weaponValues.size.length) - 1)
     setRange(rollDie(1, weaponValues.range.length) - 1)
     setWeaponType(rollDie(1, weaponValues.weaponType.length) - 1)
-    setMod(rollDie(1, modValues.length) - 1)
+    setWeaponMod(rollDie(1, weaponModValues.length) - 1)
   }
 
   let sizeLabel = weaponValues.size[size].label
@@ -155,7 +155,7 @@ function WeaponPage() {
     const description = `${weaponName}: ${weaponValues.size[size].label}, ${
       weaponValues.range[range].label
     }, ${weaponValues.weaponType[weaponType].label}, ${
-      modValues[mod].name
+      weaponModValues[weaponMod].name
     }, Range ${finalRange}, ${plusOrMinus(finalDamageBonus)} damage`
     const preset: Preset = {
       label: description,
@@ -171,14 +171,14 @@ function WeaponPage() {
 ${weaponDesc}
 ${weaponValues.size[size].label} Weapon ✧ ${weaponValues.range[range].label}, ${
     weaponValues.weaponType[weaponType].label
-  }, ${modValues[mod].name}
+  }, ${weaponModValues[weaponMod].name}
 Weapon Dice: ${finalWeaponDice}, Damage Bonus: ${plusOrMinus(
     finalDamageBonus
   )}, Range: ${finalRange}
 ${weaponValues.weaponType[weaponType].label}: ${
     weaponValues.weaponType[weaponType].help
   }
-${modValues[mod].name}: ${modValues[mod].value}
+${weaponModValues[weaponMod].name}: ${weaponModValues[weaponMod].value}
 `
 
   return (
@@ -236,12 +236,12 @@ ${modValues[mod].name}: ${modValues[mod].value}
             </GenericInput>
           </div>
           <div className="column">
-            <GenericInput label="Mod" help={modValues[mod].value}>
+            <GenericInput label="Mod" help={weaponModValues[weaponMod].value}>
               <select
-                onChange={(event) => setMod(parseInt(event.target.value))}
-                value={mod}
+                onChange={(event) => setWeaponMod(parseInt(event.target.value))}
+                value={weaponMod}
               >
-                {modValues.map((mod, index) => (
+                {weaponModValues.map((mod, index) => (
                   <option key={index} value={index}>
                     {mod.name}
                   </option>
@@ -280,7 +280,7 @@ ${modValues[mod].name}: ${modValues[mod].value}
           <em>
             {weaponValues.range[range].label},&nbsp;
             {weaponValues.weaponType[weaponType].label},&nbsp;
-            {modValues[mod].name}
+            {weaponModValues[weaponMod].name}
           </em>
         </p>
         <p>
@@ -294,8 +294,8 @@ ${modValues[mod].name}: ${modValues[mod].value}
             {weaponValues.weaponType[weaponType].help}
           </div>
           <div>
-            <strong>{modValues[mod].name}: </strong>
-            {modValues[mod].value}
+            <strong>{weaponModValues[weaponMod].name}: </strong>
+            {weaponModValues[weaponMod].value}
           </div>
         </div>
         <div className="mt-2">

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import GenericInput from './GenericInput'
 import ImportExportModal from './ImportExportModal'
-import { rollDie } from './utilities'
+import { plusOrMinus, rollDie } from './utilities'
 
 const outfitValues = {
   Light: {
@@ -68,7 +68,7 @@ const outfitValues = {
   },
 }
 
-const modValues = [
+const outfitModValues = [
   {
     name: 'Attuned',
     value: 'Witches only. +2 on Aether Charge rolls.',
@@ -112,16 +112,12 @@ const modValues = [
   },
 ]
 
-function plusOrMinus(value: number): string {
-  return value > 0 ? `+${value}` : `${value}`
-}
-
 function OutfitPage() {
   const [outfitForm, setOutfitForm] = useState<string>('Light')
   const [defenseBonus, setDefenseBonus] = useState<string>('A')
   const [armorHP, setArmorHP] = useState<string>('B')
   const [soakBonus, setSoakBonus] = useState<string>('C')
-  const [mod, setMod] = useState<number>(0)
+  const [outfitMod, setOutfitMod] = useState<number>(0)
   const [outfitName, setOutfitName] = useState<string>('My New Outfit')
   const [outfitDesc, setOutfitDesc] = useState<string>(
     "My outfit's description"
@@ -164,19 +160,28 @@ function OutfitPage() {
     setDefenseBonus(newPriorities[0])
     setArmorHP(newPriorities[1])
     setSoakBonus(newPriorities[2])
-    setMod(rollDie(1, modValues.length) - 1)
+    setOutfitMod(rollDie(1, outfitModValues.length) - 1)
   }
 
   let finalDefenseBonus: number =
     (path([outfitForm, 'defenseBonus'], outfitValues) as number) +
     (path([outfitForm, defenseBonus, 'defenseBonus'], outfitValues) as number)
   let defenseBonusAnnotation = ''
-  let finalArmorHP = (path([outfitForm, armorHP, 'armorHP'], outfitValues) as number)
-  let finalSoakBonus = (path([outfitForm, soakBonus, 'soakBonus'], outfitValues) as number)
+  let finalArmorHP = path(
+    [outfitForm, armorHP, 'armorHP'],
+    outfitValues
+  ) as number
+  let finalSoakBonus = path(
+    [outfitForm, soakBonus, 'soakBonus'],
+    outfitValues
+  ) as number
   let soakAnnotation = ''
-  let finalInventoryPoints = (path([outfitForm, 'inventoryPoints'], outfitValues) as number)
+  let finalInventoryPoints = path(
+    [outfitForm, 'inventoryPoints'],
+    outfitValues
+  ) as number
 
-  switch (modValues[mod].name) {
+  switch (outfitModValues[outfitMod].name) {
     case 'Bodyguard':
       soakAnnotation = ` (${plusOrMinus(
         finalSoakBonus + 1
@@ -208,7 +213,7 @@ function OutfitPage() {
 
   const copyableOutfitText = `${outfitName}
 ${outfitDesc}
-${outfitForm} Outfit ◯ ${modValues[mod].name}
+${outfitForm} Outfit ◯ ${outfitModValues[outfitMod].name}
 Defense Bonus: ${plusOrMinus(
     finalDefenseBonus
   )} ${defenseBonusAnnotation}, Armor HP: ${finalArmorHP}, Soak Bonus: ${plusOrMinus(
@@ -216,7 +221,7 @@ Defense Bonus: ${plusOrMinus(
   )} ${soakAnnotation}, Inventory Points: ${finalInventoryPoints}
 ${
   outfitForm === 'Heavy' ? `Heavy: Disadvantage on Move & Sneak tests.\n` : ''
-}${modValues[mod].name}: ${modValues[mod].value}
+}${outfitModValues[outfitMod].name}: ${outfitModValues[outfitMod].value}
 `
 
   return (
@@ -227,7 +232,7 @@ ${
           <div className="column">
             <GenericInput
               label="Outfit Form"
-              help={path([outfitForm, 'restrictions'], outfitValues) || ""}
+              help={path([outfitForm, 'restrictions'], outfitValues) || ''}
             >
               <select
                 onChange={(event) => setOutfitForm(event.target.value)}
@@ -259,13 +264,34 @@ ${
                 value={defenseBonus}
               >
                 <option value="A">
-                  A ({plusOrMinus(path([outfitForm, 'A', 'defenseBonus'], outfitValues) as number)})
+                  A (
+                  {plusOrMinus(
+                    path(
+                      [outfitForm, 'A', 'defenseBonus'],
+                      outfitValues
+                    ) as number
+                  )}
+                  )
                 </option>
                 <option value="B">
-                  B ({plusOrMinus(path([outfitForm, 'B', 'defenseBonus'], outfitValues) as number)})
+                  B (
+                  {plusOrMinus(
+                    path(
+                      [outfitForm, 'B', 'defenseBonus'],
+                      outfitValues
+                    ) as number
+                  )}
+                  )
                 </option>
                 <option value="C">
-                  C ({plusOrMinus(path([outfitForm, 'C', 'defenseBonus'], outfitValues) as number)})
+                  C (
+                  {plusOrMinus(
+                    path(
+                      [outfitForm, 'C', 'defenseBonus'],
+                      outfitValues
+                    ) as number
+                  )}
+                  )
                 </option>
               </select>
             </GenericInput>
@@ -292,13 +318,16 @@ ${
                 value={armorHP}
               >
                 <option value="A">
-                  A ({path([outfitForm, 'A', 'armorHP'], outfitValues) as number})
+                  A (
+                  {path([outfitForm, 'A', 'armorHP'], outfitValues) as number})
                 </option>
                 <option value="B">
-                  B ({path([outfitForm, 'B', 'armorHP'], outfitValues) as number})
+                  B (
+                  {path([outfitForm, 'B', 'armorHP'], outfitValues) as number})
                 </option>
                 <option value="C">
-                  C ({path([outfitForm, 'C', 'armorHP'], outfitValues) as number})
+                  C (
+                  {path([outfitForm, 'C', 'armorHP'], outfitValues) as number})
                 </option>
               </select>
             </GenericInput>
@@ -323,24 +352,36 @@ ${
                 value={soakBonus}
               >
                 <option value="A">
-                  A ({plusOrMinus(path([outfitForm, 'A', 'soakBonus'], outfitValues) as number)})
+                  A (
+                  {plusOrMinus(
+                    path([outfitForm, 'A', 'soakBonus'], outfitValues) as number
+                  )}
+                  )
                 </option>
                 <option value="B">
-                  B ({plusOrMinus(path([outfitForm, 'B', 'soakBonus'], outfitValues) as number)})
+                  B (
+                  {plusOrMinus(
+                    path([outfitForm, 'B', 'soakBonus'], outfitValues) as number
+                  )}
+                  )
                 </option>
                 <option value="C">
-                  C ({plusOrMinus(path([outfitForm, 'C', 'soakBonus'], outfitValues) as number)})
+                  C (
+                  {plusOrMinus(
+                    path([outfitForm, 'C', 'soakBonus'], outfitValues) as number
+                  )}
+                  )
                 </option>
               </select>
             </GenericInput>
           </div>
           <div className="column">
-            <GenericInput label="Mod" help={modValues[mod].value}>
+            <GenericInput label="Mod" help={outfitModValues[outfitMod].value}>
               <select
-                onChange={(event) => setMod(parseInt(event.target.value))}
-                value={mod}
+                onChange={(event) => setOutfitMod(parseInt(event.target.value))}
+                value={outfitMod}
               >
-                {modValues.map((mod, index) => (
+                {outfitModValues.map((mod, index) => (
                   <option key={index} value={index}>
                     {mod.name}
                   </option>
@@ -375,7 +416,8 @@ ${
           {outfitDesc}
         </p>
         <p>
-          <em>{outfitForm} Outfit</em> ◯ <em>{modValues[mod].name}</em>
+          <em>{outfitForm} Outfit</em> ◯{' '}
+          <em>{outfitModValues[outfitMod].name}</em>
         </p>
         <p>
           <strong>Defense Bonus:</strong> {plusOrMinus(finalDefenseBonus)}
@@ -397,8 +439,8 @@ ${
             )}
           </div>
           <div>
-            <strong>{modValues[mod].name}: </strong>
-            {modValues[mod].value}
+            <strong>{outfitModValues[outfitMod].name}: </strong>
+            {outfitModValues[outfitMod].value}
           </div>
         </div>
         <div className="mt-2">
