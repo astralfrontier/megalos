@@ -1,21 +1,4 @@
-import {
-  allPass,
-  assoc,
-  concat,
-  difference,
-  either,
-  filter,
-  includes,
-  indexOf,
-  map,
-  pathEq,
-  pluck,
-  prop,
-  propEq,
-  reject,
-  sortBy,
-  uniqBy,
-} from 'ramda'
+import { allPass, assoc, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
 
 import { Description } from '../visuals'
 import powerDescriptions from './powers.yaml'
@@ -483,7 +466,7 @@ export const classes: MegalosClass[] = [
     ],
     aetherCurrentRules: [
       `At the start of an encounter, take 4d6 as Aether Current dice and place them here. You gain +1 Core Damage per unburned AC die you currently have.`,
-      `WHen you Injure or damage an Injured foe, you can burn AC dice to use your Finisher. Your CD bonus is reduced equal to the number of dice burned.`,
+      `When you Injure or damage an Injured foe, you can burn AC dice to use your Finisher. Your CD bonus is reduced equal to the number of dice burned.`,
     ],
     benefits: {
       strikes: 2,

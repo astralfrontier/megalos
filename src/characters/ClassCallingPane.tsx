@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { describe } from '../visuals'
 import { MegalosCharacter, MegalosRole } from './data'
 
 interface ClassCallingPaneProps {
@@ -55,6 +56,14 @@ function ClassCallingPane(props: ClassCallingPaneProps) {
           {benefit('Sorceries', character.class.benefits.sorceries)}
           {benefit('Cantrips', character.class.benefits.cantrips)}
           {benefit('Talents', character.class.benefits.talents)}
+        </div>
+      </article>
+      <article className="message">
+        <div className="message-header">
+          <p>Aether Current Rules</p>
+        </div>
+        <div className="message-body">
+          {describe(character.class.aetherCurrentRules)}
         </div>
       </article>
       <article className="message">
