@@ -1,4 +1,21 @@
-import { allPass, assoc, concat, difference, either, filter, includes, indexOf, map, pathEq, pluck, prop, propEq, reject, sortBy, uniqBy } from 'ramda'
+import {
+  allPass,
+  assoc,
+  concat,
+  difference,
+  either,
+  filter,
+  includes,
+  indexOf,
+  map,
+  pathEq,
+  pluck,
+  prop,
+  propEq,
+  reject,
+  sortBy,
+  uniqBy,
+} from 'ramda'
 
 import { Description } from '../visuals'
 import powerDescriptions from './powers.yaml'
@@ -428,7 +445,7 @@ export const classes: MegalosClass[] = [
     ],
     aetherCurrentRules: [
       `At the start of an encounter:`,
-      `◇: Choose an Invocation to host, roll 4d6 for your Aether Current dice & place them here. Each die unlocks a Seal which you use to fuel your powers. YOu may have up to 4 AC dice at a time.`,
+      `◇: Choose an Invocation to host, roll 4d6 for your Aether Current dice & place them here. Each die unlocks a Seal which you use to fuel your powers. You may have up to 4 AC dice at a time.`,
       `Evens = Astral Seals`,
       `Odds = Umbral Seals`,
     ],
