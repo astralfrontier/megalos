@@ -2,12 +2,17 @@ import { filter, has, pluck, reduce } from 'ramda'
 import React, { useContext } from 'react'
 
 import { CharacterContext } from '../GameStateProvider'
+import ImportExportModal from '../ImportExportModal'
 import CharacterProfilePane from './CharacterProfilePane'
 import ClassCallingPane from './ClassCallingPane'
-import { CharacterMutator } from './data'
+import { CharacterMutator, MegalosCharacter } from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 import SkillsPane from './SkillsPane'
 import TraitsPane from './TraitsPane'
+
+function characterToJson(character: MegalosCharacter): string {
+  return JSON.stringify(character, null, 2)
+}
 
 function FinalSheet() {
   const { character } = useContext(CharacterContext)
@@ -23,6 +28,9 @@ function FinalSheet() {
 
   return (
     <>
+      <div className="block">
+        <ImportExportModal exportedText={characterToJson(character)} />
+      </div>
       <div className="columns">
         <div className="column">
           <CharacterProfilePane character={finalCharacter} />
