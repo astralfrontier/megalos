@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
-import { DiceContext, Preset } from './GameStateProvider'
+import { DiceContext, LoadoutContext, Preset } from './GameStateProvider'
 import GenericInput from './GenericInput'
 import ImportExportModal from './ImportExportModal'
 import { plusOrMinus, rollDie } from './utilities'
@@ -106,15 +106,20 @@ const weaponModValues = [
 
 function WeaponPage() {
   const { presets, setPresets } = useContext(DiceContext)
-
-  const [size, setSize] = useState<number>(0)
-  const [range, setRange] = useState<number>(0)
-  const [weaponType, setWeaponType] = useState<number>(0)
-  const [weaponMod, setWeaponMod] = useState<number>(0)
-  const [weaponName, setWeaponName] = useState<string>('My New Weapon')
-  const [weaponDesc, setWeaponDesc] = useState<string>(
-    "My weapon's description"
-  )
+  const {
+    size,
+    setSize,
+    range,
+    setRange,
+    weaponType,
+    setWeaponType,
+    weaponMod,
+    setWeaponMod,
+    weaponName,
+    setWeaponName,
+    weaponDesc,
+    setWeaponDesc,
+  } = useContext(LoadoutContext)
 
   function renameWeapon() {
     const value = prompt('Enter a new name for the outfit', weaponName)

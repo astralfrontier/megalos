@@ -1,6 +1,7 @@
 import { path } from 'ramda'
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 
+import { LoadoutContext } from './GameStateProvider'
 import GenericInput from './GenericInput'
 import ImportExportModal from './ImportExportModal'
 import { plusOrMinus, rollDie } from './utilities'
@@ -113,15 +114,22 @@ const outfitModValues = [
 ]
 
 function OutfitPage() {
-  const [outfitForm, setOutfitForm] = useState<string>('Light')
-  const [defenseBonus, setDefenseBonus] = useState<string>('A')
-  const [armorHP, setArmorHP] = useState<string>('B')
-  const [soakBonus, setSoakBonus] = useState<string>('C')
-  const [outfitMod, setOutfitMod] = useState<number>(0)
-  const [outfitName, setOutfitName] = useState<string>('My New Outfit')
-  const [outfitDesc, setOutfitDesc] = useState<string>(
-    "My outfit's description"
-  )
+  const {
+    outfitForm,
+    setOutfitForm,
+    defenseBonus,
+    setDefenseBonus,
+    armorHP,
+    setArmorHP,
+    soakBonus,
+    setSoakBonus,
+    outfitMod,
+    setOutfitMod,
+    outfitName,
+    setOutfitName,
+    outfitDesc,
+    setOutfitDesc,
+  } = useContext(LoadoutContext)
 
   function renameOutfit() {
     const value = prompt('Enter a new name for the outfit', outfitName)
