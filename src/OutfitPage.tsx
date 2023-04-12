@@ -113,6 +113,106 @@ const outfitModValues = [
   },
 ]
 
+export function calculateOutfitValues(
+  outfitName: string,
+  outfitDesc: string,
+  outfitForm: string,
+  defenseBonus: string,
+  armorHP: string,
+  soakBonus: string,
+  outfitMod: number
+) {
+  let finalDefenseBonus: number =
+    (path([outfitForm, 'defenseBonus'], outfitValues) as number) +
+    (path([outfitForm, defenseBonus, 'defenseBonus'], outfitValues) as number)
+  let defenseBonusAnnotation = ''
+  let finalArmorHP = path(
+    [outfitForm, armorHP, 'armorHP'],
+    outfitValues
+  ) as number
+  let finalSoakBonus = path(
+    [outfitForm, soakBonus, 'soakBonus'],
+    outfitValues
+  ) as number
+  let soakAnnotation = ''
+  let finalInventoryPoints = path(
+    [outfitForm, 'inventoryPoints'],
+    outfitValues
+  ) as number
+
+  let physicalSoak = 0,
+    astralSoak = 0,
+    umbralSoak = 0,
+    toxicSoak = 0,
+    dodgeBonus = 0,
+    wardBonus = 0
+
+  switch (outfitModValues[outfitMod].name) {
+    case 'Bodyguard':
+      soakAnnotation = ` (${plusOrMinus(
+        finalSoakBonus + 1
+      )} vs. Physical and Toxic)`
+      physicalSoak = 1
+      toxicSoak = 1
+      break
+    case 'Cargo':
+      finalInventoryPoints =
+        finalInventoryPoints + (outfitForm == 'Light' ? 3 : 2)
+      break
+    case 'Deflective':
+      defenseBonusAnnotation = ` (${plusOrMinus(
+        finalDefenseBonus + 1
+      )} to Dodge)`
+      dodgeBonus = 1
+      break
+    case 'Hexagrammatic':
+      defenseBonusAnnotation = ` (${plusOrMinus(
+        finalDefenseBonus + 1
+      )} to Ward)`
+      wardBonus = 1
+      break
+    case 'Reinforced':
+      finalArmorHP = finalArmorHP + (outfitForm == 'Heavy' ? 5 : 4)
+      break
+    case 'Spellthreaded':
+      soakAnnotation = ` (${plusOrMinus(
+        finalSoakBonus + 1
+      )} vs. Astral and Umbral)`
+      astralSoak = 1
+      umbralSoak = 1
+      break
+  }
+
+  const copyableOutfitText = `${outfitName}
+  ${outfitDesc}
+  ${outfitForm} Outfit ◯ ${outfitModValues[outfitMod].name}
+  Defense Bonus: ${plusOrMinus(
+    finalDefenseBonus
+  )} ${defenseBonusAnnotation}, Armor HP: ${finalArmorHP}, Soak Bonus: ${plusOrMinus(
+    finalSoakBonus
+  )} ${soakAnnotation}, Inventory Points: ${finalInventoryPoints}
+  ${
+    outfitForm === 'Heavy' ? `Heavy: Disadvantage on Move & Sneak tests.\n` : ''
+  }${outfitModValues[outfitMod].name}: ${outfitModValues[outfitMod].value}
+  `
+
+  return {
+    finalDefenseBonus,
+    defenseBonusAnnotation,
+    finalArmorHP,
+    finalSoakBonus,
+    soakAnnotation,
+    finalInventoryPoints,
+    physicalSoak,
+    astralSoak,
+    umbralSoak,
+    toxicSoak,
+    dodgeBonus,
+    wardBonus,
+    copyableOutfitText,
+  }
+}
+
 function OutfitPage() {
   const {
     outfitForm,
@@ -171,66 +271,23 @@ function OutfitPage() {
     setOutfitMod(rollDie(1, outfitModValues.length) - 1)
   }
 
-  let finalDefenseBonus: number =
-    (path([outfitForm, 'defenseBonus'], outfitValues) as number) +
-    (path([outfitForm, defenseBonus, 'defenseBonus'], outfitValues) as number)
-  let defenseBonusAnnotation = ''
-  let finalArmorHP = path(
-    [outfitForm, armorHP, 'armorHP'],
-    outfitValues
-  ) as number
-  let finalSoakBonus = path(
-    [outfitForm, soakBonus, 'soakBonus'],
-    outfitValues
-  ) as number
-  let soakAnnotation = ''
-  let finalInventoryPoints = path(
-    [outfitForm, 'inventoryPoints'],
-    outfitValues
-  ) as number
-
-  switch (outfitModValues[outfitMod].name) {
-    case 'Bodyguard':
-      soakAnnotation = ` (${plusOrMinus(
-        finalSoakBonus + 1
-      )} vs. Physical and Toxic)`
-      break
-    case 'Cargo':
-      finalInventoryPoints =
-        finalInventoryPoints + (outfitForm == 'Light' ? 3 : 2)
-      break
-    case 'Deflective':
-      defenseBonusAnnotation = ` (${plusOrMinus(
-        finalDefenseBonus + 1
-      )} to Dodge)`
-      break
-    case 'Hexagrammatic':
-      defenseBonusAnnotation = ` (${plusOrMinus(
-        finalDefenseBonus + 1
-      )} to Ward)`
-      break
-    case 'Reinforced':
-      finalArmorHP = finalArmorHP + (outfitForm == 'Heavy' ? 5 : 4)
-      break
-    case 'Spellthreaded':
-      soakAnnotation = ` (${plusOrMinus(
-        finalSoakBonus + 1
-      )} vs. Astral and Umbral)`
-      break
-  }
-
-  const copyableOutfitText = `${outfitName}
-${outfitDesc}
-${outfitForm} Outfit ◯ ${outfitModValues[outfitMod].name}
-Defense Bonus: ${plusOrMinus(
-    finalDefenseBonus
-  )} ${defenseBonusAnnotation}, Armor HP: ${finalArmorHP}, Soak Bonus: ${plusOrMinus(
-    finalSoakBonus
-  )} ${soakAnnotation}, Inventory Points: ${finalInventoryPoints}
-${
-  outfitForm === 'Heavy' ? `Heavy: Disadvantage on Move & Sneak tests.\n` : ''
-}${outfitModValues[outfitMod].name}: ${outfitModValues[outfitMod].value}
-`
+  const {
+    finalDefenseBonus,
+    defenseBonusAnnotation,
+    finalArmorHP,
+    finalSoakBonus,
+    soakAnnotation,
+    finalInventoryPoints,
+    copyableOutfitText,
+  } = calculateOutfitValues(
+    outfitName,
+    outfitDesc,
+    outfitForm,
+    defenseBonus,
+    armorHP,
+    soakBonus,
+    outfitMod
+  )
 
   return (
     <>

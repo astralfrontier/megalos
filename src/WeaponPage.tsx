@@ -104,6 +104,53 @@ const weaponModValues = [
   },
 ]
 
+export function calculateWeaponValues(
+  size: number,
+  range: number,
+  weaponType: number,
+  weaponMod: number,
+  weaponName: string,
+  weaponDesc: string
+) {
+  let sizeLabel = weaponValues.size[size].label
+  let finalWeaponDice = weaponValues.size[size].weaponDice
+  let finalDamageBonus =
+    weaponValues.size[size].damageBonus + weaponValues.range[range].damageBonus
+  let finalRange = weaponValues.range[range].range
+
+  switch (weaponValues.weaponType[weaponType].label) {
+    case 'Deadly':
+      finalDamageBonus = finalDamageBonus + (sizeLabel == 'Heavy' ? 2 : 1)
+      break
+    case 'Reach':
+      finalRange = finalRange + 1
+  }
+
+  const copyableWeaponText = `${weaponName}
+  ${weaponDesc}
+  ${weaponValues.size[size].label} Weapon ✧ ${
+    weaponValues.range[range].label
+  }, ${weaponValues.weaponType[weaponType].label}, ${
+    weaponModValues[weaponMod].name
+  }
+  Weapon Dice: ${finalWeaponDice}, Damage Bonus: ${plusOrMinus(
+    finalDamageBonus
+  )}, Range: ${finalRange}
+  ${weaponValues.weaponType[weaponType].label}: ${
+    weaponValues.weaponType[weaponType].help
+  }
+  ${weaponModValues[weaponMod].name}: ${weaponModValues[weaponMod].value}
+  `
+
+  return {
+    sizeLabel,
+    finalWeaponDice,
+    finalDamageBonus,
+    finalRange,
+    copyableWeaponText,
+  }
+}
+
 function WeaponPage() {
   const { presets, setPresets } = useContext(DiceContext)
   const {
@@ -142,19 +189,20 @@ function WeaponPage() {
     setWeaponMod(rollDie(1, weaponModValues.length) - 1)
   }
 
-  let sizeLabel = weaponValues.size[size].label
-  let finalWeaponDice = weaponValues.size[size].weaponDice
-  let finalDamageBonus =
-    weaponValues.size[size].damageBonus + weaponValues.range[range].damageBonus
-  let finalRange = weaponValues.range[range].range
-
-  switch (weaponValues.weaponType[weaponType].label) {
-    case 'Deadly':
-      finalDamageBonus = finalDamageBonus + (sizeLabel == 'Heavy' ? 2 : 1)
-      break
-    case 'Reach':
-      finalRange = finalRange + 1
-  }
+  const {
+    sizeLabel,
+    finalWeaponDice,
+    finalDamageBonus,
+    finalRange,
+    copyableWeaponText,
+  } = calculateWeaponValues(
+    size,
+    range,
+    weaponType,
+    weaponMod,
+    weaponName,
+    weaponDesc
+  )
 
   function addAsPreset() {
     const description = `${weaponName}: ${weaponValues.size[size].label}, ${
@@ -171,20 +219,6 @@ function WeaponPage() {
     setPresets([...presets, preset])
     alert('Preset added to Dice roller')
   }
-
-  const copyableWeaponText = `${weaponName}
-${weaponDesc}
-${weaponValues.size[size].label} Weapon ✧ ${weaponValues.range[range].label}, ${
-    weaponValues.weaponType[weaponType].label
-  }, ${weaponModValues[weaponMod].name}
-Weapon Dice: ${finalWeaponDice}, Damage Bonus: ${plusOrMinus(
-    finalDamageBonus
-  )}, Range: ${finalRange}
-${weaponValues.weaponType[weaponType].label}: ${
-    weaponValues.weaponType[weaponType].help
-  }
-${weaponModValues[weaponMod].name}: ${weaponModValues[weaponMod].value}
-`
 
   return (
     <>

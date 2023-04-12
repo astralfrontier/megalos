@@ -95,10 +95,10 @@ export interface MegalosCallingBenefits {
   recovery: number
 }
 
-// TODO: aether current rules
 export interface MegalosClass {
   name: MegalosClassName
   description: Description
+  aetherCurrentRules: Description
   benefits: MegalosClassBenefits
 }
 
@@ -443,6 +443,12 @@ export const classes: MegalosClass[] = [
     transcendent aether of the void
     between worlds.`,
     ],
+    aetherCurrentRules: [
+      `At the start of an encounter:`,
+      `◇: Choose an Invocation to host, roll 4d6 for your Aether Current dice & place them here. Each die unlocks a Seal which you use to fuel your powers. YOu may have up to 4 AC dice at a time.`,
+      `Evens = Astral Seals`,
+      `Odds = Umbral Seals`,
+    ],
     benefits: {
       invocations: 2,
       arcana: 1,
@@ -475,6 +481,10 @@ export const classes: MegalosClass[] = [
     to work with. It's in their best interest,
     therefore, to end fights quickly.`,
     ],
+    aetherCurrentRules: [
+      `At the start of an encounter, take 4d6 as Aether Current dice and place them here. You gain +1 Core Damage per unburned AC die you currently have.`,
+      `WHen you Injure or damage an Injured foe, you can burn AC dice to use your Finisher. Your CD bonus is reduced equal to the number of dice burned.`,
+    ],
     benefits: {
       strikes: 2,
       counters: 1,
@@ -505,6 +515,11 @@ export const classes: MegalosClass[] = [
     They're punk rock spellcasters devoted
     to the democratization of magick and
     an egalitarian future for aetherology.`,
+    ],
+    aetherCurrentRules: [
+      `At the start of an encounter, roll 1d6 as an Aether Current die & place it here. Roll another whenever you use a Cantrip power. You may have up to 4 AC dice at any time.`,
+      `1-4 = Weak Aether Charge`,
+      `5-6 = Surging Aether Charge`,
     ],
     benefits: {
       sorceries: 2,
