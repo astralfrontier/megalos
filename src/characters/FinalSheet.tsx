@@ -59,7 +59,16 @@ function FinalSheet() {
     outfitDesc,
   } = useContext(LoadoutContext)
 
-  const exportedText = characterToJson(character, {
+  const effects = pluck('effect')(
+    filter(has('effect'), character.powers)
+  ) as CharacterMutator[]
+  const finalCharacter = reduce(
+    (character, effect) => effect(character),
+    character,
+    effects
+  )
+
+  const exportedText = characterToJson(finalCharacter, {
     weapon: {
       weaponName,
       weaponDesc,
@@ -86,15 +95,6 @@ function FinalSheet() {
       ),
     },
   })
-
-  const effects = pluck('effect')(
-    filter(has('effect'), character.powers)
-  ) as CharacterMutator[]
-  const finalCharacter = reduce(
-    (character, effect) => effect(character),
-    character,
-    effects
-  )
 
   return (
     <>

@@ -170,6 +170,10 @@ export interface MegalosPower {
   effect?: CharacterMutator
 }
 
+export interface MegalosCharacterFeatures {
+  fifthAetherCurrentDie: boolean
+}
+
 export interface MegalosCharacter {
   name: string
   pronouns: string
@@ -180,6 +184,7 @@ export interface MegalosCharacter {
   skills: RankedSkill[]
   powers: MegalosPower[]
   traits: MegalosTraits
+  features: MegalosCharacterFeatures
 }
 
 export const homelands: Homeland[] = [
@@ -1327,7 +1332,7 @@ const sorcery = (
 })
 
 const reduceHpByFive = {
-  effect: (character: MegalosCharacter) => ({
+  effect: (character: MegalosCharacter): MegalosCharacter => ({
     ...character,
     calling: {
       ...character.calling,
@@ -1335,6 +1340,9 @@ const reduceHpByFive = {
         ...character.calling.benefits,
         baseHp: character.calling.benefits.baseHp - 5,
       },
+    },
+    features: {
+      fifthAetherCurrentDie: true,
     },
   }),
 }
@@ -1919,6 +1927,9 @@ export function newCharacter(): MegalosCharacter {
       mental: '',
       physical: '',
       special: '',
+    },
+    features: {
+      fifthAetherCurrentDie: false,
     },
   }
   return assoc(

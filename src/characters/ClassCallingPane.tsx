@@ -83,7 +83,10 @@ function ClassCallingPane(props: ClassCallingPaneProps) {
           {benefit('Base Ward', character.calling.benefits.baseWard)}
           {benefit('Base Damage', character.calling.benefits.baseDamage)}
           {benefit('Recovery', character.calling.benefits.recovery)}
-          {benefit('Recovery Base (RB)', character.calling.benefits.baseHp / 4)}
+          {benefit(
+            'Recovery Base (RB)',
+            Math.ceil(character.calling.benefits.baseHp / 4)
+          )}
         </div>
       </article>
     </>
