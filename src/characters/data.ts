@@ -157,7 +157,7 @@ export enum MegalosPowerType {
   SORCERY = 'Sorcery',
   CANTRIP = 'Cantrip',
   TALENT = 'Talent',
-  CALLING_BONUS = 'Bonus',
+  CALLING_BONUS = 'Calling Bonus',
 }
 
 export interface MegalosPower {
