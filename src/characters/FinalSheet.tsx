@@ -99,7 +99,17 @@ function FinalSheet() {
   return (
     <>
       <div className="block">
-        <ImportExportModal exportedText={exportedText} />
+        <div className="columns is-vcentered">
+          <div className="column is-narrow">
+            <ImportExportModal exportedText={exportedText} />
+          </div>
+          <div className="column">
+            <strong>
+              Don't forget to create a Weapon and Outfit before exporting your
+              character!
+            </strong>
+          </div>
+        </div>
       </div>
       <div className="columns">
         <div className="column">

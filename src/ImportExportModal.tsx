@@ -11,8 +11,13 @@ function ImportExportModal(props: ImportExportModalProps) {
   const { exportedText, importFunction } = props
 
   useEffect(() => {
-    setContent(props.exportedText)
-  }, [props.exportedText])
+    setContent(exportedText)
+  }, [exportedText])
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(content)
+    alert('Copied')
+  }
 
   const buttonLabel = importFunction ? 'Import/Export' : 'Export'
 
@@ -43,8 +48,8 @@ function ImportExportModal(props: ImportExportModalProps) {
               rows={8}
             />
           </section>
-          {importFunction ? (
-            <footer className="modal-card-foot">
+          <footer className="modal-card-foot">
+            {importFunction ? (
               <button
                 className="button is-success"
                 onClick={() => {
@@ -54,10 +59,13 @@ function ImportExportModal(props: ImportExportModalProps) {
               >
                 Import
               </button>
-            </footer>
-          ) : (
-            <></>
-          )}
+            ) : (
+              <></>
+            )}
+            <button className="button is-success" onClick={copyToClipboard}>
+              Copy
+            </button>
+          </footer>
         </div>
       </div>
     </>
