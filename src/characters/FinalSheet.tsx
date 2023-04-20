@@ -12,6 +12,8 @@ import { CharacterMutator, MegalosCharacter, MegalosPower } from './data'
 import PowersTalentsPane from './PowersTalentsPane'
 import SkillsPane from './SkillsPane'
 import TraitsPane from './TraitsPane'
+import { OUTFITS_PATH, WEAPONS_PATH } from '../App'
+import { Link } from 'react-router-dom'
 
 // Do a quick and dirty sanitization of Markdown in power descriptions
 // by stripping out ** and _, which is the markdown we happen to use there.
@@ -105,7 +107,8 @@ function FinalSheet() {
           </div>
           <div className="column">
             <strong>
-              Don't forget to create a Weapon and Outfit before exporting your
+              Don't forget to create a <Link to={WEAPONS_PATH}>Weapon</Link> and{' '}
+              <Link to={OUTFITS_PATH}>Outfit</Link> before exporting your
               character!
             </strong>
           </div>
