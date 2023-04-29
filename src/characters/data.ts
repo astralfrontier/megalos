@@ -522,9 +522,12 @@ export const classes: MegalosClass[] = [
     an egalitarian future for aetherology.`,
     ],
     aetherCurrentRules: [
-      `At the start of an encounter, roll 1d6 as an Aether Current die & place it here. Roll another whenever you use a Cantrip power. You may have up to 4 AC dice at any time.`,
-      `1-4 = Weak Aether Charge`,
-      `5-6 = Surging Aether Charge`,
+      `When a combat encounter begins, place all four of your Aether Current dice on your sheet or somewhere else convenient. You don't need to roll them yet.
+
+Whenever you use a Cantrip power, you roll one of your AC dice. If the result is a 1-4, you've accumulated a weak aether charge. If the result is a 5-6, you've accumulated a surging aether charge.
+In either case, put the die on the charge type rolled for the power you used, so that you remember what kind of charges you have built up.
+
+When you use a Sorcery power, in addition to resolving that power as normal, you also resolve all of the aether charge effects you have saved up. When aether charges are triggered by the use of a Sorcery power, the AC dice associated with those charges are burned. They do not return to your AC dice pool. You can regain burned AC dice by drinking an aether potion or the Power Up!! action.`,
     ],
     benefits: {
       sorceries: 2,
