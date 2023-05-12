@@ -210,7 +210,7 @@ function GmPage() {
         notes: '',
       }
     }, lines)
-    setCombatants(newCombatants)
+    setCombatants(reindex(newCombatants))
   }
 
   // Split combatants into Fast, Enemy, Slow, Boss partitions
@@ -397,7 +397,8 @@ function GmPage() {
                 </li>
                 <li>
                   <strong>At the end of each combatant's turn,</strong> attempt
-                  one save roll vs. a Status effect, and reduce all Condition durations by 1 round
+                  one save roll vs. a Status effect, and reduce all Condition
+                  durations by 1 round
                 </li>
                 <li>
                   <strong>At the end of every round,</strong> resolve
