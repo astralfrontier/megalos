@@ -786,8 +786,8 @@ export const skills: MegalosSkill[] = [
     type: MegalosSkillType.ACTIVE,
     description: [
       `Engineering solutions to problems,
-      crafting new objects from raw materi-
-      als, and making all manner of artistic or
+      crafting new objects from raw materials,
+      and making all manner of artistic or
       useful objects. Used as the skill for
       coalescence crafting`,
     ],
