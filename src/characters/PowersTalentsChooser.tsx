@@ -172,21 +172,30 @@ function PowersTalentsChooser() {
                 <>
                   <div className="block card">
                     <div className="card-content">
-                      <label className="checkbox" aria-disabled={!isSelectable}>
-                        <input
-                          id={`power-checkbox-${slugify(
-                            power.name.toLowerCase()
-                          )}`}
-                          type="checkbox"
-                          value={power.name}
-                          disabled={!isSelectable}
-                          checked={isSelected}
-                          onChange={powerSetter}
-                        />{' '}
-                        <strong>
-                          {power.type}: {power.name}
-                        </strong>
-                      </label>
+                      <div className="has-background-primary p-1">
+                        <label
+                          className="checkbox"
+                          aria-disabled={!isSelectable}
+                        >
+                          <input
+                            id={`power-checkbox-${slugify(
+                              power.name.toLowerCase()
+                            )}`}
+                            type="checkbox"
+                            value={power.name}
+                            disabled={!isSelectable}
+                            checked={isSelected}
+                            onChange={powerSetter}
+                          />{' '}
+                          <strong
+                            className={
+                              isSelectable ? 'has-text-white' : 'has-text-grey'
+                            }
+                          >
+                            {power.type}: {power.name}
+                          </strong>
+                        </label>
+                      </div>
                       <div className={isSelectable ? '' : 'has-text-grey'}>
                         {describe(power.description)}
                       </div>

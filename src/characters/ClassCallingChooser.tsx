@@ -10,7 +10,7 @@ import { callings, classes, recalculatePowers } from './data'
 function ClassCallingChooser() {
   const { character, setCharacter } = useContext(CharacterContext)
 
-  function classSetter(event) {
+  const classSetter: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const newClass = find(propEq('name', event.currentTarget.value), classes)
     if (newClass) {
       const newCharacter = {
@@ -25,7 +25,9 @@ function ClassCallingChooser() {
     }
   }
 
-  function callingSetter(event) {
+  const callingSetter: React.ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
     const newCalling = find(
       propEq('name', event.currentTarget.value),
       callings[character.class.name]
@@ -83,22 +85,14 @@ function ClassCallingChooser() {
             </div>
           </div>
           <div className="content">
-            <article className="message">
-              <div className="message-header">
-                <p>Your Class</p>
-              </div>
-              <div className="message-body">
-                {describe(character.class.description)}
-              </div>
-            </article>
-            <article className="message">
-              <div className="message-header">
-                <p>Your Calling</p>
-              </div>
-              <div className="message-body">
-                {describe(character.calling.description)}
-              </div>
-            </article>
+            <h1 className="title has-text-white has-background-primary p-1">
+              Your Class
+            </h1>
+            {describe(character.class.description)}
+            <h1 className="title has-text-white has-background-primary p-1">
+              Your Calling
+            </h1>
+            {describe(character.calling.description)}
           </div>
         </div>
         <div className="column">
