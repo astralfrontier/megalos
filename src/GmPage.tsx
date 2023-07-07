@@ -194,20 +194,34 @@ function GmPage() {
     }
   }
 
+  const IMPORT_REGEX = /^([a-zA-Z]+):([^:]*):?(.*)$/
+
   function importCombatants(text: string) {
     const lines = reject(
       (line: string) => isEmpty(line) || line.startsWith('#'),
       split('\n', text)
     )
     const newCombatants: Combatant[] = map((line: string) => {
-      const [type, name] = split(':', line)
-      return {
-        name,
-        type: type as CombatantType,
-        fast: false,
-        acted: false,
-        actedBonus: false,
-        notes: '',
+      const result = line.match(IMPORT_REGEX)
+      if (result) {
+        const [expr, type, name, notes] = result
+        return {
+          name,
+          type: type as CombatantType,
+          fast: false,
+          acted: false,
+          actedBonus: false,
+          notes,
+        }
+      } else {
+        return {
+          name: line,
+          type: CombatantType.MC,
+          fast: false,
+          acted: false,
+          actedBonus: false,
+          notes: '',
+        }
       }
     }, lines)
     setCombatants(reindex(newCombatants))
@@ -233,7 +247,8 @@ function GmPage() {
   const copyableCombatants = join(
     '\n',
     map(
-      (combatant: Combatant) => `${combatant.type}:${combatant.name}`,
+      (combatant: Combatant) =>
+        `${combatant.type}:${combatant.name}:${combatant.notes}`,
       combatants
     )
   )
