@@ -22,7 +22,7 @@
     "slugify": "^1.6.6"
   },
   "devDependencies": {
-    "@modyfi/vite-plugin-yaml": "^1.0.4",
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@types/ramda": "=0.28.23",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
