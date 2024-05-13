@@ -30,7 +30,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "cypress": "^13.7.1",
     "prettier": "3.2.5",
-    "sass": "^1.72.0",
+    "sass": "^1.77.1",
     "vite": "^5.2.8"
   }
 }
